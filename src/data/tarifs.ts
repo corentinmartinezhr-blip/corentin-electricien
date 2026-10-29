@@ -54,7 +54,7 @@ const euros = (montant: number) =>
 
 const PRIX_DEPANNAGE = 89;
 // Engagement de Corentin (29/10/2026) : affiché en gras dans le haut de la page Dépannage et en fin de forfait.
-const PROMESSE_DEPANNAGE = "Pas de facturation si je ne trouve pas la panne\u00a0: je m'engage.";
+const PROMESSE_DEPANNAGE = 'Pas de facturation si je ne trouve pas la panne.';
 
 export const offreDepannage = {
   prix: euros(PRIX_DEPANNAGE),
@@ -63,8 +63,9 @@ export const offreDepannage = {
   inclus: [
     'Du lundi au samedi, en journée (7h–19h).',
     'Déplacement inclus dans tout Avignon.',
-    "Jusqu'à une heure sur place pour rechercher et identifier la panne.",
-    'Devis de réparation gratuit, avant tout travail supplémentaire.',
+    "Jusqu'à une heure sur place pour trouver la panne.",
+    'Petite panne réparée dans cette heure\u00a0: seul le matériel s’ajoute.',
+    'Réparation plus longue\u00a0: devis gratuit avant tout travail supplémentaire.',
     PROMESSE_DEPANNAGE,
   ],
   supplements: [
@@ -73,9 +74,9 @@ export const offreDepannage = {
     { prestation: 'Autres communes de la zone', detail: 'Supplément de déplacement', prix: '+30 €' },
   ] satisfies LigneTarif[],
   // Taux horaire : affichage obligatoire pour le dépannage (arrêté du 24 janvier 2017).
-  reparation: "Réparation au-delà du diagnostic : 65 € de l'heure, comptée par quart d'heure entamé, toujours sur devis accepté.",
-  piecesEtSuite:
-    'Pièces, réparation et éventuel second déplacement sont facturés selon le devis accepté.',
+  reparation:
+    "Au-delà de l'heure incluse\u00a0: 65\u00a0€ de l'heure, comptée par quart d'heure entamé, toujours sur devis accepté.",
+  piecesEtSuite: 'Le matériel et un éventuel second déplacement sont facturés en plus, selon le devis accepté.',
 };
 
 // ---------- Installation ----------
