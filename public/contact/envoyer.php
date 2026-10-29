@@ -9,6 +9,8 @@ declare(strict_types=1);
 const DESTINATAIRE = 'contact@corentin-electricien.fr';
 const EXPEDITEUR = 'contact@corentin-electricien.fr';
 
+const TELEPHONE = '06 83 78 69 11'; // = entreprise.telephoneAffiche (src/data/entreprise.ts)
+
 const PAGE_FORMULAIRE = '/contact/';
 const PAGE_MERCI = '/contact/merci/';
 const PAGE_ERREUR = '/contact/erreur/';
@@ -103,6 +105,36 @@ function photosJointes(): ?array
     return $photos;
 }
 
+/**
+ * Accusé de réception envoyé au client. Volontairement sans rien de ce qu'il a écrit (hors type de demande,
+ * choisi dans une liste) : un robot ne peut pas s'en servir pour faire envoyer son propre texte à quelqu'un.
+ * « Répondre » écrit à Corentin. Un échec n'empêche pas la page de remerciement : la demande, elle, est partie.
+ */
+function envoyerConfirmation(string $email, string $type): void
+{
+    $precision = $type === 'Autre' ? '' : ' (' . mb_strtolower($type) . ')'; // « votre demande (dépannage) »
+    $corps = "Bonjour,\n\n"
+        . "Merci pour votre message : votre demande$precision a bien été prise en compte.\n\n"
+        . "Je vais l'étudier et je risque de vous recontacter par e-mail ou par téléphone pour préciser "
+        . "votre besoin.\n\n"
+        . "Vous pouvez répondre directement à cet e-mail pour ajouter une précision ou des photos.\n"
+        . 'Pour une urgence, appelez-moi ou écrivez-moi sur WhatsApp au ' . TELEPHONE . ".\n\n"
+        . "À bientôt,\n"
+        . "Corentin\n"
+        . "Corentin Électricien, Avignon\n"
+        . "https://corentin-electricien.fr\n";
+
+    $entetes = implode("\r\n", [
+        'From: ' . mb_encode_mimeheader('Corentin Électricien', 'UTF-8', 'Q') . ' <' . EXPEDITEUR . '>',
+        'MIME-Version: 1.0',
+        'Content-Type: text/plain; charset=UTF-8',
+        'Content-Transfer-Encoding: base64',
+        'Auto-Submitted: auto-replied', // message automatique : évite les réponses automatiques en boucle
+    ]);
+    $sujet = mb_encode_mimeheader('Votre demande a bien été reçue – Corentin Électricien', 'UTF-8', 'B');
+    mail($email, $sujet, chunk_split(base64_encode($corps)), $entetes, '-f' . EXPEDITEUR);
+}
+
 if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') {
     rediriger(PAGE_FORMULAIRE);
 }
@@ -183,4 +215,5 @@ $envoye = mail(DESTINATAIRE, $sujet, $contenu, $entetes, '-f' . EXPEDITEUR);
 if (!$envoye) {
     refuser('envoi');
 }
+envoyerConfirmation($email, $type);
 rediriger(PAGE_MERCI);
