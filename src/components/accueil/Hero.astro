@@ -1,8 +1,6 @@
 ---
-import { Image } from 'astro:assets';
 import BoutonContact from '../BoutonContact.astro';
 import { entreprise } from '../../data/entreprise';
-import portrait from '../../assets/portrait/corentin.png';
 ---
 
 <section class="hero" aria-labelledby="hero-titre">
@@ -20,14 +18,13 @@ import portrait from '../../assets/portrait/corentin.png';
         <BoutonContact action="whatsapp" class="action--whatsapp" />
       </div>
     </div>
-    <Image
+    <!-- WebP retouché et compressé par Corentin, servi tel quel (pas de recompression). 1086 × 1448. -->
+    <img
       class="hero__photo"
-      src={portrait}
+      src="/portrait/corentin.webp"
       alt={`Corentin, artisan électricien à ${entreprise.ville}`}
-      width={800}
-      widths={[320, 480, 640, 800]}
-      sizes="(min-width: 64rem) 24rem, (min-width: 48rem) 20rem, 80vw"
-      loading="eager"
+      width="1086"
+      height="1448"
       fetchpriority="high"
     />
   </div>
