@@ -1,0 +1,55 @@
+name: Préparer le site pour o2switch
+
+# Le pare-feu d'o2switch bloque les envois venant de GitHub (FTP coupé, SSH fermé).
+# On inverse donc le sens :
+#   1. GitHub construit le site et range le résultat dans la branche « production »
+#      (uniquement les fichiers prêts à publier, rien d'autre) ;
+#   2. une tâche cron sur o2switch récupère cette branche toutes les 5 minutes
+#      et la copie dans le dossier du site (voir docs/deploiement.md).
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: publier
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  construire:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Récupérer le code
+        uses: actions/checkout@v4
+
+      - name: Installer Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Installer les dépendances
+        run: npm install --no-audit --no-fund
+
+      - name: Construire le site
+        run: npm run build
+        env:
+          # « preparation » = site en ligne mais non indexé par Google.
+          # Passer à « production » le jour du lancement officiel.
+          PUBLIC_SITE_ENV: preparation
+
+      - name: Ranger le site construit dans la branche production
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          cd dist
+          git init -q -b production
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -q -m "Site construit depuis ${GITHUB_SHA::7}"
+          git push -q --force "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" production
+          echo "Branche production mise à jour ($(git ls-files | wc -l) fichiers)."

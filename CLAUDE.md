@@ -7,7 +7,7 @@ Le détail du cadrage est dans `docs/note-de-cadrage-v2.md`. La palette est dans
 
 - Site vitrine de Corentin, artisan électricien indépendant (Marseille). Tout le site est en français.
 - Corentin n'est pas développeur : on lui parle simplement, sans jargon, et on ne lui demande jamais de taper de commande.
-- Il valide chaque modification sur son téléphone, sur le site de test, avant toute mise en ligne.
+- Il voit chaque modification directement sur le vrai site (pas de site de test, à sa demande) : on lui explique ce qui va changer avant d'envoyer.
 
 ## Architecture du site (V1)
 
@@ -58,16 +58,16 @@ Le détail du cadrage est dans `docs/note-de-cadrage-v2.md`. La palette est dans
 
 - Astro en site 100 % statique (`output: 'static'`), hébergé sur o2switch. Pas de serveur Node.
 - Mesure d'audience : Matomo auto-hébergé sur o2switch, configuré en mode exempté CNIL. Pas de bannière cookies, donc aucun autre traceur.
-- Tout ce qui n'est pas la production est en `noindex` (variable `PUBLIC_SITE_ENV`, voir `src/layouts/Base.astro` et `src/pages/robots.txt.ts`).
+- Tout ce qui n'est pas `PUBLIC_SITE_ENV=production` est en `noindex` (voir `src/layouts/Base.astro` et `src/pages/robots.txt.ts`).
 
 ## Déploiement
 
-- Chaque envoi sur `main` construit le site sur GitHub et le dépose sur `test.corentin-electricien.fr` (`.github/workflows/deploy-test.yml`).
-- Le FTP depuis GitHub ne marche pas : le pare-feu o2switch coupe les transferts (ECONNRESET sur le canal de données). On utilise la méthode o2switch : exception temporaire via l'API cPanel `SshWhitelist` (add puis remove in/out), puis rsync sur SSH. Limite : 5 exceptions sur le compte, d'où le retrait systématique.
-- rsync utilise `--delete` mais exclut `.htaccess`, `.well-known/` et `cgi-bin/` côté serveur.
-- Le site de test est protégé par mot de passe via cPanel (« Confidentialité des répertoires »), qui écrit un `.htaccess` dans le dossier de test. Ne jamais publier de `.htaccess` à la racine du site de test sans y reprendre cette protection.
-- La mise en ligne en production se fait seulement après validation explicite de Corentin, par un déploiement séparé (à créer).
-- Secrets GitHub : `O2SWITCH_SERVER` (nom d'hôte du serveur cPanel), `CPANEL_USER`, `CPANEL_TOKEN` (jeton API cPanel), `SSH_PRIVATE_KEY`. Les anciens `FTP_*` ne servent plus. Ne jamais demander, afficher ni committer un mot de passe, un jeton ou une clé.
+- Détail complet : `docs/deploiement.md`.
+- Pas de site de test (choix de Corentin) : chaque envoi sur `main` part en ligne sur `corentin-electricien.fr`. Donc rien d'inachevé ou de faux ne doit être envoyé sur `main`. En cas de doute, demander à Corentin avant d'envoyer.
+- Le pare-feu o2switch bloque GitHub → o2switch (FTP coupé, SSH fermé, API cPanel indisponible sur ce compte). Méthode retenue : GitHub construit le site et le range dans la branche `production` (`.github/workflows/publier.yml`) ; une tâche cron o2switch récupère cette branche toutes les 5 min et la copie dans le dossier du site avec `rsync --delete` (exclut `.htaccess`, `.well-known/`, `cgi-bin/`).
+- Ne jamais installer quoi que ce soit à la main dans le dossier du site (rsync l'effacerait). Matomo ira sur un sous-domaine.
+- Tant que le site n'est pas lancé officiellement : `PUBLIC_SITE_ENV: preparation` (non indexé). Le jour du lancement : `production`.
+- Ne jamais demander, afficher ni committer un mot de passe, un jeton ou une clé.
 
 ## Questions ouvertes
 
