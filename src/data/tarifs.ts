@@ -53,15 +53,19 @@ const euros = (montant: number) =>
   `${montant.toLocaleString('fr-FR', { minimumFractionDigits: Number.isInteger(montant) ? 0 : 2 })}\u00a0€`; // espace insécable : jamais « 89 » et « € » sur deux lignes
 
 const PRIX_DEPANNAGE = 89;
+// Engagement de Corentin (29/10/2026) : affiché en gras dans le haut de la page Dépannage et en fin de forfait.
+const PROMESSE_DEPANNAGE = "Pas de facturation si je ne trouve pas la panne\u00a0: je m'engage.";
 
 export const offreDepannage = {
   prix: euros(PRIX_DEPANNAGE),
+  promesse: PROMESSE_DEPANNAGE,
   titre: 'Déplacement et diagnostic de panne',
   inclus: [
     'Du lundi au samedi, en journée (7h–19h).',
     'Déplacement inclus dans tout Avignon.',
     "Jusqu'à une heure sur place pour rechercher et identifier la panne.",
     'Devis de réparation gratuit, avant tout travail supplémentaire.',
+    PROMESSE_DEPANNAGE,
   ],
   supplements: [
     { prestation: 'Soir', detail: '19h–22h (+25 %)', prix: euros(PRIX_DEPANNAGE * 1.25) },

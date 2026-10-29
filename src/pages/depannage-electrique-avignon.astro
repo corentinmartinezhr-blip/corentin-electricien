@@ -9,6 +9,7 @@ import Electromenager from '../components/depannage/Electromenager.astro';
 import BonsReflexes from '../components/depannage/BonsReflexes.astro';
 import AppelFinal from '../components/AppelFinal.astro';
 import { entreprise } from '../data/entreprise';
+import { offreDepannage } from '../data/tarifs';
 import photoTableau from '../assets/realisations/tableau-electrique.png';
 ---
 
@@ -23,8 +24,13 @@ import photoTableau from '../assets/realisations/tableau-electrique.png';
     alt="Tableau électrique remis en état par Corentin"
   >
     <p>
-      Panne de courant, disjoncteur qui saute, prise hors service : je viens identifier la panne pour 89 €,
-      déplacement compris dans tout Avignon, puis je vous remets un devis de réparation gratuit.
+      Panne de courant, disjoncteur qui saute, prise hors service : je viens identifier la panne, puis je vous
+      remets un devis de réparation gratuit.
+    </p>
+    <p>
+      <strong>
+        {offreDepannage.prix} déplacement compris dans tout {entreprise.ville}. {offreDepannage.promesse}
+      </strong>
     </p>
   </IntroPage>
   <Pannes />
