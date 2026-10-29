@@ -29,7 +29,7 @@ Le cadrage de référence est la note de cadrage V3 (Claude Docs : https://claud
 
 - Ne jamais écrire « réparateur agréé ».
 - Ne jamais écrire « certifié » sauf pour une vraie certification nommée. L'habilitation électrique n'est pas une certification : on affiche les niveaux exacts (BR, B2V…).
-- La section Garanties reste masquée tant que les assurances (RC Pro, décennale) ne sont pas signées. L'électroménager peut être mis en avant (validé par Corentin le 29/10/2026).
+- Ne jamais annoncer la décennale ou la RC Pro avant leur signature. L'électroménager peut être mis en avant (validé par Corentin le 29/10/2026).
 - Pas d'avis clients inventés, pas de chiffres inventés.
 
 ## Contact
@@ -39,7 +39,8 @@ Le cadrage de référence est la note de cadrage V3 (Claude Docs : https://claud
 - Présentation (faits fournis par Corentin) : 31 ans, réactif, communication et transparence, croit en l'artisanat et au fait main. Rien d'autre sans validation.
 - Le bouton « Demander un devis » mène à l'appel final (#contact) tant que le formulaire n'existe pas.
 - Boutons « Appeler » = lien `tel:` (lance l'appel). Numéro écrit en clair dans un texte (pied de page, FAQ, appel final) = composant `NumeroCopiable` : un clic copie le numéro et affiche « Numéro copié » (demande de Corentin).
-- Garanties : triptyque Diplômé / Habilitations basse tension / Décennale et RC Pro, piloté par `garanties` dans `src/data/entreprise.ts` (null = masqué). Ne le remplir qu'avec les intitulés exacts confirmés par Corentin.
+- Garanties (après « Qui suis-je ») : CAP Électricien mention très bien (Académie de Paris, 2025) et habilitations basse tension BR, BC, B2V, B2V Essai, BE Essai, confirmés le 29/10/2026. La H0 n'est pas affichée (choix de Corentin). La 3e carte « Décennale et RC Pro » n'apparaît que si `assurancesSignees: true` dans `src/data/entreprise.ts` : à passer seulement après signature (prévue début novembre 2026).
+- SIREN/SIRET en cours (demande déposée à l'INPI). Pas de lancement officiel (indexation) avant SIRET + décennale signée ; mentions légales à compléter à ce moment-là.
 - Sur mobile : WhatsApp en premier. Sur ordinateur : formulaire en premier.
 - On change l'ordre, on ne cache jamais rien : le formulaire reste accessible sur mobile.
 - Formulaire : script PHP sur o2switch. Expéditeur sur le domaine (ex. `site@corentin-electricien.fr`), destinataire : la boîte Gmail de Corentin, `Reply-To` = adresse du client. Ne jamais écrire l'adresse Gmail en clair dans le HTML.

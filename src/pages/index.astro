@@ -62,8 +62,8 @@ const faq = [
 ];
 
 // Alternance des fonds : elle se décale quand la section Garanties est affichée.
-const fondZone = garanties ? 'section section--brume' : 'section';
-const fondFaq = garanties ? 'section' : 'section section--brume';
+const fondZone = 'section section--brume';
+const fondFaq = 'section';
 ---
 
 <Base
@@ -157,31 +157,34 @@ const fondFaq = garanties ? 'section' : 'section section--brume';
     </div>
   </section>
 
-  <!-- 3 bis. Garanties (masquée tant que garanties === null, voir src/data/entreprise.ts) -->
-  {
-    garanties && (
-      <section class="section" aria-labelledby="garanties-titre">
-        <div class="conteneur">
-          <span class="surtitre">Vos garanties</span>
-          <h2 id="garanties-titre">Un travail encadré et assuré</h2>
-          <ul class="garanties" role="list">
-            <li class="garantie">
-              <h3>Artisan diplômé</h3>
-              <p>{garanties.diplome}</p>
-            </li>
-            <li class="garantie">
-              <h3>Habilitations basse tension</h3>
-              <p>{garanties.habilitations}</p>
-            </li>
+  <!-- 3 bis. Garanties (données : src/data/entreprise.ts) -->
+  <section class="section" aria-labelledby="garanties-titre">
+    <div class="conteneur">
+      <span class="surtitre">Vos garanties</span>
+      <h2 id="garanties-titre">Un professionnel formé et habilité</h2>
+      <ul class:list={['garanties', { 'garanties--trois': garanties.assurancesSignees }]} role="list">
+        <li class="garantie">
+          <h3>Artisan diplômé</h3>
+          <p>
+            {garanties.diplome}<br />
+            <span class="garantie__detail">{garanties.diplomeDetail}</span>
+          </p>
+        </li>
+        <li class="garantie">
+          <h3>Habilitations basse tension</h3>
+          <p>{garanties.habilitations}</p>
+        </li>
+        {
+          garanties.assurancesSignees && (
             <li class="garantie">
               <h3>Garantie décennale et RC Pro</h3>
-              <p>{garanties.assureur ? `Assuré auprès de ${garanties.assureur}.` : 'Vos travaux sont couverts.'}</p>
+              <p>{garanties.assureur ? `Assuré auprès de ${garanties.assureur}.` : 'Vos travaux sont assurés.'}</p>
             </li>
-          </ul>
-        </div>
-      </section>
-    )
-  }
+          )
+        }
+      </ul>
+    </div>
+  </section>
 
   <!-- 4. Zone d'intervention -->
   <section class={fondZone} aria-labelledby="zone-titre">
@@ -483,10 +486,16 @@ const fondFaq = garanties ? 'section' : 'section section--brume';
     color: var(--gris-pierre);
     margin: 0;
   }
+  .garantie__detail {
+    font-size: 0.9375rem;
+  }
   @media (min-width: 48rem) {
     .garanties {
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 1.5rem;
+    }
+    .garanties--trois {
+      grid-template-columns: repeat(3, 1fr);
     }
   }
   .final__actions {
