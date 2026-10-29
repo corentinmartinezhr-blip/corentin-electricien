@@ -17,7 +17,7 @@ const appareils = ['Lave-linge', 'Lave-vaisselle', 'Sèche-linge', 'Four', 'Plaq
         Je me déplace chez vous pour diagnostiquer la panne, puis je vous propose la réparation avec un devis
         gratuit, pièces comprises.
       </p>
-      <ul class="liste-nue appareils" role="list">
+      <ul class="liste-nue etiquettes" role="list">
         {appareils.map((appareil) => <li>{appareil}</li>)}
       </ul>
     </div>
@@ -30,20 +30,6 @@ const appareils = ['Lave-linge', 'Lave-vaisselle', 'Sèche-linge', 'Four', 'Plaq
     display: grid;
     align-items: center;
     gap: 2rem;
-  }
-
-  .appareils {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-  }
-
-  .appareils li {
-    padding: 0.35rem 0.85rem;
-    border: 1px solid var(--bordure);
-    border-radius: 999px;
-    background: var(--blanc);
-    font-size: 0.9375rem;
   }
 
   @media (min-width: 48rem) {

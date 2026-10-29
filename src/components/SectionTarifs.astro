@@ -6,18 +6,12 @@ import { conditions, deplacements, tauxHoraires, type GroupeForfaits } from '../
 
 interface Props {
   forfaits: GroupeForfaits[];
-  /** Fond de la section, pour respecter l'alternance de la page. */
-  fond?: 'ivoire' | 'brume';
 }
 
-const { forfaits, fond = 'brume' } = Astro.props;
+const { forfaits } = Astro.props;
 ---
 
-<section
-  class:list={['section', { 'section--brume': fond === 'brume' }]}
-  id="tarifs"
-  aria-labelledby="tarifs-titre"
->
+<section class="section section--brume" id="tarifs" aria-labelledby="tarifs-titre">
   <div class="conteneur">
     <h2 id="tarifs-titre">Tarifs</h2>
     <div class="grilles">

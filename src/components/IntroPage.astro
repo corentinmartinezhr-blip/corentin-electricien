@@ -3,6 +3,7 @@
 // fil d'Ariane, surtitre, H1, accroche, boutons et image facultative à droite.
 // Image : soit un fichier de src/assets (optimisé par Astro), soit le chemin d'un WebP
 // déjà compressé par Corentin dans public/ (servi tel quel, sans recompression).
+// Les WebP de public/realisations/ font tous 1920 × 1080 : d'où width/height ci-dessous (évite les sauts de mise en page).
 import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 import BoutonContact from './BoutonContact.astro';

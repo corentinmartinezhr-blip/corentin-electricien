@@ -1,7 +1,8 @@
 ---
 // Page Installation : /installation-electrique-avignon/ (recherches visées : « installation électrique Avignon »,
 // « pose luminaire Avignon », « installation prise électrique Avignon »).
-// Alternance des fonds : brume, ivoire, brume, ivoire, puis olive.
+// Ordre demandé par Corentin : tarifs avant les réalisations.
+// Alternance des fonds : brume, ivoire, brume (tarifs), ivoire (réalisations), puis olive.
 import Base from '../layouts/Base.astro';
 import IntroPage from '../components/IntroPage.astro';
 import Prestations from '../components/installation/Prestations.astro';
@@ -28,7 +29,7 @@ import { forfaitsInstallation } from '../data/tarifs';
     </p>
   </IntroPage>
   <Prestations />
+  <SectionTarifs forfaits={forfaitsInstallation} />
   <Realisations />
-  <SectionTarifs forfaits={forfaitsInstallation} fond="ivoire" />
   <AppelFinal />
 </Base>

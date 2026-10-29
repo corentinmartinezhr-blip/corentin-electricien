@@ -27,6 +27,7 @@ const externe = action === 'whatsapp';
   class:list={['bouton', `bouton--${variante}`, classe]}
   href={lien}
   rel={externe ? 'noopener' : undefined}
+  data-numero={action === 'appel' ? entreprise.telephoneAffiche : undefined}
   target={externe ? '_blank' : undefined}
 >
   <Icone nom={icone} />

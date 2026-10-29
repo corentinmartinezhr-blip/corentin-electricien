@@ -58,7 +58,7 @@ const donneesStructurees = {
     <link rel="preload" href={policeTexte} as="font" type="font/woff2" crossorigin />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="sitemap" href="/sitemap.xml" />
-    <meta name="theme-color" content="#FAF7F0" />
+    <meta name="theme-color" content="#FAF7F0" /><!-- = --ivoire (une balise meta ne lit pas le CSS) -->
     <meta name="format-detection" content="telephone=no" />
 
     <script type="application/ld+json" set:html={JSON.stringify(donneesStructurees)} />
@@ -70,5 +70,8 @@ const donneesStructurees = {
       <slot />
     </main>
     <PiedDePage />
+    <script>
+      import '../scripts/contact.ts';
+    </script>
   </body>
 </html>

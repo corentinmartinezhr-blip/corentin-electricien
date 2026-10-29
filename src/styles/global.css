@@ -17,6 +17,7 @@
   --blanc: #FFFFFF;
   --jaune-survol: #E8B220;
   --bordure: rgba(52, 64, 47, 0.12);
+  --bordure-claire: rgba(250, 247, 240, 0.12); /* sur fond olive */
 
   /* Typographie (polices auto-hébergées via @fontsource, voir Base.astro) */
   --font-titre: 'Fraunces Variable', Georgia, 'Times New Roman', serif;
@@ -157,6 +158,21 @@ a {
   background: var(--jaune-soleil);
 }
 
+/* Liste d'étiquettes arrondies (communes, appareils…). */
+.etiquettes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.etiquettes li {
+  padding: 0.35rem 0.85rem;
+  border: 1px solid var(--bordure);
+  border-radius: 999px;
+  background: var(--blanc);
+  font-size: 0.9375rem;
+}
+
 /* ---------- Textes ---------- */
 
 .surtitre {
@@ -177,6 +193,7 @@ a {
 /* ---------- Boutons ---------- */
 
 .bouton {
+  position: relative; /* pour le message « Numéro copié » */
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -212,6 +229,45 @@ a {
 
 .fond-olive .bouton--contour:hover {
   background: var(--ivoire);
+  color: var(--vert-olive);
+}
+
+/* ---------- Message « Numéro copié » (script : src/scripts/contact.ts) ---------- */
+
+.message-copie {
+  position: absolute;
+  bottom: calc(100% + 0.4rem);
+  left: 50%;
+  padding: 0.3rem 0.65rem;
+  border-radius: 999px;
+  background: var(--vert-olive);
+  color: var(--ivoire);
+  font-family: var(--font-texte);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: normal;
+  line-height: 1.3;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, 0.25rem);
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+.message-copie.est-visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+/* Dans l'en-tête, collé en haut de l'écran : le message s'affiche en dessous. */
+.en-tete .message-copie {
+  top: calc(100% + 0.4rem);
+  bottom: auto;
+}
+
+/* Sur fond olive, le message passe en jaune pour rester visible. */
+.fond-olive .message-copie {
+  background: var(--jaune-soleil);
   color: var(--vert-olive);
 }
 

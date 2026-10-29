@@ -25,7 +25,11 @@ const cheminActuel = Astro.url.pathname;
         }
       </ul>
     </nav>
-    <a class="bouton bouton--principal en-tete__appel" href={entreprise.telephoneLien}>
+    <a
+      class="bouton bouton--principal en-tete__appel"
+      href={entreprise.telephoneLien}
+      data-numero={entreprise.telephoneAffiche}
+    >
       <Icone nom="telephone" taille={18} />
       <span class="en-tete__appel-court">Appeler</span>
       <span class="en-tete__appel-long">{entreprise.telephoneAffiche}</span>

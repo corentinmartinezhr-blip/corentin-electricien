@@ -33,17 +33,15 @@ const services = [
     <ul class="liste-nue services" role="list">
       {
         services.map((service) => (
-          <li class="carte">
+          <li class="carte service">
             <span class="pastille-icone">
               <Icone nom={service.icone} taille={24} />
             </span>
             <h3>{service.titre}</h3>
             <p>{service.texte}</p>
-            {(
-              <a class="service__lien" href={service.lien.url}>
-                {service.lien.texte} <span aria-hidden="true">→</span>
-              </a>
-            )}
+            <a class="service__lien" href={service.lien.url}>
+              {service.lien.texte} <span aria-hidden="true">→</span>
+            </a>
           </li>
         ))
       }
@@ -58,9 +56,16 @@ const services = [
     margin-top: 2rem;
   }
 
+  /* Les liens s'alignent en bas des cartes, quelle que soit la longueur du texte. */
+  .service {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
   .service__lien {
-    display: inline-block;
-    margin-top: 1rem;
+    margin-top: auto;
+    padding-top: 1rem;
     font-weight: 700;
     text-decoration-color: var(--jaune-soleil);
     text-decoration-thickness: 2px;

@@ -46,7 +46,7 @@ Le cadrage de référence est la note de cadrage V3 (Claude Docs : https://claud
 - Zone : les 18 communes de la zone principale sont validées (29/10/2026). Formulation prudente sur les frais de déplacement.
 - Présentation (faits fournis par Corentin) : 31 ans, réactif, communication et transparence, croit en l'artisanat et au fait main. Rien d'autre sans validation.
 - Le bouton « Demander un devis » mène à l'appel final (#contact) tant que le formulaire n'existe pas.
-- Boutons « Appeler » = lien `tel:` (lance l'appel). Numéro écrit en clair dans un texte (pied de page, FAQ, appel final) = composant `NumeroCopiable` : un clic copie le numéro et affiche « Numéro copié » (demande de Corentin).
+- Boutons « Appeler » = lien `tel:` (lance l'appel sur téléphone ; sur ordinateur, copie le numéro et affiche « Numéro copié »). Numéro écrit en clair dans un texte (pied de page, FAQ, appel final) = composant `NumeroCopiable` : un clic copie le numéro et affiche « Numéro copié » (demande de Corentin).
 - Garanties (après « Qui suis-je ») : CAP Électricien mention très bien (Académie de Paris, 2025) et habilitations basse tension BR, BC, B2V, B2V Essai, BE Essai, confirmés le 29/10/2026. La H0 n'est pas affichée (choix de Corentin). La 3e carte « Décennale et RC Pro » n'apparaît que si `assurancesSignees: true` dans `src/data/entreprise.ts` : à passer seulement après signature (prévue début novembre 2026).
 - SIREN/SIRET en cours (demande déposée à l'INPI). Pas de lancement officiel (indexation) avant SIRET + décennale signée ; mentions légales à compléter à ce moment-là.
 - Sur mobile : WhatsApp en premier. Sur ordinateur : formulaire en premier.
@@ -67,6 +67,7 @@ Le cadrage de référence est la note de cadrage V3 (Claude Docs : https://claud
 ## Photos
 
 - Réalisations : `src/assets/realisations/` ; portrait : `src/assets/portrait/`.
+- Page Installation : tarifs avant les réalisations (demande de Corentin).
 - Photos de réalisations : WebP fournis et déjà compressés par Corentin, dans `public/realisations/`, servis tels quels (balise `<img>`, pas de recompression : demande de Corentin, la recompression d'Astro était visible). Autres images (portrait, tableau) : `astro:assets`.
 - Portrait : le logo d'une autre entreprise a été effacé du sweat (original hors dépôt). Un shooting est prévu pour le remplacer.
 - Ne jamais publier d'élément permettant d'identifier l'adresse d'un client.
@@ -92,9 +93,9 @@ Relire chaque modification avec un œil critique avant de l'envoyer, et amélior
 
 - **Structure :** une page = `src/pages/` ; une section = un composant (`src/components/<page>/`) qui porte son contenu et son style. Viser < 150 lignes par fichier.
 - **Données :** toute information sur l'entreprise (téléphone, communes, diplômes…) vient de `src/data/entreprise.ts`, jamais écrite en dur ailleurs.
-- **Styles :** couleurs et espacements via les variables de `src/styles/global.css` (aucune couleur en dur hors de ce fichier). Classes communes : `.conteneur`, `.section`, `.section--brume`, `.fond-olive`, `.carte`, `.liste-nue`, `.bouton`. Supprimer tout CSS inutilisé.
+- **Styles :** couleurs et espacements via les variables de `src/styles/global.css` (aucune couleur en dur hors de ce fichier). Classes communes : `.conteneur`, `.section`, `.section--brume`, `.fond-olive`, `.carte`, `.liste-nue`, `.etiquettes`, `.pastille-icone`, `.bouton`, `.message-copie`. Supprimer tout CSS inutilisé.
 - **Boutons d'action :** `BoutonContact` (appel / whatsapp / devis). Numéro en clair : `NumeroCopiable`.
-- **JavaScript :** aucun par défaut. Seule exception actuelle : la copie du numéro. Pas de bibliothèque ni de dépendance sans raison forte.
+- **JavaScript :** aucun par défaut. Seule exception : `src/scripts/contact.ts` (copie du numéro ; sur ordinateur, les liens `tel:` copient le numéro au lieu de ne rien faire). Pas de bibliothèque ni de dépendance sans raison forte.
 - **Nommage :** en français, explicite (`telephoneLien`, `garanties`), commentaires courts qui disent le pourquoi.
 - **Performance :** images via `astro:assets` avec `widths`/`sizes` ; CSS intégré dans la page ; polices latines préchargées ; viser LCP ≤ 2,5 s, CLS ≤ 0,1.
 - **SEO :** un seul `<h1>` par page ; title ≤ ~60 caractères et description ≤ ~155 ; URL lisibles (`/depannage-electrique-avignon/`) ; canonical, sitemap et données structurées `Electrician` gérés par `Base.astro`, `sitemap.xml.ts`, `robots.txt.ts`. Les nouvelles pages entrent seules dans le sitemap.

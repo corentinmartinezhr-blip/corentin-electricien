@@ -11,7 +11,7 @@ import { communes, entreprise } from '../../data/entreprise';
       disponibilités. Contactez-moi pour confirmer la possibilité d'intervention et les éventuels frais de
       déplacement.
     </p>
-    <ul class="liste-nue communes" role="list">
+    <ul class="liste-nue etiquettes communes" role="list">
       {communes.map((commune) => <li>{commune}</li>)}
     </ul>
   </div>
@@ -19,17 +19,6 @@ import { communes, entreprise } from '../../data/entreprise';
 
 <style>
   .communes {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
     margin-top: 1.75rem;
-  }
-
-  li {
-    padding: 0.35rem 0.85rem;
-    border: 1px solid var(--bordure);
-    border-radius: 999px;
-    background: var(--blanc);
-    font-size: 0.9375rem;
   }
 </style>
