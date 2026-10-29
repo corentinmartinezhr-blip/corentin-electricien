@@ -1,0 +1,34 @@
+---
+// Bouton d'action vers Corentin. Un seul endroit pour les liens, icônes et libellés.
+import Icone from './Icone.astro';
+import { entreprise } from '../data/entreprise';
+
+interface Props {
+  action: 'appel' | 'whatsapp' | 'devis';
+  variante?: 'principal' | 'contour';
+  libelle?: string;
+  class?: string;
+}
+
+const { action, variante = 'contour', libelle, class: classe } = Astro.props;
+
+const actions = {
+  appel: { lien: entreprise.telephoneLien, icone: 'telephone', texte: 'Appeler Corentin' },
+  whatsapp: { lien: entreprise.whatsappLien, icone: 'whatsapp', texte: 'WhatsApp' },
+  // Pas encore de formulaire : le devis se demande par téléphone ou WhatsApp (section #contact).
+  devis: { lien: '#contact', icone: 'devis', texte: 'Demander un devis' },
+} as const;
+
+const { lien, icone, texte } = actions[action];
+const externe = action === 'whatsapp';
+---
+
+<a
+  class:list={['bouton', `bouton--${variante}`, classe]}
+  href={lien}
+  rel={externe ? 'noopener' : undefined}
+  target={externe ? '_blank' : undefined}
+>
+  <Icone nom={icone} />
+  {libelle ?? texte}
+</a>

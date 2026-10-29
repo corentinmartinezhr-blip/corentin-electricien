@@ -78,6 +78,22 @@ Le cadrage de référence est la note de cadrage V3 (Claude Docs : https://claud
 - Tant que le site n'est pas lancé officiellement : `PUBLIC_SITE_ENV: preparation` (non indexé). Le jour du lancement : `production`.
 - Ne jamais demander, afficher ni committer un mot de passe, un jeton ou une clé.
 
+## Règles de code (exigence de Corentin : léger, lisible, robuste, bon SEO)
+
+Relire chaque modification avec un œil critique avant de l'envoyer, et améliorer sans hésiter.
+
+- **Structure :** une page = `src/pages/` ; une section = un composant (`src/components/<page>/`) qui porte son contenu et son style. Viser < 150 lignes par fichier.
+- **Données :** toute information sur l'entreprise (téléphone, communes, diplômes…) vient de `src/data/entreprise.ts`, jamais écrite en dur ailleurs.
+- **Styles :** couleurs et espacements via les variables de `src/styles/global.css` (aucune couleur en dur hors de ce fichier). Classes communes : `.conteneur`, `.section`, `.section--brume`, `.fond-olive`, `.carte`, `.liste-nue`, `.bouton`. Supprimer tout CSS inutilisé.
+- **Boutons d'action :** `BoutonContact` (appel / whatsapp / devis). Numéro en clair : `NumeroCopiable`.
+- **JavaScript :** aucun par défaut. Seule exception actuelle : la copie du numéro. Pas de bibliothèque ni de dépendance sans raison forte.
+- **Nommage :** en français, explicite (`telephoneLien`, `garanties`), commentaires courts qui disent le pourquoi.
+- **Performance :** images via `astro:assets` avec `widths`/`sizes` ; CSS intégré dans la page ; polices latines préchargées ; viser LCP ≤ 2,5 s, CLS ≤ 0,1.
+- **SEO :** un seul `<h1>` par page ; title ≤ ~60 caractères et description ≤ ~155 ; URL lisibles (`/depannage-electrique-avignon/`) ; canonical, sitemap et données structurées `Electrician` gérés par `Base.astro`, `sitemap.xml.ts`, `robots.txt.ts`. Les nouvelles pages entrent seules dans le sitemap.
+- **Accessibilité :** contrastes WCAG AA, focus visible, `aria-labelledby` sur chaque section, `role="list"` sur les listes sans puces.
+- **Vérification :** après chaque envoi, contrôler que le build GitHub passe, puis regarder la page en ligne (mobile et ordinateur) après le passage du cron.
+- **Limite connue :** pas de `package-lock.json` (l'espace de travail de Claude ne peut pas installer les paquets). Les versions suivent les plages de `package.json`.
+
 ## Questions ouvertes
 
 - Élément du hero : animation ? (à préciser avec Corentin)

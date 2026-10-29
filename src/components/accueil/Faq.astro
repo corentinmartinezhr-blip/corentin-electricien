@@ -1,0 +1,88 @@
+---
+import NumeroCopiable from '../NumeroCopiable.astro';
+
+// Conseils volontairement prudents : jamais inviter à ouvrir le tableau ni à toucher un fil.
+const questions = [
+  {
+    question: 'Pourquoi mon disjoncteur saute-t-il ?',
+    reponse:
+      "Le plus souvent, trop d'appareils fonctionnent sur le même circuit, un appareil est défectueux ou il y a un défaut d'isolement. Débranchez les appareils du circuit concerné puis réarmez le disjoncteur. S'il saute de nouveau, n'insistez pas : appelez un électricien.",
+  },
+  {
+    question: 'Que faire en cas de panne de courant ?',
+    reponse:
+      "Regardez d'abord si vos voisins sont aussi privés de courant : si c'est le cas, la panne vient sans doute du réseau. Sinon, vérifiez si un disjoncteur est tombé dans votre tableau. N'ouvrez jamais le tableau et ne touchez à aucun fil. En cas de fumée, d'étincelles ou d'odeur de brûlé, éloignez-vous et appelez les secours (18 ou 112) si le danger est immédiat.",
+  },
+  {
+    question: "Réparez-vous l'électroménager ?",
+    reponse:
+      "Oui, je diagnostique et je répare les appareils électroménagers en panne. Décrivez-moi l'appareil et le problème par téléphone ou sur WhatsApp.",
+  },
+];
+---
+
+<section class="section" aria-labelledby="faq-titre">
+  <div class="conteneur">
+    <span class="surtitre">Questions fréquentes</span>
+    <h2 id="faq-titre">Vos questions</h2>
+    <div class="faq">
+      {
+        questions.map(({ question, reponse }) => (
+          <details>
+            <summary>{question}</summary>
+            <p>{reponse}</p>
+          </details>
+        ))
+      }
+      <details>
+        <summary>Comment vous contacter ?</summary>
+        <p>Par téléphone ou sur WhatsApp, au <NumeroCopiable />. Vous tombez directement sur moi.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq {
+    max-width: 48rem;
+    margin-top: 1.5rem;
+    border-top: 1px solid var(--bordure);
+  }
+
+  details {
+    border-bottom: 1px solid var(--bordure);
+  }
+
+  summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-block: 1.1rem;
+    font-weight: 700;
+    list-style: none;
+    cursor: pointer;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  summary::after {
+    content: '+';
+    flex: none;
+    color: var(--ocre);
+    font-size: 1.5rem;
+    line-height: 1;
+  }
+
+  details[open] summary::after {
+    content: '−';
+  }
+
+  p {
+    max-width: 42rem;
+    margin: 0 0 1.25rem;
+    color: var(--gris-pierre);
+  }
+</style>

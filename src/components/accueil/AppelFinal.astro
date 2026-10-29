@@ -1,0 +1,51 @@
+---
+// Cible du bouton « Demander un devis » (#contact) tant que le formulaire n'existe pas.
+import BoutonContact from '../BoutonContact.astro';
+import NumeroCopiable from '../NumeroCopiable.astro';
+---
+
+<section class="fond-olive appel-final" id="contact" aria-labelledby="appel-final-titre">
+  <div class="conteneur">
+    <h2 id="appel-final-titre">Un problème électrique&nbsp;?</h2>
+    <p>Appelez-moi ou écrivez-moi sur WhatsApp, pour un dépannage comme pour un devis.</p>
+    <p class="appel-final__numero"><NumeroCopiable /></p>
+    <div class="appel-final__actions">
+      <BoutonContact action="appel" variante="principal" />
+      <BoutonContact action="whatsapp" libelle="Écrire sur WhatsApp" />
+    </div>
+  </div>
+</section>
+
+<style>
+  .appel-final {
+    padding-block: var(--espace-section);
+    text-align: center;
+  }
+
+  p {
+    max-width: 34rem;
+    margin-inline: auto;
+    opacity: 0.9;
+  }
+
+  .appel-final__numero {
+    margin-block: 0.5rem 1.75rem;
+    opacity: 1;
+  }
+
+  .appel-final__numero :global(.numero-copiable) {
+    color: var(--jaune-soleil);
+    font-family: var(--font-titre);
+    font-size: clamp(2rem, 7vw, 3rem);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+  }
+
+  .appel-final__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+  }
+</style>

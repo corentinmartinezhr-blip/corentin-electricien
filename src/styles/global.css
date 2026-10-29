@@ -1,25 +1,41 @@
-/* Palette « Le soleil et l'olivier » — voir docs/palette.png et CLAUDE.md */
+/*
+  Styles communs à tout le site.
+  Palette « Le soleil et l'olivier » : voir docs/palette.png et CLAUDE.md.
+  Les styles propres à une section vivent dans le composant de cette section.
+*/
+
 :root {
-  --jaune-soleil: #F5C02E; /* signature : éclair, bouton « Appeler ». Jamais en texte sur fond clair. */
-  --vert-olive: #34402F;   /* textes, titres, pied de page */
+  /* Couleurs de la palette */
+  --jaune-soleil: #F5C02E; /* éclair, boutons « Appeler ». Jamais en texte sur fond clair. */
+  --vert-olive: #34402F;   /* textes, titres, fonds foncés */
   --ivoire: #FAF7F0;       /* fond principal */
   --vert-brume: #EEF0E6;   /* fond alterné des sections */
-  --gris-pierre: #5E5A50;  /* texte secondaire, légendes */
-  --ocre: #8A6410;         /* version « texte » du jaune : surtitres, labels */
+  --gris-pierre: #5E5A50;  /* texte secondaire */
+  --ocre: #8A6410;         /* version « texte » du jaune : surtitres */
 
-  /* Jaune soleil très dilué dans l'ivoire (≈ 14 %) : fond du hero uniquement. */
-  --soleil-pastel: #F9EFD5;
-  --olive-fonce: #2A3426;
+  /* Couleurs dérivées */
+  --blanc: #FFFFFF;
+  --jaune-survol: #E8B220;
+  --bordure: rgba(52, 64, 47, 0.12);
 
-  /* Polices auto-hébergées (paquets @fontsource, servis depuis o2switch). */
+  /* Typographie (polices auto-hébergées via @fontsource, voir Base.astro) */
   --font-titre: 'Fraunces Variable', Georgia, 'Times New Roman', serif;
   --font-texte: 'Manrope Variable', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
 
+  /* Mise en page */
   --largeur-max: 72rem;
   --gouttiere: 1rem;
   --rayon: 0.75rem;
   --espace-section: clamp(3.5rem, 8vw, 6rem);
 }
+
+@media (min-width: 48rem) {
+  :root {
+    --gouttiere: 2rem;
+  }
+}
+
+/* ---------- Base ---------- */
 
 *,
 *::before,
@@ -50,10 +66,10 @@ body {
 h1,
 h2,
 h3 {
+  margin: 0 0 0.5em;
   font-family: var(--font-titre);
   font-weight: 600;
   line-height: 1.15;
-  margin: 0 0 0.5em;
   text-wrap: balance;
 }
 
@@ -70,9 +86,9 @@ p {
 }
 
 img {
+  display: block;
   max-width: 100%;
   height: auto;
-  display: block;
 }
 
 a {
@@ -85,16 +101,12 @@ a {
   border-radius: 4px;
 }
 
+/* ---------- Mise en page ---------- */
+
 .conteneur {
   max-width: var(--largeur-max);
   margin-inline: auto;
   padding-inline: var(--gouttiere);
-}
-
-@media (min-width: 48rem) {
-  :root {
-    --gouttiere: 2rem;
-  }
 }
 
 .section {
@@ -105,22 +117,54 @@ a {
   background: var(--vert-brume);
 }
 
+/* Fonds vert olive (appel final, pied de page) : texte clair, focus jaune. */
+.fond-olive {
+  background: var(--vert-olive);
+  color: var(--ivoire);
+}
+
+.fond-olive :focus-visible {
+  outline-color: var(--jaune-soleil);
+}
+
+/* Liste sans puces. Ajouter role="list" dans le HTML pour que Safari la lise comme une liste. */
+.liste-nue {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.carte {
+  padding: 1.5rem;
+  border: 1px solid var(--bordure);
+  border-radius: var(--rayon);
+  background: var(--blanc);
+}
+
+.carte p {
+  margin: 0;
+  color: var(--gris-pierre);
+}
+
+/* ---------- Textes ---------- */
+
 .surtitre {
   display: block;
+  margin-bottom: 0.75rem;
   color: var(--ocre);
   font-size: 0.8125rem;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  margin-bottom: 0.75rem;
 }
 
 .intro {
-  color: var(--gris-pierre);
   max-width: 40rem;
+  color: var(--gris-pierre);
 }
 
-/* Boutons */
+/* ---------- Boutons ---------- */
+
 .bouton {
   display: inline-flex;
   align-items: center;
@@ -128,14 +172,13 @@ a {
   gap: 0.5rem;
   min-height: 3rem;
   padding: 0.75rem 1.4rem;
-  border-radius: 999px;
   border: 2px solid transparent;
-  font-family: var(--font-texte);
+  border-radius: 999px;
   font-size: 1rem;
   font-weight: 700;
   line-height: 1.2;
   text-decoration: none;
-  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  transition: background-color 0.15s ease, color 0.15s ease;
 }
 
 .bouton--principal {
@@ -144,12 +187,11 @@ a {
 }
 
 .bouton--principal:hover {
-  background: #E8B220;
+  background: var(--jaune-survol);
 }
 
 .bouton--contour {
-  border-color: var(--vert-olive);
-  color: var(--vert-olive);
+  border-color: currentColor;
 }
 
 .bouton--contour:hover {
@@ -157,37 +199,22 @@ a {
   color: var(--ivoire);
 }
 
-.bouton--clair {
-  border-color: var(--ivoire);
-  color: var(--ivoire);
-}
-
-.bouton--clair:hover {
+.fond-olive .bouton--contour:hover {
   background: var(--ivoire);
   color: var(--vert-olive);
 }
 
-.visuellement-cache {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
+/* ---------- Accessibilité ---------- */
 
 .lien-evitement {
   position: absolute;
-  left: 1rem;
   top: -4rem;
+  left: 1rem;
   z-index: 10;
-  background: var(--vert-olive);
-  color: var(--ivoire);
   padding: 0.6rem 1rem;
   border-radius: 0.5rem;
+  background: var(--vert-olive);
+  color: var(--ivoire);
   font-weight: 700;
 }
 

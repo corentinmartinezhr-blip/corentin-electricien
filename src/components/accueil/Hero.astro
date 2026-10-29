@@ -1,0 +1,110 @@
+---
+import { Image } from 'astro:assets';
+import BoutonContact from '../BoutonContact.astro';
+import { entreprise } from '../../data/entreprise';
+import portrait from '../../assets/portrait/corentin.png';
+---
+
+<section class="hero" aria-labelledby="hero-titre">
+  <div class="conteneur hero__grille">
+    <div>
+      <span class="surtitre">Artisan électricien à {entreprise.ville}</span>
+      <h1 id="hero-titre">Un problème électrique&nbsp;? Je suis là pour vous aider.</h1>
+      <p class="hero__accroche">
+        Dépannage électrique, recherche de panne et installations : je vous accompagne avec des solutions
+        adaptées à votre besoin, à {entreprise.ville} et dans les communes voisines.
+      </p>
+      <div class="hero__actions">
+        <BoutonContact action="appel" variante="principal" class="action--appel" />
+        <BoutonContact action="devis" class="action--devis" />
+        <BoutonContact action="whatsapp" class="action--whatsapp" />
+      </div>
+    </div>
+    <Image
+      class="hero__photo"
+      src={portrait}
+      alt={`Corentin, artisan électricien à ${entreprise.ville}`}
+      width={800}
+      widths={[320, 480, 640, 800]}
+      sizes="(min-width: 64rem) 24rem, (min-width: 48rem) 20rem, 80vw"
+      loading="eager"
+      fetchpriority="high"
+    />
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding-block: clamp(2.5rem, 7vw, 5rem);
+    background: var(--vert-brume);
+  }
+
+  .hero__grille {
+    display: grid;
+    align-items: center;
+    gap: 2.5rem;
+  }
+
+  h1 {
+    max-width: 18ch;
+    font-size: clamp(2rem, 6vw, 3.25rem);
+  }
+
+  .hero__accroche {
+    max-width: 36rem;
+    margin-bottom: 1.75rem;
+    font-size: 1.125rem;
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  /* Ordre des boutons sur mobile : Appeler, WhatsApp, devis. */
+  .hero__actions :global(.action--appel) {
+    order: 1;
+  }
+  .hero__actions :global(.action--whatsapp) {
+    order: 2;
+  }
+  .hero__actions :global(.action--devis) {
+    order: 3;
+  }
+
+  .hero__photo {
+    justify-self: center;
+    width: min(20rem, 80vw);
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    border-radius: 1.25rem;
+  }
+
+  @media (max-width: 29.99rem) {
+    .hero__actions :global(.bouton) {
+      flex: 1 1 100%;
+    }
+  }
+
+  @media (min-width: 48rem) {
+    .hero__grille {
+      grid-template-columns: 1.3fr 0.7fr;
+      gap: 3rem;
+    }
+
+    .hero__photo {
+      justify-self: end;
+      width: 100%;
+      max-width: 24rem;
+    }
+
+    /* Ordre sur ordinateur : Appeler, devis, WhatsApp. */
+    .hero__actions :global(.action--devis) {
+      order: 2;
+    }
+    .hero__actions :global(.action--whatsapp) {
+      order: 3;
+    }
+  }
+</style>

@@ -1,0 +1,35 @@
+---
+import { communes, entreprise } from '../../data/entreprise';
+---
+
+<section class="section section--brume" aria-labelledby="zone-titre">
+  <div class="conteneur">
+    <span class="surtitre">Zone d'intervention</span>
+    <h2 id="zone-titre">{entreprise.ville} et les communes voisines</h2>
+    <p class="intro">
+      J'interviens à {entreprise.ville} et dans les communes voisines, selon la nature de la demande et mes
+      disponibilités. Contactez-moi pour confirmer la possibilité d'intervention et les éventuels frais de
+      déplacement.
+    </p>
+    <ul class="liste-nue communes" role="list">
+      {communes.map((commune) => <li>{commune}</li>)}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .communes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1.75rem;
+  }
+
+  li {
+    padding: 0.35rem 0.85rem;
+    border: 1px solid var(--bordure);
+    border-radius: 999px;
+    background: var(--blanc);
+    font-size: 0.9375rem;
+  }
+</style>

@@ -10,6 +10,7 @@ interface Props {
 const { class: classe } = Astro.props;
 ---
 
+
 <button
   type="button"
   class:list={['numero-copiable', classe]}
@@ -61,7 +62,7 @@ const { class: classe } = Astro.props;
     transform: translate(-50%, 0);
   }
   /* Sur fond olive, le message passe en jaune pour rester visible. */
-  .numero-copiable--sur-olive .numero-copiable__message {
+  .fond-olive .numero-copiable__message {
     background: var(--jaune-soleil);
     color: var(--vert-olive);
   }

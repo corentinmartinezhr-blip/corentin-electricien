@@ -8,5 +8,7 @@ export default defineConfig({
   trailingSlash: 'ignore',
   build: {
     format: 'directory',
+    // Le CSS (~15 Ko) est écrit directement dans la page : une requête bloquante de moins.
+    inlineStylesheets: 'always',
   },
 });

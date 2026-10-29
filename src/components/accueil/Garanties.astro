@@ -1,0 +1,59 @@
+---
+// Données : src/data/entreprise.ts. Jamais « certifié » (aucune certification nommée).
+import { garanties } from '../../data/entreprise';
+---
+
+<section class="section" aria-labelledby="garanties-titre">
+  <div class="conteneur">
+    <span class="surtitre">Vos garanties</span>
+    <h2 id="garanties-titre">Un professionnel formé et habilité</h2>
+    <ul class:list={['liste-nue', 'garanties', { 'garanties--trois': garanties.assurancesSignees }]} role="list">
+      <li class="carte garantie">
+        <h3>Artisan diplômé</h3>
+        <p>
+          {garanties.diplome}<br />
+          <small>{garanties.diplomeDetail}</small>
+        </p>
+      </li>
+      <li class="carte garantie">
+        <h3>Habilitations basse tension</h3>
+        <p>{garanties.habilitations}</p>
+      </li>
+      {
+        garanties.assurancesSignees && (
+          <li class="carte garantie">
+            <h3>Garantie décennale et RC Pro</h3>
+            <p>{garanties.assureur ? `Assuré auprès de ${garanties.assureur}.` : 'Vos travaux sont assurés.'}</p>
+          </li>
+        )
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .garanties {
+    display: grid;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .garantie {
+    border-top: 4px solid var(--jaune-soleil);
+  }
+
+  small {
+    font-size: 0.9375rem;
+  }
+
+  @media (min-width: 48rem) {
+    .garanties {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    .garanties--trois {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

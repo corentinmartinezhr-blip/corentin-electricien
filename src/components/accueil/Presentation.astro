@@ -1,0 +1,75 @@
+---
+import { entreprise } from '../../data/entreprise';
+
+// Faits et valeurs fournis par Corentin (29/10/2026). N'ajouter que du vérifié.
+const valeurs = [
+  { titre: 'Réactif', texte: 'Vous me joignez directement, sans standard ni intermédiaire.' },
+  {
+    titre: 'Communication et transparence',
+    texte: 'Je vous explique ce que je constate et ce que je propose, simplement.',
+  },
+  { titre: 'Travail fait main', texte: "Je crois en l'artisanat : chaque intervention est faite avec soin." },
+];
+---
+
+<section class="section section--brume" aria-labelledby="presentation-titre">
+  <div class="conteneur presentation">
+    <div>
+      <span class="surtitre">Qui suis-je</span>
+      <h2 id="presentation-titre">Un artisan, un seul interlocuteur</h2>
+      <p>
+        Je m'appelle Corentin, j'ai 31 ans et je suis électricien indépendant à {entreprise.ville}. Quand vous
+        m'appelez, c'est moi qui vous réponds et c'est moi qui interviens.
+      </p>
+      <p>
+        Mes maîtres-mots sont la communication et la transparence : je prends le temps de vous expliquer la
+        situation et les solutions possibles, sans jargon.
+      </p>
+    </div>
+    <ul class="liste-nue valeurs" role="list">
+      {
+        valeurs.map((valeur) => (
+          <li class="valeur">
+            <h3>{valeur.titre}</h3>
+            <p>{valeur.texte}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .presentation {
+    display: grid;
+    gap: 2rem;
+  }
+
+  .valeurs {
+    display: grid;
+    align-content: center;
+    gap: 1.25rem;
+  }
+
+  .valeur {
+    padding-left: 1rem;
+    border-left: 3px solid var(--jaune-soleil);
+  }
+
+  .valeur h3 {
+    margin-bottom: 0.25rem;
+    font-size: 1.125rem;
+  }
+
+  .valeur p {
+    margin: 0;
+    color: var(--gris-pierre);
+  }
+
+  @media (min-width: 48rem) {
+    .presentation {
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 4rem;
+    }
+  }
+</style>

@@ -1,0 +1,70 @@
+---
+import Icone from '../Icone.astro';
+
+// Les liens vers les pages Dépannage et Installation seront ajoutés
+// quand ces pages existeront (jamais de lien mort).
+const services = [
+  {
+    icone: 'eclair',
+    titre: 'Dépannage électrique',
+    texte:
+      "Panne de courant, disjoncteur qui saute, prise ou éclairage qui ne fonctionne plus : je recherche l'origine de la panne et je remets votre installation en état.",
+  },
+  {
+    icone: 'outils',
+    titre: 'Petits travaux et tableau',
+    texte:
+      "Ajout ou remplacement de prises et d'interrupteurs, pose de luminaires, intervention sur votre tableau électrique.",
+  },
+  {
+    icone: 'electromenager',
+    titre: 'Électroménager',
+    texte: 'Diagnostic et réparation de vos appareils électroménagers en panne.',
+  },
+] as const;
+---
+
+<section class="section" aria-labelledby="services-titre">
+  <div class="conteneur">
+    <span class="surtitre">Mes services</span>
+    <h2 id="services-titre">Ce que je fais pour vous</h2>
+    <ul class="liste-nue services" role="list">
+      {
+        services.map((service) => (
+          <li class="carte">
+            <span class="service__icone">
+              <Icone nom={service.icone} taille={24} />
+            </span>
+            <h3>{service.titre}</h3>
+            <p>{service.texte}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .services {
+    display: grid;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .service__icone {
+    display: inline-grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    margin-bottom: 1rem;
+    border-radius: 999px;
+    background: var(--jaune-soleil);
+  }
+
+  @media (min-width: 48rem) {
+    .services {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+  }
+</style>
