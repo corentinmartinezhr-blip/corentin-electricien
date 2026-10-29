@@ -14,6 +14,7 @@ const PAGE_MERCI = '/contact/merci/';
 const PAGE_ERREUR = '/contact/erreur/';
 
 const TYPES_DEMANDE = ['Dépannage', 'Installation', 'Électroménager', 'Autre'];
+const MESSAGE_MIN = 10; // caractères, = minlength du formulaire
 const PHOTOS_MAX = 3;
 const TAILLE_MAX_PHOTO = 8 * 1024 * 1024; // 8 Mo par photo
 const TAILLE_MAX_TOTALE = 20 * 1024 * 1024; // 20 Mo en tout
@@ -29,6 +30,25 @@ function rediriger(string $page): void
 {
     header('Location: ' . $page, true, 303);
     exit;
+}
+
+/** Renvoie vers la page d'erreur, sur l'explication du champ en cause (ancre lue en CSS, sans JavaScript). */
+function refuser(string $motif): void
+{
+    rediriger(PAGE_ERREUR . '#' . $motif);
+}
+
+/**
+ * Téléphone réduit à ses chiffres (espaces, points et tirets ignorés), puis écrit « 06 12 34 56 78 ».
+ * Accepte un numéro français à 10 chiffres ou un numéro international en « + ». Null si invalide.
+ */
+function telephoneNormalise(string $saisie): ?string
+{
+    $numero = preg_replace('/[\s.\-]/u', '', $saisie);
+    if (preg_match('/^0[1-9][0-9]{8}$/', $numero) === 1) {
+        return trim(chunk_split($numero, 2, ' '));
+    }
+    return preg_match('/^\+[0-9]{9,15}$/', $numero) === 1 ? $numero : null;
 }
 
 /** Texte saisi, nettoyé et limité en longueur. Une ligne : aucun caractère de contrôle (anti-injection d'en-têtes). */
@@ -58,13 +78,15 @@ function photosJointes(): ?array
             continue;
         }
         $chemin = $fichiers['tmp_name'][$i];
+        // Photo refusée par le serveur lui-même (trop lourde…) : il n'y a pas de fichier à examiner.
+        if ($fichiers['error'][$i] !== UPLOAD_ERR_OK || !is_uploaded_file($chemin)) {
+            return null;
+        }
         $taille = (int) $fichiers['size'][$i];
         $total += $taille;
         $format = FORMATS_PHOTO[$detecteur->file($chemin) ?: ''] ?? null;
 
-        $refusee = $fichiers['error'][$i] !== UPLOAD_ERR_OK
-            || !is_uploaded_file($chemin)
-            || count($photos) >= PHOTOS_MAX
+        $refusee = count($photos) >= PHOTOS_MAX
             || $taille > TAILLE_MAX_PHOTO
             || $total > TAILLE_MAX_TOTALE
             || $format === null;
@@ -90,23 +112,38 @@ if (champ('site_web', 200) !== '') {
     rediriger(PAGE_MERCI);
 }
 
+// Requête plus lourde que la limite du serveur : PHP vide alors $_POST, ce sont les photos qui pèsent trop.
+if ($_POST === [] && (int) ($_SERVER['CONTENT_LENGTH'] ?? 0) > 0) {
+    refuser('photos');
+}
+
 $prenom = champ('prenom', 60);
 $nom = champ('nom', 60);
-$telephone = champ('telephone', 30);
+$telephone = telephoneNormalise(champ('telephone', 30));
 $email = champ('email', 120);
 $type = champ('type', 30);
 $message = champ('message', 3000, true);
 
-$saisieValide = $prenom !== ''
-    && $nom !== ''
-    && preg_match('/^[0-9+().\s-]{10,20}$/', $telephone) === 1
-    && filter_var($email, FILTER_VALIDATE_EMAIL) !== false
-    && in_array($type, TYPES_DEMANDE, true)
-    && mb_strlen($message) >= 10;
+// Mêmes règles que le formulaire (Formulaire.astro) : le navigateur bloque d'abord, le serveur confirme.
+// Le premier problème trouvé est indiqué sur la page d'erreur.
+if ($prenom === '' || $nom === '') {
+    refuser('nom');
+}
+if ($telephone === null) {
+    refuser('telephone');
+}
+if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
+    refuser('email');
+}
+if (!in_array($type, TYPES_DEMANDE, true)) {
+    refuser('type');
+}
+if (mb_strlen($message) < MESSAGE_MIN) {
+    refuser('message');
+}
 $photos = photosJointes();
-
-if (!$saisieValide || $photos === null) {
-    rediriger(PAGE_ERREUR);
+if ($photos === null) {
+    refuser('photos');
 }
 
 // ---------- Construction de l'e-mail (texte + photos en pièces jointes) ----------
@@ -143,4 +180,7 @@ $sujet = mb_encode_mimeheader("Site : $type – $prenom $nom", 'UTF-8', 'B'); //
 $envoye = mail(DESTINATAIRE, $sujet, $contenu, $entetes, '-f' . EXPEDITEUR);
 
 // Le message de réussite ne s'affiche que si l'envoi a vraiment fonctionné.
-rediriger($envoye ? PAGE_MERCI : PAGE_ERREUR);
+if (!$envoye) {
+    refuser('envoi');
+}
+rediriger(PAGE_MERCI);

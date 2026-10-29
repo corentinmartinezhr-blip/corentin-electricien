@@ -27,13 +27,20 @@ const estProduction = import.meta.env.PUBLIC_SITE_ENV === 'production';
 const urlCanonique = new URL(Astro.url.pathname, Astro.site).href;
 
 // Données structurées : uniquement des informations exactes et publiques.
-// L'adresse et le SIRET seront ajoutés quand ils existeront.
+// Le SIRET sera ajouté quand il existera.
 const donneesStructurees = {
   '@context': 'https://schema.org',
   '@type': 'Electrician',
   name: entreprise.nom,
   url: Astro.site?.href,
   telephone: entreprise.telephoneInternational,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: entreprise.adresse.rue,
+    postalCode: entreprise.adresse.codePostal,
+    addressLocality: entreprise.adresse.ville,
+    addressCountry: 'FR',
+  },
   image: new URL('/logo/logo-carre.svg', Astro.site).href,
   areaServed: communes.map((commune) => ({ '@type': 'City', name: commune })),
 };

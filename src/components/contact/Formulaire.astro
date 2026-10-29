@@ -1,7 +1,13 @@
 ---
 // Formulaire de contact, sans JavaScript : envoyé à /contact/envoyer.php (PHP sur o2switch).
-// Les règles (champs obligatoires, photos) sont vérifiées ici par le navigateur ET côté serveur.
+// Les mêmes règles sont vérifiées ici par le navigateur, puis par envoyer.php : si l'une change, changer l'autre.
 const typesDemande = ['Dépannage', 'Installation', 'Électroménager', 'Autre']; // = TYPES_DEMANDE du PHP
+const motifs = {
+  nonVide: '.*\\S.*', // au moins un caractère autre qu'un espace
+  // 10 chiffres commençant par 0, ou + et 9 à 15 chiffres ; espaces permis entre les chiffres
+  telephone: '0[1-9]( ?[0-9]){8}|\\+( ?[0-9]){9,15}',
+  email: '[^@\\s]+@[^@\\s]+\\.[^@\\s]+', // un point après le @, comme l'exige le serveur
+};
 ---
 
 <form class="carte formulaire" action="/contact/envoyer.php" method="post" enctype="multipart/form-data">
@@ -11,11 +17,11 @@ const typesDemande = ['Dépannage', 'Installation', 'Électroménager', 'Autre']
   <div class="formulaire__ligne">
     <label>
       Prénom
-      <input name="prenom" autocomplete="given-name" maxlength="60" required />
+      <input name="prenom" autocomplete="given-name" maxlength="60" pattern={motifs.nonVide} required />
     </label>
     <label>
       Nom
-      <input name="nom" autocomplete="family-name" maxlength="60" required />
+      <input name="nom" autocomplete="family-name" maxlength="60" pattern={motifs.nonVide} required />
     </label>
   </div>
 
@@ -26,15 +32,25 @@ const typesDemande = ['Dépannage', 'Installation', 'Électroménager', 'Autre']
         name="telephone"
         type="tel"
         autocomplete="tel"
-        inputmode="tel"
-        pattern="[\d\s\+\-\.\(\)]{10,20}"
-        title="Un numéro de téléphone, par exemple 06 12 34 56 78"
+        inputmode="numeric"
+        maxlength="20"
+        pattern={motifs.telephone}
+        title="Chiffres uniquement, par exemple 06 12 34 56 78"
         required
       />
+      <span class="formulaire__aide">Chiffres uniquement, ex. 06 12 34 56 78</span>
     </label>
     <label>
       E-mail
-      <input name="email" type="email" autocomplete="email" maxlength="120" required />
+      <input
+        name="email"
+        type="email"
+        autocomplete="email"
+        maxlength="120"
+        pattern={motifs.email}
+        title="Une adresse e-mail complète, par exemple nom@exemple.fr"
+        required
+      />
     </label>
   </div>
 
@@ -56,6 +72,7 @@ const typesDemande = ['Dépannage', 'Installation', 'Électroménager', 'Autre']
       placeholder="Ce qui se passe, depuis quand, la commune…"
       required
     ></textarea>
+    <span class="formulaire__aide">10 caractères minimum.</span>
   </label>
 
   <label>

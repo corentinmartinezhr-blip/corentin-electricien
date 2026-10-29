@@ -13,7 +13,7 @@ import { entreprise } from '../../data/entreprise';
     <dt>E-mail</dt>
     <dd><a href={`mailto:${entreprise.email}`}>{entreprise.email}</a></dd>
     <dt>Adresse</dt>
-    <dd>{entreprise.adresse.rue}, {entreprise.adresse.ville}</dd>
+    <dd>{entreprise.adresse.rue}, {entreprise.adresse.codePostal} {entreprise.adresse.ville}</dd>
     <dt>Zone d'intervention</dt>
     <dd>{entreprise.ville} et les <a href="/#zone-titre">communes voisines</a></dd>
   </dl>

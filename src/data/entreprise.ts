@@ -12,8 +12,8 @@ export const entreprise = {
   // Adresse publique du domaine, redirigée vers la boîte Gmail de Corentin (cPanel → Redirecteurs).
   // L'adresse Gmail n'est jamais publiée : le dépôt GitHub et le site sont publics.
   email: 'contact@corentin-electricien.fr',
-  // Adresse fournie par Corentin le 29/10/2026. Code postal à confirmer (84000 ou 84140 selon le quartier).
-  adresse: { rue: '15 rue Alexandre Fleming', ville: 'Avignon' },
+  // Adresse fournie par Corentin le 29/10/2026.
+  adresse: { rue: '15 rue Alexandre Fleming', codePostal: '84000', ville: 'Avignon' },
 };
 
 // Section « Garanties » de l'accueil (triptyque après « Qui suis-je »).
