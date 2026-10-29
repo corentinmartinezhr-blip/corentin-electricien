@@ -62,10 +62,12 @@ Le détail du cadrage est dans `docs/note-de-cadrage-v2.md`. La palette est dans
 
 ## Déploiement
 
-- Chaque envoi sur `main` construit le site sur GitHub et le dépose par FTPS sur `test.corentin-electricien.fr` (`.github/workflows/deploy-test.yml`).
+- Chaque envoi sur `main` construit le site sur GitHub et le dépose sur `test.corentin-electricien.fr` (`.github/workflows/deploy-test.yml`).
+- Le FTP depuis GitHub ne marche pas : le pare-feu o2switch coupe les transferts (ECONNRESET sur le canal de données). On utilise la méthode o2switch : exception temporaire via l'API cPanel `SshWhitelist` (add puis remove in/out), puis rsync sur SSH. Limite : 5 exceptions sur le compte, d'où le retrait systématique.
+- rsync utilise `--delete` mais exclut `.htaccess`, `.well-known/` et `cgi-bin/` côté serveur.
 - Le site de test est protégé par mot de passe via cPanel (« Confidentialité des répertoires »), qui écrit un `.htaccess` dans le dossier de test. Ne jamais publier de `.htaccess` à la racine du site de test sans y reprendre cette protection.
 - La mise en ligne en production se fait seulement après validation explicite de Corentin, par un déploiement séparé (à créer).
-- Secrets GitHub : `FTP_SERVER`, `FTP_USERNAME`, `FTP_PASSWORD`. Ne jamais demander, afficher ni committer un mot de passe.
+- Secrets GitHub : `O2SWITCH_SERVER` (nom d'hôte du serveur cPanel), `CPANEL_USER`, `CPANEL_TOKEN` (jeton API cPanel), `SSH_PRIVATE_KEY`. Les anciens `FTP_*` ne servent plus. Ne jamais demander, afficher ni committer un mot de passe, un jeton ou une clé.
 
 ## Questions ouvertes
 
