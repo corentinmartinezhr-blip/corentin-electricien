@@ -10,7 +10,6 @@ import SectionTarifs from '../components/SectionTarifs.astro';
 import AppelFinal from '../components/AppelFinal.astro';
 import { entreprise } from '../data/entreprise';
 import { forfaitsInstallation } from '../data/tarifs';
-import photoCuisine from '../assets/realisations/cuisine-prises-led.jpg';
 ---
 
 <Base
@@ -20,7 +19,7 @@ import photoCuisine from '../assets/realisations/cuisine-prises-led.jpg';
   <IntroPage
     surtitre="Installation électrique"
     titre={`Installation électrique à ${entreprise.ville} et alentours`}
-    image={photoCuisine}
+    image="/realisations/cuisine-prises-led.webp"
     alt="Cuisine équipée de prises et d'un éclairage LED sous les meubles, posés par Corentin"
   >
     <p>

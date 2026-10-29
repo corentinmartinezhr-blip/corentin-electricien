@@ -15,6 +15,7 @@ Le cadrage de référence est la note de cadrage V3 (Claude Docs : https://claud
 - Faites : Accueil (`/`), Dépannage (`/depannage-electrique-avignon/`), Installation (`/installation-electrique-avignon/`). À faire : Contact (avec formulaire), pages légales.
 - Menu (en-tête et pied de page) : `src/data/navigation.ts`. Composants partagés : `IntroPage`, `SectionTarifs`, `GrilleTarifs`, `Deroule`, `AppelFinal`, `BoutonContact`, `NumeroCopiable`.
 - Électroménager : pas de réfrigérateur ni de climatisation (circuit de froid = attestation fluides frigorigènes).
+- Véhicule électrique : uniquement « prise renforcée jusqu'à 3,7 kW » (pas de qualification IRVE). Ne jamais proposer de « borne de recharge » ni de puissance supérieure tant que Corentin n'est pas qualifié IRVE.
 - Pas de page Tarifs : les prix sont affichés sur Dépannage et Installation.
 - Accueil : hero avec la photo de Corentin, 3 services (dépannage électrique ; petits travaux et tableau ; électroménager), présentation, garanties, FAQ, appel final.
 - Électroménager : une section de la page Dépannage en V1, pas une page.
@@ -65,7 +66,7 @@ Le cadrage de référence est la note de cadrage V3 (Claude Docs : https://claud
 ## Photos
 
 - Réalisations : `src/assets/realisations/` ; portrait : `src/assets/portrait/`.
-- Toujours passer par `astro:assets` (`<Image>`) pour optimiser.
+- Photos de réalisations : WebP fournis et déjà compressés par Corentin, dans `public/realisations/`, servis tels quels (balise `<img>`, pas de recompression : demande de Corentin, la recompression d'Astro était visible). Autres images (portrait, tableau) : `astro:assets`.
 - Portrait : le logo d'une autre entreprise a été effacé du sweat (original hors dépôt). Un shooting est prévu pour le remplacer.
 - Ne jamais publier d'élément permettant d'identifier l'adresse d'un client.
 

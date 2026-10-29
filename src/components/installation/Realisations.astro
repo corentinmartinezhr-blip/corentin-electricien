@@ -1,20 +1,13 @@
 ---
 // Photos de chantiers de Corentin (sans élément permettant d'identifier l'adresse d'un client).
-import { Image } from 'astro:assets';
-import prisesPlanTravail from '../../assets/realisations/prises-plan-travail.jpg';
-import priseDouble from '../../assets/realisations/prise-cuisine-double.jpg';
-import priseTriple from '../../assets/realisations/prise-salon-triple.jpg';
-import interrupteur from '../../assets/realisations/interrupteur-telecommande.jpg';
-import ventilateurAllume from '../../assets/realisations/brasseur-air-allume.jpg';
-import ventilateur from '../../assets/realisations/brasseur-air.jpg';
-
+// WebP déjà compressés par Corentin (public/realisations/) : servis tels quels, sans recompression.
 const photos = [
-  { src: prisesPlanTravail, legende: 'Prises sur le plan de travail d’une cuisine' },
-  { src: priseDouble, legende: 'Double prise encastrée dans la crédence' },
-  { src: priseTriple, legende: 'Triple prise dans un salon' },
-  { src: interrupteur, legende: 'Interrupteur double et télécommande murale' },
-  { src: ventilateurAllume, legende: 'Ventilateur de plafond avec éclairage' },
-  { src: ventilateur, legende: 'Ventilateur de plafond en marche' },
+  { fichier: 'prises-plan-travail', legende: 'Prises sur le plan de travail d’une cuisine' },
+  { fichier: 'prise-cuisine-double', legende: 'Double prise encastrée dans la crédence' },
+  { fichier: 'prise-salon-triple', legende: 'Triple prise dans un salon' },
+  { fichier: 'interrupteur-telecommande', legende: 'Interrupteur double et télécommande murale' },
+  { fichier: 'brasseur-air-allume', legende: 'Ventilateur de plafond avec éclairage' },
+  { fichier: 'brasseur-air', legende: 'Ventilateur de plafond en marche' },
 ];
 ---
 
@@ -24,15 +17,16 @@ const photos = [
     <h2 id="realisations-titre">Quelques chantiers récents</h2>
     <ul class="liste-nue galerie" role="list">
       {
-        photos.map(({ src, legende }) => (
+        photos.map(({ fichier, legende }) => (
           <li>
             <figure>
-              <Image
-                src={src}
+              <img
+                src={`/realisations/${fichier}.webp`}
                 alt={legende}
-                width={720}
-                widths={[360, 540, 720]}
-                sizes="(min-width: 64rem) 22rem, (min-width: 40rem) 45vw, 90vw"
+                width="1920"
+                height="1080"
+                loading="lazy"
+                decoding="async"
               />
               <figcaption>{legende}</figcaption>
             </figure>
@@ -54,7 +48,7 @@ const photos = [
     margin: 0;
   }
 
-  .galerie :global(img) {
+  img {
     width: 100%;
     aspect-ratio: 4 / 3;
     object-fit: cover;

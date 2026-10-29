@@ -20,6 +20,12 @@ const prestations = [
     texte: 'Rubans LED sous les meubles de cuisine ou en éclairage d’ambiance.',
   },
   {
+    icone: 'voiture',
+    titre: 'Prise pour véhicule électrique',
+    // Prise renforcée ≤ 3,7 kW : pas de qualification IRVE requise. Jamais « borne de recharge ».
+    texte: 'Pose d’une prise renforcée au garage pour recharger votre voiture électrique ou hybride (jusqu’à 3,7 kW).',
+  },
+  {
     icone: 'outils',
     titre: 'Tableau électrique',
     texte: 'Remplacement ou modernisation de votre tableau, sur devis gratuit.',
@@ -75,7 +81,7 @@ const etapes = [
 
   @media (min-width: 64rem) {
     .prestations {
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 1.5rem;
     }
   }

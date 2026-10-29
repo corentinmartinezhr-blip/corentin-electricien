@@ -1,6 +1,8 @@
 ---
 // Haut de page des pages intérieures (Dépannage, Installation…) :
 // fil d'Ariane, surtitre, H1, accroche, boutons et image facultative à droite.
+// Image : soit un fichier de src/assets (optimisé par Astro), soit le chemin d'un WebP
+// déjà compressé par Corentin dans public/ (servi tel quel, sans recompression).
 import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 import BoutonContact from './BoutonContact.astro';
@@ -8,7 +10,7 @@ import BoutonContact from './BoutonContact.astro';
 interface Props {
   surtitre: string;
   titre: string;
-  image?: ImageMetadata;
+  image?: ImageMetadata | string;
   alt?: string;
 }
 
@@ -30,7 +32,20 @@ const { surtitre, titre, image, alt = '' } = Astro.props;
       </div>
     </div>
     {
-      image && (
+      typeof image === 'string' && (
+        <img
+          class="intro-page__image"
+          src={image}
+          alt={alt}
+          width="1920"
+          height="1080"
+          fetchpriority="high"
+          decoding="async"
+        />
+      )
+    }
+    {
+      image && typeof image !== 'string' && (
         <Image
           class="intro-page__image"
           src={image}

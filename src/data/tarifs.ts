@@ -41,9 +41,14 @@ const luminaire: LigneTarif = {
   prix: '85 €',
 };
 const tableau: LigneTarif = { prestation: 'Remplacement du tableau électrique', prix: 'Sur devis' };
+const priseVehicule: LigneTarif = {
+  prestation: 'Prise renforcée pour véhicule électrique',
+  detail: 'Jusqu’à 3,7 kW',
+  prix: 'Sur devis',
+};
 
 export const forfaitsDepannage: LigneTarif[] = [recherchePanne, disjoncteur, priseInterrupteur, tableau];
-export const forfaitsInstallation: LigneTarif[] = [priseInterrupteur, luminaire, tableau];
+export const forfaitsInstallation: LigneTarif[] = [priseInterrupteur, luminaire, priseVehicule, tableau];
 
 export const diagnosticElectromenager: LigneTarif = {
   prestation: 'Diagnostic électroménager',

@@ -1,7 +1,7 @@
 ---
 // Petites icônes en SVG inline (aucune bibliothèque, rien à télécharger).
 interface Props {
-  nom: 'telephone' | 'whatsapp' | 'eclair' | 'outils' | 'electromenager' | 'devis' | 'prise' | 'ampoule';
+  nom: 'telephone' | 'whatsapp' | 'eclair' | 'outils' | 'electromenager' | 'devis' | 'prise' | 'ampoule' | 'voiture';
   taille?: number;
 }
 const { nom, taille = 20 } = Astro.props;
@@ -51,6 +51,14 @@ const { nom, taille = 20 } = Astro.props;
     <>
       <path d="M9 18h6M10 22h4" />
       <path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.2 1 2V18h6v-1.3c0-.8.4-1.5 1-2A7 7 0 0 0 12 2z" />
+    </>
+  )}
+  {nom === 'voiture' && (
+    <>
+      <path d="M5 17H3v-5l2-5h11l3 5h2v5h-2" />
+      <circle cx="7.5" cy="17" r="2" />
+      <circle cx="16.5" cy="17" r="2" />
+      <path d="M9.5 17h5M12 7l-1.5 3h3L12 13" />
     </>
   )}
   {nom === 'devis' && (
