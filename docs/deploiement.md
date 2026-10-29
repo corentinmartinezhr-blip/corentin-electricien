@@ -17,10 +17,10 @@ Il n'y a pas de site de test : choix de Corentin, pour garder la chaîne simple.
 - Commande (une seule ligne) :
 
 ```sh
-{ cd "$HOME" && { [ -d site-git ] || git clone -q --depth 1 -b production https://github.com/corentinmartinezhr-blip/corentin-electricien.git site-git; } && cd site-git && git fetch -q --depth 1 origin production && git reset -q --hard origin/production && rsync -a --delete --exclude=.git --exclude=.htaccess --exclude=.well-known/ --exclude=cgi-bin/ ./ "$HOME/DOSSIER_DU_SITE/"; } > "$HOME/deploiement-dernier.log" 2>&1
+{ cd "$HOME" && { [ -d site-git ] || git clone -q --depth 1 -b production https://github.com/corentinmartinezhr-blip/corentin-electricien.git site-git; } && cd site-git && git fetch -q --depth 1 origin production && git reset -q --hard origin/production && rsync -a --delete --exclude=.git --exclude=.htaccess --exclude=.well-known/ --exclude=cgi-bin/ ./ "$HOME/public_html/"; } > "$HOME/deploiement-dernier.log" 2>&1
 ```
 
-`DOSSIER_DU_SITE` = racine du document de `corentin-electricien.fr` (cPanel → Domaines).
+Le site est dans `public_html` (racine du document de `corentin-electricien.fr`). Corentin a confirmé que l'ancien contenu de ce dossier pouvait être supprimé.
 
 Le résultat du dernier passage est dans `~/deploiement-dernier.log` (vide = tout va bien).
 
