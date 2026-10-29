@@ -4,18 +4,17 @@
 import Base from '../layouts/Base.astro';
 import IntroPage from '../components/IntroPage.astro';
 import Pannes from '../components/depannage/Pannes.astro';
-import SectionTarifs from '../components/SectionTarifs.astro';
+import Tarif from '../components/depannage/Tarif.astro';
 import Electromenager from '../components/depannage/Electromenager.astro';
 import BonsReflexes from '../components/depannage/BonsReflexes.astro';
 import AppelFinal from '../components/AppelFinal.astro';
 import { entreprise } from '../data/entreprise';
-import { forfaitsDepannage } from '../data/tarifs';
 import photoTableau from '../assets/realisations/tableau-electrique.png';
 ---
 
 <Base
   title="Dépannage électrique à Avignon – Tarifs | Corentin Électricien"
-  description="Dépannage électrique et recherche de panne à Avignon et alentours. Tarifs affichés, devis gratuit, électroménager. Appel ou WhatsApp au 06 83 78 69 11."
+  description="Dépannage électrique à Avignon : déplacement et diagnostic de panne 89 €, devis de réparation gratuit. Appel ou WhatsApp au 06 83 78 69 11."
 >
   <IntroPage
     surtitre="Dépannage électrique"
@@ -24,12 +23,12 @@ import photoTableau from '../assets/realisations/tableau-electrique.png';
     alt="Tableau électrique remis en état par Corentin"
   >
     <p>
-      Panne de courant, disjoncteur qui saute, prise hors service : je recherche l'origine de la panne et je
-      remets votre installation en état. Tarifs affichés et devis gratuit avant d'intervenir.
+      Panne de courant, disjoncteur qui saute, prise hors service : je viens identifier la panne pour 89 €,
+      déplacement compris dans tout Avignon, puis je vous remets un devis de réparation gratuit.
     </p>
   </IntroPage>
   <Pannes />
-  <SectionTarifs forfaits={forfaitsDepannage} />
+  <Tarif />
   <Electromenager />
   <BonsReflexes />
   <AppelFinal />

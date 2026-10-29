@@ -1,0 +1,74 @@
+---
+// Tarifs de l'installation : devis gratuit mis en avant, puis forfaits de main-d'œuvre.
+// La règle de lecture des prix est dite une seule fois, au-dessus des grilles. Données : src/data/tarifs.ts.
+import GrilleTarifs from '../GrilleTarifs.astro';
+import Icone from '../Icone.astro';
+import { deplacementInstallation, forfaitsInstallation, mentionTva } from '../../data/tarifs';
+---
+
+<section class="section section--brume" id="tarifs" aria-labelledby="tarifs-titre">
+  <div class="conteneur">
+    <h2 id="tarifs-titre">Tarifs</h2>
+
+    <div class="carte devis">
+      <span class="pastille-icone"><Icone nom="devis" taille={24} /></span>
+      <div>
+        <h3>Devis gratuit avant chaque chantier</h3>
+        <p>Vous connaissez le prix total avant que je commence. {deplacementInstallation}</p>
+      </div>
+    </div>
+
+    <p class="intro lecture">
+      <strong>Comment lire ces prix :</strong> chaque montant est un forfait de main-d'œuvre pour la prestation
+      complète (pose, raccordement et vérification). Le matériel s'ajoute, au prix indiqué sur le devis.
+    </p>
+
+    <div class="grilles">
+      {forfaitsInstallation.map(({ titre, lignes }) => <GrilleTarifs titre={titre} lignes={lignes} />)}
+    </div>
+    <p class="mention">{mentionTva}</p>
+  </div>
+</section>
+
+<style>
+  .devis {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    margin-top: 2rem;
+    border-top: 4px solid var(--jaune-soleil);
+  }
+
+  .devis .pastille-icone {
+    flex: none;
+    margin-bottom: 0;
+  }
+
+  .devis h3 {
+    margin-bottom: 0.25rem;
+  }
+
+  .lecture {
+    margin-block: 1.5rem;
+  }
+
+  .grilles {
+    display: grid;
+    align-items: start;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .mention {
+    margin: 0;
+    color: var(--gris-pierre);
+    font-size: 0.9375rem;
+  }
+
+  @media (min-width: 48rem) {
+    .grilles {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+  }
+</style>

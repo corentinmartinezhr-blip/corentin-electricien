@@ -13,7 +13,7 @@ Le cadrage de référence est la note de cadrage V3 (Claude Docs : https://claud
 
 - 4 pages : Accueil, Dépannage, Installation, Contact, plus les pages légales (mentions légales, confidentialité).
 - Faites : Accueil (`/`), Dépannage (`/depannage-electrique-avignon/`), Installation (`/installation-electrique-avignon/`). À faire : Contact (avec formulaire), pages légales.
-- Menu (en-tête et pied de page) : `src/data/navigation.ts`. Composants partagés : `IntroPage`, `SectionTarifs`, `GrilleTarifs`, `Deroule`, `AppelFinal`, `BoutonContact`, `NumeroCopiable`.
+- Menu (en-tête et pied de page) : `src/data/navigation.ts`. Composants partagés : `IntroPage`, `GrilleTarifs`, `Deroule`, `AppelFinal`, `BoutonContact`, `NumeroCopiable`.
 - Électroménager : pas de réfrigérateur ni de climatisation (circuit de froid = attestation fluides frigorigènes).
 - Véhicule électrique : uniquement « prise renforcée jusqu'à 3,7 kW » (pas de qualification IRVE). Ne jamais proposer de « borne de recharge » ni de puissance supérieure tant que Corentin n'est pas qualifié IRVE.
 - Pas de page Tarifs : les prix sont affichés sur Dépannage et Installation.
@@ -21,16 +21,11 @@ Le cadrage de référence est la note de cadrage V3 (Claude Docs : https://claud
 - Électroménager : une section de la page Dépannage en V1, pas une page.
 - Les « bons réflexes » sont sur la page Dépannage.
 
-## Grille tarifaire (périodes)
+## Tarifs (seule source : `src/data/tarifs.ts`)
 
-- Journée : du lundi au samedi, 7h–19h.
-- Soir : 19h–22h, +25 %.
-- Dimanche et jours fériés : +50 %.
-- Le samedi après-midi est au tarif journée, sans majoration.
-- Un tarif de diagnostic électroménager doit être affiché.
-- Montants validés par Corentin le 29/10/2026 (benchmark dans les documents du projet) : seule source `src/data/tarifs.ts`. 65 €/h journée, 81 €/h soir, 97 €/h dimanche et fériés ; déplacement 35 € Avignon, 49 € autres communes ; recherche de panne 110 € ; disjoncteur 75 € ; prise/interrupteur 65 € ; luminaire 85 € ; tableau sur devis ; diagnostic électroménager 65 € déplacement inclus.
-- Devis gratuit. Décompte : première heure due en entier, puis par quart d'heure entamé. Prix nets, « TVA non applicable, art. 293 B du CGI » (franchise de TVA, à confirmer avec le SIRET).
-- Petites installations (validées le 29/10/2026) : détecteur de fumée 45 € ; radiateur ou sèche-serviettes 85 € ; thermostat/programmateur 75 € ; prise RJ45/TV 65 € ; éclairage extérieur ou détecteur de présence 85 € (alimentation existante) ; interphone/visiophone, circuit dédié et prise véhicule électrique sur devis. Pas de VMC pour l'instant.
+- **Dépannage (défini par Corentin le 29/10/2026)** : forfait unique « Déplacement et diagnostic de panne » 89 €, du lundi au samedi en journée (7h–19h), déplacement inclus dans tout Avignon, jusqu'à 1 h sur place, devis de réparation gratuit. Suppléments : soir 19h–22h +25 % (111,25 €), dimanche et fériés +50 % (133,50 €), autres communes de la zone +30 €. Réparation au-delà du diagnostic : 65 €/h, par quart d'heure entamé, toujours sur devis accepté (ligne obligatoire : affichage du taux horaire, arrêté du 24/01/2017). Ce sont les seuls tarifs de la page Dépannage (plus le diagnostic électroménager 65 €).
+- **Installation** : devis gratuit mis en avant ; déplacement offert dans tout Avignon, 49 € ailleurs. Forfaits de main-d'œuvre pour la prestation complète, matériel en plus (règle expliquée une seule fois au-dessus des grilles) : prise/interrupteur 65 € ; RJ45/TV 65 € ; luminaire 85 € ; éclairage extérieur ou détecteur de présence 85 € ; radiateur ou sèche-serviettes 85 € ; thermostat 75 € ; détecteur de fumée 45 € ; circuit dédié, prise véhicule électrique, tableau, interphone : sur devis. Pas de VMC pour l'instant.
+- Prix nets, « TVA non applicable, art. 293 B du CGI » (franchise de TVA, à confirmer avec le SIRET).
 - Les prix affichés sont un plafond : remise possible, jamais au-dessus.
 
 ## Formulations interdites ou encadrées (obligatoire)

@@ -1,0 +1,87 @@
+---
+// Tarif du dépannage : un forfait unique, ses suppléments et les mentions obligatoires
+// (arrêté du 24 janvier 2017 : forfait, déplacement, taux horaire). Données : src/data/tarifs.ts.
+import GrilleTarifs from '../GrilleTarifs.astro';
+import { entreprise } from '../../data/entreprise';
+import { mentionTva, offreDepannage } from '../../data/tarifs';
+---
+
+<section class="section section--brume" id="tarifs" aria-labelledby="tarifs-titre">
+  <div class="conteneur">
+    <h2 id="tarifs-titre">Tarifs</h2>
+    <div class="tarif">
+      <div class="carte offre">
+        <p class="offre__marque">{entreprise.nom} · {entreprise.ville}</p>
+        <p class="offre__prix">{offreDepannage.prix}</p>
+        <h3>{offreDepannage.titre}</h3>
+        <ul class="offre__inclus">
+          {offreDepannage.inclus.map((point) => <li>{point}</li>)}
+        </ul>
+      </div>
+      <GrilleTarifs titre="Suppléments" lignes={offreDepannage.supplements} />
+    </div>
+    <ul class="mentions" role="list">
+      <li>{offreDepannage.reparation}</li>
+      <li>{offreDepannage.piecesEtSuite}</li>
+      <li>{mentionTva}</li>
+    </ul>
+  </div>
+</section>
+
+<style>
+  .tarif {
+    display: grid;
+    align-items: start;
+    gap: 1rem;
+    margin-block: 2rem 1.5rem;
+  }
+
+  .offre {
+    border-top: 4px solid var(--jaune-soleil);
+  }
+
+  .offre__marque {
+    color: var(--ocre);
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .offre .offre__prix {
+    margin-block: 0.25rem 0.5rem;
+    color: var(--vert-olive);
+    font-family: var(--font-titre);
+    font-size: clamp(2.5rem, 8vw, 3.5rem);
+    font-weight: 600;
+    line-height: 1;
+  }
+
+  .offre__inclus {
+    margin: 0;
+    padding-left: 1.2rem;
+  }
+
+  .offre__inclus li + li {
+    margin-top: 0.35rem;
+  }
+
+  .mentions {
+    max-width: 44rem;
+    margin: 0;
+    padding-left: 1.2rem;
+    color: var(--gris-pierre);
+    font-size: 0.9375rem;
+  }
+
+  .mentions li + li {
+    margin-top: 0.35rem;
+  }
+
+  @media (min-width: 48rem) {
+    .tarif {
+      grid-template-columns: 1.2fr 1fr;
+      gap: 1.5rem;
+    }
+  }
+</style>

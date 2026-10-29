@@ -8,70 +8,9 @@ export interface LigneTarif {
   prix: string;
 }
 
-export const tauxHoraires: LigneTarif[] = [
-  { prestation: 'Journée', detail: 'Du lundi au samedi, 7h–19h', prix: '65 € / h' },
-  { prestation: 'Soir', detail: '19h–22h (+25 %)', prix: '81 € / h' },
-  { prestation: 'Dimanche et jours fériés', detail: '+50 %', prix: '97 € / h' },
-];
-
-export const deplacements: LigneTarif[] = [
-  { prestation: 'Avignon', prix: '35 €' },
-  { prestation: 'Autres communes de la zone', prix: '49 €' },
-];
-
-// Forfaits : chaque prestation est définie une seule fois, puis regroupée par page.
-const recherchePanne: LigneTarif = {
-  prestation: 'Recherche de panne',
-  detail: "Jusqu'à 1 h, hors déplacement",
-  prix: '110 €',
-};
-const disjoncteur: LigneTarif = {
-  prestation: "Remplacement d'un disjoncteur",
-  detail: 'Main-d’œuvre, hors matériel',
-  prix: '75 €',
-};
-const priseInterrupteur: LigneTarif = {
-  prestation: "Pose ou remplacement d'une prise ou d'un interrupteur",
-  detail: 'Main-d’œuvre, hors matériel',
-  prix: '65 €',
-};
-const luminaire: LigneTarif = {
-  prestation: "Pose d'un luminaire ou d'un plafonnier",
-  detail: 'Main-d’œuvre, hors matériel',
-  prix: '85 €',
-};
-const tableau: LigneTarif = { prestation: 'Remplacement du tableau électrique', prix: 'Sur devis' };
-const priseVehicule: LigneTarif = {
-  prestation: 'Prise renforcée pour véhicule électrique',
-  detail: 'Jusqu’à 3,7 kW',
-  prix: 'Sur devis',
-};
-
-// Petites installations : forfaits validés le 29/10/2026 (benchmark complété dans les documents du projet).
-const mainOeuvre = 'Main-d’œuvre, hors matériel';
-const detecteurFumee: LigneTarif = { prestation: "Pose d'un détecteur de fumée", detail: mainOeuvre, prix: '45 €' };
-const radiateur: LigneTarif = {
-  prestation: "Pose ou remplacement d'un radiateur ou d'un sèche-serviettes",
-  detail: mainOeuvre,
-  prix: '85 €',
-};
-const thermostat: LigneTarif = {
-  prestation: "Pose d'un thermostat ou d'un programmateur de radiateur",
-  detail: mainOeuvre,
-  prix: '75 €',
-};
-const priseReseau: LigneTarif = { prestation: "Pose d'une prise RJ45 ou TV", detail: mainOeuvre, prix: '65 €' };
-const eclairageExterieur: LigneTarif = {
-  prestation: "Éclairage extérieur ou détecteur de présence",
-  detail: 'Sur une alimentation existante, hors matériel',
-  prix: '85 €',
-};
-const interphone: LigneTarif = { prestation: 'Interphone ou visiophone', prix: 'Sur devis' };
-const circuitDedie: LigneTarif = {
-  prestation: 'Circuit dédié (plaque, four, lave-linge…)',
-  detail: 'Tirage de câble depuis le tableau',
-  prix: 'Sur devis',
-};
+// ---------- Installation : forfaits de main-d'œuvre (validés le 29/10/2026) ----------
+// Chaque prix couvre la prestation complète (pose, raccordement, vérification), matériel en plus.
+// Cette règle est expliquée une seule fois sur la page, au-dessus des grilles.
 
 /** Une grille de forfaits avec son titre (une page peut en afficher plusieurs). */
 export interface GroupeForfaits {
@@ -79,16 +18,28 @@ export interface GroupeForfaits {
   lignes: LigneTarif[];
 }
 
-export const forfaitsDepannage: GroupeForfaits[] = [
-  { titre: 'Forfaits dépannage', lignes: [recherchePanne, disjoncteur, priseInterrupteur, tableau] },
-];
-
 export const forfaitsInstallation: GroupeForfaits[] = [
   {
     titre: 'Prises, éclairage et circuits',
-    lignes: [priseInterrupteur, priseReseau, luminaire, eclairageExterieur, circuitDedie, priseVehicule, tableau],
+    lignes: [
+      { prestation: 'Prise ou interrupteur', detail: 'Pose ou remplacement', prix: '65 €' },
+      { prestation: 'Prise RJ45 ou TV', prix: '65 €' },
+      { prestation: 'Luminaire ou plafonnier', prix: '85 €' },
+      { prestation: 'Éclairage extérieur ou détecteur de présence', detail: 'Sur une alimentation existante', prix: '85 €' },
+      { prestation: 'Circuit dédié (plaque, four, lave-linge…)', detail: 'Tirage de câble depuis le tableau', prix: 'Sur devis' },
+      { prestation: 'Prise renforcée pour véhicule électrique', detail: 'Jusqu’à 3,7 kW', prix: 'Sur devis' },
+      { prestation: 'Remplacement du tableau électrique', prix: 'Sur devis' },
+    ],
   },
-  { titre: 'Chauffage, sécurité et confort', lignes: [radiateur, thermostat, detecteurFumee, interphone] },
+  {
+    titre: 'Chauffage, sécurité et confort',
+    lignes: [
+      { prestation: 'Radiateur ou sèche-serviettes', detail: 'Pose ou remplacement', prix: '85 €' },
+      { prestation: 'Thermostat ou programmateur de radiateur', prix: '75 €' },
+      { prestation: 'Détecteur de fumée', prix: '45 €' },
+      { prestation: 'Interphone ou visiophone', prix: 'Sur devis' },
+    ],
+  },
 ];
 
 export const diagnosticElectromenager: LigneTarif = {
@@ -97,10 +48,35 @@ export const diagnosticElectromenager: LigneTarif = {
   prix: '65 €',
 };
 
-// Conditions à afficher (arrêté du 24 janvier 2017), confirmées par Corentin le 29/10/2026.
-export const conditions = {
-  decompte: "La première heure est due en entier, puis le temps est compté par quart d'heure entamé.",
-  devis: 'Le devis est gratuit et vous est remis par écrit avant toute intervention.',
-  materiel: 'Le matériel est facturé en plus, au prix indiqué sur le devis.',
-  tva: 'TVA non applicable, art. 293 B du CGI.',
+// ---------- Dépannage : un forfait unique (défini par Corentin le 29/10/2026) ----------
+const euros = (montant: number) =>
+  `${montant.toLocaleString('fr-FR', { minimumFractionDigits: Number.isInteger(montant) ? 0 : 2 })} €`;
+
+const PRIX_DEPANNAGE = 89;
+
+export const offreDepannage = {
+  prix: euros(PRIX_DEPANNAGE),
+  titre: 'Déplacement et diagnostic de panne',
+  inclus: [
+    'Du lundi au samedi, en journée (7h–19h).',
+    'Déplacement inclus dans tout Avignon.',
+    "Jusqu'à une heure sur place pour rechercher et identifier la panne.",
+    'Devis de réparation gratuit, avant tout travail supplémentaire.',
+  ],
+  supplements: [
+    { prestation: 'Soir', detail: '19h–22h (+25 %)', prix: euros(PRIX_DEPANNAGE * 1.25) },
+    { prestation: 'Dimanche et jours fériés', detail: '+50 %', prix: euros(PRIX_DEPANNAGE * 1.5) },
+    { prestation: 'Autres communes de la zone', detail: 'Supplément de déplacement', prix: '+30 €' },
+  ] satisfies LigneTarif[],
+  // Taux horaire : affichage obligatoire pour le dépannage (arrêté du 24 janvier 2017).
+  reparation: "Réparation au-delà du diagnostic : 65 € de l'heure, comptée par quart d'heure entamé, toujours sur devis accepté.",
+  piecesEtSuite:
+    'Pièces, réparation et éventuel second déplacement sont facturés selon le devis accepté.',
 };
+
+// ---------- Installation ----------
+export const deplacementInstallation =
+  'Déplacement offert dans tout Avignon, 49 € dans les autres communes de la zone.';
+
+// Mentions communes.
+export const mentionTva = 'Prix nets, TVA non applicable (art. 293 B du CGI).';

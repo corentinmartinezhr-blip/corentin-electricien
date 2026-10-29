@@ -7,10 +7,9 @@ import Base from '../layouts/Base.astro';
 import IntroPage from '../components/IntroPage.astro';
 import Prestations from '../components/installation/Prestations.astro';
 import Realisations from '../components/installation/Realisations.astro';
-import SectionTarifs from '../components/SectionTarifs.astro';
+import Tarifs from '../components/installation/Tarifs.astro';
 import AppelFinal from '../components/AppelFinal.astro';
 import { entreprise } from '../data/entreprise';
-import { forfaitsInstallation } from '../data/tarifs';
 ---
 
 <Base
@@ -29,7 +28,7 @@ import { forfaitsInstallation } from '../data/tarifs';
     </p>
   </IntroPage>
   <Prestations />
-  <SectionTarifs forfaits={forfaitsInstallation} />
+  <Tarifs />
   <Realisations />
   <AppelFinal />
 </Base>
