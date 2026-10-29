@@ -1,4 +1,5 @@
 ---
+import NumeroCopiable from './NumeroCopiable.astro';
 import { entreprise } from '../data/entreprise';
 const annee = new Date().getFullYear();
 ---
@@ -16,7 +17,7 @@ const annee = new Date().getFullYear();
     <div class="pied__infos">
       <p>
         Électricien à {entreprise.ville} et dans les communes voisines<br />
-        <a href={entreprise.telephoneLien}>{entreprise.telephoneAffiche}</a>
+        <NumeroCopiable class="numero-copiable--sur-olive" />
       </p>
       <p class="pied__mentions">© {annee} {entreprise.nom}</p>
     </div>
@@ -46,10 +47,8 @@ const annee = new Date().getFullYear();
   .pied__infos p {
     margin: 0 0 0.5rem;
   }
-  .pied__infos a {
-    font-weight: 700;
+  .pied__infos :global(.numero-copiable) {
     text-decoration-color: var(--jaune-soleil);
-    text-underline-offset: 3px;
   }
   .pied :focus-visible {
     outline-color: var(--jaune-soleil);

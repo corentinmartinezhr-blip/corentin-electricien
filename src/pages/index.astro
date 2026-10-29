@@ -2,7 +2,8 @@
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import Icone from '../components/Icone.astro';
-import { entreprise, communes } from '../data/entreprise';
+import NumeroCopiable from '../components/NumeroCopiable.astro';
+import { entreprise, communes, garanties } from '../data/entreprise';
 import portrait from '../assets/portrait/corentin.png';
 
 // Les liens vers les pages Dépannage et Installation seront ajoutés
@@ -58,11 +59,11 @@ const faq = [
     reponse:
       "Oui, je diagnostique et je répare les appareils électroménagers en panne. Décrivez-moi l'appareil et le problème par téléphone ou sur WhatsApp.",
   },
-  {
-    question: 'Comment vous contacter ?',
-    reponse: `Par téléphone ou sur WhatsApp, au ${entreprise.telephoneAffiche}. Vous tombez directement sur moi.`,
-  },
 ];
+
+// Alternance des fonds : elle se décale quand la section Garanties est affichée.
+const fondZone = garanties ? 'section section--brume' : 'section';
+const fondFaq = garanties ? 'section' : 'section section--brume';
 ---
 
 <Base
@@ -156,8 +157,34 @@ const faq = [
     </div>
   </section>
 
+  <!-- 3 bis. Garanties (masquée tant que garanties === null, voir src/data/entreprise.ts) -->
+  {
+    garanties && (
+      <section class="section" aria-labelledby="garanties-titre">
+        <div class="conteneur">
+          <span class="surtitre">Vos garanties</span>
+          <h2 id="garanties-titre">Un travail encadré et assuré</h2>
+          <ul class="garanties" role="list">
+            <li class="garantie">
+              <h3>Artisan diplômé</h3>
+              <p>{garanties.diplome}</p>
+            </li>
+            <li class="garantie">
+              <h3>Habilitations basse tension</h3>
+              <p>{garanties.habilitations}</p>
+            </li>
+            <li class="garantie">
+              <h3>Garantie décennale et RC Pro</h3>
+              <p>{garanties.assureur ? `Assuré auprès de ${garanties.assureur}.` : 'Vos travaux sont couverts.'}</p>
+            </li>
+          </ul>
+        </div>
+      </section>
+    )
+  }
+
   <!-- 4. Zone d'intervention -->
-  <section class="section" aria-labelledby="zone-titre">
+  <section class={fondZone} aria-labelledby="zone-titre">
     <div class="conteneur">
       <span class="surtitre">Zone d'intervention</span>
       <h2 id="zone-titre">{entreprise.ville} et les communes voisines</h2>
@@ -173,7 +200,7 @@ const faq = [
   </section>
 
   <!-- 5. FAQ -->
-  <section class="section section--brume" aria-labelledby="faq-titre">
+  <section class={fondFaq} aria-labelledby="faq-titre">
     <div class="conteneur faq">
       <span class="surtitre">Questions fréquentes</span>
       <h2 id="faq-titre">Vos questions</h2>
@@ -186,6 +213,12 @@ const faq = [
             </details>
           ))
         }
+        <details class="faq__item">
+          <summary>Comment vous contacter ?</summary>
+          <p>
+            Par téléphone ou sur WhatsApp, au <NumeroCopiable />. Vous tombez directement sur moi.
+          </p>
+        </details>
       </div>
     </div>
   </section>
@@ -195,7 +228,7 @@ const faq = [
     <div class="conteneur final__contenu">
       <h2 id="final-titre">Un problème électrique&nbsp;?</h2>
       <p>Appelez-moi ou écrivez-moi sur WhatsApp, pour un dépannage comme pour un devis.</p>
-      <a class="final__numero" href={entreprise.telephoneLien}>{entreprise.telephoneAffiche}</a>
+      <p class="final__numero-ligne"><NumeroCopiable class="final__numero numero-copiable--sur-olive" /></p>
       <div class="final__actions">
         <a class="bouton bouton--principal" href={entreprise.telephoneLien}>
           <Icone nom="telephone" />
@@ -213,10 +246,8 @@ const faq = [
 <style>
   /* ---------- Hero ---------- */
   .hero {
-    /* Jaune soleil très pastel + petits éclairs blancs en motif, derrière tout le contenu du hero. */
-    background-color: var(--soleil-pastel);
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cg fill='white'%3E%3Cpath d='M38 14 22 40h13l-4 22 20-30H37z'/%3E%3Cpath d='M118 92l-11 18h9l-3 15 14-21h-9z'/%3E%3Cpath d='M126 18l-7 11h6l-2 9 9-13h-6z' opacity='.8'/%3E%3Cpath d='M44 104l-8 13h6l-2 10 10-15h-6z' opacity='.8'/%3E%3C/g%3E%3C/svg%3E");
-    background-size: 160px 160px;
+    /* Fond vert brume, sobre (le jaune pastel + éclairs a été abandonné le 29/10/2026). */
+    background-color: var(--vert-brume);
     padding-block: clamp(2.5rem, 7vw, 5rem);
     overflow: hidden;
   }
@@ -420,15 +451,43 @@ const faq = [
     max-width: 34rem;
     margin-inline: auto;
   }
-  .final__numero {
-    display: inline-block;
+  .final__numero-ligne {
     margin: 0.5rem 0 1.75rem;
+  }
+  .final :global(.final__numero) {
+    display: inline-block;
     font-family: var(--font-titre);
     font-size: clamp(2rem, 7vw, 3rem);
     font-weight: 600;
     color: var(--jaune-soleil);
     text-decoration: none;
     letter-spacing: 0.02em;
+  }
+
+  /* ---------- Garanties ---------- */
+  .garanties {
+    list-style: none;
+    margin: 2rem 0 0;
+    padding: 0;
+    display: grid;
+    gap: 1rem;
+  }
+  .garantie {
+    background: #fff;
+    border: 1px solid rgba(52, 64, 47, 0.1);
+    border-top: 4px solid var(--jaune-soleil);
+    border-radius: var(--rayon);
+    padding: 1.5rem;
+  }
+  .garantie p {
+    color: var(--gris-pierre);
+    margin: 0;
+  }
+  @media (min-width: 48rem) {
+    .garanties {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
   }
   .final__actions {
     display: flex;

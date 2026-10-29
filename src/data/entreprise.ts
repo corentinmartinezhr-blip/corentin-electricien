@@ -10,6 +10,17 @@ export const entreprise = {
   whatsappLien: 'https://wa.me/33683786911',
 };
 
+// Section « Garanties » de l'accueil (triptyque après « Qui suis-je »).
+// Reste à null — donc masquée — tant que Corentin n'a pas confirmé :
+//  - l'intitulé exact de son diplôme (jamais « certifié » sans certification nommée),
+//  - ses niveaux d'habilitation exacts (basse tension),
+//  - la signature de la décennale et de la RC Pro.
+export const garanties: null | {
+  diplome: string; // ex. « CAP Électricien »
+  habilitations: string; // ex. « BR, B2V, BC » — tels qu'écrits sur le titre
+  assureur?: string;
+} = null;
+
 // Zone principale validée par Corentin le 29/10/2026.
 export const communes = [
   'Avignon',
