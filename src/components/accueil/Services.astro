@@ -1,8 +1,7 @@
 ---
 import Icone from '../Icone.astro';
 
-// Lien vers la page dédiée quand elle existe (jamais de lien mort).
-// Installation : lien à ajouter quand la page sera créée.
+// Chaque carte renvoie vers sa page dédiée.
 const services = [
   {
     icone: 'eclair',
@@ -16,6 +15,7 @@ const services = [
     titre: 'Petits travaux et tableau',
     texte:
       "Ajout ou remplacement de prises et d'interrupteurs, pose de luminaires, intervention sur votre tableau électrique.",
+    lien: { url: '/installation-electrique-avignon/', texte: 'Réalisations et tarifs' },
   },
   {
     icone: 'electromenager',
@@ -34,12 +34,12 @@ const services = [
       {
         services.map((service) => (
           <li class="carte">
-            <span class="service__icone">
+            <span class="pastille-icone">
               <Icone nom={service.icone} taille={24} />
             </span>
             <h3>{service.titre}</h3>
             <p>{service.texte}</p>
-            {'lien' in service && (
+            {(
               <a class="service__lien" href={service.lien.url}>
                 {service.lien.texte} <span aria-hidden="true">→</span>
               </a>
@@ -65,16 +65,6 @@ const services = [
     text-decoration-color: var(--jaune-soleil);
     text-decoration-thickness: 2px;
     text-underline-offset: 4px;
-  }
-
-  .service__icone {
-    display: inline-grid;
-    place-items: center;
-    width: 2.75rem;
-    height: 2.75rem;
-    margin-bottom: 1rem;
-    border-radius: 999px;
-    background: var(--jaune-soleil);
   }
 
   @media (min-width: 48rem) {

@@ -1,0 +1,46 @@
+---
+// Étapes numérotées d'une intervention (pages Dépannage et Installation).
+interface Props {
+  titre: string;
+  etapes: string[];
+}
+
+const { titre, etapes } = Astro.props;
+---
+
+<h3 class="deroule-titre">{titre}</h3>
+<ol class="liste-nue deroule" role="list">
+  {etapes.map((etape) => <li>{etape}</li>)}
+</ol>
+
+<style>
+  .deroule-titre {
+    margin-bottom: 1.25rem;
+  }
+
+  .deroule {
+    display: grid;
+    gap: 0.75rem;
+    max-width: 44rem;
+    counter-reset: etape;
+  }
+
+  li {
+    display: flex;
+    align-items: baseline;
+    gap: 0.85rem;
+    counter-increment: etape;
+  }
+
+  li::before {
+    content: counter(etape);
+    display: inline-grid;
+    flex: none;
+    place-items: center;
+    width: 1.9rem;
+    height: 1.9rem;
+    border-radius: 999px;
+    background: var(--jaune-soleil);
+    font-weight: 700;
+  }
+</style>

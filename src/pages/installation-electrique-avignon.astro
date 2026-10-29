@@ -1,0 +1,35 @@
+---
+// Page Installation : /installation-electrique-avignon/ (recherches visées : « installation électrique Avignon »,
+// « pose luminaire Avignon », « installation prise électrique Avignon »).
+// Alternance des fonds : brume, ivoire, brume, ivoire, puis olive.
+import Base from '../layouts/Base.astro';
+import IntroPage from '../components/IntroPage.astro';
+import Prestations from '../components/installation/Prestations.astro';
+import Realisations from '../components/installation/Realisations.astro';
+import SectionTarifs from '../components/SectionTarifs.astro';
+import AppelFinal from '../components/AppelFinal.astro';
+import { entreprise } from '../data/entreprise';
+import { forfaitsInstallation } from '../data/tarifs';
+import photoCuisine from '../assets/realisations/cuisine-prises-led.jpg';
+---
+
+<Base
+  title="Installation électrique à Avignon – Tarifs | Corentin Électricien"
+  description="Pose de prises, d'interrupteurs, de luminaires et d'éclairage LED, tableau électrique à Avignon et alentours. Tarifs affichés, devis gratuit. 06 83 78 69 11."
+>
+  <IntroPage
+    surtitre="Installation électrique"
+    titre={`Installation électrique à ${entreprise.ville} et alentours`}
+    image={photoCuisine}
+    alt="Cuisine équipée de prises et d'un éclairage LED sous les meubles, posés par Corentin"
+  >
+    <p>
+      Prises, interrupteurs, luminaires, éclairage LED ou tableau électrique : je réalise vos petits travaux
+      avec soin, avec des tarifs affichés et un devis gratuit avant de commencer.
+    </p>
+  </IntroPage>
+  <Prestations />
+  <Realisations />
+  <SectionTarifs titreForfaits="Forfaits installation" forfaits={forfaitsInstallation} fond="ivoire" />
+  <AppelFinal />
+</Base>

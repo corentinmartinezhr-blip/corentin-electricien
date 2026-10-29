@@ -1,6 +1,7 @@
 ---
 import NumeroCopiable from './NumeroCopiable.astro';
 import { entreprise } from '../data/entreprise';
+import { menu } from '../data/navigation';
 
 const annee = new Date().getFullYear();
 ---
@@ -22,7 +23,7 @@ const annee = new Date().getFullYear();
       </p>
       <nav class="pied__nav" aria-label="Pages du site">
         <a href="/">Accueil</a>
-        <a href="/depannage-electrique-avignon/">Dépannage et tarifs</a>
+        {menu.map(({ url, texte }) => <a href={url}>{texte}</a>)}
       </nav>
       <p class="pied__copyright">© {annee} {entreprise.nom}</p>
     </div>

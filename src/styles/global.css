@@ -146,6 +146,17 @@ a {
   color: var(--gris-pierre);
 }
 
+/* Icône dans un rond jaune (cartes de services et de prestations). */
+.pastille-icone {
+  display: inline-grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  margin-bottom: 1rem;
+  border-radius: 999px;
+  background: var(--jaune-soleil);
+}
+
 /* ---------- Textes ---------- */
 
 .surtitre {

@@ -1,0 +1,82 @@
+---
+// Photos de chantiers de Corentin (sans élément permettant d'identifier l'adresse d'un client).
+import { Image } from 'astro:assets';
+import prisesPlanTravail from '../../assets/realisations/prises-plan-travail.jpg';
+import priseDouble from '../../assets/realisations/prise-cuisine-double.jpg';
+import priseTriple from '../../assets/realisations/prise-salon-triple.jpg';
+import interrupteur from '../../assets/realisations/interrupteur-telecommande.jpg';
+import ventilateurAllume from '../../assets/realisations/brasseur-air-allume.jpg';
+import ventilateur from '../../assets/realisations/brasseur-air.jpg';
+
+const photos = [
+  { src: prisesPlanTravail, legende: 'Prises sur le plan de travail d’une cuisine' },
+  { src: priseDouble, legende: 'Double prise encastrée dans la crédence' },
+  { src: priseTriple, legende: 'Triple prise dans un salon' },
+  { src: interrupteur, legende: 'Interrupteur double et télécommande murale' },
+  { src: ventilateurAllume, legende: 'Ventilateur de plafond avec éclairage' },
+  { src: ventilateur, legende: 'Ventilateur de plafond en marche' },
+];
+---
+
+<section class="section section--brume" aria-labelledby="realisations-titre">
+  <div class="conteneur">
+    <span class="surtitre">Réalisations</span>
+    <h2 id="realisations-titre">Quelques chantiers récents</h2>
+    <ul class="liste-nue galerie" role="list">
+      {
+        photos.map(({ src, legende }) => (
+          <li>
+            <figure>
+              <Image
+                src={src}
+                alt={legende}
+                width={720}
+                widths={[360, 540, 720]}
+                sizes="(min-width: 64rem) 22rem, (min-width: 40rem) 45vw, 90vw"
+              />
+              <figcaption>{legende}</figcaption>
+            </figure>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .galerie {
+    display: grid;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  figure {
+    margin: 0;
+  }
+
+  .galerie :global(img) {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: var(--rayon);
+  }
+
+  figcaption {
+    margin-top: 0.5rem;
+    color: var(--gris-pierre);
+    font-size: 0.9375rem;
+  }
+
+  @media (min-width: 40rem) {
+    .galerie {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .galerie {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+  }
+</style>

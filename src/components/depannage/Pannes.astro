@@ -1,5 +1,7 @@
 ---
 // Pannes traitées + déroulé d'une intervention.
+import Deroule from '../Deroule.astro';
+
 const pannes = [
   { titre: 'Panne de courant', texte: 'Plus de courant dans tout le logement ou dans une seule pièce.' },
   { titre: 'Disjoncteur qui saute', texte: 'Un disjoncteur ou le différentiel qui se déclenche sans arrêt.' },
@@ -32,10 +34,7 @@ const etapes = [
       }
     </ul>
 
-    <h3 class="deroule-titre">Comment se passe une intervention</h3>
-    <ol class="liste-nue deroule" role="list">
-      {etapes.map((etape) => <li>{etape}</li>)}
-    </ol>
+    <Deroule titre="Comment se passe une intervention" etapes={etapes} />
   </div>
 </section>
 
@@ -48,36 +47,6 @@ const etapes = [
 
   .pannes h3 {
     font-size: 1.125rem;
-  }
-
-  .deroule-titre {
-    margin-bottom: 1.25rem;
-  }
-
-  .deroule {
-    display: grid;
-    gap: 0.75rem;
-    max-width: 44rem;
-    counter-reset: etape;
-  }
-
-  .deroule li {
-    display: flex;
-    align-items: baseline;
-    gap: 0.85rem;
-    counter-increment: etape;
-  }
-
-  .deroule li::before {
-    content: counter(etape);
-    display: inline-grid;
-    flex: none;
-    place-items: center;
-    width: 1.9rem;
-    height: 1.9rem;
-    border-radius: 999px;
-    background: var(--jaune-soleil);
-    font-weight: 700;
   }
 
   @media (min-width: 40rem) {

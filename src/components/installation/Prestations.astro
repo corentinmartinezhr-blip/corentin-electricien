@@ -1,0 +1,82 @@
+---
+// Prestations d'installation réellement proposées (illustrées par les réalisations de Corentin).
+import Deroule from '../Deroule.astro';
+import Icone from '../Icone.astro';
+
+const prestations = [
+  {
+    icone: 'prise',
+    titre: 'Prises et interrupteurs',
+    texte: 'Ajout, remplacement ou déplacement de prises, y compris en cuisine sur le plan de travail.',
+  },
+  {
+    icone: 'ampoule',
+    titre: 'Luminaires et plafonniers',
+    texte: 'Pose de plafonniers, suspensions, appliques et ventilateurs de plafond avec éclairage.',
+  },
+  {
+    icone: 'eclair',
+    titre: 'Éclairage LED',
+    texte: 'Rubans LED sous les meubles de cuisine ou en éclairage d’ambiance.',
+  },
+  {
+    icone: 'outils',
+    titre: 'Tableau électrique',
+    texte: 'Remplacement ou modernisation de votre tableau, sur devis gratuit.',
+  },
+] as const;
+
+const etapes = [
+  'Vous m’expliquez votre projet, par téléphone ou sur WhatsApp avec quelques photos.',
+  'Je vous remets un devis gratuit et détaillé avant les travaux.',
+  'Je réalise les travaux proprement, à la date convenue ensemble.',
+  'Je vérifie l’installation avec vous et je vous explique son fonctionnement.',
+];
+---
+
+<section class="section" aria-labelledby="prestations-titre">
+  <div class="conteneur">
+    <span class="surtitre">Mes prestations</span>
+    <h2 id="prestations-titre">Petits travaux et installation</h2>
+    <ul class="liste-nue prestations" role="list">
+      {
+        prestations.map(({ icone, titre, texte }) => (
+          <li class="carte">
+            <span class="pastille-icone">
+              <Icone nom={icone} taille={24} />
+            </span>
+            <h3>{titre}</h3>
+            <p>{texte}</p>
+          </li>
+        ))
+      }
+    </ul>
+
+    <Deroule titre="Comment se passent les travaux" etapes={etapes} />
+  </div>
+</section>
+
+<style>
+  .prestations {
+    display: grid;
+    gap: 1rem;
+    margin-block: 2rem 3rem;
+  }
+
+  .prestations h3 {
+    font-size: 1.125rem;
+  }
+
+  @media (min-width: 40rem) {
+    .prestations {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .prestations {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+    }
+  }
+</style>

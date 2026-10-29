@@ -2,38 +2,34 @@
 // En-tête : logo à gauche ; à droite, le menu puis le bouton d'appel.
 import Icone from './Icone.astro';
 import { entreprise } from '../data/entreprise';
-
-// Ajouter ici chaque nouvelle page (Installation, Contact…).
-const menu = [{ url: '/depannage-electrique-avignon/', texte: 'Dépannage' }];
+import { menu } from '../data/navigation';
 
 const cheminActuel = Astro.url.pathname;
 ---
 
 <header class="en-tete">
-  <div class="conteneur en-tete__ligne">
+  <div class="conteneur en-tete__grille">
     <a class="en-tete__logo" href="/" aria-label={`${entreprise.nom}, accueil`}>
       <img src="/logo/logo-horizontal.svg" alt="" width="1188" height="500" />
     </a>
-    <div class="en-tete__droite">
-      <nav aria-label="Menu principal">
-        <ul class="liste-nue en-tete__menu" role="list">
-          {
-            menu.map(({ url, texte }) => (
-              <li>
-                <a href={url} aria-current={cheminActuel.startsWith(url) ? 'page' : undefined}>
-                  {texte}
-                </a>
-              </li>
-            ))
-          }
-        </ul>
-      </nav>
-      <a class="bouton bouton--principal en-tete__appel" href={entreprise.telephoneLien}>
-        <Icone nom="telephone" taille={18} />
-        <span class="en-tete__appel-court">Appeler</span>
-        <span class="en-tete__appel-long">{entreprise.telephoneAffiche}</span>
-      </a>
-    </div>
+    <nav class="en-tete__nav" aria-label="Menu principal">
+      <ul class="liste-nue en-tete__menu" role="list">
+        {
+          menu.map(({ url, texte }) => (
+            <li>
+              <a href={url} aria-current={cheminActuel.startsWith(url) ? 'page' : undefined}>
+                {texte}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+    <a class="bouton bouton--principal en-tete__appel" href={entreprise.telephoneLien}>
+      <Icone nom="telephone" taille={18} />
+      <span class="en-tete__appel-court">Appeler</span>
+      <span class="en-tete__appel-long">{entreprise.telephoneAffiche}</span>
+    </a>
   </div>
 </header>
 
@@ -43,31 +39,39 @@ const cheminActuel = Astro.url.pathname;
     background: var(--ivoire);
   }
 
-  .en-tete__ligne {
-    display: flex;
+  /* Mobile : logo et bouton d'appel sur la 1re ligne, menu sur la 2e. */
+  .en-tete__grille {
+    display: grid;
+    grid-template-areas:
+      'logo appel'
+      'nav nav';
+    grid-template-columns: 1fr auto;
     align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    min-height: 4.5rem;
+    column-gap: 1rem;
+    padding-block: 0.75rem;
+  }
+
+  .en-tete__logo {
+    grid-area: logo;
   }
 
   .en-tete__logo img {
     width: clamp(8.5rem, 30vw, 11.5rem);
   }
 
-  .en-tete__droite {
-    display: flex;
-    align-items: center;
-    gap: clamp(0.75rem, 3vw, 1.75rem);
+  .en-tete__nav {
+    grid-area: nav;
+    margin-top: 0.5rem;
   }
 
   .en-tete__menu {
     display: flex;
-    gap: 1.25rem;
+    gap: 1.5rem;
   }
 
   .en-tete__menu a {
-    padding-block: 0.5rem;
+    display: inline-block;
+    padding-block: 0.4rem;
     font-weight: 700;
     text-decoration: none;
   }
@@ -81,6 +85,7 @@ const cheminActuel = Astro.url.pathname;
   }
 
   .en-tete__appel {
+    grid-area: appel;
     min-height: 2.75rem;
     padding: 0.55rem 1.1rem;
     font-size: 0.9375rem;
@@ -90,7 +95,20 @@ const cheminActuel = Astro.url.pathname;
     display: none;
   }
 
-  @media (min-width: 40rem) {
+  /* Ordinateur : tout sur une ligne, menu juste à gauche du bouton. */
+  @media (min-width: 48rem) {
+    .en-tete__grille {
+      grid-template-areas: 'logo nav appel';
+      grid-template-columns: 1fr auto auto;
+      column-gap: 1.75rem;
+      min-height: 4.5rem;
+      padding-block: 0;
+    }
+
+    .en-tete__nav {
+      margin-top: 0;
+    }
+
     .en-tete__appel-court {
       display: none;
     }

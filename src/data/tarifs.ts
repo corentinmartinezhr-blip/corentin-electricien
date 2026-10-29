@@ -19,16 +19,31 @@ export const deplacements: LigneTarif[] = [
   { prestation: 'Autres communes de la zone', prix: '49 €' },
 ];
 
-export const forfaitsDepannage: LigneTarif[] = [
-  { prestation: 'Recherche de panne', detail: "Jusqu'à 1 h, hors déplacement", prix: '110 €' },
-  { prestation: "Remplacement d'un disjoncteur", detail: 'Main-d’œuvre, hors matériel', prix: '75 €' },
-  {
-    prestation: "Remplacement d'une prise ou d'un interrupteur",
-    detail: 'Main-d’œuvre, hors matériel',
-    prix: '65 €',
-  },
-  { prestation: 'Remplacement du tableau électrique', prix: 'Sur devis' },
-];
+// Forfaits : chaque prestation est définie une seule fois, puis regroupée par page.
+const recherchePanne: LigneTarif = {
+  prestation: 'Recherche de panne',
+  detail: "Jusqu'à 1 h, hors déplacement",
+  prix: '110 €',
+};
+const disjoncteur: LigneTarif = {
+  prestation: "Remplacement d'un disjoncteur",
+  detail: 'Main-d’œuvre, hors matériel',
+  prix: '75 €',
+};
+const priseInterrupteur: LigneTarif = {
+  prestation: "Pose ou remplacement d'une prise ou d'un interrupteur",
+  detail: 'Main-d’œuvre, hors matériel',
+  prix: '65 €',
+};
+const luminaire: LigneTarif = {
+  prestation: "Pose d'un luminaire ou d'un plafonnier",
+  detail: 'Main-d’œuvre, hors matériel',
+  prix: '85 €',
+};
+const tableau: LigneTarif = { prestation: 'Remplacement du tableau électrique', prix: 'Sur devis' };
+
+export const forfaitsDepannage: LigneTarif[] = [recherchePanne, disjoncteur, priseInterrupteur, tableau];
+export const forfaitsInstallation: LigneTarif[] = [priseInterrupteur, luminaire, tableau];
 
 export const diagnosticElectromenager: LigneTarif = {
   prestation: 'Diagnostic électroménager',

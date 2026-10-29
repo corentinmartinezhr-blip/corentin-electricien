@@ -4,11 +4,12 @@
 import Base from '../layouts/Base.astro';
 import IntroPage from '../components/IntroPage.astro';
 import Pannes from '../components/depannage/Pannes.astro';
-import Tarifs from '../components/depannage/Tarifs.astro';
+import SectionTarifs from '../components/SectionTarifs.astro';
 import Electromenager from '../components/depannage/Electromenager.astro';
 import BonsReflexes from '../components/depannage/BonsReflexes.astro';
 import AppelFinal from '../components/AppelFinal.astro';
 import { entreprise } from '../data/entreprise';
+import { forfaitsDepannage } from '../data/tarifs';
 import photoTableau from '../assets/realisations/tableau-electrique.png';
 ---
 
@@ -28,7 +29,7 @@ import photoTableau from '../assets/realisations/tableau-electrique.png';
     </p>
   </IntroPage>
   <Pannes />
-  <Tarifs />
+  <SectionTarifs titreForfaits="Forfaits dépannage" forfaits={forfaitsDepannage} />
   <Electromenager />
   <BonsReflexes />
   <AppelFinal />

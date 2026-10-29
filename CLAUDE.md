@@ -12,7 +12,8 @@ Le cadrage de référence est la note de cadrage V3 (Claude Docs : https://claud
 ## Architecture du site (V1)
 
 - 4 pages : Accueil, Dépannage, Installation, Contact, plus les pages légales (mentions légales, confidentialité).
-- Faites : Accueil (`/`), Dépannage (`/depannage-electrique-avignon/`). À faire : Installation (`/installation-electrique-avignon/`), Contact, pages légales.
+- Faites : Accueil (`/`), Dépannage (`/depannage-electrique-avignon/`), Installation (`/installation-electrique-avignon/`). À faire : Contact (avec formulaire), pages légales.
+- Menu (en-tête et pied de page) : `src/data/navigation.ts`. Composants partagés : `IntroPage`, `SectionTarifs`, `GrilleTarifs`, `Deroule`, `AppelFinal`, `BoutonContact`, `NumeroCopiable`.
 - Électroménager : pas de réfrigérateur ni de climatisation (circuit de froid = attestation fluides frigorigènes).
 - Pas de page Tarifs : les prix sont affichés sur Dépannage et Installation.
 - Accueil : hero avec la photo de Corentin, 3 services (dépannage électrique ; petits travaux et tableau ; électroménager), présentation, garanties, FAQ, appel final.
