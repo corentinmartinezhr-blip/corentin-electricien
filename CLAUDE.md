@@ -66,7 +66,7 @@ Le cadrage de référence est la note de cadrage V3 (Claude Docs : https://claud
 - Réalisations : `src/assets/realisations/` ; portrait : `src/assets/portrait/`.
 - Page Installation : tarifs avant les réalisations (demande de Corentin).
 - Photos de réalisations : WebP fournis et déjà compressés par Corentin, dans `public/realisations/`, servis tels quels (balise `<img>`, pas de recompression : demande de Corentin, la recompression d'Astro était visible). Autres images (portrait, tableau) : `astro:assets`.
-- Portrait : le logo d'une autre entreprise a été effacé du sweat (original hors dépôt). Un shooting est prévu pour le remplacer.
+- Portrait : le logo d'une autre entreprise a été effacé du sweat (original hors dépôt), puis le logo Corentin Électricien y a été ajouté (29/10/2026, demande de Corentin). Un shooting est prévu pour le remplacer.
 - Ne jamais publier d'élément permettant d'identifier l'adresse d'un client.
 
 ## Technique
