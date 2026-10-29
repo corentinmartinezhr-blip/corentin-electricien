@@ -31,8 +31,7 @@ const cheminActuel = Astro.url.pathname;
       data-numero={entreprise.telephoneAffiche}
     >
       <Icone nom="telephone" taille={18} />
-      <span class="en-tete__appel-court">Appeler</span>
-      <span class="en-tete__appel-long">{entreprise.telephoneAffiche}</span>
+      {entreprise.telephoneAffiche}
     </a>
   </div>
 </header>
@@ -60,7 +59,7 @@ const cheminActuel = Astro.url.pathname;
   }
 
   .en-tete__logo img {
-    width: clamp(8.5rem, 30vw, 11.5rem);
+    width: clamp(7rem, 30vw, 11.5rem);
   }
 
   .en-tete__nav {
@@ -88,15 +87,21 @@ const cheminActuel = Astro.url.pathname;
     text-underline-offset: 6px;
   }
 
+  /* Le numéro est écrit sur le bouton : on peut le lire ou le recopier, et le clic garde son effet
+     (appel sur téléphone, copie sur ordinateur). */
   .en-tete__appel {
     grid-area: appel;
     min-height: 2.75rem;
-    padding: 0.55rem 1.1rem;
-    font-size: 0.9375rem;
+    padding: 0.55rem 0.9rem;
+    font-size: 0.875rem;
+    white-space: nowrap;
   }
 
-  .en-tete__appel-long {
-    display: none;
+  /* Très petits écrans : l'icône s'efface pour que le numéro tienne à côté du logo. */
+  @media (max-width: 22rem) {
+    .en-tete__appel :global(svg) {
+      display: none;
+    }
   }
 
   /* Ordinateur : tout sur une ligne, menu juste à gauche du bouton. */
@@ -113,12 +118,9 @@ const cheminActuel = Astro.url.pathname;
       margin-top: 0;
     }
 
-    .en-tete__appel-court {
-      display: none;
-    }
-
-    .en-tete__appel-long {
-      display: inline;
+    .en-tete__appel {
+      padding-inline: 1.1rem;
+      font-size: 0.9375rem;
     }
   }
 </style>
