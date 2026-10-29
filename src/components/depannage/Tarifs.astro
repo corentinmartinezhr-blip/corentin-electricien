@@ -1,0 +1,51 @@
+---
+// Affichage obligatoire des prix (arrêté du 24 janvier 2017). Données : src/data/tarifs.ts.
+import GrilleTarifs from '../GrilleTarifs.astro';
+import { conditions, deplacements, forfaitsDepannage, tauxHoraires } from '../../data/tarifs';
+---
+
+<section class="section section--brume" id="tarifs" aria-labelledby="tarifs-titre">
+  <div class="conteneur">
+    <span class="surtitre">Tarifs</span>
+    <h2 id="tarifs-titre">Des prix clairs, annoncés avant d'intervenir</h2>
+    <div class="grilles">
+      <GrilleTarifs titre="Main-d’œuvre" lignes={tauxHoraires} />
+      <GrilleTarifs titre="Déplacement" lignes={deplacements} />
+      <GrilleTarifs titre="Forfaits dépannage" lignes={forfaitsDepannage} />
+    </div>
+    <ul class="conditions" role="list">
+      <li>{conditions.devis}</li>
+      <li>{conditions.decompte}</li>
+      <li>{conditions.materiel}</li>
+      <li>Prix nets. {conditions.tva}</li>
+    </ul>
+  </div>
+</section>
+
+<style>
+  .grilles {
+    display: grid;
+    align-items: start;
+    gap: 1rem;
+    margin-block: 2rem 1.5rem;
+  }
+
+  .conditions {
+    max-width: 44rem;
+    margin: 0;
+    padding-left: 1.2rem;
+    color: var(--gris-pierre);
+    font-size: 0.9375rem;
+  }
+
+  .conditions li + li {
+    margin-top: 0.35rem;
+  }
+
+  @media (min-width: 48rem) {
+    .grilles {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+  }
+</style>

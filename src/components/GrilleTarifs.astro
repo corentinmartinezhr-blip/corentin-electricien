@@ -1,0 +1,78 @@
+---
+// Tableau de prix réutilisable (pages Dépannage et Installation).
+import type { LigneTarif } from '../data/tarifs';
+
+interface Props {
+  titre: string;
+  lignes: LigneTarif[];
+}
+
+const { titre, lignes } = Astro.props;
+---
+
+<div class="carte grille">
+  <table>
+    <caption>{titre}</caption>
+    <tbody>
+      {
+        lignes.map(({ prestation, detail, prix }) => (
+          <tr>
+            <th scope="row">
+              {prestation}
+              {detail && <span>{detail}</span>}
+            </th>
+            <td>{prix}</td>
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+</div>
+
+<style>
+  .grille {
+    padding: 1.25rem 1.5rem;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  caption {
+    margin-bottom: 0.5rem;
+    font-family: var(--font-titre);
+    font-size: 1.25rem;
+    font-weight: 600;
+    text-align: left;
+  }
+
+  tr + tr {
+    border-top: 1px solid var(--bordure);
+  }
+
+  th,
+  td {
+    padding-block: 0.75rem;
+    vertical-align: top;
+  }
+
+  th {
+    font-weight: 600;
+    text-align: left;
+  }
+
+  th span {
+    display: block;
+    color: var(--gris-pierre);
+    font-size: 0.9375rem;
+    font-weight: 400;
+  }
+
+  td {
+    padding-left: 1rem;
+    font-weight: 700;
+    text-align: right;
+    white-space: nowrap;
+  }
+</style>

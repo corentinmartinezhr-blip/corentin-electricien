@@ -1,0 +1,62 @@
+---
+// Haut de page des pages intérieures (Dépannage, Installation…) : surtitre, H1, accroche, boutons.
+import BoutonContact from './BoutonContact.astro';
+
+interface Props {
+  surtitre: string;
+  titre: string;
+}
+
+const { surtitre, titre } = Astro.props;
+---
+
+<section class="intro-page" aria-labelledby="intro-titre">
+  <div class="conteneur">
+    <nav class="fil" aria-label="Fil d'Ariane">
+      <a href="/">Accueil</a> <span aria-hidden="true">›</span> <span aria-current="page">{surtitre}</span>
+    </nav>
+    <span class="surtitre">{surtitre}</span>
+    <h1 id="intro-titre">{titre}</h1>
+    <div class="intro-page__texte"><slot /></div>
+    <div class="intro-page__actions">
+      <BoutonContact action="appel" variante="principal" />
+      <BoutonContact action="whatsapp" />
+    </div>
+  </div>
+</section>
+
+<style>
+  .intro-page {
+    padding-block: clamp(2rem, 6vw, 4rem);
+    background: var(--vert-brume);
+  }
+
+  .fil {
+    margin-bottom: 1.5rem;
+    color: var(--gris-pierre);
+    font-size: 0.875rem;
+  }
+
+  h1 {
+    max-width: 22ch;
+    font-size: clamp(2rem, 5.5vw, 3rem);
+  }
+
+  .intro-page__texte {
+    max-width: 40rem;
+    margin-bottom: 1.75rem;
+    font-size: 1.125rem;
+  }
+
+  .intro-page__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  @media (max-width: 29.99rem) {
+    .intro-page__actions :global(.bouton) {
+      flex: 1 1 100%;
+    }
+  }
+</style>

@@ -20,6 +20,10 @@ const annee = new Date().getFullYear();
         Électricien à {entreprise.ville} et dans les communes voisines<br />
         <NumeroCopiable />
       </p>
+      <nav class="pied__nav" aria-label="Pages du site">
+        <a href="/">Accueil</a>
+        <a href="/depannage-electrique-avignon/">Dépannage et tarifs</a>
+      </nav>
       <p class="pied__copyright">© {annee} {entreprise.nom}</p>
     </div>
   </div>
@@ -55,6 +59,13 @@ const annee = new Date().getFullYear();
     text-decoration-color: var(--jaune-soleil);
   }
 
+  .pied__nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.25rem;
+    margin-bottom: 0.5rem;
+  }
+
   .pied__copyright {
     opacity: 0.75;
   }
@@ -62,6 +73,10 @@ const annee = new Date().getFullYear();
   @media (min-width: 48rem) {
     .pied__infos {
       text-align: right;
+    }
+
+    .pied__nav {
+      justify-content: flex-end;
     }
   }
 </style>

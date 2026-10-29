@@ -1,0 +1,91 @@
+---
+// Pannes traitées + déroulé d'une intervention.
+const pannes = [
+  { titre: 'Panne de courant', texte: 'Plus de courant dans tout le logement ou dans une seule pièce.' },
+  { titre: 'Disjoncteur qui saute', texte: 'Un disjoncteur ou le différentiel qui se déclenche sans arrêt.' },
+  { titre: 'Prise ou interrupteur hors service', texte: 'Une prise qui ne fonctionne plus, qui chauffe ou qui grésille.' },
+  { titre: 'Éclairage en panne', texte: "Un point lumineux ou tout un circuit d'éclairage qui ne s'allume plus." },
+  { titre: 'Tableau électrique', texte: 'Un tableau vétuste, un disjoncteur abîmé, un défaut à identifier.' },
+  { titre: 'Recherche de panne', texte: "Une panne dont l'origine est inconnue : je la localise et je l'explique." },
+];
+
+const etapes = [
+  'Vous m’appelez ou m’écrivez sur WhatsApp en décrivant la panne.',
+  'Je vous indique les tarifs et je vous remets un devis gratuit avant d’intervenir.',
+  'Je recherche l’origine de la panne et je remets votre installation en état.',
+  'Je vous explique ce que j’ai fait et je vous remets la facture.',
+];
+---
+
+<section class="section" aria-labelledby="pannes-titre">
+  <div class="conteneur">
+    <span class="surtitre">Les pannes que je traite</span>
+    <h2 id="pannes-titre">Une panne électrique ? Je trouve d'où elle vient</h2>
+    <ul class="liste-nue pannes" role="list">
+      {
+        pannes.map(({ titre, texte }) => (
+          <li class="carte">
+            <h3>{titre}</h3>
+            <p>{texte}</p>
+          </li>
+        ))
+      }
+    </ul>
+
+    <h3 class="deroule-titre">Comment se passe une intervention</h3>
+    <ol class="liste-nue deroule" role="list">
+      {etapes.map((etape) => <li>{etape}</li>)}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .pannes {
+    display: grid;
+    gap: 1rem;
+    margin-block: 2rem 3rem;
+  }
+
+  .pannes h3 {
+    font-size: 1.125rem;
+  }
+
+  .deroule {
+    display: grid;
+    gap: 0.75rem;
+    max-width: 44rem;
+    counter-reset: etape;
+  }
+
+  .deroule li {
+    display: flex;
+    align-items: baseline;
+    gap: 0.85rem;
+    counter-increment: etape;
+  }
+
+  .deroule li::before {
+    content: counter(etape);
+    display: inline-grid;
+    flex: none;
+    place-items: center;
+    width: 1.9rem;
+    height: 1.9rem;
+    border-radius: 999px;
+    background: var(--jaune-soleil);
+    font-weight: 700;
+  }
+
+  @media (min-width: 40rem) {
+    .pannes {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .pannes {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+  }
+</style>

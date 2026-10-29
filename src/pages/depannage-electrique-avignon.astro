@@ -1,0 +1,29 @@
+---
+// Page Dépannage : /depannage-electrique-avignon/ (recherches visées : « dépannage électrique Avignon »,
+// « recherche de panne électrique Avignon »). Pas de « urgence » ni de délai promis (non confirmés).
+import Base from '../layouts/Base.astro';
+import IntroPage from '../components/IntroPage.astro';
+import Pannes from '../components/depannage/Pannes.astro';
+import Tarifs from '../components/depannage/Tarifs.astro';
+import Electromenager from '../components/depannage/Electromenager.astro';
+import BonsReflexes from '../components/depannage/BonsReflexes.astro';
+import AppelFinal from '../components/AppelFinal.astro';
+import { entreprise } from '../data/entreprise';
+---
+
+<Base
+  title="Dépannage électrique à Avignon – Tarifs | Corentin Électricien"
+  description="Dépannage électrique et recherche de panne à Avignon et alentours. Tarifs affichés, devis gratuit, électroménager. Appel ou WhatsApp au 06 83 78 69 11."
+>
+  <IntroPage surtitre="Dépannage électrique" titre={`Dépannage électrique à ${entreprise.ville} et alentours`}>
+    <p>
+      Panne de courant, disjoncteur qui saute, prise hors service : je recherche l'origine de la panne et je
+      remets votre installation en état. Tarifs affichés et devis gratuit avant d'intervenir.
+    </p>
+  </IntroPage>
+  <Pannes />
+  <Tarifs />
+  <Electromenager />
+  <BonsReflexes />
+  <AppelFinal />
+</Base>

@@ -1,0 +1,86 @@
+---
+// Conseils de sécurité : prudents, jamais d'invitation à ouvrir le tableau ou à toucher un fil.
+const reflexes = [
+  {
+    titre: 'Vérifiez si la panne est générale',
+    texte:
+      "Si vos voisins sont aussi privés de courant, la panne vient du réseau : appelez le dépannage Enedis, dont le numéro figure sur votre facture d'électricité.",
+  },
+  {
+    titre: 'Regardez votre tableau, sans l’ouvrir',
+    texte: "Un disjoncteur est tombé ? Débranchez les appareils du circuit concerné, puis réarmez-le une seule fois.",
+  },
+  {
+    titre: 'S’il saute encore, n’insistez pas',
+    texte: 'Laissez le circuit coupé et appelez un électricien : réarmer plusieurs fois peut aggraver le défaut.',
+  },
+];
+
+const interdits = [
+  "N'ouvrez jamais le tableau électrique et ne touchez à aucun fil.",
+  "Ne touchez pas d'appareil électrique avec les mains mouillées ou les pieds dans l'eau.",
+  "En cas de fumée, d'étincelles ou d'odeur de brûlé, éloignez-vous et appelez les secours (18 ou 112) si le danger est immédiat.",
+];
+---
+
+<section class="section section--brume" aria-labelledby="reflexes-titre">
+  <div class="conteneur">
+    <span class="surtitre">En attendant mon arrivée</span>
+    <h2 id="reflexes-titre">Les bons réflexes en cas de panne</h2>
+    <ol class="liste-nue reflexes" role="list">
+      {
+        reflexes.map(({ titre, texte }) => (
+          <li class="carte">
+            <h3>{titre}</h3>
+            <p>{texte}</p>
+          </li>
+        ))
+      }
+    </ol>
+    <div class="alerte" role="note">
+      <h3>À ne jamais faire</h3>
+      <ul>
+        {interdits.map((interdit) => <li>{interdit}</li>)}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .reflexes {
+    display: grid;
+    gap: 1rem;
+    margin-block: 2rem 1.5rem;
+  }
+
+  .reflexes h3 {
+    font-size: 1.125rem;
+  }
+
+  .alerte {
+    padding: 1.5rem;
+    border-left: 4px solid var(--jaune-soleil);
+    border-radius: var(--rayon);
+    background: var(--blanc);
+  }
+
+  .alerte h3 {
+    font-size: 1.125rem;
+  }
+
+  .alerte ul {
+    margin: 0;
+    padding-left: 1.2rem;
+  }
+
+  .alerte li + li {
+    margin-top: 0.35rem;
+  }
+
+  @media (min-width: 48rem) {
+    .reflexes {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+  }
+</style>

@@ -1,14 +1,15 @@
 ---
 import Icone from '../Icone.astro';
 
-// Les liens vers les pages Dépannage et Installation seront ajoutés
-// quand ces pages existeront (jamais de lien mort).
+// Lien vers la page dédiée quand elle existe (jamais de lien mort).
+// Installation : lien à ajouter quand la page sera créée.
 const services = [
   {
     icone: 'eclair',
     titre: 'Dépannage électrique',
     texte:
       "Panne de courant, disjoncteur qui saute, prise ou éclairage qui ne fonctionne plus : je recherche l'origine de la panne et je remets votre installation en état.",
+    lien: { url: '/depannage-electrique-avignon/', texte: 'Dépannage et tarifs' },
   },
   {
     icone: 'outils',
@@ -20,6 +21,7 @@ const services = [
     icone: 'electromenager',
     titre: 'Électroménager',
     texte: 'Diagnostic et réparation de vos appareils électroménagers en panne.',
+    lien: { url: '/depannage-electrique-avignon/#electromenager', texte: 'Électroménager et tarif' },
   },
 ] as const;
 ---
@@ -37,6 +39,11 @@ const services = [
             </span>
             <h3>{service.titre}</h3>
             <p>{service.texte}</p>
+            {'lien' in service && (
+              <a class="service__lien" href={service.lien.url}>
+                {service.lien.texte} <span aria-hidden="true">→</span>
+              </a>
+            )}
           </li>
         ))
       }
@@ -49,6 +56,15 @@ const services = [
     display: grid;
     gap: 1rem;
     margin-top: 2rem;
+  }
+
+  .service__lien {
+    display: inline-block;
+    margin-top: 1rem;
+    font-weight: 700;
+    text-decoration-color: var(--jaune-soleil);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
   }
 
   .service__icone {

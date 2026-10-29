@@ -1,0 +1,55 @@
+---
+// Section électroménager (V1 : section de la page Dépannage, pas une page).
+// Ne jamais écrire « réparateur agréé ».
+import GrilleTarifs from '../GrilleTarifs.astro';
+import { diagnosticElectromenager } from '../../data/tarifs';
+
+// Pas de réfrigérateur : intervenir sur le circuit de froid exige une attestation fluides frigorigènes.
+const appareils = ['Lave-linge', 'Lave-vaisselle', 'Sèche-linge', 'Four', 'Plaque de cuisson'];
+---
+
+<section class="section" id="electromenager" aria-labelledby="electromenager-titre">
+  <div class="conteneur electromenager">
+    <div>
+      <span class="surtitre">Électroménager</span>
+      <h2 id="electromenager-titre">Un appareil électroménager en panne ?</h2>
+      <p class="intro">
+        Je me déplace chez vous pour diagnostiquer la panne, puis je vous propose la réparation avec un devis
+        gratuit, pièces comprises.
+      </p>
+      <ul class="liste-nue appareils" role="list">
+        {appareils.map((appareil) => <li>{appareil}</li>)}
+      </ul>
+    </div>
+    <GrilleTarifs titre="Tarif" lignes={[diagnosticElectromenager]} />
+  </div>
+</section>
+
+<style>
+  .electromenager {
+    display: grid;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .appareils {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .appareils li {
+    padding: 0.35rem 0.85rem;
+    border: 1px solid var(--bordure);
+    border-radius: 999px;
+    background: var(--blanc);
+    font-size: 0.9375rem;
+  }
+
+  @media (min-width: 48rem) {
+    .electromenager {
+      grid-template-columns: 1.4fr 1fr;
+      gap: 3rem;
+    }
+  }
+</style>

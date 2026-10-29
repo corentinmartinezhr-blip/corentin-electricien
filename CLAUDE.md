@@ -12,6 +12,8 @@ Le cadrage de référence est la note de cadrage V3 (Claude Docs : https://claud
 ## Architecture du site (V1)
 
 - 4 pages : Accueil, Dépannage, Installation, Contact, plus les pages légales (mentions légales, confidentialité).
+- Faites : Accueil (`/`), Dépannage (`/depannage-electrique-avignon/`). À faire : Installation (`/installation-electrique-avignon/`), Contact, pages légales.
+- Électroménager : pas de réfrigérateur ni de climatisation (circuit de froid = attestation fluides frigorigènes).
 - Pas de page Tarifs : les prix sont affichés sur Dépannage et Installation.
 - Accueil : hero avec la photo de Corentin, 3 services (dépannage électrique ; petits travaux et tableau ; électroménager), présentation, garanties, FAQ, appel final.
 - Électroménager : une section de la page Dépannage en V1, pas une page.
@@ -24,6 +26,9 @@ Le cadrage de référence est la note de cadrage V3 (Claude Docs : https://claud
 - Dimanche et jours fériés : +50 %.
 - Le samedi après-midi est au tarif journée, sans majoration.
 - Un tarif de diagnostic électroménager doit être affiché.
+- Montants validés par Corentin le 29/10/2026 (benchmark dans les documents du projet) : seule source `src/data/tarifs.ts`. 65 €/h journée, 81 €/h soir, 97 €/h dimanche et fériés ; déplacement 35 € Avignon, 49 € autres communes ; recherche de panne 110 € ; disjoncteur 75 € ; prise/interrupteur 65 € ; luminaire 85 € ; tableau sur devis ; diagnostic électroménager 65 € déplacement inclus.
+- Devis gratuit. Décompte : première heure due en entier, puis par quart d'heure entamé. Prix nets, « TVA non applicable, art. 293 B du CGI » (franchise de TVA, à confirmer avec le SIRET).
+- Les prix affichés sont un plafond : remise possible, jamais au-dessus.
 
 ## Formulations interdites ou encadrées (obligatoire)
 
