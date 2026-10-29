@@ -1,11 +1,11 @@
 # Règles du projet — Corentin Électricien
 
 Ce fichier est relu au début de chaque session. Il garde les décisions prises pour qu'elles ne se perdent pas.
-Le détail du cadrage est dans `docs/note-de-cadrage-v2.md`. La palette est dans `docs/palette.png`.
+Le cadrage de référence est la note de cadrage V3 (Claude Docs : https://claude.ai/artifact/EntNT5KbDpYUD3NwiTPGYk), reconstruite le 29/10/2026 à partir de `docs/synthese-cadrage-v1.1.md` et `docs/note-de-cadrage-v2.md`. En cas de divergence, la V2 l'emporte sur la V1.1. La palette est dans `docs/palette.png`.
 
 ## Qui, quoi
 
-- Site vitrine de Corentin, artisan électricien indépendant (Marseille). Tout le site est en français.
+- Site vitrine de Corentin, artisan électricien indépendant à Avignon. Tout le site est en français.
 - Corentin n'est pas développeur : on lui parle simplement, sans jargon, et on ne lui demande jamais de taper de commande.
 - Il voit chaque modification directement sur le vrai site (pas de site de test, à sa demande) : on lui explique ce qui va changer avant d'envoyer.
 
