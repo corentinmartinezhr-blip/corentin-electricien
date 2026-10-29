@@ -34,6 +34,7 @@ const donneesStructurees = {
   name: entreprise.nom,
   url: Astro.site?.href,
   telephone: entreprise.telephoneInternational,
+  knowsLanguage: entreprise.langues,
   address: {
     '@type': 'PostalAddress',
     streetAddress: entreprise.adresse.rue,

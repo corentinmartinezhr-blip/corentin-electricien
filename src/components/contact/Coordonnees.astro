@@ -21,6 +21,7 @@ import { entreprise } from '../../data/entreprise';
     <BoutonContact action="appel" variante="principal" />
     <BoutonContact action="whatsapp" />
   </div>
+  <p class="coordonnees__langues">Je parle aussi anglais. <span lang="en">I also speak English.</span></p>
 </aside>
 
 <style>
@@ -47,5 +48,11 @@ import { entreprise } from '../../data/entreprise';
     display: flex;
     flex-wrap: wrap;
     gap: 0.75rem;
+  }
+
+  .coordonnees__langues {
+    margin: 1rem 0 0;
+    color: var(--gris-pierre);
+    font-size: 0.9375rem;
   }
 </style>

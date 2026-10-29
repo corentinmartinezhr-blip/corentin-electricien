@@ -14,6 +14,8 @@ export const entreprise = {
   email: 'contact@corentin-electricien.fr',
   // Adresse fournie par Corentin le 29/10/2026.
   adresse: { rue: '15 rue Alexandre Fleming', codePostal: '84000', ville: 'Avignon' },
+  // Langues parlées par Corentin (29/10/2026), au format des données structurées.
+  langues: ['fr', 'en'],
 };
 
 // Section « Garanties » de l'accueil (triptyque après « Qui suis-je »).

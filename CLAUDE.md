@@ -40,6 +40,7 @@ Le cadrage de référence est la note de cadrage V3 (Claude Docs : https://claud
 - Téléphone et WhatsApp : 06 83 78 69 11 (même numéro). Coordonnées et communes dans `src/data/entreprise.ts`, seule source à utiliser.
 - Zone : les 18 communes de la zone principale sont validées (29/10/2026). Formulation prudente sur les frais de déplacement.
 - Présentation (faits fournis par Corentin) : 31 ans, réactif, communication et transparence, croit en l'artisanat et au fait main. Rien d'autre sans validation.
+- Corentin parle aussi anglais (29/10/2026) : mention sous les boutons de « Me joindre directement » (page Contact) et `knowsLanguage` dans les données structurées.
 - Le bouton « Demander un devis gratuit » mène à `/contact/`.
 - Boutons « Appeler » = lien `tel:` : sur téléphone (appareil déclaré mobile ou pointeur tactile principal), ouvre l'application d'appel ; sur ordinateur, copie le numéro et affiche « Numéro copié ». Exigence de Corentin : ne jamais copier sur un téléphone. Numéro écrit en clair dans un texte (pied de page, FAQ, appel final) = composant `NumeroCopiable` : un clic copie le numéro et affiche « Numéro copié » (demande de Corentin).
 - Garanties (après « Qui suis-je ») : CAP Électricien mention très bien (Académie de Paris, 2025) et habilitations basse tension BR, BC, B2V, B2V Essai, BE Essai, confirmés le 29/10/2026. La H0 n'est pas affichée (choix de Corentin). La 3e carte « Décennale et RC Pro » n'apparaît que si `assurancesSignees: true` dans `src/data/entreprise.ts` : à passer seulement après signature (prévue début novembre 2026).
