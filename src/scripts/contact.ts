@@ -1,11 +1,20 @@
 // Seul JavaScript du site : copie du numéro de téléphone.
-//  - Numéro écrit en clair (bouton .numero-copiable) : un clic le copie, partout.
-//  - Liens « Appeler » (tel:) : sur téléphone, ils lancent l'appel normalement ;
-//    sur ordinateur (souris, pas d'écran tactile), un lien tel: ne fait rien,
-//    donc on copie le numéro à la place.
-// Dans les deux cas, un petit message « Numéro copié » apparaît au-dessus de l'élément.
+//  - Numéro écrit en clair (bouton .numero-copiable) : un clic le copie, sur tous les appareils.
+//  - Boutons « Appeler » (liens tel:) : sur téléphone, ils ouvrent l'application d'appel (comportement
+//    normal du navigateur) ; sur ordinateur, un lien tel: ne fait rien, donc on copie le numéro à la place.
+// Dans les deux cas de copie, un petit message « Numéro copié » apparaît au-dessus de l'élément.
 
-const surOrdinateur = window.matchMedia('(hover: hover) and (pointer: fine)');
+/**
+ * Téléphone (ou tablette) = l'appareil se déclare mobile, OU son pointeur principal est le doigt.
+ * Les deux critères ensemble évitent de prendre un téléphone pour un ordinateur
+ * (certains Android, ou le mode « version ordinateur » du navigateur). Un portable à écran
+ * tactile garde la souris comme pointeur principal : il reste traité comme un ordinateur.
+ */
+function estTelephone(): boolean {
+  const declareMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
+  const pointeurDoigt = window.matchMedia('(pointer: coarse)').matches;
+  return declareMobile || pointeurDoigt;
+}
 
 /** Copie synchrone dans le geste de l'utilisateur : la méthode la plus fiable (Android, iOS, navigateurs intégrés). */
 function copieClassique(texte: string): boolean {
@@ -65,8 +74,9 @@ document.addEventListener('click', (evenement) => {
     return;
   }
 
+  // Sur téléphone, on laisse le lien tel: ouvrir l'application d'appel.
   const lienAppel = cible?.closest<HTMLAnchorElement>('a[href^="tel:"]');
-  if (lienAppel && surOrdinateur.matches) {
+  if (lienAppel && !estTelephone()) {
     evenement.preventDefault();
     copierDepuis(lienAppel, lienAppel.dataset.numero ?? '');
   }
