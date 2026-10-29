@@ -1,26 +1,48 @@
 ---
+// En-tête : logo à gauche ; à droite, le menu puis le bouton d'appel.
 import Icone from './Icone.astro';
 import { entreprise } from '../data/entreprise';
+
+// Ajouter ici chaque nouvelle page (Installation, Contact…).
+const menu = [{ url: '/depannage-electrique-avignon/', texte: 'Dépannage' }];
+
+const cheminActuel = Astro.url.pathname;
 ---
 
 <header class="en-tete">
   <div class="conteneur en-tete__ligne">
-    <a class="en-tete__logo" href="/" aria-label="Corentin Électricien, accueil">
+    <a class="en-tete__logo" href="/" aria-label={`${entreprise.nom}, accueil`}>
       <img src="/logo/logo-horizontal.svg" alt="" width="1188" height="500" />
     </a>
-    <a class="bouton bouton--principal en-tete__appel" href={entreprise.telephoneLien}>
-      <Icone nom="telephone" taille={18} />
-      <span class="en-tete__appel-court">Appeler</span>
-      <span class="en-tete__appel-long">{entreprise.telephoneAffiche}</span>
-    </a>
+    <div class="en-tete__droite">
+      <nav aria-label="Menu principal">
+        <ul class="liste-nue en-tete__menu" role="list">
+          {
+            menu.map(({ url, texte }) => (
+              <li>
+                <a href={url} aria-current={cheminActuel.startsWith(url) ? 'page' : undefined}>
+                  {texte}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+      <a class="bouton bouton--principal en-tete__appel" href={entreprise.telephoneLien}>
+        <Icone nom="telephone" taille={18} />
+        <span class="en-tete__appel-court">Appeler</span>
+        <span class="en-tete__appel-long">{entreprise.telephoneAffiche}</span>
+      </a>
+    </div>
   </div>
 </header>
 
 <style>
   .en-tete {
+    border-bottom: 1px solid var(--bordure);
     background: var(--ivoire);
-    border-bottom: 1px solid rgba(52, 64, 47, 0.1);
   }
+
   .en-tete__ligne {
     display: flex;
     align-items: center;
@@ -28,21 +50,51 @@ import { entreprise } from '../data/entreprise';
     gap: 1rem;
     min-height: 4.5rem;
   }
+
   .en-tete__logo img {
-    width: clamp(9rem, 30vw, 11.5rem);
+    width: clamp(8.5rem, 30vw, 11.5rem);
   }
+
+  .en-tete__droite {
+    display: flex;
+    align-items: center;
+    gap: clamp(0.75rem, 3vw, 1.75rem);
+  }
+
+  .en-tete__menu {
+    display: flex;
+    gap: 1.25rem;
+  }
+
+  .en-tete__menu a {
+    padding-block: 0.5rem;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .en-tete__menu a:hover,
+  .en-tete__menu a[aria-current='page'] {
+    text-decoration: underline;
+    text-decoration-color: var(--jaune-soleil);
+    text-decoration-thickness: 3px;
+    text-underline-offset: 6px;
+  }
+
   .en-tete__appel {
     min-height: 2.75rem;
     padding: 0.55rem 1.1rem;
     font-size: 0.9375rem;
   }
+
   .en-tete__appel-long {
     display: none;
   }
+
   @media (min-width: 40rem) {
     .en-tete__appel-court {
       display: none;
     }
+
     .en-tete__appel-long {
       display: inline;
     }

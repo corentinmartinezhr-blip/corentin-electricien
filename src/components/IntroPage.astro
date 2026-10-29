@@ -1,27 +1,48 @@
 ---
-// Haut de page des pages intérieures (Dépannage, Installation…) : surtitre, H1, accroche, boutons.
+// Haut de page des pages intérieures (Dépannage, Installation…) :
+// fil d'Ariane, surtitre, H1, accroche, boutons et image facultative à droite.
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
 import BoutonContact from './BoutonContact.astro';
 
 interface Props {
   surtitre: string;
   titre: string;
+  image?: ImageMetadata;
+  alt?: string;
 }
 
-const { surtitre, titre } = Astro.props;
+const { surtitre, titre, image, alt = '' } = Astro.props;
 ---
 
 <section class="intro-page" aria-labelledby="intro-titre">
-  <div class="conteneur">
-    <nav class="fil" aria-label="Fil d'Ariane">
-      <a href="/">Accueil</a> <span aria-hidden="true">›</span> <span aria-current="page">{surtitre}</span>
-    </nav>
-    <span class="surtitre">{surtitre}</span>
-    <h1 id="intro-titre">{titre}</h1>
-    <div class="intro-page__texte"><slot /></div>
-    <div class="intro-page__actions">
-      <BoutonContact action="appel" variante="principal" />
-      <BoutonContact action="whatsapp" />
+  <div class:list={['conteneur', { 'intro-page__grille': image }]}>
+    <div>
+      <nav class="fil" aria-label="Fil d'Ariane">
+        <a href="/">Accueil</a> <span aria-hidden="true">›</span> <span aria-current="page">{surtitre}</span>
+      </nav>
+      <span class="surtitre">{surtitre}</span>
+      <h1 id="intro-titre">{titre}</h1>
+      <div class="intro-page__texte"><slot /></div>
+      <div class="intro-page__actions">
+        <BoutonContact action="appel" variante="principal" />
+        <BoutonContact action="whatsapp" />
+      </div>
     </div>
+    {
+      image && (
+        <Image
+          class="intro-page__image"
+          src={image}
+          alt={alt}
+          width={900}
+          widths={[400, 600, 900]}
+          sizes="(min-width: 48rem) 28rem, 90vw"
+          loading="eager"
+          fetchpriority="high"
+        />
+      )
+    }
   </div>
 </section>
 
@@ -29,6 +50,12 @@ const { surtitre, titre } = Astro.props;
   .intro-page {
     padding-block: clamp(2rem, 6vw, 4rem);
     background: var(--vert-brume);
+  }
+
+  .intro-page__grille {
+    display: grid;
+    align-items: center;
+    gap: 2.5rem;
   }
 
   .fil {
@@ -54,9 +81,23 @@ const { surtitre, titre } = Astro.props;
     gap: 0.75rem;
   }
 
+  .intro-page__image {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: 1.25rem;
+  }
+
   @media (max-width: 29.99rem) {
     .intro-page__actions :global(.bouton) {
       flex: 1 1 100%;
+    }
+  }
+
+  @media (min-width: 48rem) {
+    .intro-page__grille {
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 3rem;
     }
   }
 </style>
