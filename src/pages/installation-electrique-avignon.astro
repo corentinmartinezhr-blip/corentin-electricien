@@ -14,7 +14,7 @@ import { forfaitsInstallation } from '../data/tarifs';
 
 <Base
   title="Installation électrique à Avignon – Tarifs | Corentin Électricien"
-  description="Pose de prises, d'interrupteurs, de luminaires et d'éclairage LED, tableau électrique à Avignon et alentours. Tarifs affichés, devis gratuit. 06 83 78 69 11."
+  description="Prises, éclairage, radiateurs, détecteurs de fumée, interphone, circuits dédiés, prise véhicule électrique à Avignon. Tarifs affichés, devis gratuit."
 >
   <IntroPage
     surtitre="Installation électrique"
@@ -23,12 +23,12 @@ import { forfaitsInstallation } from '../data/tarifs';
     alt="Cuisine équipée de prises et d'un éclairage LED sous les meubles, posés par Corentin"
   >
     <p>
-      Prises, interrupteurs, luminaires, éclairage LED ou tableau électrique : je réalise vos petits travaux
-      avec soin, avec des tarifs affichés et un devis gratuit avant de commencer.
+      Prises, éclairage, chauffage électrique, détecteurs de fumée ou prise pour voiture électrique : je réalise
+      vos petits travaux avec soin, avec des tarifs affichés et un devis gratuit avant de commencer.
     </p>
   </IntroPage>
   <Prestations />
   <Realisations />
-  <SectionTarifs titreForfaits="Forfaits installation" forfaits={forfaitsInstallation} fond="ivoire" />
+  <SectionTarifs forfaits={forfaitsInstallation} fond="ivoire" />
   <AppelFinal />
 </Base>

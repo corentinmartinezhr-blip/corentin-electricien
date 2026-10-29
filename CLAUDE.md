@@ -30,6 +30,7 @@ Le cadrage de référence est la note de cadrage V3 (Claude Docs : https://claud
 - Un tarif de diagnostic électroménager doit être affiché.
 - Montants validés par Corentin le 29/10/2026 (benchmark dans les documents du projet) : seule source `src/data/tarifs.ts`. 65 €/h journée, 81 €/h soir, 97 €/h dimanche et fériés ; déplacement 35 € Avignon, 49 € autres communes ; recherche de panne 110 € ; disjoncteur 75 € ; prise/interrupteur 65 € ; luminaire 85 € ; tableau sur devis ; diagnostic électroménager 65 € déplacement inclus.
 - Devis gratuit. Décompte : première heure due en entier, puis par quart d'heure entamé. Prix nets, « TVA non applicable, art. 293 B du CGI » (franchise de TVA, à confirmer avec le SIRET).
+- Petites installations (validées le 29/10/2026) : détecteur de fumée 45 € ; radiateur ou sèche-serviettes 85 € ; thermostat/programmateur 75 € ; prise RJ45/TV 65 € ; éclairage extérieur ou détecteur de présence 85 € (alimentation existante) ; interphone/visiophone, circuit dédié et prise véhicule électrique sur devis. Pas de VMC pour l'instant.
 - Les prix affichés sont un plafond : remise possible, jamais au-dessus.
 
 ## Formulations interdites ou encadrées (obligatoire)

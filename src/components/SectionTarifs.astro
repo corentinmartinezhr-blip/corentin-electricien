@@ -2,16 +2,15 @@
 // Section « Tarifs » partagée par les pages Dépannage et Installation.
 // Affichage obligatoire des prix (arrêté du 24 janvier 2017). Données : src/data/tarifs.ts.
 import GrilleTarifs from './GrilleTarifs.astro';
-import { conditions, deplacements, tauxHoraires, type LigneTarif } from '../data/tarifs';
+import { conditions, deplacements, tauxHoraires, type GroupeForfaits } from '../data/tarifs';
 
 interface Props {
-  titreForfaits: string;
-  forfaits: LigneTarif[];
+  forfaits: GroupeForfaits[];
   /** Fond de la section, pour respecter l'alternance de la page. */
   fond?: 'ivoire' | 'brume';
 }
 
-const { titreForfaits, forfaits, fond = 'brume' } = Astro.props;
+const { forfaits, fond = 'brume' } = Astro.props;
 ---
 
 <section
@@ -24,7 +23,7 @@ const { titreForfaits, forfaits, fond = 'brume' } = Astro.props;
     <div class="grilles">
       <GrilleTarifs titre="Main-d’œuvre" lignes={tauxHoraires} />
       <GrilleTarifs titre="Déplacement" lignes={deplacements} />
-      <GrilleTarifs titre={titreForfaits} lignes={forfaits} />
+      {forfaits.map(({ titre, lignes }) => <GrilleTarifs titre={titre} lignes={lignes} />)}
     </div>
     <ul class="conditions" role="list">
       <li>{conditions.devis}</li>

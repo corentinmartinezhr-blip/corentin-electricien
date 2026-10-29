@@ -47,8 +47,49 @@ const priseVehicule: LigneTarif = {
   prix: 'Sur devis',
 };
 
-export const forfaitsDepannage: LigneTarif[] = [recherchePanne, disjoncteur, priseInterrupteur, tableau];
-export const forfaitsInstallation: LigneTarif[] = [priseInterrupteur, luminaire, priseVehicule, tableau];
+// Petites installations : forfaits validés le 29/10/2026 (benchmark complété dans les documents du projet).
+const mainOeuvre = 'Main-d’œuvre, hors matériel';
+const detecteurFumee: LigneTarif = { prestation: "Pose d'un détecteur de fumée", detail: mainOeuvre, prix: '45 €' };
+const radiateur: LigneTarif = {
+  prestation: "Pose ou remplacement d'un radiateur ou d'un sèche-serviettes",
+  detail: mainOeuvre,
+  prix: '85 €',
+};
+const thermostat: LigneTarif = {
+  prestation: "Pose d'un thermostat ou d'un programmateur de radiateur",
+  detail: mainOeuvre,
+  prix: '75 €',
+};
+const priseReseau: LigneTarif = { prestation: "Pose d'une prise RJ45 ou TV", detail: mainOeuvre, prix: '65 €' };
+const eclairageExterieur: LigneTarif = {
+  prestation: "Éclairage extérieur ou détecteur de présence",
+  detail: 'Sur une alimentation existante, hors matériel',
+  prix: '85 €',
+};
+const interphone: LigneTarif = { prestation: 'Interphone ou visiophone', prix: 'Sur devis' };
+const circuitDedie: LigneTarif = {
+  prestation: 'Circuit dédié (plaque, four, lave-linge…)',
+  detail: 'Tirage de câble depuis le tableau',
+  prix: 'Sur devis',
+};
+
+/** Une grille de forfaits avec son titre (une page peut en afficher plusieurs). */
+export interface GroupeForfaits {
+  titre: string;
+  lignes: LigneTarif[];
+}
+
+export const forfaitsDepannage: GroupeForfaits[] = [
+  { titre: 'Forfaits dépannage', lignes: [recherchePanne, disjoncteur, priseInterrupteur, tableau] },
+];
+
+export const forfaitsInstallation: GroupeForfaits[] = [
+  {
+    titre: 'Prises, éclairage et circuits',
+    lignes: [priseInterrupteur, priseReseau, luminaire, eclairageExterieur, circuitDedie, priseVehicule, tableau],
+  },
+  { titre: 'Chauffage, sécurité et confort', lignes: [radiateur, thermostat, detecteurFumee, interphone] },
+];
 
 export const diagnosticElectromenager: LigneTarif = {
   prestation: 'Diagnostic électroménager',

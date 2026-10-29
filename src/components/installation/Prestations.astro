@@ -3,32 +3,39 @@
 import Deroule from '../Deroule.astro';
 import Icone from '../Icone.astro';
 
+// Six familles pour rester lisible. Pas de VMC pour l'instant (choix de Corentin, 29/10/2026).
 const prestations = [
   {
     icone: 'prise',
-    titre: 'Prises et interrupteurs',
-    texte: 'Ajout, remplacement ou déplacement de prises, y compris en cuisine sur le plan de travail.',
+    titre: 'Prises et réseau',
+    texte: 'Ajout, déplacement ou remplacement de prises et d’interrupteurs, prises RJ45 et TV.',
   },
   {
     icone: 'ampoule',
-    titre: 'Luminaires et plafonniers',
-    texte: 'Pose de plafonniers, suspensions, appliques et ventilateurs de plafond avec éclairage.',
+    titre: 'Éclairage intérieur et extérieur',
+    texte:
+      'Plafonniers, suspensions, ventilateurs de plafond, rubans LED, éclairage extérieur et détecteurs de présence.',
   },
   {
-    icone: 'eclair',
-    titre: 'Éclairage LED',
-    texte: 'Rubans LED sous les meubles de cuisine ou en éclairage d’ambiance.',
+    icone: 'radiateur',
+    titre: 'Chauffage électrique',
+    texte: 'Pose et remplacement de radiateurs et de sèche-serviettes, thermostats et programmateurs.',
+  },
+  {
+    icone: 'bouclier',
+    titre: 'Sécurité et accès',
+    texte: 'Détecteurs de fumée, interphones et visiophones.',
+  },
+  {
+    icone: 'outils',
+    titre: 'Circuits dédiés et tableau',
+    texte: 'Tirage de câble et circuit dédié pour plaque, four ou lave-linge, remplacement du tableau électrique.',
   },
   {
     icone: 'voiture',
     titre: 'Prise pour véhicule électrique',
     // Prise renforcée ≤ 3,7 kW : pas de qualification IRVE requise. Jamais « borne de recharge ».
-    texte: 'Pose d’une prise renforcée au garage pour recharger votre voiture électrique ou hybride (jusqu’à 3,7 kW).',
-  },
-  {
-    icone: 'outils',
-    titre: 'Tableau électrique',
-    texte: 'Remplacement ou modernisation de votre tableau, sur devis gratuit.',
+    texte: 'Prise renforcée au garage pour recharger votre voiture électrique ou hybride (jusqu’à 3,7 kW).',
   },
 ] as const;
 
