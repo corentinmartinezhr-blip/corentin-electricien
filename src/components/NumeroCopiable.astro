@@ -31,6 +31,8 @@ const { class: classe } = Astro.props;
     font: inherit;
     font-weight: 700;
     cursor: copy;
+    -webkit-user-select: text;
+    user-select: text;
     text-decoration: underline;
     text-decoration-thickness: 1px;
     text-underline-offset: 3px;
@@ -66,23 +68,39 @@ const { class: classe } = Astro.props;
 </style>
 
 <script>
+  // 1) Copie « classique », synchrone dans le geste de l'utilisateur : la plus fiable
+  //    (Android, navigateurs intégrés, iOS avec le réglage de sélection ci-dessous).
+  function copieClassique(texte: string): boolean {
+    const zone = document.createElement('textarea');
+    zone.value = texte;
+    zone.setAttribute('aria-hidden', 'true');
+    zone.style.position = 'fixed';
+    zone.style.top = '0';
+    zone.style.left = '0';
+    zone.style.opacity = '0';
+    zone.style.fontSize = '16px'; // évite le zoom automatique sur iPhone
+    zone.contentEditable = 'true';
+    document.body.appendChild(zone);
+    zone.focus();
+    zone.select();
+    zone.setSelectionRange(0, texte.length); // nécessaire sur iOS
+    let ok = false;
+    try {
+      ok = document.execCommand('copy');
+    } catch {
+      ok = false;
+    }
+    zone.remove();
+    return ok;
+  }
+
+  // 2) Sinon, l'API moderne du presse-papiers.
   function copier(texte: string): Promise<void> {
+    if (copieClassique(texte)) return Promise.resolve();
     if (navigator.clipboard && window.isSecureContext) {
       return navigator.clipboard.writeText(texte);
     }
-    // Repli pour les anciens navigateurs.
-    return new Promise((resolve, reject) => {
-      const zone = document.createElement('textarea');
-      zone.value = texte;
-      zone.setAttribute('readonly', '');
-      zone.style.position = 'fixed';
-      zone.style.opacity = '0';
-      document.body.appendChild(zone);
-      zone.select();
-      const ok = document.execCommand('copy');
-      zone.remove();
-      ok ? resolve() : reject(new Error('copie impossible'));
-    });
+    return Promise.reject(new Error('copie impossible'));
   }
 
   document.addEventListener('click', (evenement) => {
@@ -91,7 +109,15 @@ const { class: classe } = Astro.props;
     const numero = bouton.dataset.copier ?? '';
     copier(numero)
       .then(() => afficher(bouton, 'Numéro copié'))
-      .catch(() => afficher(bouton, numero));
+      .catch(() => {
+        // Dernier recours : on sélectionne le numéro pour un appui long « Copier ».
+        const selection = window.getSelection();
+        const plage = document.createRange();
+        plage.selectNodeContents(bouton.firstChild ?? bouton);
+        selection?.removeAllRanges();
+        selection?.addRange(plage);
+        afficher(bouton, 'Appui long pour copier');
+      });
   });
 
   function afficher(bouton: HTMLButtonElement, texte: string) {
@@ -106,7 +132,7 @@ const { class: classe } = Astro.props;
     requestAnimationFrame(() => message!.classList.add('est-visible'));
     window.clearTimeout(Number(message.dataset.minuteur));
     message.dataset.minuteur = String(
-      window.setTimeout(() => message!.classList.remove('est-visible'), 1600),
+      window.setTimeout(() => message!.classList.remove('est-visible'), 1800),
     );
   }
 </script>
