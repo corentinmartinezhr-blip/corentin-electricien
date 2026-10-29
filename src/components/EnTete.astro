@@ -1,0 +1,50 @@
+---
+import Icone from './Icone.astro';
+import { entreprise } from '../data/entreprise';
+---
+
+<header class="en-tete">
+  <div class="conteneur en-tete__ligne">
+    <a class="en-tete__logo" href="/" aria-label="Corentin Électricien, accueil">
+      <img src="/logo/logo-horizontal.svg" alt="" width="1188" height="500" />
+    </a>
+    <a class="bouton bouton--principal en-tete__appel" href={entreprise.telephoneLien}>
+      <Icone nom="telephone" taille={18} />
+      <span class="en-tete__appel-court">Appeler</span>
+      <span class="en-tete__appel-long">{entreprise.telephoneAffiche}</span>
+    </a>
+  </div>
+</header>
+
+<style>
+  .en-tete {
+    background: var(--ivoire);
+    border-bottom: 1px solid rgba(52, 64, 47, 0.1);
+  }
+  .en-tete__ligne {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    min-height: 4.5rem;
+  }
+  .en-tete__logo img {
+    width: clamp(9rem, 30vw, 11.5rem);
+  }
+  .en-tete__appel {
+    min-height: 2.75rem;
+    padding: 0.55rem 1.1rem;
+    font-size: 0.9375rem;
+  }
+  .en-tete__appel-long {
+    display: none;
+  }
+  @media (min-width: 40rem) {
+    .en-tete__appel-court {
+      display: none;
+    }
+    .en-tete__appel-long {
+      display: inline;
+    }
+  }
+</style>

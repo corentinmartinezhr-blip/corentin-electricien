@@ -1,5 +1,9 @@
 ---
+import '@fontsource-variable/fraunces';
+import '@fontsource-variable/manrope';
 import '../styles/global.css';
+import EnTete from '../components/EnTete.astro';
+import PiedDePage from '../components/PiedDePage.astro';
 
 interface Props {
   title: string;
@@ -9,7 +13,7 @@ interface Props {
 const { title, description } = Astro.props;
 
 // Par sécurité, tout est « noindex » sauf la version de production.
-// Seul le déploiement de production définit PUBLIC_SITE_ENV=production.
+// Seul le déploiement de lancement définit PUBLIC_SITE_ENV=production.
 const estProduction = import.meta.env.PUBLIC_SITE_ENV === 'production';
 const urlCanonique = new URL(Astro.url.pathname, Astro.site);
 ---
@@ -23,9 +27,15 @@ const urlCanonique = new URL(Astro.url.pathname, Astro.site);
     <meta name="description" content={description} />
     {estProduction ? <link rel="canonical" href={urlCanonique} /> : <meta name="robots" content="noindex, nofollow" />}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="theme-color" content="#34402F" />
+    <meta name="theme-color" content="#FAF7F0" />
+    <meta name="format-detection" content="telephone=no" />
   </head>
   <body>
-    <slot />
+    <a class="lien-evitement" href="#contenu">Aller au contenu</a>
+    <EnTete />
+    <main id="contenu">
+      <slot />
+    </main>
+    <PiedDePage />
   </body>
 </html>

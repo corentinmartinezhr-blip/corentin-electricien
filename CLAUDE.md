@@ -29,11 +29,15 @@ Le cadrage de référence est la note de cadrage V3 (Claude Docs : https://claud
 
 - Ne jamais écrire « réparateur agréé ».
 - Ne jamais écrire « certifié » sauf pour une vraie certification nommée. L'habilitation électrique n'est pas une certification : on affiche les niveaux exacts (BR, B2V…).
-- La section Garanties reste masquée tant que les assurances (RC Pro, décennale) ne sont pas signées. L'activité électroménager doit être couverte par la RC Pro avant d'être mise en avant.
+- La section Garanties reste masquée tant que les assurances (RC Pro, décennale) ne sont pas signées. L'électroménager peut être mis en avant (validé par Corentin le 29/10/2026).
 - Pas d'avis clients inventés, pas de chiffres inventés.
 
 ## Contact
 
+- Téléphone et WhatsApp : 06 83 78 69 11 (même numéro). Coordonnées et communes dans `src/data/entreprise.ts`, seule source à utiliser.
+- Zone : les 18 communes de la zone principale sont validées (29/10/2026). Formulation prudente sur les frais de déplacement.
+- Présentation (faits fournis par Corentin) : 31 ans, réactif, communication et transparence, croit en l'artisanat et au fait main. Rien d'autre sans validation.
+- Le bouton « Demander un devis » mène à l'appel final (#contact) tant que le formulaire n'existe pas.
 - Sur mobile : WhatsApp en premier. Sur ordinateur : formulaire en premier.
 - On change l'ordre, on ne cache jamais rien : le formulaire reste accessible sur mobile.
 - Formulaire : script PHP sur o2switch. Expéditeur sur le domaine (ex. `site@corentin-electricien.fr`), destinataire : la boîte Gmail de Corentin, `Reply-To` = adresse du client. Ne jamais écrire l'adresse Gmail en clair dans le HTML.
@@ -43,6 +47,8 @@ Le cadrage de référence est la note de cadrage V3 (Claude Docs : https://claud
 - Palette « Le soleil et l'olivier », variables dans `src/styles/global.css` :
   jaune soleil #F5C02E, vert olive #34402F, ivoire #FAF7F0, vert brume #EEF0E6, gris pierre #5E5A50, ocre #8A6410.
 - Dosage : ivoire ~55 %, olive ~20 %, brume ~15 %, jaune ~10 %.
+- Hero de l'accueil (demande de Corentin) : fond `--soleil-pastel` (jaune soleil très dilué, presque ivoire) avec un motif de petits éclairs blancs derrière tout le contenu, uniquement dans le hero (pas dans l'en-tête). Pas d'animation : sobre et léger.
+- Polices : Fraunces (titres) et Manrope (texte), via `@fontsource-variable`, servies depuis o2switch.
 - Le jaune n'est jamais utilisé pour du texte sur fond clair, et jamais de texte blanc sur jaune. Pour du texte « jaune » sur fond clair, utiliser l'ocre.
 - Logos dans `public/logo/` : `logo-horizontal.svg` (fond transparent, pour fond clair), `logo-horizontal-fond-olive.svg`, `logo-carre.svg` (aussi favicon).
 - Pas de Google Fonts chargées depuis Google (RGPD) : polices auto-hébergées uniquement.
@@ -51,7 +57,7 @@ Le cadrage de référence est la note de cadrage V3 (Claude Docs : https://claud
 
 - Réalisations : `src/assets/realisations/` ; portrait : `src/assets/portrait/`.
 - Toujours passer par `astro:assets` (`<Image>`) pour optimiser.
-- Le portrait actuel montre le logo d'une autre entreprise sur le sweat : à remplacer ou flouter avant la mise en ligne.
+- Portrait : le logo d'une autre entreprise a été effacé du sweat (original hors dépôt). Un shooting est prévu pour le remplacer.
 - Ne jamais publier d'élément permettant d'identifier l'adresse d'un client.
 
 ## Technique

@@ -1,63 +1,442 @@
 ---
-// Page provisoire : elle sert uniquement à tester la chaîne de déploiement.
-// Elle sera remplacée par la vraie page d'accueil (voir docs/note-de-cadrage.md).
+import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
+import Icone from '../components/Icone.astro';
+import { entreprise, communes } from '../data/entreprise';
+import portrait from '../assets/portrait/corentin.png';
 
-const dateConstruction = new Date().toLocaleString('fr-FR', {
-  timeZone: 'Europe/Paris',
-  dateStyle: 'long',
-  timeStyle: 'short',
-});
+// Les liens vers les pages Dépannage et Installation seront ajoutés
+// quand ces pages existeront (pas de lien mort en attendant).
+const services = [
+  {
+    icone: 'eclair',
+    titre: 'Dépannage électrique',
+    texte:
+      "Panne de courant, disjoncteur qui saute, prise ou éclairage qui ne fonctionne plus : je recherche l'origine de la panne et je remets votre installation en état.",
+  },
+  {
+    icone: 'outils',
+    titre: 'Petits travaux et tableau',
+    texte:
+      "Ajout ou remplacement de prises et d'interrupteurs, pose de luminaires, intervention sur votre tableau électrique.",
+  },
+  {
+    icone: 'electromenager',
+    titre: 'Électroménager',
+    texte: 'Diagnostic et réparation de vos appareils électroménagers en panne.',
+  },
+] as const;
+
+const valeurs = [
+  {
+    titre: 'Réactif',
+    texte: 'Vous me joignez directement, sans standard ni intermédiaire.',
+  },
+  {
+    titre: 'Communication et transparence',
+    texte: 'Je vous explique ce que je constate et ce que je propose, simplement.',
+  },
+  {
+    titre: 'Travail fait main',
+    texte: "Je crois en l'artisanat : chaque intervention est faite avec soin.",
+  },
+];
+
+const faq = [
+  {
+    question: 'Pourquoi mon disjoncteur saute-t-il ?',
+    reponse:
+      "Le plus souvent, trop d'appareils fonctionnent sur le même circuit, un appareil est défectueux ou il y a un défaut d'isolement. Débranchez les appareils du circuit concerné puis réarmez le disjoncteur. S'il saute de nouveau, n'insistez pas : appelez un électricien.",
+  },
+  {
+    question: 'Que faire en cas de panne de courant ?',
+    reponse:
+      "Regardez d'abord si vos voisins sont aussi privés de courant : si c'est le cas, la panne vient sans doute du réseau. Sinon, vérifiez si un disjoncteur est tombé dans votre tableau. N'ouvrez jamais le tableau et ne touchez à aucun fil. En cas de fumée, d'étincelles ou d'odeur de brûlé, éloignez-vous et appelez les secours (18 ou 112) si le danger est immédiat.",
+  },
+  {
+    question: "Réparez-vous l'électroménager ?",
+    reponse:
+      "Oui, je diagnostique et je répare les appareils électroménagers en panne. Décrivez-moi l'appareil et le problème par téléphone ou sur WhatsApp.",
+  },
+  {
+    question: 'Comment vous contacter ?',
+    reponse: `Par téléphone ou sur WhatsApp, au ${entreprise.telephoneAffiche}. Vous tombez directement sur moi.`,
+  },
+];
 ---
 
 <Base
-  title="Corentin Électricien — site en préparation"
-  description="Électricien à Avignon : dépannage, petits travaux, tableau électrique et électroménager."
+  title="Électricien à Avignon — Corentin Électricien, dépannage et petits travaux"
+  description="Corentin, artisan électricien à Avignon et dans les communes voisines : dépannage électrique, recherche de panne, petits travaux, tableau et électroménager. Appel ou WhatsApp au 06 83 78 69 11."
 >
-  <main class="attente">
-    <div class="conteneur">
-      <img
-        class="logo"
-        src="/logo/logo-horizontal.svg"
-        alt="Corentin Électricien"
-        width="1188"
-        height="500"
-      />
-      <p class="surtitre">Site en préparation</p>
-      <h1>Le nouveau site arrive bientôt.</h1>
-      <p class="secondaire">Dépannage électrique, petits travaux, tableau et électroménager.</p>
-      <p class="version">Version de test construite le {dateConstruction}.</p>
+  <!-- 1. Hero -->
+  <section class="hero" aria-labelledby="hero-titre">
+    <div class="conteneur hero__grille">
+      <div class="hero__texte">
+        <span class="surtitre">Artisan électricien à {entreprise.ville}</span>
+        <h1 id="hero-titre">Un problème électrique&nbsp;? Je suis là pour vous aider.</h1>
+        <p class="hero__accroche">
+          Dépannage électrique, recherche de panne et installations : je vous accompagne avec des solutions
+          adaptées à votre besoin, à {entreprise.ville} et dans les communes voisines.
+        </p>
+        <div class="hero__actions">
+          <a class="bouton bouton--principal action--appel" href={entreprise.telephoneLien}>
+            <Icone nom="telephone" />
+            Appeler Corentin
+          </a>
+          <a class="bouton bouton--contour action--devis" href="#contact">
+            <Icone nom="devis" />
+            Demander un devis
+          </a>
+          <a class="bouton bouton--contour action--whatsapp" href={entreprise.whatsappLien} rel="noopener">
+            <Icone nom="whatsapp" />
+            WhatsApp
+          </a>
+        </div>
+      </div>
+      <div class="hero__photo">
+        <Image
+          src={portrait}
+          alt="Corentin, artisan électricien à Avignon"
+          widths={[320, 480, 640, 800]}
+          sizes="(min-width: 64rem) 24rem, (min-width: 48rem) 20rem, 80vw"
+          loading="eager"
+          fetchpriority="high"
+        />
+      </div>
     </div>
-  </main>
+  </section>
+
+  <!-- 2. Services -->
+  <section class="section" aria-labelledby="services-titre">
+    <div class="conteneur">
+      <span class="surtitre">Mes services</span>
+      <h2 id="services-titre">Ce que je fais pour vous</h2>
+      <ul class="services" role="list">
+        {
+          services.map((s) => (
+            <li class="service">
+              <span class="service__icone">
+                <Icone nom={s.icone} taille={24} />
+              </span>
+              <h3>{s.titre}</h3>
+              <p>{s.texte}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- 3. Présentation -->
+  <section class="section section--brume" aria-labelledby="presentation-titre">
+    <div class="conteneur presentation">
+      <div>
+        <span class="surtitre">Qui suis-je</span>
+        <h2 id="presentation-titre">Un artisan, un seul interlocuteur</h2>
+        <p>
+          Je m'appelle Corentin, j'ai 31 ans et je suis électricien indépendant à {entreprise.ville}. Quand vous
+          m'appelez, c'est moi qui vous réponds et c'est moi qui interviens.
+        </p>
+        <p>
+          Mes maîtres-mots sont la communication et la transparence : je prends le temps de vous expliquer la
+          situation et les solutions possibles, sans jargon.
+        </p>
+      </div>
+      <ul class="valeurs" role="list">
+        {
+          valeurs.map((v) => (
+            <li class="valeur">
+              <h3>{v.titre}</h3>
+              <p>{v.texte}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- 4. Zone d'intervention -->
+  <section class="section" aria-labelledby="zone-titre">
+    <div class="conteneur">
+      <span class="surtitre">Zone d'intervention</span>
+      <h2 id="zone-titre">{entreprise.ville} et les communes voisines</h2>
+      <p class="intro">
+        J'interviens à {entreprise.ville} et dans les communes voisines, selon la nature de la demande et mes
+        disponibilités. Contactez-moi pour confirmer la possibilité d'intervention et les éventuels frais de
+        déplacement.
+      </p>
+      <ul class="communes" role="list">
+        {communes.map((c) => <li>{c}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <!-- 5. FAQ -->
+  <section class="section section--brume" aria-labelledby="faq-titre">
+    <div class="conteneur faq">
+      <span class="surtitre">Questions fréquentes</span>
+      <h2 id="faq-titre">Vos questions</h2>
+      <div class="faq__liste">
+        {
+          faq.map((q) => (
+            <details class="faq__item">
+              <summary>{q.question}</summary>
+              <p>{q.reponse}</p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Appel final -->
+  <section class="final" id="contact" aria-labelledby="final-titre">
+    <div class="conteneur final__contenu">
+      <h2 id="final-titre">Un problème électrique&nbsp;?</h2>
+      <p>Appelez-moi ou écrivez-moi sur WhatsApp, pour un dépannage comme pour un devis.</p>
+      <a class="final__numero" href={entreprise.telephoneLien}>{entreprise.telephoneAffiche}</a>
+      <div class="final__actions">
+        <a class="bouton bouton--principal" href={entreprise.telephoneLien}>
+          <Icone nom="telephone" />
+          Appeler Corentin
+        </a>
+        <a class="bouton bouton--clair" href={entreprise.whatsappLien} rel="noopener">
+          <Icone nom="whatsapp" />
+          Écrire sur WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
 </Base>
 
 <style>
-  .attente {
-    min-height: 100vh;
-    min-height: 100svh;
+  /* ---------- Hero ---------- */
+  .hero {
+    /* Jaune soleil très pastel + petits éclairs blancs en motif, derrière tout le contenu du hero. */
+    background-color: var(--soleil-pastel);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cg fill='white'%3E%3Cpath d='M38 14 22 40h13l-4 22 20-30H37z'/%3E%3Cpath d='M118 92l-11 18h9l-3 15 14-21h-9z'/%3E%3Cpath d='M126 18l-7 11h6l-2 9 9-13h-6z' opacity='.8'/%3E%3Cpath d='M44 104l-8 13h6l-2 10 10-15h-6z' opacity='.8'/%3E%3C/g%3E%3C/svg%3E");
+    background-size: 160px 160px;
+    padding-block: clamp(2.5rem, 7vw, 5rem);
+    overflow: hidden;
+  }
+  .hero__grille {
     display: grid;
-    place-items: center;
-    text-align: center;
-    padding-block: 3rem;
+    gap: 2.5rem;
+    align-items: center;
   }
-  .logo {
-    width: min(22rem, 80%);
-    margin: 0 auto 2rem;
+  .hero h1 {
+    font-size: clamp(2rem, 6vw, 3.25rem);
+    max-width: 18ch;
   }
-  h1 {
-    font-size: clamp(1.75rem, 5vw, 2.75rem);
+  .hero__accroche {
+    font-size: 1.125rem;
+    max-width: 36rem;
+    margin-bottom: 1.75rem;
   }
-  .secondaire {
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+  /* Sur mobile : Appeler, puis WhatsApp, puis devis. */
+  .action--appel {
+    order: 1;
+  }
+  .action--whatsapp {
+    order: 2;
+  }
+  .action--devis {
+    order: 3;
+  }
+  .hero__photo {
+    justify-self: center;
+    width: min(20rem, 80vw);
+  }
+  .hero__photo :global(img) {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    border-radius: 1.25rem;
+    box-shadow: 0 1px 0 rgba(52, 64, 47, 0.06);
+  }
+
+  @media (max-width: 29.99rem) {
+    .hero__actions .bouton {
+      flex: 1 1 100%;
+    }
+  }
+
+  @media (min-width: 48rem) {
+    .hero__grille {
+      grid-template-columns: 1.3fr 0.7fr;
+      gap: 3rem;
+    }
+    .hero__photo {
+      width: 100%;
+      max-width: 24rem;
+      justify-self: end;
+    }
+    /* Sur ordinateur : Appeler, puis devis, puis WhatsApp. */
+    .action--devis {
+      order: 2;
+    }
+    .action--whatsapp {
+      order: 3;
+    }
+  }
+
+  /* ---------- Services ---------- */
+  .services {
+    list-style: none;
+    margin: 2rem 0 0;
+    padding: 0;
+    display: grid;
+    gap: 1rem;
+  }
+  .service {
+    background: #fff;
+    border: 1px solid rgba(52, 64, 47, 0.1);
+    border-radius: var(--rayon);
+    padding: 1.5rem;
+  }
+  .service p {
     color: var(--gris-pierre);
-    margin: 0 0 2rem;
-  }
-  .version {
-    display: inline-block;
-    background: var(--vert-brume);
-    color: var(--gris-pierre);
-    font-size: 0.875rem;
-    padding: 0.4rem 0.9rem;
-    border-radius: 999px;
     margin: 0;
+  }
+  .service__icone {
+    display: inline-grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 999px;
+    background: var(--jaune-soleil);
+    color: var(--vert-olive);
+    margin-bottom: 1rem;
+  }
+  @media (min-width: 48rem) {
+    .services {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+  }
+
+  /* ---------- Présentation ---------- */
+  .presentation {
+    display: grid;
+    gap: 2rem;
+  }
+  .valeurs {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 1.25rem;
+    align-content: center;
+  }
+  .valeur {
+    border-left: 3px solid var(--jaune-soleil);
+    padding-left: 1rem;
+  }
+  .valeur h3 {
+    font-size: 1.125rem;
+    margin-bottom: 0.25rem;
+  }
+  .valeur p {
+    color: var(--gris-pierre);
+    margin: 0;
+  }
+  @media (min-width: 48rem) {
+    .presentation {
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 4rem;
+    }
+  }
+
+  /* ---------- Zone ---------- */
+  .communes {
+    list-style: none;
+    margin: 1.75rem 0 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .communes li {
+    background: #fff;
+    border: 1px solid rgba(52, 64, 47, 0.12);
+    border-radius: 999px;
+    padding: 0.35rem 0.85rem;
+    font-size: 0.9375rem;
+  }
+
+  /* ---------- FAQ ---------- */
+  .faq__liste {
+    max-width: 48rem;
+    margin-top: 1.5rem;
+    border-top: 1px solid rgba(52, 64, 47, 0.15);
+  }
+  .faq__item {
+    border-bottom: 1px solid rgba(52, 64, 47, 0.15);
+  }
+  .faq__item summary {
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding-block: 1.1rem;
+    font-weight: 700;
+  }
+  .faq__item summary::-webkit-details-marker {
+    display: none;
+  }
+  .faq__item summary::after {
+    content: '+';
+    flex: none;
+    font-size: 1.5rem;
+    line-height: 1;
+    color: var(--ocre);
+  }
+  .faq__item[open] summary::after {
+    content: '−';
+  }
+  .faq__item p {
+    color: var(--gris-pierre);
+    margin: 0 0 1.25rem;
+    max-width: 42rem;
+  }
+
+  /* ---------- Appel final ---------- */
+  .final {
+    background: var(--vert-olive);
+    color: var(--ivoire);
+    padding-block: var(--espace-section);
+    text-align: center;
+  }
+  .final__contenu p {
+    opacity: 0.9;
+    max-width: 34rem;
+    margin-inline: auto;
+  }
+  .final__numero {
+    display: inline-block;
+    margin: 0.5rem 0 1.75rem;
+    font-family: var(--font-titre);
+    font-size: clamp(2rem, 7vw, 3rem);
+    font-weight: 600;
+    color: var(--jaune-soleil);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+  }
+  .final__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+  }
+  .final :focus-visible {
+    outline-color: var(--jaune-soleil);
   }
 </style>

@@ -1,0 +1,65 @@
+---
+import { entreprise } from '../data/entreprise';
+const annee = new Date().getFullYear();
+---
+
+<footer class="pied">
+  <div class="conteneur pied__ligne">
+    <img
+      class="pied__logo"
+      src="/logo/logo-horizontal-fond-olive.svg"
+      alt="Corentin Électricien"
+      width="1188"
+      height="500"
+      loading="lazy"
+    />
+    <div class="pied__infos">
+      <p>
+        Électricien à {entreprise.ville} et dans les communes voisines<br />
+        <a href={entreprise.telephoneLien}>{entreprise.telephoneAffiche}</a>
+      </p>
+      <p class="pied__mentions">© {annee} {entreprise.nom}</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .pied {
+    background: var(--vert-olive);
+    color: var(--ivoire);
+    padding-block: 2.5rem;
+    border-top: 1px solid rgba(250, 247, 240, 0.12);
+  }
+  .pied__ligne {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+  }
+  .pied__logo {
+    width: 11rem;
+  }
+  .pied__infos {
+    font-size: 0.9375rem;
+  }
+  .pied__infos p {
+    margin: 0 0 0.5rem;
+  }
+  .pied__infos a {
+    font-weight: 700;
+    text-decoration-color: var(--jaune-soleil);
+    text-underline-offset: 3px;
+  }
+  .pied :focus-visible {
+    outline-color: var(--jaune-soleil);
+  }
+  .pied__mentions {
+    opacity: 0.75;
+  }
+  @media (min-width: 48rem) {
+    .pied__infos {
+      text-align: right;
+    }
+  }
+</style>
