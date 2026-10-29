@@ -1,11 +1,11 @@
 ---
-// Formulaire de contact, sans JavaScript : envoyé à /contact/envoyer.php (PHP sur o2switch).
+// Formulaire de contact, envoyé à /contact/envoyer.php (PHP sur o2switch). Fonctionne sans JavaScript ;
+// seul ajout : le champ téléphone n'accepte que des chiffres (scripts/formulaire.ts).
 // Les mêmes règles sont vérifiées ici par le navigateur, puis par envoyer.php : si l'une change, changer l'autre.
 const typesDemande = ['Dépannage', 'Installation', 'Électroménager', 'Autre']; // = TYPES_DEMANDE du PHP
 const motifs = {
   nonVide: '.*\\S.*', // au moins un caractère autre qu'un espace
-  // 10 chiffres commençant par 0, ou + et 9 à 15 chiffres ; espaces permis entre les chiffres
-  telephone: '0[1-9]( ?[0-9]){8}|\\+( ?[0-9]){9,15}',
+  telephone: '0[1-9][0-9]{8}', // 10 chiffres, sans espace (le script ne laisse saisir que des chiffres)
   email: '[^@\\s]+@[^@\\s]+\\.[^@\\s]+', // un point après le @, comme l'exige le serveur
 };
 ---
@@ -17,11 +17,25 @@ const motifs = {
   <div class="formulaire__ligne">
     <label>
       Prénom
-      <input name="prenom" autocomplete="given-name" maxlength="60" pattern={motifs.nonVide} required />
+      <input
+        name="prenom"
+        autocomplete="given-name"
+        maxlength="60"
+        pattern={motifs.nonVide}
+        placeholder="Camille"
+        required
+      />
     </label>
     <label>
       Nom
-      <input name="nom" autocomplete="family-name" maxlength="60" pattern={motifs.nonVide} required />
+      <input
+        name="nom"
+        autocomplete="family-name"
+        maxlength="60"
+        pattern={motifs.nonVide}
+        placeholder="Martin"
+        required
+      />
     </label>
   </div>
 
@@ -33,12 +47,12 @@ const motifs = {
         type="tel"
         autocomplete="tel"
         inputmode="numeric"
-        maxlength="20"
         pattern={motifs.telephone}
-        title="Chiffres uniquement, par exemple 06 12 34 56 78"
+        title="10 chiffres, par exemple 0612345678"
+        placeholder="0612345678"
+        data-chiffres
         required
       />
-      <span class="formulaire__aide">Chiffres uniquement, ex. 06 12 34 56 78</span>
     </label>
     <label>
       E-mail
@@ -49,6 +63,7 @@ const motifs = {
         maxlength="120"
         pattern={motifs.email}
         title="Une adresse e-mail complète, par exemple nom@exemple.fr"
+        placeholder="camille.martin@exemple.fr"
         required
       />
     </label>
@@ -92,6 +107,10 @@ const motifs = {
   </p>
 </form>
 
+<script>
+  import '../../scripts/formulaire.ts';
+</script>
+
 <style>
   .formulaire {
     display: grid;
@@ -132,6 +151,11 @@ const motifs = {
 
   textarea {
     resize: vertical;
+  }
+
+  ::placeholder {
+    color: var(--bordure-champ); /* plus clair que le texte saisi : on voit que c'est un exemple */
+    opacity: 1;
   }
 
   input:focus-visible,
