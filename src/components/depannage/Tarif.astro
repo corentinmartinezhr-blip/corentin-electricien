@@ -2,7 +2,6 @@
 // Tarif du dépannage : un forfait unique, ses suppléments et les mentions obligatoires
 // (arrêté du 24 janvier 2017 : forfait, déplacement, taux horaire). Données : src/data/tarifs.ts.
 import GrilleTarifs from '../GrilleTarifs.astro';
-import { entreprise } from '../../data/entreprise';
 import { mentionTva, offreDepannage } from '../../data/tarifs';
 ---
 
@@ -11,7 +10,6 @@ import { mentionTva, offreDepannage } from '../../data/tarifs';
     <h2 id="tarifs-titre">Tarifs</h2>
     <div class="tarif">
       <div class="carte offre">
-        <p class="offre__marque">{entreprise.nom} · {entreprise.ville}</p>
         <p class="offre__prix">{offreDepannage.prix}</p>
         <h3>{offreDepannage.titre}</h3>
         <ul class="offre__inclus">
@@ -40,16 +38,8 @@ import { mentionTva, offreDepannage } from '../../data/tarifs';
     border-top: 4px solid var(--jaune-soleil);
   }
 
-  .offre__marque {
-    color: var(--ocre);
-    font-size: 0.8125rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-  }
-
   .offre .offre__prix {
-    margin-block: 0.25rem 0.5rem;
+    margin-block: 0 0.5rem;
     color: var(--vert-olive);
     font-family: var(--font-titre);
     font-size: clamp(2.5rem, 8vw, 3.5rem);

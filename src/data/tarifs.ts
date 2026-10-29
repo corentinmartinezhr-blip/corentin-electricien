@@ -76,7 +76,7 @@ export const offreDepannage = {
 
 // ---------- Installation ----------
 export const deplacementInstallation =
-  'Déplacement offert dans tout Avignon, 49 € dans les autres communes de la zone.';
+  'Déplacement offert dans tout Avignon, 30 € dans les autres communes de la zone.';
 
 // Mentions communes.
 export const mentionTva = 'Prix nets, TVA non applicable (art. 293 B du CGI).';

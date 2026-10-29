@@ -24,7 +24,7 @@ Le cadrage de référence est la note de cadrage V3 (Claude Docs : https://claud
 ## Tarifs (seule source : `src/data/tarifs.ts`)
 
 - **Dépannage (défini par Corentin le 29/10/2026)** : forfait unique « Déplacement et diagnostic de panne » 89 €, du lundi au samedi en journée (7h–19h), déplacement inclus dans tout Avignon, jusqu'à 1 h sur place, devis de réparation gratuit. Suppléments : soir 19h–22h +25 % (111,25 €), dimanche et fériés +50 % (133,50 €), autres communes de la zone +30 €. Réparation au-delà du diagnostic : 65 €/h, par quart d'heure entamé, toujours sur devis accepté (ligne obligatoire : affichage du taux horaire, arrêté du 24/01/2017). Ce sont les seuls tarifs de la page Dépannage (plus le diagnostic électroménager 65 €).
-- **Installation** : devis gratuit mis en avant ; déplacement offert dans tout Avignon, 49 € ailleurs. Forfaits de main-d'œuvre pour la prestation complète, matériel en plus (règle expliquée une seule fois au-dessus des grilles) : prise/interrupteur 65 € ; RJ45/TV 65 € ; luminaire 85 € ; éclairage extérieur ou détecteur de présence 85 € ; radiateur ou sèche-serviettes 85 € ; thermostat 75 € ; détecteur de fumée 45 € ; circuit dédié, prise véhicule électrique, tableau, interphone : sur devis. Pas de VMC pour l'instant.
+- **Installation** : devis gratuit mis en avant ; déplacement offert dans tout Avignon, 30 € ailleurs (aligné sur le dépannage, 29/10/2026). Forfaits de main-d'œuvre pour la prestation complète, matériel en plus (règle expliquée une seule fois au-dessus des grilles) : prise/interrupteur 65 € ; RJ45/TV 65 € ; luminaire 85 € ; éclairage extérieur ou détecteur de présence 85 € ; radiateur ou sèche-serviettes 85 € ; thermostat 75 € ; détecteur de fumée 45 € ; circuit dédié, prise véhicule électrique, tableau, interphone : sur devis. Pas de VMC pour l'instant.
 - Prix nets, « TVA non applicable, art. 293 B du CGI » (franchise de TVA, à confirmer avec le SIRET).
 - Les prix affichés sont un plafond : remise possible, jamais au-dessus.
 
@@ -48,7 +48,7 @@ Le cadrage de référence est la note de cadrage V3 (Claude Docs : https://claud
 - On change l'ordre, on ne cache jamais rien : le formulaire reste accessible sur mobile.
 - Formulaire (`src/components/contact/Formulaire.astro` → `public/contact/envoyer.php`, sans JavaScript) : prénom, nom, téléphone, e-mail, type de demande, descriptif, photos facultatives (3 max, 8 Mo chacune, JPEG/PNG/WebP/HEIC, vrai format vérifié). Rien n'est stocké : envoi par e-mail puis effacement. Anti-spam : champ piège. Succès → `/contact/merci/`, échec → `/contact/erreur/`. Testé localement (cas valides, robot, saisies invalides, injection d'en-têtes, faux fichiers, photos trop lourdes ou trop nombreuses).
 - E-mail public : `contact@corentin-electricien.fr` (dans `entreprise.ts`), expéditeur et destinataire du formulaire, redirigé vers le Gmail de Corentin par un redirecteur cPanel. Ne jamais écrire l'adresse Gmail dans le code ni sur le site (dépôt public).
-- Adresse postale : pas encore fournie par Corentin ; ne rien inventer.
+- Adresse : 15 rue Alexandre Fleming, Avignon (fournie le 29/10/2026), affichée sur la page Contact. Code postal à confirmer avant de l'ajouter (données structurées, mentions légales).
 
 ## Identité visuelle
 
