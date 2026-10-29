@@ -1,0 +1,41 @@
+---
+// Page Contact : /contact/. Formulaire (envoyé par public/contact/envoyer.php) + coordonnées directes.
+// Mobile : les boutons Appeler et WhatsApp sont en haut de page ; le formulaire reste juste en dessous.
+import Base from '../../layouts/Base.astro';
+import IntroPage from '../../components/IntroPage.astro';
+import Formulaire from '../../components/contact/Formulaire.astro';
+import Coordonnees from '../../components/contact/Coordonnees.astro';
+import { entreprise } from '../../data/entreprise';
+---
+
+<Base
+  title="Contact et devis gratuit – Électricien à Avignon | Corentin"
+  description="Contactez Corentin, électricien à Avignon : formulaire avec photos, téléphone ou WhatsApp au 06 83 78 69 11. Devis gratuit pour vos travaux."
+>
+  <IntroPage surtitre="Contact" titre="Parlons de votre projet ou de votre panne">
+    <p>
+      Appelez-moi, écrivez-moi sur WhatsApp ou remplissez le formulaire : je vous réponds moi-même. Le devis est
+      gratuit, à {entreprise.ville} comme dans les communes voisines.
+    </p>
+  </IntroPage>
+  <section class="section" aria-labelledby="formulaire-titre">
+    <div class="conteneur contact">
+      <Formulaire />
+      <Coordonnees />
+    </div>
+  </section>
+</Base>
+
+<style>
+  .contact {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 56rem) {
+    .contact {
+      grid-template-columns: 1.6fr 1fr;
+      gap: 2rem;
+    }
+  }
+</style>

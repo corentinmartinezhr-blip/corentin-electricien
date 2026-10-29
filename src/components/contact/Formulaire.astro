@@ -1,0 +1,149 @@
+---
+// Formulaire de contact, sans JavaScript : envoyé à /contact/envoyer.php (PHP sur o2switch).
+// Les règles (champs obligatoires, photos) sont vérifiées ici par le navigateur ET côté serveur.
+const typesDemande = ['Dépannage', 'Installation', 'Électroménager', 'Autre']; // = TYPES_DEMANDE du PHP
+---
+
+<form class="carte formulaire" action="/contact/envoyer.php" method="post" enctype="multipart/form-data">
+  <h2 id="formulaire-titre">Décrivez votre besoin</h2>
+  <p class="formulaire__aide">Tous les champs sont obligatoires, sauf les photos.</p>
+
+  <div class="formulaire__ligne">
+    <label>
+      Prénom
+      <input name="prenom" autocomplete="given-name" maxlength="60" required />
+    </label>
+    <label>
+      Nom
+      <input name="nom" autocomplete="family-name" maxlength="60" required />
+    </label>
+  </div>
+
+  <div class="formulaire__ligne">
+    <label>
+      Téléphone
+      <input
+        name="telephone"
+        type="tel"
+        autocomplete="tel"
+        inputmode="tel"
+        pattern="[\d\s\+\-\.\(\)]{10,20}"
+        title="Un numéro de téléphone, par exemple 06 12 34 56 78"
+        required
+      />
+    </label>
+    <label>
+      E-mail
+      <input name="email" type="email" autocomplete="email" maxlength="120" required />
+    </label>
+  </div>
+
+  <label>
+    Votre demande concerne
+    <select name="type" required>
+      <option value="" disabled selected>Choisir…</option>
+      {typesDemande.map((type) => <option>{type}</option>)}
+    </select>
+  </label>
+
+  <label>
+    Descriptif
+    <textarea
+      name="message"
+      rows="6"
+      minlength="10"
+      maxlength="3000"
+      placeholder="Ce qui se passe, depuis quand, la commune…"
+      required
+    ></textarea>
+  </label>
+
+  <label>
+    Photos <span class="facultatif">(facultatif)</span>
+    <input name="photos[]" type="file" accept="image/jpeg,image/png,image/webp,image/heic,image/heif" multiple />
+    <span class="formulaire__aide">3 photos maximum, 8 Mo chacune. Une photo de la panne m'aide à préparer mon intervention.</span>
+  </label>
+
+  <!-- Anti-spam : champ invisible pour les humains, rempli par les robots. -->
+  <div class="piege" aria-hidden="true">
+    <label>Ne pas remplir <input name="site_web" tabindex="-1" autocomplete="off" /></label>
+  </div>
+
+  <button class="bouton bouton--principal" type="submit">Envoyer ma demande</button>
+  <p class="formulaire__aide">
+    Vos informations servent uniquement à vous répondre. <a href="/confidentialite/">Confidentialité</a>
+  </p>
+</form>
+
+<style>
+  .formulaire {
+    display: grid;
+    gap: 1.1rem;
+  }
+
+  h2 {
+    margin-bottom: 0;
+  }
+
+  .formulaire__ligne {
+    display: grid;
+    gap: 1.1rem;
+  }
+
+  label {
+    display: grid;
+    gap: 0.35rem;
+    font-weight: 700;
+  }
+
+  input,
+  select,
+  textarea {
+    width: 100%;
+    padding: 0.7rem 0.85rem;
+    border: 1px solid var(--bordure-champ);
+    border-radius: 0.5rem;
+    background: var(--blanc);
+    color: var(--vert-olive);
+    font: inherit;
+    font-weight: 400;
+  }
+
+  input[type='file'] {
+    padding: 0.55rem;
+  }
+
+  textarea {
+    resize: vertical;
+  }
+
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    outline: 3px solid var(--jaune-soleil);
+    outline-offset: 1px;
+    border-color: var(--vert-olive);
+  }
+
+  .facultatif,
+  .formulaire .formulaire__aide {
+    color: var(--gris-pierre);
+    font-size: 0.875rem;
+    font-weight: 400;
+  }
+
+  .piege {
+    position: absolute;
+    left: -9999px;
+  }
+
+  button {
+    justify-self: start;
+  }
+
+  @media (min-width: 40rem) {
+    .formulaire__ligne {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+</style>

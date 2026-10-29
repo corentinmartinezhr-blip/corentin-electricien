@@ -15,9 +15,11 @@ interface Props {
   title: string;
   /** Meta description : ~155 caractères maximum. */
   description: string;
+  /** false pour les pages utilitaires (merci, erreur) : jamais indexées, absentes du sitemap. */
+  indexable?: boolean;
 }
 
-const { title, description } = Astro.props;
+const { title, description, indexable = true } = Astro.props;
 
 // Tant que le site n'est pas lancé officiellement, il est en « noindex ».
 // Seul le lancement passera PUBLIC_SITE_ENV à « production » (voir .github/workflows/publier.yml).
@@ -45,7 +47,7 @@ const donneesStructurees = {
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={urlCanonique} />
-    {!estProduction && <meta name="robots" content="noindex, nofollow" />}
+    {(!estProduction || !indexable) && <meta name="robots" content="noindex, nofollow" />}
 
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="fr_FR" />

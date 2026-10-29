@@ -15,8 +15,7 @@ const { action, variante = 'contour', libelle, class: classe } = Astro.props;
 const actions = {
   appel: { lien: entreprise.telephoneLien, icone: 'telephone', texte: 'Appeler Corentin' },
   whatsapp: { lien: entreprise.whatsappLien, icone: 'whatsapp', texte: 'WhatsApp' },
-  // Pas encore de formulaire : le devis se demande par téléphone ou WhatsApp (section #contact).
-  devis: { lien: '#contact', icone: 'devis', texte: 'Demander un devis gratuit' },
+  devis: { lien: '/contact/', icone: 'devis', texte: 'Demander un devis gratuit' },
 } as const;
 
 const { lien, icone, texte } = actions[action];

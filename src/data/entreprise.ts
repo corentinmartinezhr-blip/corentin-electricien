@@ -9,6 +9,9 @@ export const entreprise = {
   telephoneLien: 'tel:+33683786911',
   // Même numéro pour WhatsApp (confirmé le 29/10/2026).
   whatsappLien: 'https://wa.me/33683786911',
+  // Adresse publique du domaine, redirigée vers la boîte Gmail de Corentin (cPanel → Redirecteurs).
+  // L'adresse Gmail n'est jamais publiée : le dépôt GitHub et le site sont publics.
+  email: 'contact@corentin-electricien.fr',
 };
 
 // Section « Garanties » de l'accueil (triptyque après « Qui suis-je »).

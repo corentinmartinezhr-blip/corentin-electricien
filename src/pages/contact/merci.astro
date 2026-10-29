@@ -1,0 +1,14 @@
+---
+// Page affichée seulement après un envoi réussi du formulaire (redirection de envoyer.php).
+import Base from '../../layouts/Base.astro';
+import IntroPage from '../../components/IntroPage.astro';
+---
+
+<Base title="Demande envoyée | Corentin Électricien" description="Votre demande a bien été envoyée." indexable={false}>
+  <IntroPage surtitre="Contact" titre="Merci, votre demande est bien envoyée">
+    <p>
+      Je vous recontacte dès que possible. Pour une panne qui ne peut pas attendre, appelez-moi ou écrivez-moi
+      directement sur WhatsApp.
+    </p>
+  </IntroPage>
+</Base>

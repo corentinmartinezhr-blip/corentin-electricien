@@ -1,5 +1,5 @@
 ---
-// Bloc de contact en bas de chaque page. Cible du bouton « Demander un devis » (#contact).
+// Bloc de contact en bas des pages (sauf Contact).
 import BoutonContact from './BoutonContact.astro';
 import NumeroCopiable from './NumeroCopiable.astro';
 ---
@@ -7,7 +7,7 @@ import NumeroCopiable from './NumeroCopiable.astro';
 <section class="fond-olive appel-final" id="contact" aria-labelledby="appel-final-titre">
   <div class="conteneur">
     <h2 id="appel-final-titre">Un problème électrique&nbsp;?</h2>
-    <p>Appelez-moi ou écrivez-moi sur WhatsApp, pour un dépannage comme pour un devis.</p>
+    <p>Appelez-moi, écrivez-moi sur WhatsApp ou passez par le <a href="/contact/">formulaire</a>, pour un dépannage comme pour un devis gratuit.</p>
     <p class="appel-final__numero"><NumeroCopiable /></p>
     <div class="appel-final__actions">
       <BoutonContact action="appel" variante="principal" />

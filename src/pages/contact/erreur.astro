@@ -1,0 +1,15 @@
+---
+// Page affichée quand envoyer.php refuse ou ne peut pas envoyer la demande.
+import Base from '../../layouts/Base.astro';
+import IntroPage from '../../components/IntroPage.astro';
+---
+
+<Base title="Demande non envoyée | Corentin Électricien" description="Votre demande n'a pas pu être envoyée." indexable={false}>
+  <IntroPage surtitre="Contact" titre="Votre demande n'a pas pu être envoyée">
+    <p>
+      Vérifiez que tous les champs sont remplis et que vos photos respectent les limites (3 photos maximum,
+      8 Mo chacune, au format JPEG, PNG, WebP ou HEIC), puis <a href="/contact/">réessayez</a>. Vous pouvez aussi
+      m'appeler ou m'écrire sur WhatsApp.
+    </p>
+  </IntroPage>
+</Base>

@@ -18,6 +18,7 @@
   --jaune-survol: #E8B220;
   --bordure: rgba(52, 64, 47, 0.12);
   --bordure-claire: rgba(250, 247, 240, 0.12); /* sur fond olive */
+  --bordure-champ: #857F73; /* contour des champs de formulaire : contraste ≥ 3:1 (WCAG AA) */
 
   /* Typographie (polices auto-hébergées via @fontsource, voir Base.astro) */
   --font-titre: 'Fraunces Variable', Georgia, 'Times New Roman', serif;

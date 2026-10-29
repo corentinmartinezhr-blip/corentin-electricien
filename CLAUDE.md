@@ -12,7 +12,7 @@ Le cadrage de référence est la note de cadrage V3 (Claude Docs : https://claud
 ## Architecture du site (V1)
 
 - 4 pages : Accueil, Dépannage, Installation, Contact, plus les pages légales (mentions légales, confidentialité).
-- Faites : Accueil (`/`), Dépannage (`/depannage-electrique-avignon/`), Installation (`/installation-electrique-avignon/`). À faire : Contact (avec formulaire), pages légales.
+- Faites : Accueil (`/`), Dépannage (`/depannage-electrique-avignon/`), Installation (`/installation-electrique-avignon/`), Contact (`/contact/`, + `merci/` et `erreur/` non indexées), Confidentialité (`/confidentialite/`). À faire : Mentions légales (attend le SIRET).
 - Menu (en-tête et pied de page) : `src/data/navigation.ts`. Composants partagés : `IntroPage`, `GrilleTarifs`, `Deroule`, `AppelFinal`, `BoutonContact`, `NumeroCopiable`.
 - Électroménager : pas de réfrigérateur ni de climatisation (circuit de froid = attestation fluides frigorigènes).
 - Véhicule électrique : uniquement « prise renforcée jusqu'à 3,7 kW » (pas de qualification IRVE). Ne jamais proposer de « borne de recharge » ni de puissance supérieure tant que Corentin n'est pas qualifié IRVE.
@@ -40,13 +40,15 @@ Le cadrage de référence est la note de cadrage V3 (Claude Docs : https://claud
 - Téléphone et WhatsApp : 06 83 78 69 11 (même numéro). Coordonnées et communes dans `src/data/entreprise.ts`, seule source à utiliser.
 - Zone : les 18 communes de la zone principale sont validées (29/10/2026). Formulation prudente sur les frais de déplacement.
 - Présentation (faits fournis par Corentin) : 31 ans, réactif, communication et transparence, croit en l'artisanat et au fait main. Rien d'autre sans validation.
-- Le bouton « Demander un devis » mène à l'appel final (#contact) tant que le formulaire n'existe pas.
+- Le bouton « Demander un devis gratuit » mène à `/contact/`.
 - Boutons « Appeler » = lien `tel:` : sur téléphone (appareil déclaré mobile ou pointeur tactile principal), ouvre l'application d'appel ; sur ordinateur, copie le numéro et affiche « Numéro copié ». Exigence de Corentin : ne jamais copier sur un téléphone. Numéro écrit en clair dans un texte (pied de page, FAQ, appel final) = composant `NumeroCopiable` : un clic copie le numéro et affiche « Numéro copié » (demande de Corentin).
 - Garanties (après « Qui suis-je ») : CAP Électricien mention très bien (Académie de Paris, 2025) et habilitations basse tension BR, BC, B2V, B2V Essai, BE Essai, confirmés le 29/10/2026. La H0 n'est pas affichée (choix de Corentin). La 3e carte « Décennale et RC Pro » n'apparaît que si `assurancesSignees: true` dans `src/data/entreprise.ts` : à passer seulement après signature (prévue début novembre 2026).
 - SIREN/SIRET en cours (demande déposée à l'INPI). Pas de lancement officiel (indexation) avant SIRET + décennale signée ; mentions légales à compléter à ce moment-là.
 - Sur mobile : WhatsApp en premier. Sur ordinateur : formulaire en premier.
 - On change l'ordre, on ne cache jamais rien : le formulaire reste accessible sur mobile.
-- Formulaire : script PHP sur o2switch. Expéditeur sur le domaine (ex. `site@corentin-electricien.fr`), destinataire : la boîte Gmail de Corentin, `Reply-To` = adresse du client. Ne jamais écrire l'adresse Gmail en clair dans le HTML.
+- Formulaire (`src/components/contact/Formulaire.astro` → `public/contact/envoyer.php`, sans JavaScript) : prénom, nom, téléphone, e-mail, type de demande, descriptif, photos facultatives (3 max, 8 Mo chacune, JPEG/PNG/WebP/HEIC, vrai format vérifié). Rien n'est stocké : envoi par e-mail puis effacement. Anti-spam : champ piège. Succès → `/contact/merci/`, échec → `/contact/erreur/`. Testé localement (cas valides, robot, saisies invalides, injection d'en-têtes, faux fichiers, photos trop lourdes ou trop nombreuses).
+- E-mail public : `contact@corentin-electricien.fr` (dans `entreprise.ts`), expéditeur et destinataire du formulaire, redirigé vers le Gmail de Corentin par un redirecteur cPanel. Ne jamais écrire l'adresse Gmail dans le code ni sur le site (dépôt public).
+- Adresse postale : pas encore fournie par Corentin ; ne rien inventer.
 
 ## Identité visuelle
 

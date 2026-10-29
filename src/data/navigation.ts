@@ -2,4 +2,5 @@
 export const menu = [
   { url: '/depannage-electrique-avignon/', texte: 'Dépannage' },
   { url: '/installation-electrique-avignon/', texte: 'Installation' },
+  { url: '/contact/', texte: 'Contact' },
 ];

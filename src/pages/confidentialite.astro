@@ -1,0 +1,83 @@
+---
+// Politique de confidentialité : obligatoire dès que le formulaire collecte des données (RGPD).
+// À compléter avec l'identité légale (nom, SIRET) quand l'entreprise sera immatriculée.
+import Base from '../layouts/Base.astro';
+import { entreprise } from '../data/entreprise';
+
+const miseAJour = '29 octobre 2026';
+---
+
+<Base
+  title="Confidentialité | Corentin Électricien"
+  description="Comment Corentin Électricien utilise et protège les informations envoyées par le formulaire de contact."
+>
+  <article class="section">
+    <div class="conteneur texte-legal">
+      <span class="surtitre">Données personnelles</span>
+      <h1>Confidentialité</h1>
+      <p class="intro">Mise à jour le {miseAJour}.</p>
+
+      <h2>Qui est responsable de vos données ?</h2>
+      <p>
+        {entreprise.nom}, artisan électricien à {entreprise.ville}. Pour toute question sur vos données :
+        <a href={`mailto:${entreprise.email}`}>{entreprise.email}</a>.
+      </p>
+
+      <h2>Quelles données, et pourquoi ?</h2>
+      <p>
+        Quand vous remplissez le formulaire de contact, vous transmettez votre prénom, votre nom, votre numéro de
+        téléphone, votre adresse e-mail, la description de votre besoin et, si vous le souhaitez, des photos.
+      </p>
+      <p>
+        Ces informations servent uniquement à vous répondre, à préparer une intervention et à établir un devis.
+        Cette utilisation repose sur votre demande (mesures précontractuelles). Elles ne sont jamais vendues ni
+        utilisées pour de la publicité.
+      </p>
+
+      <h2>Qui y a accès ?</h2>
+      <p>
+        Votre demande est envoyée par e-mail à {entreprise.nom}, qui est seul à la lire. Le site ne conserve aucune
+        copie : ni le message, ni les photos ne sont stockés sur le serveur. Le site est hébergé en France par
+        o2switch (Clermont-Ferrand).
+      </p>
+
+      <h2>Combien de temps sont-elles conservées ?</h2>
+      <p>
+        Si votre demande n'aboutit pas à une intervention, vos données sont supprimées au plus tard trois ans après
+        notre dernier échange. Si elle aboutit, elles sont conservées le temps de la relation, puis aussi longtemps
+        que la loi l'impose pour les documents comptables (factures).
+      </p>
+
+      <h2>Vos droits</h2>
+      <p>
+        Vous pouvez demander à consulter, corriger ou supprimer vos données, ou vous opposer à leur utilisation, en
+        écrivant à <a href={`mailto:${entreprise.email}`}>{entreprise.email}</a>. Si vous estimez que vos droits ne
+        sont pas respectés, vous pouvez adresser une réclamation à la CNIL (<a
+          href="https://www.cnil.fr"
+          rel="noopener">cnil.fr</a
+        >).
+      </p>
+
+      <h2>Cookies</h2>
+      <p>
+        Ce site ne dépose aucun cookie et n'utilise aucun outil de suivi publicitaire. Les polices de caractères sont
+        hébergées sur le site lui-même : aucune donnée n'est envoyée à un service extérieur.
+      </p>
+    </div>
+  </article>
+</Base>
+
+<style>
+  .texte-legal {
+    max-width: 46rem;
+  }
+
+  h1 {
+    font-size: clamp(2rem, 5.5vw, 3rem);
+  }
+
+  h2 {
+    margin-top: 2rem;
+    font-size: 1.375rem;
+  }
+</style>

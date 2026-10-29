@@ -1,10 +1,12 @@
 import type { APIRoute } from 'astro';
 
 // Plan du site généré à partir des fichiers de src/pages : une nouvelle page y entre automatiquement.
+// Pages exclues : 404 et pages utilitaires du formulaire (merci, erreur).
+const exclues = ['404.astro', 'contact/merci.astro', 'contact/erreur.astro'];
 const fichiers = Object.keys(import.meta.glob('./**/*.astro'));
 
 const chemins = fichiers
-  .filter((fichier) => !fichier.endsWith('404.astro'))
+  .filter((fichier) => !exclues.some((exclue) => fichier.endsWith(exclue)))
   .map((fichier) => {
     const chemin = fichier.replace(/^\.\//, '/').replace(/(index)?\.astro$/, '');
     return chemin.endsWith('/') ? chemin : `${chemin}/`;
