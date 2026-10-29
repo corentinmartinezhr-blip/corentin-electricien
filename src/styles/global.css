@@ -1,0 +1,67 @@
+/* Palette « Le soleil et l'olivier » — voir docs/palette.png et CLAUDE.md */
+:root {
+  --jaune-soleil: #F5C02E; /* signature : éclair, bouton « Appeler ». Jamais en texte sur fond clair. */
+  --vert-olive: #34402F;   /* textes, titres, pied de page */
+  --ivoire: #FAF7F0;       /* fond principal */
+  --vert-brume: #EEF0E6;   /* fond alterné des sections */
+  --gris-pierre: #5E5A50;  /* texte secondaire, légendes */
+  --ocre: #8A6410;         /* version « texte » du jaune : surtitres, labels */
+
+  --font-texte: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-titre: Georgia, 'Times New Roman', serif;
+
+  --largeur-max: 72rem;
+  --gouttiere: 1rem;
+  --rayon: 0.75rem;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--ivoire);
+  color: var(--vert-olive);
+  font-family: var(--font-texte);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-titre);
+  line-height: 1.15;
+  margin: 0 0 0.5em;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+}
+
+.conteneur {
+  max-width: var(--largeur-max);
+  margin-inline: auto;
+  padding-inline: var(--gouttiere);
+}
+
+.surtitre {
+  color: var(--ocre);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}

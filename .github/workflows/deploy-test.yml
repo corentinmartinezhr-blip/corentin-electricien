@@ -1,0 +1,63 @@
+name: Déploiement sur le site de test
+
+# À chaque envoi sur main (et à la demande), on construit le site
+# puis on le dépose sur test.corentin-electricien.fr (protégé par mot de passe).
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-test
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Récupérer le code
+        uses: actions/checkout@v4
+
+      - name: Installer Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Installer les dépendances
+        run: npm install --no-audit --no-fund
+
+      - name: Construire le site (version test, non indexée)
+        run: npm run build
+        env:
+          PUBLIC_SITE_ENV: test
+
+      - name: Vérifier que les accès FTP sont renseignés
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+        run: |
+          manque=""
+          [ -z "$FTP_SERVER" ] && manque="$manque FTP_SERVER"
+          [ -z "$FTP_USERNAME" ] && manque="$manque FTP_USERNAME"
+          [ -z "$FTP_PASSWORD" ] && manque="$manque FTP_PASSWORD"
+          if [ -n "$manque" ]; then
+            echo "::error::Secrets GitHub manquants :$manque (Settings > Secrets and variables > Actions)"
+            exit 1
+          fi
+
+      - name: Envoyer sur le site de test (FTPS)
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          port: 21
+          local-dir: ./dist/
+          # Le compte FTP deploy-test est limité au dossier du site de test : sa racine est la racine du site.
+          server-dir: ./

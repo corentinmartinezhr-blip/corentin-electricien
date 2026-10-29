@@ -1,0 +1,63 @@
+---
+// Page provisoire : elle sert uniquement à tester la chaîne de déploiement.
+// Elle sera remplacée par la vraie page d'accueil (voir docs/note-de-cadrage.md).
+import Base from '../layouts/Base.astro';
+
+const dateConstruction = new Date().toLocaleString('fr-FR', {
+  timeZone: 'Europe/Paris',
+  dateStyle: 'long',
+  timeStyle: 'short',
+});
+---
+
+<Base
+  title="Corentin Électricien — site en préparation"
+  description="Électricien à Marseille : dépannage, petits travaux, tableau électrique et électroménager."
+>
+  <main class="attente">
+    <div class="conteneur">
+      <img
+        class="logo"
+        src="/logo/logo-horizontal.svg"
+        alt="Corentin Électricien"
+        width="1188"
+        height="500"
+      />
+      <p class="surtitre">Site en préparation</p>
+      <h1>Le nouveau site arrive bientôt.</h1>
+      <p class="secondaire">Dépannage électrique, petits travaux, tableau et électroménager.</p>
+      <p class="version">Version de test construite le {dateConstruction}.</p>
+    </div>
+  </main>
+</Base>
+
+<style>
+  .attente {
+    min-height: 100vh;
+    min-height: 100svh;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    padding-block: 3rem;
+  }
+  .logo {
+    width: min(22rem, 80%);
+    margin: 0 auto 2rem;
+  }
+  h1 {
+    font-size: clamp(1.75rem, 5vw, 2.75rem);
+  }
+  .secondaire {
+    color: var(--gris-pierre);
+    margin: 0 0 2rem;
+  }
+  .version {
+    display: inline-block;
+    background: var(--vert-brume);
+    color: var(--gris-pierre);
+    font-size: 0.875rem;
+    padding: 0.4rem 0.9rem;
+    border-radius: 999px;
+    margin: 0;
+  }
+</style>

@@ -1,0 +1,31 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+
+// Par sécurité, tout est « noindex » sauf la version de production.
+// Seul le déploiement de production définit PUBLIC_SITE_ENV=production.
+const estProduction = import.meta.env.PUBLIC_SITE_ENV === 'production';
+const urlCanonique = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {estProduction ? <link rel="canonical" href={urlCanonique} /> : <meta name="robots" content="noindex, nofollow" />}
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="theme-color" content="#34402F" />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
