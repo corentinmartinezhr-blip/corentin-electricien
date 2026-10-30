@@ -13,9 +13,10 @@ Sauvegarde de la version précédente : `/home/maco0206/htaccess-sauvegarde-2026
    La règle créée par le menu « Redirections » du cPanel ne marchait pas : elle ne s'appliquait qu'en http,
    alors que le bloc o2switch « forceHttps » passe déjà tout en https avant elle. Elle a été remplacée.
    Conséquence : la redirection n'apparaît plus dans le menu « Redirections » du cPanel ; c'est normal.
-2. **Bloc o2switch « forceHttps »** (WpTiger) : géré par o2switch, ne pas modifier.
-3. **Bloc « WordPress » vide** : laissé par l'hébergeur, sans effet.
-4. **Mise en cache dans le navigateur** : `/_astro/` 1 an (noms de fichiers uniques à chaque version),
+2. **Page d'erreur 404** : `ErrorDocument 404 /404.html` (page « Aïe, aïe, aïe » générée par `src/pages/404.astro`). Le code renvoyé reste bien 404.
+3. **Bloc o2switch « forceHttps »** (WpTiger) : géré par o2switch, ne pas modifier.
+4. **Bloc « WordPress » vide** : laissé par l'hébergeur, sans effet.
+5. **Mise en cache dans le navigateur** : `/_astro/` 1 an (noms de fichiers uniques à chaque version),
    photos/logos/polices 1 semaine, pages `no-cache` (revérifiées à chaque visite).
 
 ```apache
@@ -23,6 +24,9 @@ Sauvegarde de la version précédente : `/home/maco0206/htaccess-sauvegarde-2026
 RewriteEngine On
 RewriteCond %{HTTP_HOST} ^www\.corentin-electricien\.fr$ [NC]
 RewriteRule ^(.*)$ https://corentin-electricien.fr/$1 [R=301,L]
+
+# Corentin Électricien : page « Aïe, aïe, aïe » pour les adresses qui n'existent pas (le code reste 404)
+ErrorDocument 404 /404.html
 
 # o2s WpTiger Begin - Dont edit - Ne pas modifier - forceHttps
 RewriteEngine On
