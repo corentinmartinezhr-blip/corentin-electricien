@@ -1,0 +1,58 @@
+---
+// FAQ de la page Installation : une question par recherche fréquente (prix d'une prise, d'un luminaire,
+// ajout de prise, prise pour voiture électrique, chauffage, tableau, matériel, villes).
+// Voir le benchmark « mots-clés » dans les documents du projet (30/10/2026).
+// Voiture électrique : uniquement « prise renforcée jusqu'à 3,7 kW », jamais de borne (pas de qualification IRVE).
+// Prix, temps et villes viennent des données du site : ils suivent tout changement.
+import ListeQuestions from '../ListeQuestions.astro';
+import { communes } from '../../data/entreprise';
+import { decompteTemps, tauxInstallation } from '../../data/tarifs';
+
+const villes = `${communes.slice(0, -1).join(', ')} et ${communes.at(-1)}`;
+
+const questions = [
+  {
+    question: "Combien coûte la pose d'une prise ou d'un interrupteur ?",
+    reponse: `Remplacer une prise ou un interrupteur prend moins d'une heure : c'est donc ${tauxInstallation}, plus le prix de la prise. Le déplacement et le devis sont gratuits. Si vous en avez plusieurs à faire, je compte le temps total, pas chaque prise.`,
+  },
+  {
+    question: "Combien coûte l'installation d'un luminaire ou d'un plafonnier ?",
+    reponse: `Remplacer une lampe, un plafonnier ou une suspension prend en général moins d'une heure : ${tauxInstallation}, plus le prix du luminaire. Je pose aussi les ventilateurs de plafond et les bandes de LED.`,
+  },
+  {
+    question: "Pouvez-vous ajouter une prise là où il n'y en a pas ?",
+    reponse:
+      "Oui. Si une prise existe juste à côté, il faut environ une heure. S'il n'y a pas de fil à proximité, je tire un nouveau câble, ce qui prend en général 2 à 4 heures selon le chemin des fils. Je vous donne le prix exact sur un devis gratuit, avant de commencer.",
+  },
+  {
+    question: 'Pouvez-vous installer une prise pour recharger ma voiture électrique ?',
+    reponse:
+      "Oui, je pose des prises renforcées (plus solides qu'une prise normale) jusqu'à 3,7 kW, au garage ou sur une place de parking, pour recharger une voiture électrique ou hybride. Il faut en général une demi-journée à une journée, avec une ligne rien que pour elle depuis le tableau. Je vous fais un devis gratuit. Je ne pose pas de borne de recharge.",
+  },
+  {
+    question: 'Pouvez-vous remplacer un radiateur électrique ou un sèche-serviettes ?',
+    reponse: `Oui. Remplacer un radiateur ou un sèche-serviettes prend environ une heure : ${tauxInstallation}, plus le prix de l'appareil. Je peux aussi poser un thermostat ou un programmateur pour régler la température.`,
+  },
+  {
+    question: 'Remplacez-vous les tableaux électriques ?',
+    reponse:
+      "Oui. Remplacer un tableau électrique prend en général une à deux journées, selon la taille du logement. Je passe d'abord voir votre installation et je vous donne un devis gratuit et détaillé.",
+  },
+  {
+    question: 'Le matériel est-il compris dans le prix ?',
+    reponse: `Non. Je compte mon temps de travail à ${tauxInstallation} de l'heure (${decompteTemps}). Le matériel (la prise, la lampe, le radiateur…) s'ajoute, au prix écrit sur le devis.`,
+  },
+  {
+    question: 'Dans quelles villes intervenez-vous ?',
+    reponse: `À ${villes}. Le déplacement et le devis sont gratuits dans ces quatre villes.`,
+  },
+];
+---
+
+<section class="section section--brume" id="questions" aria-labelledby="questions-titre">
+  <div class="conteneur">
+    <span class="surtitre">Questions fréquentes</span>
+    <h2 id="questions-titre">Vos questions sur l'installation électrique</h2>
+    <ListeQuestions questions={questions} />
+  </div>
+</section>

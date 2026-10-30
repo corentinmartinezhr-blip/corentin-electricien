@@ -1,9 +1,8 @@
 import type { APIRoute } from 'astro';
 
 // Plan du site généré à partir des fichiers de src/pages : une nouvelle page y entre automatiquement.
-// Pages exclues : 404, pages utilitaires du formulaire (merci, erreur) et Installation (mise de côté le
-// 30/10/2026 : la page reste en ligne pour Corentin, mais hors menu et hors Google).
-const exclues = ['404.astro', 'contact/merci.astro', 'contact/erreur.astro', 'installation-electrique-avignon.astro'];
+// Pages exclues : 404 et pages utilitaires du formulaire (merci, erreur).
+const exclues = ['404.astro', 'contact/merci.astro', 'contact/erreur.astro'];
 const fichiers = Object.keys(import.meta.glob('./**/*.astro'));
 
 const chemins = fichiers
