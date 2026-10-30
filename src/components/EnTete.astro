@@ -9,8 +9,8 @@ const cheminActuel = Astro.url.pathname;
 
 <header class="en-tete">
   <div class="conteneur en-tete__grille">
-    <a class="en-tete__logo" href="/" aria-label={`${entreprise.nom}, accueil`}>
-      <img src="/logo/logo-horizontal.svg" alt="" width="1188" height="500" />
+    <a class="en-tete__logo" href="/">
+      <img src="/logo/logo-horizontal.svg" alt={`${entreprise.nom}, retour à l'accueil`} width="1188" height="500" />
     </a>
     <nav class="en-tete__nav" aria-label="Menu principal">
       <ul class="liste-nue en-tete__menu" role="list">
