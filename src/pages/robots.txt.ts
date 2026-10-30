@@ -1,6 +1,6 @@
 import type { APIRoute } from 'astro';
 
-// Avant le lancement officiel, tout le site est fermé aux moteurs de recherche.
+// Ouvert aux moteurs de recherche en « production » ; fermé en « preparation » (voir publier.yml).
 export const GET: APIRoute = ({ site }) => {
   const estProduction = import.meta.env.PUBLIC_SITE_ENV === 'production';
   const contenu = estProduction

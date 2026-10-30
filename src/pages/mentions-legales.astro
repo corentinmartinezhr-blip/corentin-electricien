@@ -1,0 +1,68 @@
+---
+// Mentions légales (LCEN art. 6 ; Code de la consommation pour le médiateur). Données : src/data/entreprise.ts.
+// SIREN et médiateur s'affichent seuls dès qu'ils sont renseignés dans entreprise.ts.
+import Base from '../layouts/Base.astro';
+import { entreprise, hebergeur, mediateur } from '../data/entreprise';
+
+const miseAJour = '30 octobre 2026';
+---
+
+<Base
+  title="Mentions légales | Corentin Électricien"
+  description="Mentions légales du site de Corentin Électricien, électricien d'urgence à Avignon : éditeur, hébergeur, contact."
+>
+  <article class="section">
+    <div class="conteneur texte-legal">
+      <span class="surtitre">Informations légales</span>
+      <h1>Mentions légales</h1>
+      <p class="intro">Mise à jour le {miseAJour}.</p>
+
+      <h2>Qui édite ce site&nbsp;?</h2>
+      <p>
+        {entreprise.responsable}, {entreprise.statut}, sous le nom commercial {entreprise.nom}.<br />
+        {entreprise.activite}.<br />
+        {entreprise.adresse.rue}, {entreprise.adresse.codePostal} {entreprise.adresse.ville}.<br />
+        Téléphone&nbsp;: {entreprise.telephoneAffiche}. E-mail&nbsp;:
+        <a href={`mailto:${entreprise.email}`}>{entreprise.email}</a>.<br />
+        {entreprise.siren ? `SIREN : ${entreprise.siren}.` : 'Immatriculation en cours.'}
+      </p>
+      <p>Directeur de la publication&nbsp;: {entreprise.responsable}.</p>
+
+      <h2>Qui héberge ce site&nbsp;?</h2>
+      <p>
+        {hebergeur.nom}, {hebergeur.adresse}. Téléphone&nbsp;: {hebergeur.telephone}.
+        <a href={hebergeur.site} rel="noopener">{hebergeur.site.replace('https://', '')}</a>
+      </p>
+
+      <h2>Prix</h2>
+      <p>
+        Les prix affichés sur ce site sont des prix TTC (toutes taxes comprises). Le prix exact d'une réparation
+        longue est donné sur un devis gratuit, avant les travaux.
+      </p>
+
+      {
+        mediateur && (
+          <>
+            <h2>En cas de litige</h2>
+            <p>
+              Si un désaccord persiste après une réclamation écrite, vous pouvez faire appel gratuitement au médiateur
+              de la consommation&nbsp;: {mediateur.nom} (<a href={mediateur.site} rel="noopener">{mediateur.site}</a>).
+            </p>
+          </>
+        )
+      }
+
+      <h2>Vos données personnelles</h2>
+      <p>
+        Ce que deviennent les informations envoyées par le formulaire est expliqué sur la page
+        <a href="/confidentialite/">Confidentialité</a>.
+      </p>
+
+      <h2>Photos et contenus</h2>
+      <p>
+        Les textes, photos et logos de ce site appartiennent à {entreprise.responsable}. Merci de ne pas les réutiliser
+        sans son accord.
+      </p>
+    </div>
+  </article>
+</Base>

@@ -1,15 +1,14 @@
 ---
-// Tarif du dépannage (offre de lancement) : 65 € TTC de l'heure, déplacement et devis gratuits, et les
+// Tarif du dépannage : 65 € TTC de l'heure, déplacement et devis gratuits, et les
 // mentions obligatoires (arrêté du 24 janvier 2017 : taux horaire, déplacement, décompte du temps).
 // L'exemple est mis en avant sous la carte : c'est lui qui rend le tarif évident. Données : src/data/tarifs.ts.
 import GrilleTarifs from '../GrilleTarifs.astro';
-import { offreDepannage, offreLancement } from '../../data/tarifs';
+import { offreDepannage } from '../../data/tarifs';
 ---
 
 <section class="section" id="tarifs" aria-labelledby="tarifs-titre">
   <div class="conteneur">
     <h2 id="tarifs-titre">Tarifs</h2>
-    <p class="lancement">{offreLancement}</p>
     <div class="tarif">
       <div class="carte offre">
         <p class="offre__prix">{offreDepannage.prix} <span>{offreDepannage.unite}</span></p>

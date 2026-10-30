@@ -63,6 +63,9 @@ body {
   font-family: var(--font-texte);
   font-size: 1.0625rem;
   line-height: 1.6;
+  /* Chiffres alignés partout : Playfair Display dessine par défaut des chiffres de style ancien
+     (le 6 monte, le 5 descend), peu lisibles pour un prix ou un numéro de téléphone. */
+  font-variant-numeric: lining-nums;
 }
 
 h1,
@@ -176,17 +179,6 @@ a {
 
 /* ---------- Textes ---------- */
 
-/* Pastille « Offre de lancement » au-dessus des tarifs (texte olive sur jaune : contraste 6,5:1). */
-.lancement {
-  display: inline-block;
-  margin: 0;
-  padding: 0.35rem 0.9rem;
-  border-radius: 999px;
-  background: var(--jaune-soleil);
-  font-size: 0.875rem;
-  font-weight: 700;
-}
-
 .surtitre {
   display: block;
   margin-bottom: 0.75rem;
@@ -299,4 +291,18 @@ a {
 
 .lien-evitement:focus {
   top: 1rem;
+}
+
+/* Pages légales (mentions légales, confidentialité) : texte seul, largeur de lecture. */
+.texte-legal {
+  max-width: 46rem;
+}
+
+.texte-legal h1 {
+  font-size: clamp(2rem, 5.5vw, 3rem);
+}
+
+.texte-legal h2 {
+  margin-top: 2rem;
+  font-size: 1.375rem;
 }

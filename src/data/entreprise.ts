@@ -3,6 +3,11 @@
 
 export const entreprise = {
   nom: 'Corentin Électricien',
+  // Identité légale (mentions légales, confidentialité). Fournie par Corentin le 30/10/2026.
+  responsable: 'Corentin Martinez',
+  statut: 'entrepreneur individuel (EI)',
+  activite: 'Électricien : dépannage électrique et réparation d’électroménager',
+  siren: '', // À RENSEIGNER dès réception (immatriculation en cours) : il s'affichera seul dans les mentions légales.
   ville: 'Avignon',
   telephoneAffiche: '06 83 78 69 11',
   telephoneInternational: '+33683786911',
@@ -38,3 +43,15 @@ export const garanties = {
 
 // Zone recentrée le 30/10/2026 (dépannage d'urgence à vélo électrique) : Avignon et les villes proches.
 export const communes = ['Avignon', 'Le Pontet', 'Villeneuve-lès-Avignon', 'Les Angles'];
+
+// Hébergeur du site (mentions légales obligatoires, LCEN art. 6).
+export const hebergeur = {
+  nom: 'O2Switch SAS',
+  adresse: '222-224 Boulevard Gustave Flaubert, 63000 Clermont-Ferrand',
+  telephone: '04 44 44 60 40',
+  site: 'https://www.o2switch.fr',
+};
+
+// Médiateur de la consommation (obligatoire pour un professionnel qui travaille pour des particuliers).
+// À RENSEIGNER dès l'adhésion ({ nom, site }) : la section apparaîtra seule dans les mentions légales.
+export const mediateur: { nom: string; site: string } | null = null;

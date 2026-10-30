@@ -1,10 +1,9 @@
 ---
 // Politique de confidentialité : obligatoire dès que le formulaire collecte des données (RGPD).
-// À compléter avec l'identité légale (nom, SIRET) quand l'entreprise sera immatriculée.
 import Base from '../layouts/Base.astro';
 import { entreprise } from '../data/entreprise';
 
-const miseAJour = '29 octobre 2026';
+const miseAJour = '30 octobre 2026';
 ---
 
 <Base
@@ -19,7 +18,9 @@ const miseAJour = '29 octobre 2026';
 
       <h2>Qui est responsable de vos données ?</h2>
       <p>
-        {entreprise.nom}, artisan électricien à {entreprise.ville}. Pour toute question sur vos données :
+        Le responsable du traitement de vos données est {entreprise.responsable}, {entreprise.statut}, sous le nom
+        {entreprise.nom}, {entreprise.adresse.rue}, {entreprise.adresse.codePostal} {entreprise.adresse.ville}. Pour toute
+        question sur vos données :
         <a href={`mailto:${entreprise.email}`}>{entreprise.email}</a>.
       </p>
 
@@ -68,17 +69,3 @@ const miseAJour = '29 octobre 2026';
   </article>
 </Base>
 
-<style>
-  .texte-legal {
-    max-width: 46rem;
-  }
-
-  h1 {
-    font-size: clamp(2rem, 5.5vw, 3rem);
-  }
-
-  h2 {
-    margin-top: 2rem;
-    font-size: 1.375rem;
-  }
-</style>

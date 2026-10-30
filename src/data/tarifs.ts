@@ -1,6 +1,5 @@
 // Prix TTC (demande de Corentin, 30/10/2026 : pas de mention de TVA sur le site, franchise non confirmée).
-// Tarifs affichés : offre de lancement définie par Corentin le 30/10/2026, valable jusqu'au 31/12/2026
-// (peut être prolongée). Seule source des prix du site : la loi impose de les afficher, et ils servent
+// Tarifs affichés, définis par Corentin le 30/10/2026 (tarif normal, plus d'« offre de lancement »). Seule source des prix du site : la loi impose de les afficher, et ils servent
 // de plafond (une remise est possible, jamais un prix plus élevé que l'affichage).
 // Règle unique, pour le dépannage, l'électroménager et l'installation : déplacement et devis gratuits,
 // main-d'œuvre 65 € de l'heure (1 heure minimum, puis par quart d'heure), matériel ou pièces en plus.
@@ -23,7 +22,6 @@ const euros = (montant: number) =>
 const TAUX_HORAIRE = 65;
 const parHeure = (montant: number) => `${euros(montant)} / h`;
 
-export const offreLancement = "Offre de lancement jusqu'au 31 décembre 2026";
 export const decompteTemps = "1 heure minimum, puis par quart d'heure";
 
 // ---------- Dépannage ----------

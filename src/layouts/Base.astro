@@ -22,7 +22,7 @@ interface Props {
 const { title, description, indexable = true } = Astro.props;
 
 // Tant que le site n'est pas lancé officiellement, il est en « noindex ».
-// Seul le lancement passera PUBLIC_SITE_ENV à « production » (voir .github/workflows/publier.yml).
+// PUBLIC_SITE_ENV = « production » depuis le lancement du 30/10/2026 (voir .github/workflows/publier.yml).
 const estProduction = import.meta.env.PUBLIC_SITE_ENV === 'production';
 const urlCanonique = new URL(Astro.url.pathname, Astro.site).href;
 

@@ -37,9 +37,9 @@ jobs:
       - name: Construire le site
         run: npm run build
         env:
-          # « preparation » = site en ligne mais non indexé par Google.
-          # Passer à « production » le jour du lancement officiel.
-          PUBLIC_SITE_ENV: preparation
+          # « production » = site ouvert à Google (lancement officiel décidé par Corentin le 30/10/2026).
+          # « preparation » = site en ligne mais non indexé.
+          PUBLIC_SITE_ENV: production
 
       - name: Ranger le site construit dans la branche production
         env:

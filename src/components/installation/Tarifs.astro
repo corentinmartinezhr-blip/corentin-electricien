@@ -1,16 +1,15 @@
 ---
-// Tarifs de l'installation (offre de lancement) : 65 € de l'heure, matériel en plus, déplacement et devis
+// Tarifs de l'installation : 65 € de l'heure, matériel en plus, déplacement et devis
 // gratuits. La règle est dite une seule fois, puis chaque intervention affiche son temps estimé.
 // Données : src/data/tarifs.ts.
 import GrilleTarifs from '../GrilleTarifs.astro';
 import Icone from '../Icone.astro';
-import { decompteTemps, interventionsInstallation, offreLancement, tauxInstallation } from '../../data/tarifs';
+import { decompteTemps, interventionsInstallation, tauxInstallation } from '../../data/tarifs';
 ---
 
 <section class="section section--brume" id="tarifs" aria-labelledby="tarifs-titre">
   <div class="conteneur">
     <h2 id="tarifs-titre">Tarifs</h2>
-    <p class="lancement">{offreLancement}</p>
 
     <div class="carte devis">
       <span class="pastille-icone"><Icone nom="devis" taille={24} /></span>
