@@ -15,7 +15,7 @@ const PAGE_FORMULAIRE = '/contact/';
 const PAGE_MERCI = '/contact/merci/';
 const PAGE_ERREUR = '/contact/erreur/';
 
-const TYPES_DEMANDE = ['Dépannage', 'Électroménager', 'Autre'];
+const TYPES_DEMANDE = ['Dépannage', 'Électroménager', 'Installation', 'Autre'];
 const MESSAGE_MIN = 10; // caractères, = minlength du formulaire
 const PHOTOS_MAX = 3;
 const TAILLE_MAX_PHOTO = 8 * 1024 * 1024; // 8 Mo par photo

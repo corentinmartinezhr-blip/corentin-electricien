@@ -2,7 +2,7 @@
 // Formulaire de contact, envoyé à /contact/envoyer.php (PHP sur o2switch). Fonctionne sans JavaScript ;
 // seul ajout : le champ téléphone n'accepte que des chiffres (scripts/formulaire.ts).
 // Les mêmes règles sont vérifiées ici par le navigateur, puis par envoyer.php : si l'une change, changer l'autre.
-const typesDemande = ['Dépannage', 'Électroménager', 'Autre']; // = TYPES_DEMANDE du PHP
+const typesDemande = ['Dépannage', 'Électroménager', 'Installation', 'Autre']; // = TYPES_DEMANDE du PHP
 const motifs = {
   nonVide: '.*\\S.*', // au moins un caractère autre qu'un espace
   telephone: '0[1-9][0-9]{8}', // 10 chiffres, sans espace (le script ne laisse saisir que des chiffres)
