@@ -1,0 +1,21 @@
+---
+// Page « introuvable », servie par le serveur pour toute adresse qui n'existe pas
+// (ErrorDocument 404 /404.html dans le .htaccess d'o2switch, voir docs/htaccess.md).
+// Ton léger voulu par Corentin (30/10/2026) ; les boutons Appeler et WhatsApp restent là (IntroPage).
+import Base from '../layouts/Base.astro';
+import IntroPage from '../components/IntroPage.astro';
+import { entreprise } from '../data/entreprise';
+---
+
+<Base title="Page introuvable | Corentin Électricien" description="Cette page n'existe pas." indexable={false}>
+  <IntroPage surtitre="Page introuvable" titre="Aïe, aïe, aïe">
+    <p>
+      Cette page a fait sauter les plombs&nbsp;: elle n'existe pas, ou plus. Pas de panique, ici pas besoin
+      d'électricien. Il suffit de revenir à l'<a href="/">accueil</a>.
+    </p>
+    <p>
+      Et si c'est chez vous que ça a disjoncté pour de vrai, j'arrive {entreprise.deplacement}. Voir le
+      <a href="/depannage-electrique-avignon/">dépannage d'urgence</a>, ou appelez-moi directement.
+    </p>
+  </IntroPage>
+</Base>

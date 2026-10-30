@@ -10,6 +10,7 @@ import EnTete from '../components/EnTete.astro';
 import PiedDePage from '../components/PiedDePage.astro';
 import MesureAudience from '../components/MesureAudience.astro';
 import { communes, entreprise } from '../data/entreprise';
+import { fourchettePrix } from '../data/tarifs';
 
 interface Props {
   /** Balise <title> : ~60 caractères maximum, mot-clé principal en premier. */
@@ -26,9 +27,12 @@ const { title, description, indexable = true } = Astro.props;
 // PUBLIC_SITE_ENV = « production » depuis le lancement du 30/10/2026 (voir .github/workflows/publier.yml).
 const estProduction = import.meta.env.PUBLIC_SITE_ENV === 'production';
 const urlCanonique = new URL(Astro.url.pathname, Astro.site).href;
+// Image d'aperçu des liens partagés (WhatsApp, Facebook, SMS) : portrait recadré en paysage, JPG qualité 95,
+// car toutes les messageries ne lisent pas le WebP.
+const imagePartage = { url: new URL('/partage.jpg', Astro.site).href, largeur: 1086, hauteur: 570 };
 
 // Données structurées : uniquement des informations exactes et publiques.
-// Le SIRET sera ajouté quand il existera.
+// Le SIRET sera ajouté quand il existera ; le lien de la fiche Google (sameAs) dès qu'elle est validée.
 const donneesStructurees = {
   '@context': 'https://schema.org',
   '@type': 'Electrician',
@@ -43,7 +47,9 @@ const donneesStructurees = {
     addressLocality: entreprise.adresse.ville,
     addressCountry: 'FR',
   },
-  image: new URL('/logo/logo-carre.svg', Astro.site).href,
+  image: [new URL('/portrait/corentin.webp', Astro.site).href, imagePartage.url],
+  logo: new URL('/logo/logo-carre.svg', Astro.site).href,
+  priceRange: fourchettePrix,
   areaServed: communes.map((commune) => ({ '@type': 'City', name: commune })),
   openingHoursSpecification: {
     '@type': 'OpeningHoursSpecification',
@@ -70,6 +76,11 @@ const donneesStructurees = {
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={urlCanonique} />
+    <meta property="og:image" content={imagePartage.url} />
+    <meta property="og:image:width" content={String(imagePartage.largeur)} />
+    <meta property="og:image:height" content={String(imagePartage.hauteur)} />
+    <meta property="og:image:alt" content={`Corentin, électricien d'urgence à ${entreprise.ville}`} />
+    <meta name="twitter:card" content="summary_large_image" />
 
     <link rel="preload" href={policeTitres} as="font" type="font/woff2" crossorigin />
     <link rel="preload" href={policeTexte} as="font" type="font/woff2" crossorigin />

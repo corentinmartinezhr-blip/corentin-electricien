@@ -22,6 +22,8 @@ const euros = (montant: number) =>
 const TAUX_HORAIRE = 65;
 const parHeure = (montant: number) => `${euros(montant)} / h`;
 
+// Fourchette de prix pour les données structurées (Google) : main-d'œuvre selon le moment de la journée.
+export const fourchettePrix = `${euros(TAUX_HORAIRE)} à ${euros(TAUX_HORAIRE * 1.5)} TTC de l'heure`;
 export const decompteTemps = "1 heure minimum, puis par quart d'heure";
 
 // ---------- Dépannage ----------
