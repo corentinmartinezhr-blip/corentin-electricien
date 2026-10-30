@@ -1,6 +1,8 @@
 ---
 // Photos de chantiers de Corentin (sans élément permettant d'identifier l'adresse d'un client).
 // WebP déjà compressés par Corentin (public/realisations/) : servis tels quels, sans recompression.
+import { entreprise } from '../../data/entreprise';
+
 const photos = [
   { fichier: 'prises-plan-travail', legende: 'Prises sur le plan de travail d’une cuisine' },
   { fichier: 'prise-cuisine-double', legende: 'Double prise dans le mur de la cuisine' },
@@ -22,7 +24,7 @@ const photos = [
             <figure>
               <img
                 src={`/realisations/${fichier}.webp`}
-                alt={legende}
+                alt={`${legende} : travail de Corentin, électricien à ${entreprise.ville}`}
                 width="1920"
                 height="1080"
                 loading="lazy"

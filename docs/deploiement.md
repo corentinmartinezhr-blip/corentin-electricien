@@ -27,4 +27,4 @@ Le résultat du dernier passage est dans `~/deploiement-dernier.log` (vide = tou
 ## Attention
 
 - `rsync --delete` efface du dossier du site tout ce qui n'est pas dans le dépôt, sauf `.htaccess`, `.well-known/` et `cgi-bin/`. Ne rien installer à la main dans ce dossier : Matomo ira sur un sous-domaine à part (ex. `stats.corentin-electricien.fr`).
-- Tant que le site n'est pas officiellement lancé, il est construit avec `PUBLIC_SITE_ENV: preparation` : en ligne mais non indexé par Google. Le jour du lancement, passer à `production` dans `publier.yml`.
+- Depuis le lancement officiel du 30/10/2026, le site est construit avec `PUBLIC_SITE_ENV: production` : ouvert à Google (robots.txt ouvert, plan du site). Remettre `preparation` le fermerait à Google (noindex partout, robots.txt fermé).
