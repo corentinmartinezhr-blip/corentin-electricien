@@ -28,6 +28,13 @@ Le cadrage de référence est la note de cadrage V3 (Claude Docs : https://claud
 - Prix nets, « TVA non applicable, art. 293 B du CGI » (franchise de TVA, à confirmer avec le SIRET).
 - Les prix affichés sont un plafond : remise possible, jamais au-dessus.
 
+## Ton (règle n° 1 de toute la communication, définie par Corentin le 30/10/2026)
+
+- **Clair avant d'être intelligent.** Mots simples, phrases courtes, aucun jargon technique, même quand le sujet fait peur (panne, tableau, danger). Si un terme technique est indispensable, on l'explique en quelques mots.
+- Le ton est humain, professionnel, proche (local, Avignon) et transparent : on parle comme Corentin parlerait à un client chez lui, au « je » et au « vous ».
+- Pas de formule générique, pas de promesse absolue, pas de « style » qui passe avant la compréhension.
+- Repère complet (ton, couleurs, typo, logos) : guide de marque « Corentin Électricien » (Design System, https://claude.ai/artifact/3mgG7Yecot73i12baC3TiV). Toute nouvelle règle de marque (ton, couleur, police, logo) y est reportée aussi.
+
 ## Formulations interdites ou encadrées (obligatoire)
 
 - Ne jamais écrire « réparateur agréé ».
