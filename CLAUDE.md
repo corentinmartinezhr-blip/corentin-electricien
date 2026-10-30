@@ -100,7 +100,9 @@ Le cadrage de référence est la note de cadrage V3 (Claude Docs : https://claud
 - Détail complet : `docs/deploiement.md`.
 - Pas de site de test (choix de Corentin) : chaque envoi sur `main` part en ligne sur `corentin-electricien.fr`. Donc rien d'inachevé ou de faux ne doit être envoyé sur `main`. En cas de doute, demander à Corentin avant d'envoyer.
 - Le pare-feu o2switch bloque GitHub → o2switch (FTP coupé, SSH fermé, API cPanel indisponible sur ce compte). Méthode retenue : GitHub construit le site et le range dans la branche `production` (`.github/workflows/publier.yml`) ; une tâche cron o2switch récupère cette branche toutes les 5 min et la copie dans le dossier du site avec `rsync --delete` (exclut `.htaccess`, `.well-known/`, `cgi-bin/`).
-- Ne jamais installer quoi que ce soit à la main dans le dossier du site (rsync l'effacerait). Matomo ira sur un sous-domaine.
+- Ne jamais installer quoi que ce soit à la main dans le dossier du site (rsync l'effacerait). Matomo est sur le sous-domaine `stats` (dossier hors `public_html`).
+- `.htaccess` du serveur (hors dépôt, jamais écrasé) : redirection www → sans www et mise en cache dans le navigateur. Copie et explications : `docs/htaccess.md`, à tenir à jour. Ne pas activer PageSpeed, Extreme Cache ni Tiger Cache (voir ce fichier).
+- Ménage du 30/10/2026 : sous-domaine `test` et compte FTP `deploy-test` supprimés (le dossier `test.corentin-electricien.fr` reste sur le disque, à effacer par Corentin s'il le souhaite). Secrets GitHub `FTP_*`, `O2SWITCH_SERVER`, `CPANEL_USER` inutiles : à supprimer par Corentin.
 - `PUBLIC_SITE_ENV: production` depuis le 30/10/2026 (site indexable). Revenir à `preparation` ferme le site à Google.
 - Ne jamais demander, afficher ni committer un mot de passe, un jeton ou une clé.
 
