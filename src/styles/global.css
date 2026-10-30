@@ -21,7 +21,7 @@
   --bordure-champ: #857F73; /* contour des champs de formulaire : contraste ≥ 3:1 (WCAG AA) */
 
   /* Typographie (polices auto-hébergées via @fontsource, voir Base.astro) */
-  --font-titre: 'Fraunces Variable', Georgia, 'Times New Roman', serif;
+  --font-titre: 'Playfair Display Variable', Georgia, 'Times New Roman', serif;
   --font-texte: 'Manrope Variable', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
 
   /* Mise en page */

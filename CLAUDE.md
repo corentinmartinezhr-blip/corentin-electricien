@@ -57,7 +57,7 @@ Le cadrage de référence est la note de cadrage V3 (Claude Docs : https://claud
   jaune soleil #F5C02E, vert olive #34402F, ivoire #FAF7F0, vert brume #EEF0E6, gris pierre #5E5A50, ocre #8A6410.
 - Dosage : ivoire ~55 %, olive ~20 %, brume ~15 %, jaune ~10 %.
 - Hero de l'accueil : fond vert brume, sobre. Le fond jaune pastel avec motif d'éclairs a été essayé puis rejeté par Corentin (29/10/2026) : ne pas le reproposer. Pas d'animation.
-- Polices : Fraunces (titres) et Manrope (texte), via `@fontsource-variable`, servies depuis o2switch.
+- Polices : Playfair Display (titres, remplace Fraunces le 30/10/2026 : Fraunces jugée trop inhabituelle par Corentin) et Manrope (texte), via `@fontsource-variable`, servies depuis o2switch.
 - Le jaune n'est jamais utilisé pour du texte sur fond clair, et jamais de texte blanc sur jaune. Pour du texte « jaune » sur fond clair, utiliser l'ocre.
 - Logos dans `public/logo/` : `logo-horizontal.svg` (fond transparent, pour fond clair), `logo-horizontal-fond-olive.svg`, `logo-carre.svg` (aussi favicon).
 - Pas de Google Fonts chargées depuis Google (RGPD) : polices auto-hébergées uniquement.
