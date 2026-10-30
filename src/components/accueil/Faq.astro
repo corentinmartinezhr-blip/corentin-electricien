@@ -1,20 +1,12 @@
 ---
+// FAQ de l'accueil : questions générales. Les questions de pannes (courant, disjoncteur…) sont sur la
+// page Dépannage (FaqUrgence), pour ne pas avoir deux fois le même texte aux yeux de Google.
+import ListeQuestions from '../ListeQuestions.astro';
 import NumeroCopiable from '../NumeroCopiable.astro';
 
-// Conseils volontairement prudents : jamais inviter à ouvrir le tableau ni à toucher un fil.
 const questions = [
   {
-    question: 'Pourquoi mon disjoncteur saute-t-il ?',
-    reponse:
-      "Le disjoncteur coupe le courant pour vous protéger. Souvent, trop d'appareils marchent en même temps au même endroit, ou un appareil est abîmé. Débranchez les appareils de la pièce concernée, puis remontez le disjoncteur. S'il saute encore, ne recommencez pas : appelez un électricien.",
-  },
-  {
-    question: 'Que faire en cas de panne de courant ?',
-    reponse:
-      "Regardez d'abord si vos voisins ont du courant. S'ils n'en ont pas non plus, la panne vient sans doute de la rue, pas de chez vous. Sinon, regardez votre tableau électrique : si un des petits interrupteurs (un disjoncteur) est baissé, c'est lui qui a coupé. Ne démontez jamais le tableau et ne touchez à aucun fil. S'il y a de la fumée, des étincelles ou une odeur de brûlé, éloignez-vous et appelez les pompiers (18) ou le 112 en cas de danger.",
-  },
-  {
-    question: "Réparez-vous l'électroménager ?",
+    question: "Réparez-vous l'électroménager ?",
     reponse:
       "Oui : lave-linge, lave-vaisselle, sèche-linge, four, plaque de cuisson. Je trouve la panne et je répare. Dites-moi quel appareil et ce qui ne va pas, par téléphone ou sur WhatsApp.",
   },
@@ -25,67 +17,24 @@ const questions = [
   <div class="conteneur">
     <span class="surtitre">Questions fréquentes</span>
     <h2 id="faq-titre">Vos questions</h2>
-    <div class="faq">
-      {
-        questions.map(({ question, reponse }) => (
-          <details>
-            <summary>{question}</summary>
-            <p>{reponse}</p>
-          </details>
-        ))
-      }
+    <ListeQuestions questions={questions}>
       <details>
-        <summary>Comment vous contacter ?</summary>
+        <summary>Comment vous contacter ?</summary>
         <p>
           Par téléphone ou sur WhatsApp, au <NumeroCopiable />, ou par le <a href="/contact/">formulaire de contact</a>.
           Vous tombez directement sur moi.
         </p>
       </details>
-    </div>
+    </ListeQuestions>
+    <p class="faq__suite">
+      Une panne de courant, un disjoncteur qui saute&nbsp;? Les réponses sont sur la page
+      <a href="/depannage-electrique-avignon/#questions">dépannage d'urgence</a>.
+    </p>
   </div>
 </section>
 
 <style>
-  .faq {
-    max-width: 48rem;
-    margin-top: 1.5rem;
-    border-top: 1px solid var(--bordure);
-  }
-
-  details {
-    border-bottom: 1px solid var(--bordure);
-  }
-
-  summary {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    padding-block: 1.1rem;
-    font-weight: 700;
-    list-style: none;
-    cursor: pointer;
-  }
-
-  summary::-webkit-details-marker {
-    display: none;
-  }
-
-  summary::after {
-    content: '+';
-    flex: none;
-    color: var(--ocre);
-    font-size: 1.5rem;
-    line-height: 1;
-  }
-
-  details[open] summary::after {
-    content: '−';
-  }
-
-  p {
-    max-width: 42rem;
-    margin: 0 0 1.25rem;
-    color: var(--gris-pierre);
+  .faq__suite {
+    margin: 1.5rem 0 0;
   }
 </style>

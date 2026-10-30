@@ -1,0 +1,58 @@
+---
+// FAQ « urgence » de la page Dépannage : une question par recherche fréquente (prix, délai, horaires,
+// symptômes, villes). Voir le benchmark « mots-clés » dans les documents du projet (30/10/2026).
+// Conseils de sécurité volontairement prudents : jamais démonter le tableau ni toucher un fil.
+// Prix, horaires, délai et villes viennent des données du site : ils suivent tout changement.
+import ListeQuestions from '../ListeQuestions.astro';
+import { communes, entreprise } from '../../data/entreprise';
+import { decompteTemps, offreDepannage, tauxHoraires } from '../../data/tarifs';
+
+const villes = `${communes.slice(0, -1).join(', ')} et ${communes.at(-1)}`;
+
+const questions = [
+  {
+    question: 'Combien coûte un électricien en urgence à Avignon ?',
+    reponse: `Le déplacement et le devis sont gratuits. Ensuite, je compte ${tauxHoraires.jour} TTC de l'heure de travail (${decompteTemps}), plus les pièces à changer. Le soir, de 19h à 22h, c'est ${tauxHoraires.soir} TTC de l'heure, et le dimanche ou un jour férié ${tauxHoraires.dimancheFeries}. ${offreDepannage.promesse}`,
+  },
+  {
+    question: 'En combien de temps pouvez-vous venir ?',
+    reponse: `J'arrive ${entreprise.delai}. ${entreprise.delaiRapide} Je me déplace ${entreprise.deplacement} : pas de bouchons et pas de place à chercher, même dans le centre d'Avignon.`,
+  },
+  {
+    question: 'Intervenez-vous le soir, le dimanche et les jours fériés ?',
+    reponse: `Oui, ${entreprise.horaires}. Le soir (19h–22h), je compte ${tauxHoraires.soir} TTC de l'heure ; le dimanche et les jours fériés, ${tauxHoraires.dimancheFeries}.`,
+  },
+  {
+    question: "Je n'ai plus de courant chez moi : que faire ?",
+    reponse:
+      "Regardez d'abord si vos voisins ont du courant. S'ils n'en ont pas non plus, la panne vient de la rue : appelez le dépannage Enedis, son numéro est sur votre facture d'électricité. Sinon, regardez votre tableau électrique, sans rien démonter : si un des petits interrupteurs (un disjoncteur) est baissé, débranchez les appareils de la pièce et remontez-le une seule fois. S'il redescend, appelez-moi.",
+  },
+  {
+    question: 'Mon disjoncteur saute sans arrêt : pourquoi ?',
+    reponse:
+      "Le disjoncteur coupe le courant pour vous protéger. Souvent, trop d'appareils marchent en même temps au même endroit, ou un appareil est abîmé. Parfois, c'est un fil, une prise ou un interrupteur qui a un problème. Débranchez les appareils de la pièce, puis remontez le disjoncteur. S'il saute encore, ne recommencez pas : le remonter plusieurs fois peut aggraver la panne. Appelez-moi.",
+  },
+  {
+    question: "J'ai remonté le disjoncteur mais il n'y a toujours pas de courant : c'est normal ?",
+    reponse:
+      "Non. Vérifiez qu'aucun autre petit interrupteur du tableau n'est resté baissé. Si tout est remonté et qu'il n'y a toujours pas de courant, la panne est plus loin : un fil, une prise ou un interrupteur abîmé. Ne démontez rien et appelez-moi : trouver ce genre de panne, c'est mon métier.",
+  },
+  {
+    question: 'Une prise chauffe ou sent le brûlé : que faire ?',
+    reponse:
+      "Arrêtez de l'utiliser. Baissez d'abord le disjoncteur de la pièce, puis débranchez ce qui est branché dessus. Ne touchez pas la prise si elle est noircie ou très chaude. Appelez-moi : une prise qui chauffe peut provoquer un incendie. S'il y a de la fumée ou des flammes, éloignez-vous et appelez les pompiers (18) ou le 112.",
+  },
+  {
+    question: 'Dans quelles villes intervenez-vous ?',
+    reponse: `À ${villes}. Le déplacement est gratuit dans ces quatre villes.`,
+  },
+];
+---
+
+<section class="section" id="questions" aria-labelledby="questions-titre">
+  <div class="conteneur">
+    <span class="surtitre">Questions fréquentes</span>
+    <h2 id="questions-titre">Vos questions sur le dépannage d'urgence</h2>
+    <ListeQuestions questions={questions} />
+  </div>
+</section>

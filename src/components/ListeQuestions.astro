@@ -1,0 +1,66 @@
+---
+// Liste de questions-réponses dépliables (accueil et page Dépannage), sans JavaScript (<details>).
+// Une question supplémentaire avec du contenu riche (lien, numéro) peut être ajoutée par le slot.
+interface Props {
+  questions: { question: string; reponse: string }[];
+}
+
+const { questions } = Astro.props;
+---
+
+<div class="faq">
+  {
+    questions.map(({ question, reponse }) => (
+      <details>
+        <summary>{question}</summary>
+        <p>{reponse}</p>
+      </details>
+    ))
+  }
+  <slot />
+</div>
+
+<style>
+  .faq {
+    max-width: 48rem;
+    margin-top: 1.5rem;
+    border-top: 1px solid var(--bordure);
+  }
+
+  .faq :global(details) {
+    border-bottom: 1px solid var(--bordure);
+  }
+
+  .faq :global(summary) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-block: 1.1rem;
+    font-weight: 700;
+    list-style: none;
+    cursor: pointer;
+  }
+
+  .faq :global(summary::-webkit-details-marker) {
+    display: none;
+  }
+
+  .faq :global(summary::after) {
+    content: '+';
+    flex: none;
+    color: var(--ocre);
+    font-size: 1.5rem;
+    line-height: 1;
+  }
+
+  .faq :global(details[open] summary::after) {
+    content: '−';
+  }
+
+  .faq :global(details p) {
+    max-width: 42rem;
+    margin: 0 0 1.25rem;
+    color: var(--gris-pierre);
+  }
+</style>

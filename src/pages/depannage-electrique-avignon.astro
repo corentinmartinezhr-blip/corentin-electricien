@@ -2,13 +2,14 @@
 // Page Dépannage : /depannage-electrique-avignon/ (recherches visées : « dépannage électrique urgence Avignon »,
 // « électricien urgence Avignon », « recherche de panne électrique Avignon »).
 // Positionnement du 30/10/2026 : dépannage d'urgence, 7j/7 de 7h à 22h, moins de 24 h, à vélo électrique.
-// Ordre voulu par Corentin : haut de page, tarifs, pannes, électroménager, bons réflexes.
+// Ordre voulu par Corentin : haut de page, tarifs, pannes, électroménager, bons réflexes, puis la FAQ urgence.
 import Base from '../layouts/Base.astro';
 import IntroPage from '../components/IntroPage.astro';
 import Pannes from '../components/depannage/Pannes.astro';
 import Tarif from '../components/depannage/Tarif.astro';
 import Electromenager from '../components/depannage/Electromenager.astro';
 import BonsReflexes from '../components/depannage/BonsReflexes.astro';
+import FaqUrgence from '../components/depannage/FaqUrgence.astro';
 import AppelFinal from '../components/AppelFinal.astro';
 import { entreprise } from '../data/entreprise';
 import { offreDepannage } from '../data/tarifs';
@@ -40,5 +41,6 @@ import photoTableau from '../assets/realisations/tableau-electrique.png';
   <Pannes />
   <Electromenager />
   <BonsReflexes />
+  <FaqUrgence />
   <AppelFinal />
 </Base>

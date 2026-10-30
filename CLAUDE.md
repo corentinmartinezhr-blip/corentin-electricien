@@ -25,7 +25,7 @@ Le cadrage de référence est la note de cadrage V3 (Claude Docs : https://claud
 - Véhicule électrique : uniquement « prise renforcée jusqu'à 3,7 kW » (pas de qualification IRVE). Ne jamais proposer de « borne de recharge » ni de puissance supérieure tant que Corentin n'est pas qualifié IRVE.
 - Pas de page Tarifs : les prix sont affichés sur Dépannage et Installation.
 - Accueil : hero avec la photo de Corentin, 2 services (dépannage électrique d'urgence ; électroménager), présentation (dont le vélo électrique), garanties, zone, FAQ, appel final.
-- Page Dépannage, dans cet ordre (demande de Corentin) : haut de page (urgence, délai, vélo, horaires), tarifs avec l'exemple chiffré en bandeau olive juste dessous, pannes, électroménager, bons réflexes.
+- Page Dépannage, dans cet ordre (demande de Corentin) : haut de page (urgence, délai, vélo, horaires), tarifs avec l'exemple chiffré en bandeau olive juste dessous, pannes, électroménager, bons réflexes, FAQ « urgence » (8 questions : prix, délai, horaires, symptômes, villes ; `FaqUrgence.astro`, données tirées de `entreprise.ts` et `tarifs.ts`). Les questions de pannes ne sont plus sur l'accueil (pas de texte en double) : l'accueil garde Électroménager et Contact, avec un lien vers la FAQ urgence. Mots-clés visés : document « mots-clés » du projet.
 - Électroménager : une section de la page Dépannage en V1, pas une page.
 - Les « bons réflexes » sont sur la page Dépannage.
 
