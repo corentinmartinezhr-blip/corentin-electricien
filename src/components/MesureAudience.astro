@@ -1,0 +1,30 @@
+---
+// Mesure d'audience Matomo, hébergée chez Corentin (stats.corentin-electricien.fr, o2switch).
+// Réglée pour l'exemption de consentement de la CNIL : aucun cookie, adresses IP anonymisées
+// (réglage dans Matomo), pas de partage, droit de refus sur la page Confidentialité. Donc pas de bandeau.
+// Compte aussi les contacts : clic sur « Appeler », sur WhatsApp, et envoi du formulaire.
+// Chargé seulement sur le vrai site (PUBLIC_SITE_ENV = production) : voir Base.astro.
+const MATOMO = { url: 'https://stats.corentin-electricien.fr/', site: '1' };
+---
+
+<script is:inline define:vars={{ matomo: MATOMO }}>
+  var _paq = (window._paq = window._paq || []);
+  _paq.push(['disableCookies']);
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  _paq.push(['setTrackerUrl', matomo.url + 'matomo.php']);
+  _paq.push(['setSiteId', matomo.site]);
+  var script = document.createElement('script');
+  script.async = true;
+  script.src = matomo.url + 'matomo.js';
+  document.head.appendChild(script);
+
+  // Les contacts obtenus grâce au site : le chiffre qui compte vraiment.
+  document.addEventListener('click', function (evenement) {
+    var lien = evenement.target.closest && evenement.target.closest('a[href^="tel:"], a[href*="wa.me"]');
+    if (lien) _paq.push(['trackEvent', 'Contact', lien.href.indexOf('tel:') === 0 ? 'Appel' : 'WhatsApp']);
+  });
+  document.addEventListener('submit', function (evenement) {
+    if (evenement.target.matches('form[action="/contact/envoyer.php"]')) _paq.push(['trackEvent', 'Contact', 'Formulaire']);
+  });
+</script>

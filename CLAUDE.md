@@ -92,7 +92,7 @@ Le cadrage de référence est la note de cadrage V3 (Claude Docs : https://claud
 ## Technique
 
 - Astro en site 100 % statique (`output: 'static'`), hébergé sur o2switch. Pas de serveur Node.
-- Mesure d'audience : Matomo auto-hébergé sur o2switch, configuré en mode exempté CNIL. Pas de bannière cookies, donc aucun autre traceur.
+- Mesure d'audience : Matomo auto-hébergé sur `stats.corentin-electricien.fr` (installé le 30/10/2026, dossier hors `public_html`), composant `MesureAudience.astro` chargé seulement en production. Mode exempté CNIL : `disableCookies`, IP anonymisées (2 octets, réglé dans Matomo), refus possible sur la page Confidentialité. Événements « Contact » : Appel, WhatsApp, Formulaire. Pas de bannière cookies, donc aucun autre traceur.
 - Tout ce qui n'est pas `PUBLIC_SITE_ENV=production` est en `noindex` (voir `src/layouts/Base.astro` et `src/pages/robots.txt.ts`).
 
 ## Déploiement
@@ -112,7 +112,7 @@ Relire chaque modification avec un œil critique avant de l'envoyer, et amélior
 - **Données :** toute information sur l'entreprise (téléphone, communes, diplômes…) vient de `src/data/entreprise.ts`, jamais écrite en dur ailleurs.
 - **Styles :** couleurs et espacements via les variables de `src/styles/global.css` (aucune couleur en dur hors de ce fichier). Classes communes : `.conteneur`, `.section`, `.section--brume`, `.fond-olive`, `.carte`, `.liste-nue`, `.etiquettes`, `.pastille-icone`, `.bouton`, `.message-copie`. Supprimer tout CSS inutilisé.
 - **Boutons d'action :** `BoutonContact` (appel / whatsapp / devis). Numéro en clair : `NumeroCopiable`.
-- **JavaScript :** aucun par défaut. Exceptions : `src/scripts/contact.ts` (copie du numéro ; sur ordinateur, les liens `tel:` copient le numéro au lieu de ne rien faire) et `src/scripts/formulaire.ts` (champ téléphone : chiffres uniquement, demande de Corentin ; chargé seulement sur la page Contact). Pas de bibliothèque ni de dépendance sans raison forte.
+- **JavaScript :** aucun par défaut. Exceptions : `MesureAudience.astro` (Matomo) ; `src/scripts/contact.ts` (copie du numéro ; sur ordinateur, les liens `tel:` copient le numéro au lieu de ne rien faire) et `src/scripts/formulaire.ts` (champ téléphone : chiffres uniquement, demande de Corentin ; chargé seulement sur la page Contact). Pas de bibliothèque ni de dépendance sans raison forte.
 - **Nommage :** en français, explicite (`telephoneLien`, `garanties`), commentaires courts qui disent le pourquoi.
 - **Performance :** images via `astro:assets` avec `widths`/`sizes` ; CSS intégré dans la page ; polices latines préchargées ; viser LCP ≤ 2,5 s, CLS ≤ 0,1.
 - **SEO :** un seul `<h1>` par page ; title ≤ ~60 caractères et description ≤ ~155 ; URL lisibles (`/depannage-electrique-avignon/`) ; canonical, sitemap et données structurées `Electrician` gérés par `Base.astro`, `sitemap.xml.ts`, `robots.txt.ts`. Les nouvelles pages entrent seules dans le sitemap.

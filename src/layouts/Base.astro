@@ -8,6 +8,7 @@ import policeTitres from '@fontsource-variable/playfair-display/files/playfair-d
 import policeTexte from '@fontsource-variable/manrope/files/manrope-latin-wght-normal.woff2?url';
 import EnTete from '../components/EnTete.astro';
 import PiedDePage from '../components/PiedDePage.astro';
+import MesureAudience from '../components/MesureAudience.astro';
 import { communes, entreprise } from '../data/entreprise';
 
 interface Props {
@@ -89,5 +90,6 @@ const donneesStructurees = {
     <script>
       import '../scripts/contact.ts';
     </script>
+    {estProduction && <MesureAudience />}
   </body>
 </html>
