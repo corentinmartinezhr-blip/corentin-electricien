@@ -1,30 +1,39 @@
 ---
-// Tarifs de l'installation : devis gratuit mis en avant, puis forfaits de main-d'œuvre.
-// La règle de lecture des prix est dite une seule fois, au-dessus des grilles. Données : src/data/tarifs.ts.
+// Tarifs de l'installation (offre de lancement) : 65 € de l'heure, matériel en plus, déplacement et devis
+// gratuits. La règle est dite une seule fois, puis chaque intervention affiche son temps estimé.
+// Données : src/data/tarifs.ts.
 import GrilleTarifs from '../GrilleTarifs.astro';
 import Icone from '../Icone.astro';
-import { deplacementInstallation, forfaitsInstallation, mentionTva } from '../../data/tarifs';
+import { decompteTemps, interventionsInstallation, mentionTva, offreLancement, tauxInstallation } from '../../data/tarifs';
 ---
 
 <section class="section section--brume" id="tarifs" aria-labelledby="tarifs-titre">
   <div class="conteneur">
     <h2 id="tarifs-titre">Tarifs</h2>
+    <p class="lancement">{offreLancement}</p>
 
     <div class="carte devis">
       <span class="pastille-icone"><Icone nom="devis" taille={24} /></span>
       <div>
-        <h3>Devis gratuit avant chaque chantier</h3>
-        <p>Vous connaissez le prix total avant que je commence. {deplacementInstallation}</p>
+        <h3>Déplacement et devis gratuits</h3>
+        <p>Vous connaissez le prix total avant que je commence.</p>
       </div>
     </div>
 
-    <p class="lecture">
-      <strong>Comment lire ces prix :</strong> chaque prix correspond à mon travail, du début à la fin (je pose,
-      je branche et je vérifie). Le matériel (la prise, la lampe…) s'ajoute, au prix écrit sur le devis.
-    </p>
+    <div class="lecture">
+      <p>
+        <strong>Comment ça marche :</strong> je compte mon temps de travail à {tauxInstallation} de l'heure
+        ({decompteTemps}). Le matériel (la prise, la lampe…) s'ajoute.
+      </p>
+      <p>
+        Les temps ci-dessous sont des estimations, pour vous donner une idée. Exemple : remplacer une prise prend
+        moins d'une heure, donc {tauxInstallation} + le prix de la prise. Plusieurs petits travaux le même jour ? Je
+        compte le temps total, pas chaque travail.
+      </p>
+    </div>
 
     <div class="grilles">
-      {forfaitsInstallation.map(({ titre, lignes }) => <GrilleTarifs titre={titre} lignes={lignes} />)}
+      {interventionsInstallation.map(({ titre, lignes }) => <GrilleTarifs titre={titre} lignes={lignes} />)}
     </div>
     <p class="mention">{mentionTva}</p>
   </div>
@@ -35,7 +44,7 @@ import { deplacementInstallation, forfaitsInstallation, mentionTva } from '../..
     display: flex;
     gap: 1rem;
     align-items: flex-start;
-    margin-top: 2rem;
+    margin-top: 1.5rem;
     border-top: 4px solid var(--jaune-soleil);
   }
 
@@ -51,6 +60,10 @@ import { deplacementInstallation, forfaitsInstallation, mentionTva } from '../..
   .lecture {
     margin-block: 1.5rem;
     color: var(--gris-pierre);
+  }
+
+  .lecture p:last-child {
+    margin-bottom: 0;
   }
 
   .grilles {

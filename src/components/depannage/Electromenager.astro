@@ -2,7 +2,7 @@
 // Section électroménager (V1 : section de la page Dépannage, pas une page).
 // Ne jamais écrire « réparateur agréé ».
 import GrilleTarifs from '../GrilleTarifs.astro';
-import { diagnosticElectromenager } from '../../data/tarifs';
+import { tarifElectromenager } from '../../data/tarifs';
 
 // Pas de réfrigérateur : intervenir sur le circuit de froid exige une attestation fluides frigorigènes.
 const appareils = ['Lave-linge', 'Lave-vaisselle', 'Sèche-linge', 'Four', 'Plaque de cuisson'];
@@ -14,14 +14,14 @@ const appareils = ['Lave-linge', 'Lave-vaisselle', 'Sèche-linge', 'Four', 'Plaq
       <span class="surtitre">Électroménager</span>
       <h2 id="electromenager-titre">Un appareil électroménager en panne ?</h2>
       <p class="intro">
-        Je viens chez vous pour trouver ce qui ne va pas. Ensuite, je vous donne un devis gratuit pour la
-        réparation, pièces comprises.
+        Je viens chez vous gratuitement pour trouver ce qui ne va pas. Ensuite, je vous donne un devis gratuit
+        pour la réparation, pièces comprises. Si je ne trouve pas la panne, vous ne payez rien.
       </p>
       <ul class="liste-nue etiquettes" role="list">
         {appareils.map((appareil) => <li>{appareil}</li>)}
       </ul>
     </div>
-    <GrilleTarifs titre="Tarif" lignes={[diagnosticElectromenager]} />
+    <GrilleTarifs titre="Même tarif que le dépannage" lignes={tarifElectromenager} />
   </div>
 </section>
 

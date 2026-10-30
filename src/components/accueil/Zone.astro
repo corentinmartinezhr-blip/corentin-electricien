@@ -7,8 +7,7 @@ import { communes, entreprise } from '../../data/entreprise';
     <span class="surtitre">Zone d'intervention</span>
     <h2 id="zone-titre">{entreprise.ville} et les communes voisines</h2>
     <p class="intro">
-      Je me déplace à {entreprise.ville} et dans les communes ci-dessous. Dans tout {entreprise.ville}, le
-      déplacement est compris. Ailleurs, un supplément peut s'ajouter : je vous le dis avant de venir.
+      Je me déplace gratuitement à {entreprise.ville} et dans toutes les communes ci-dessous.
     </p>
     <ul class="liste-nue etiquettes communes" role="list">
       {communes.map((commune) => <li>{commune}</li>)}

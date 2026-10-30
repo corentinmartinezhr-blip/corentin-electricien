@@ -1,26 +1,27 @@
 ---
-// Tarif du dépannage : un forfait unique, ses suppléments et les mentions obligatoires
-// (arrêté du 24 janvier 2017 : forfait, déplacement, taux horaire). Données : src/data/tarifs.ts.
+// Tarif du dépannage (offre de lancement) : 65 € de l'heure, déplacement et devis gratuits, et les
+// mentions obligatoires (arrêté du 24 janvier 2017 : taux horaire, déplacement, décompte du temps).
+// Données : src/data/tarifs.ts.
 import GrilleTarifs from '../GrilleTarifs.astro';
-import { mentionTva, offreDepannage } from '../../data/tarifs';
+import { mentionTva, offreDepannage, offreLancement } from '../../data/tarifs';
 ---
 
 <section class="section section--brume" id="tarifs" aria-labelledby="tarifs-titre">
   <div class="conteneur">
     <h2 id="tarifs-titre">Tarifs</h2>
+    <p class="lancement">{offreLancement}</p>
     <div class="tarif">
       <div class="carte offre">
-        <p class="offre__prix">{offreDepannage.prix}</p>
+        <p class="offre__prix">{offreDepannage.prix} <span>{offreDepannage.unite}</span></p>
         <h3>{offreDepannage.titre}</h3>
         <ul class="offre__inclus">
-          {offreDepannage.inclus.map((point) => <li>{point}</li>)}
+          {[...offreDepannage.inclus, offreDepannage.promesse].map((point) => <li>{point}</li>)}
         </ul>
       </div>
-      <GrilleTarifs titre="Suppléments" lignes={offreDepannage.supplements} />
+      <GrilleTarifs titre="Selon le moment" lignes={offreDepannage.horaires} />
     </div>
     <ul class="mentions" role="list">
-      <li>{offreDepannage.reparation}</li>
-      <li>{offreDepannage.piecesEtSuite}</li>
+      <li>{offreDepannage.exemple}</li>
       <li>{mentionTva}</li>
     </ul>
   </div>
@@ -31,7 +32,7 @@ import { mentionTva, offreDepannage } from '../../data/tarifs';
     display: grid;
     align-items: start;
     gap: 1rem;
-    margin-block: 2rem 1.5rem;
+    margin-block: 1.5rem;
   }
 
   .offre {
@@ -47,6 +48,11 @@ import { mentionTva, offreDepannage } from '../../data/tarifs';
     line-height: 1;
   }
 
+  .offre__prix span {
+    font-family: var(--font-texte);
+    font-size: 1.25rem;
+  }
+
   .offre__inclus {
     margin: 0;
     padding-left: 1.2rem;
@@ -56,7 +62,7 @@ import { mentionTva, offreDepannage } from '../../data/tarifs';
     margin-top: 0.35rem;
   }
 
-  /* Dernière ligne = l'engagement « pas de facturation si je ne trouve pas la panne » : mis en avant. */
+  /* Dernière ligne = la promesse « pas de facturation si je ne trouve pas la panne » : mise en avant. */
   .offre__inclus li:last-child {
     font-weight: 700;
   }

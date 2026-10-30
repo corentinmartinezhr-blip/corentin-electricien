@@ -1,87 +1,88 @@
-// Tarifs affichés, validés par Corentin le 29/10/2026 (voir le benchmark dans les documents du projet).
-// Seule source des prix du site : la loi impose de les afficher, et ils servent de plafond
-// (une remise est possible, jamais un prix plus élevé que l'affichage).
+// Tarifs affichés : offre de lancement définie par Corentin le 30/10/2026, valable jusqu'au 31/12/2026
+// (peut être prolongée). Seule source des prix du site : la loi impose de les afficher, et ils servent
+// de plafond (une remise est possible, jamais un prix plus élevé que l'affichage).
+// Règle unique, pour le dépannage, l'électroménager et l'installation : déplacement et devis gratuits,
+// main-d'œuvre 65 € de l'heure (1 heure minimum, puis par quart d'heure), matériel ou pièces en plus.
 
 export interface LigneTarif {
   prestation: string;
   detail?: string;
-  prix: string;
+  prix: string; // colonne de droite : un prix, ou un temps estimé pour l'installation
 }
 
-// ---------- Installation : forfaits de main-d'œuvre (validés le 29/10/2026) ----------
-// Chaque prix couvre la prestation complète (pose, raccordement, vérification), matériel en plus.
-// Cette règle est expliquée une seule fois sur la page, au-dessus des grilles.
-
-/** Une grille de forfaits avec son titre (une page peut en afficher plusieurs). */
+/** Une grille avec son titre (une page peut en afficher plusieurs). */
 export interface GroupeForfaits {
   titre: string;
   lignes: LigneTarif[];
 }
 
-export const forfaitsInstallation: GroupeForfaits[] = [
+const euros = (montant: number) =>
+  `${montant.toLocaleString('fr-FR', { minimumFractionDigits: Number.isInteger(montant) ? 0 : 2 })} €`; // espace insécable : jamais « 65 » et « € » sur deux lignes
+
+const TAUX_HORAIRE = 65;
+const parHeure = (montant: number) => `${euros(montant)} / h`;
+
+export const offreLancement = "Offre de lancement jusqu'au 31 décembre 2026";
+export const decompteTemps = "1 heure minimum, puis par quart d'heure";
+
+// ---------- Dépannage ----------
+// Affichage obligatoire pour le dépannage (arrêté du 24 janvier 2017) : taux horaire, frais de
+// déplacement et façon de compter le temps.
+export const offreDepannage = {
+  prix: euros(TAUX_HORAIRE),
+  unite: "de l'heure",
+  titre: 'Main-d’œuvre, pièces en plus',
+  // Engagement de Corentin (29/10/2026, gardé le 30/10/2026) : en gras en haut de page et en fin de liste.
+  promesse: 'Pas de facturation si je ne trouve pas la panne.',
+  inclus: [
+    'Déplacement gratuit, à Avignon et dans les communes voisines.',
+    `Je compte seulement le temps de travail (recherche et réparation) : ${decompteTemps}.`,
+    'Les pièces à changer sont en plus.',
+    'Réparation longue : je vous donne d’abord un devis gratuit.',
+  ],
+  horaires: [
+    { prestation: 'Du lundi au samedi', detail: '7h–19h', prix: parHeure(TAUX_HORAIRE) },
+    { prestation: 'Soir', detail: '19h–22h (+25 %)', prix: parHeure(TAUX_HORAIRE * 1.25) },
+    { prestation: 'Dimanche et jours fériés', detail: '+50 %', prix: parHeure(TAUX_HORAIRE * 1.5) },
+  ] satisfies LigneTarif[],
+  exemple: `Exemple : une prise grillée, trouvée et réparée en 40 minutes = ${euros(TAUX_HORAIRE)} + le prix de la prise.`,
+};
+
+// ---------- Électroménager : même règle que le dépannage ----------
+export const tarifElectromenager: LigneTarif[] = [
+  { prestation: 'Déplacement et devis', prix: 'Gratuits' },
+  { prestation: 'Main-d’œuvre', detail: decompteTemps, prix: parHeure(TAUX_HORAIRE) },
+  { prestation: 'Pièces à changer', prix: 'En plus' },
+];
+
+// ---------- Installation : temps estimés (Corentin, 30/10/2026), facturés au taux horaire ----------
+export const tauxInstallation = euros(TAUX_HORAIRE);
+
+export const interventionsInstallation: GroupeForfaits[] = [
   {
-    titre: 'Prises, éclairage et circuits',
+    titre: 'Petits travaux : 1 heure ou moins',
     lignes: [
-      { prestation: 'Prise ou interrupteur', detail: 'Pose ou remplacement', prix: '65 €' },
-      { prestation: 'Prise internet (RJ45) ou TV', prix: '65 €' },
-      { prestation: 'Lampe ou plafonnier', prix: '85 €' },
-      { prestation: 'Lumière extérieure ou détecteur de présence', detail: 'Là où un fil électrique arrive déjà', prix: '85 €' },
-      { prestation: 'Ligne dédiée (plaque, four, lave-linge…)', detail: 'Un nouveau câble depuis le tableau', prix: 'Sur devis' },
-      { prestation: 'Prise renforcée pour voiture électrique', detail: 'Jusqu’à 3,7 kW', prix: 'Sur devis' },
-      { prestation: 'Remplacement du tableau électrique', prix: 'Sur devis' },
+      { prestation: 'Remplacer une prise ou un interrupteur', prix: 'Moins d’1 h' },
+      { prestation: 'Ajouter une prise', detail: 'À côté d’une prise qui existe déjà', prix: 'Environ 1 h' },
+      { prestation: 'Prise internet (RJ45) ou TV', detail: 'Remplacement', prix: 'Moins d’1 h' },
+      { prestation: 'Remplacer une lampe ou un plafonnier', prix: 'Moins d’1 h' },
+      { prestation: 'Lumière extérieure ou détecteur de présence', detail: 'Là où un fil électrique arrive déjà', prix: 'Environ 1 h' },
+      { prestation: 'Remplacer un radiateur ou un sèche-serviettes', prix: 'Environ 1 h' },
+      { prestation: 'Thermostat ou programmateur de radiateur', prix: 'Moins d’1 h' },
+      { prestation: 'Détecteur de fumée', prix: 'Moins d’1 h' },
     ],
   },
   {
-    titre: 'Chauffage, sécurité et confort',
+    titre: 'Plus gros travaux : sur devis',
     lignes: [
-      { prestation: 'Radiateur ou sèche-serviettes', detail: 'Pose ou remplacement', prix: '85 €' },
-      { prestation: 'Thermostat ou programmateur de radiateur', prix: '75 €' },
-      { prestation: 'Détecteur de fumée', prix: '45 €' },
-      { prestation: 'Interphone ou visiophone', prix: 'Sur devis' },
+      { prestation: 'Ajouter une prise là où il n’y a pas de fil', prix: '2 à 4 h' },
+      { prestation: 'Interphone ou visiophone', prix: '2 à 4 h' },
+      { prestation: 'Ligne dédiée (plaque, four, lave-linge…)', detail: 'Un nouveau câble depuis le tableau', prix: '4 à 8 h' },
+      { prestation: 'Prise renforcée pour voiture électrique', detail: 'Jusqu’à 3,7 kW', prix: '4 à 8 h' },
+      { prestation: 'Remplacement du tableau électrique', prix: '1 à 2 jours' },
     ],
   },
 ];
 
-export const diagnosticElectromenager: LigneTarif = {
-  prestation: 'Recherche de panne sur un appareil',
-  detail: 'Déplacement inclus',
-  prix: '65 €',
-};
-
-// ---------- Dépannage : un forfait unique (défini par Corentin le 29/10/2026) ----------
-const euros = (montant: number) =>
-  `${montant.toLocaleString('fr-FR', { minimumFractionDigits: Number.isInteger(montant) ? 0 : 2 })}\u00a0€`; // espace insécable : jamais « 89 » et « € » sur deux lignes
-
-const PRIX_DEPANNAGE = 89;
-// Engagement de Corentin (29/10/2026) : affiché en gras dans le haut de la page Dépannage et en fin de forfait.
-const PROMESSE_DEPANNAGE = 'Pas de facturation si je ne trouve pas la panne.';
-
-export const offreDepannage = {
-  prix: euros(PRIX_DEPANNAGE),
-  promesse: PROMESSE_DEPANNAGE,
-  titre: 'Déplacement et recherche de panne',
-  inclus: [
-    'Du lundi au samedi, en journée (7h–19h).',
-    'Déplacement inclus dans tout Avignon.',
-    "Jusqu'à une heure sur place pour trouver la panne.",
-    'Si je répare la panne dans cette heure, vous payez seulement les pièces en plus.',
-    'Si la réparation prend plus de temps, je vous donne d’abord un devis gratuit.',
-    PROMESSE_DEPANNAGE,
-  ],
-  supplements: [
-    { prestation: 'Soir', detail: '19h–22h (+25 %)', prix: euros(PRIX_DEPANNAGE * 1.25) },
-    { prestation: 'Dimanche et jours fériés', detail: '+50 %', prix: euros(PRIX_DEPANNAGE * 1.5) },
-    { prestation: 'Autres communes de la zone', detail: 'Supplément de déplacement', prix: '+30 €' },
-  ] satisfies LigneTarif[],
-  // Taux horaire : affichage obligatoire pour le dépannage (arrêté du 24 janvier 2017).
-  reparation:
-    "Après la première heure\u00a0: 65\u00a0€ de l'heure, comptés par tranche de 15 minutes commencée, et seulement si vous avez accepté le devis.",
-  piecesEtSuite: 'Les pièces et un éventuel deuxième passage sont en plus, comme écrit sur le devis.',
-};
-
-// ---------- Installation ----------
-export const deplacementInstallation =
-  'Déplacement offert dans tout Avignon, 30 € dans les autres communes de la zone.';
-
 // Mentions communes.
-export const mentionTva = 'Prix nets\u00a0: pas de TVA en plus (TVA non applicable, art. 293 B du CGI).';
+export const mentionTva = 'Prix nets : pas de TVA en plus (TVA non applicable, art. 293 B du CGI).';

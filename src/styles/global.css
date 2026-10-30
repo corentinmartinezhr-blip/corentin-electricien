@@ -176,6 +176,17 @@ a {
 
 /* ---------- Textes ---------- */
 
+/* Pastille « Offre de lancement » au-dessus des tarifs (texte olive sur jaune : contraste 6,5:1). */
+.lancement {
+  display: inline-block;
+  margin: 0;
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+  background: var(--jaune-soleil);
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
 .surtitre {
   display: block;
   margin-bottom: 0.75rem;
