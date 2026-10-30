@@ -6,7 +6,7 @@ import { garanties } from '../../data/entreprise';
 <section class="section" aria-labelledby="garanties-titre">
   <div class="conteneur">
     <span class="surtitre">Vos garanties</span>
-    <h2 id="garanties-titre">Un professionnel formé et habilité</h2>
+    <h2 id="garanties-titre">Un professionnel diplômé et formé à la sécurité</h2>
     <ul class:list={['liste-nue', 'garanties', { 'garanties--trois': garanties.assurancesSignees }]} role="list">
       <li class="carte garantie">
         <h3>Artisan diplômé</h3>
@@ -16,8 +16,11 @@ import { garanties } from '../../data/entreprise';
         </p>
       </li>
       <li class="carte garantie">
-        <h3>Habilitations basse tension</h3>
-        <p>{garanties.habilitations}</p>
+        <h3>Formé à la sécurité électrique</h3>
+        <p>
+          Habilitations électriques {garanties.habilitations}<br />
+          <small>Elles montrent que je suis formé pour travailler en sécurité sur votre installation.</small>
+        </p>
       </li>
       {
         garanties.assurancesSignees && (

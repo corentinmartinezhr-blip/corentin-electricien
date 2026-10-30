@@ -23,11 +23,11 @@ export const forfaitsInstallation: GroupeForfaits[] = [
     titre: 'Prises, éclairage et circuits',
     lignes: [
       { prestation: 'Prise ou interrupteur', detail: 'Pose ou remplacement', prix: '65 €' },
-      { prestation: 'Prise RJ45 ou TV', prix: '65 €' },
-      { prestation: 'Luminaire ou plafonnier', prix: '85 €' },
-      { prestation: 'Éclairage extérieur ou détecteur de présence', detail: 'Sur une alimentation existante', prix: '85 €' },
-      { prestation: 'Circuit dédié (plaque, four, lave-linge…)', detail: 'Tirage de câble depuis le tableau', prix: 'Sur devis' },
-      { prestation: 'Prise renforcée pour véhicule électrique', detail: 'Jusqu’à 3,7 kW', prix: 'Sur devis' },
+      { prestation: 'Prise internet (RJ45) ou TV', prix: '65 €' },
+      { prestation: 'Lampe ou plafonnier', prix: '85 €' },
+      { prestation: 'Lumière extérieure ou détecteur de présence', detail: 'Là où un fil électrique arrive déjà', prix: '85 €' },
+      { prestation: 'Ligne dédiée (plaque, four, lave-linge…)', detail: 'Un nouveau câble depuis le tableau', prix: 'Sur devis' },
+      { prestation: 'Prise renforcée pour voiture électrique', detail: 'Jusqu’à 3,7 kW', prix: 'Sur devis' },
       { prestation: 'Remplacement du tableau électrique', prix: 'Sur devis' },
     ],
   },
@@ -43,7 +43,7 @@ export const forfaitsInstallation: GroupeForfaits[] = [
 ];
 
 export const diagnosticElectromenager: LigneTarif = {
-  prestation: 'Diagnostic électroménager',
+  prestation: 'Recherche de panne sur un appareil',
   detail: 'Déplacement inclus',
   prix: '65 €',
 };
@@ -59,13 +59,13 @@ const PROMESSE_DEPANNAGE = 'Pas de facturation si je ne trouve pas la panne.';
 export const offreDepannage = {
   prix: euros(PRIX_DEPANNAGE),
   promesse: PROMESSE_DEPANNAGE,
-  titre: 'Déplacement et diagnostic de panne',
+  titre: 'Déplacement et recherche de panne',
   inclus: [
     'Du lundi au samedi, en journée (7h–19h).',
     'Déplacement inclus dans tout Avignon.',
     "Jusqu'à une heure sur place pour trouver la panne.",
-    'Petite panne réparée dans cette heure\u00a0: seul le matériel s’ajoute.',
-    'Réparation plus longue\u00a0: devis gratuit avant tout travail supplémentaire.',
+    'Si je répare la panne dans cette heure, vous payez seulement les pièces en plus.',
+    'Si la réparation prend plus de temps, je vous donne d’abord un devis gratuit.',
     PROMESSE_DEPANNAGE,
   ],
   supplements: [
@@ -75,8 +75,8 @@ export const offreDepannage = {
   ] satisfies LigneTarif[],
   // Taux horaire : affichage obligatoire pour le dépannage (arrêté du 24 janvier 2017).
   reparation:
-    "Au-delà de l'heure incluse\u00a0: 65\u00a0€ de l'heure, comptée par quart d'heure entamé, toujours sur devis accepté.",
-  piecesEtSuite: 'Le matériel et un éventuel second déplacement sont facturés en plus, selon le devis accepté.',
+    "Après la première heure\u00a0: 65\u00a0€ de l'heure, comptés par tranche de 15 minutes commencée, et seulement si vous avez accepté le devis.",
+  piecesEtSuite: 'Les pièces et un éventuel deuxième passage sont en plus, comme écrit sur le devis.',
 };
 
 // ---------- Installation ----------
@@ -84,4 +84,4 @@ export const deplacementInstallation =
   'Déplacement offert dans tout Avignon, 30 € dans les autres communes de la zone.';
 
 // Mentions communes.
-export const mentionTva = 'Prix nets, TVA non applicable (art. 293 B du CGI).';
+export const mentionTva = 'Prix nets\u00a0: pas de TVA en plus (TVA non applicable, art. 293 B du CGI).';

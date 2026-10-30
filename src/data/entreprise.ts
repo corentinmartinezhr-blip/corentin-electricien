@@ -23,7 +23,7 @@ export const entreprise = {
 export const garanties = {
   diplome: 'CAP Électricien, mention très bien',
   diplomeDetail: 'Académie de Paris, 2025',
-  habilitations: 'BR, BC, B2V, B2V Essai, BE Essai',
+  habilitations: 'BR, BC, B2V, B2V Essai et BE Essai',
   // Décennale et RC Pro : pas encore signées (prévu début novembre 2026).
   // Passer à true UNIQUEMENT après signature : la 3e carte apparaîtra.
   assurancesSignees: false,
