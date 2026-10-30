@@ -16,6 +16,12 @@ export const entreprise = {
   adresse: { rue: '15 rue Alexandre Fleming', codePostal: '84000', ville: 'Avignon' },
   // Langues parlées par Corentin (29/10/2026), au format des données structurées.
   langues: ['fr', 'en'],
+  // Dépannage d'urgence (positionnement du 30/10/2026) : horaires, délai et déplacement à vélo électrique.
+  horaires: '7 jours sur 7, de 7h à 22h',
+  horairesDonnees: { ouverture: '07:00', fermeture: '22:00' }, // tous les jours (données structurées)
+  delai: 'en moins de 24 h, le plus souvent le jour même',
+  delaiRapide: "Si je suis libre, j'arrive en moins d'une heure.",
+  deplacement: 'à vélo électrique',
 };
 
 // Section « Garanties » de l'accueil (triptyque après « Qui suis-je »).
@@ -30,24 +36,5 @@ export const garanties = {
   assureur: '', // facultatif, à renseigner à la signature
 };
 
-// Zone principale validée par Corentin le 29/10/2026.
-export const communes = [
-  'Avignon',
-  'Le Pontet',
-  'Villeneuve-lès-Avignon',
-  'Les Angles',
-  'Rognonas',
-  'Morières-lès-Avignon',
-  'Vedène',
-  'Sorgues',
-  'Saint-Saturnin-lès-Avignon',
-  'Châteaurenard',
-  'Rochefort-du-Gard',
-  'Entraigues-sur-la-Sorgue',
-  'Jonquerettes',
-  'Caumont-sur-Durance',
-  'Noves',
-  'Graveson',
-  'Pujaut',
-  'Sauveterre',
-];
+// Zone recentrée le 30/10/2026 (dépannage d'urgence à vélo électrique) : Avignon et les villes proches.
+export const communes = ['Avignon', 'Le Pontet', 'Villeneuve-lès-Avignon', 'Les Angles'];

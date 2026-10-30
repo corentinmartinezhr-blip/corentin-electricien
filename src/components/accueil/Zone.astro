@@ -5,9 +5,9 @@ import { communes, entreprise } from '../../data/entreprise';
 <section class="section section--brume" aria-labelledby="zone-titre">
   <div class="conteneur">
     <span class="surtitre">Zone d'intervention</span>
-    <h2 id="zone-titre">{entreprise.ville} et les communes voisines</h2>
+    <h2 id="zone-titre">{entreprise.ville} et les villes proches</h2>
     <p class="intro">
-      Je me déplace gratuitement à {entreprise.ville} et dans toutes les communes ci-dessous.
+      Je me déplace gratuitement, {entreprise.deplacement}, dans ces quatre villes. J'arrive {entreprise.delai}.
     </p>
     <ul class="liste-nue etiquettes communes" role="list">
       {communes.map((commune) => <li>{commune}</li>)}

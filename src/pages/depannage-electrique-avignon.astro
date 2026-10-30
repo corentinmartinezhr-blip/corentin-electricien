@@ -1,6 +1,8 @@
 ---
-// Page Dépannage : /depannage-electrique-avignon/ (recherches visées : « dépannage électrique Avignon »,
-// « recherche de panne électrique Avignon »). Pas de « urgence » ni de délai promis (non confirmés).
+// Page Dépannage : /depannage-electrique-avignon/ (recherches visées : « dépannage électrique urgence Avignon »,
+// « électricien urgence Avignon », « recherche de panne électrique Avignon »).
+// Positionnement du 30/10/2026 : dépannage d'urgence, 7j/7 de 7h à 22h, moins de 24 h, à vélo électrique.
+// Ordre voulu par Corentin : haut de page, tarifs, pannes, électroménager, bons réflexes.
 import Base from '../layouts/Base.astro';
 import IntroPage from '../components/IntroPage.astro';
 import Pannes from '../components/depannage/Pannes.astro';
@@ -14,28 +16,28 @@ import photoTableau from '../assets/realisations/tableau-electrique.png';
 ---
 
 <Base
-  title="Dépannage électrique à Avignon – Tarifs | Corentin Électricien"
-  description="Dépannage électrique à Avignon : déplacement et devis gratuits, 65 € de l'heure. Rien à payer si je ne trouve pas la panne. Appel ou WhatsApp."
+  title="Dépannage électrique en urgence à Avignon | Corentin"
+  description="Électricien d'urgence à Avignon, 7j/7 de 7h à 22h : sur place en moins de 24 h, à vélo électrique. Déplacement et devis gratuits, 65 € TTC/h."
 >
   <IntroPage
-    surtitre="Dépannage électrique"
-    titre={`Dépannage électrique à ${entreprise.ville} et alentours`}
+    surtitre="Dépannage électrique d'urgence"
+    titre={`Dépannage électrique en urgence à ${entreprise.ville}`}
     image={photoTableau}
     alt="Tableau électrique remis en état par Corentin"
   >
     <p>
-      Plus de courant, un disjoncteur qui saute, une prise qui ne marche plus : je viens trouver la panne et
-      je la répare. Si c'est long, je vous donne d'abord un devis gratuit.
+      Plus de courant, un disjoncteur qui saute, une prise qui ne marche plus ? J'arrive {entreprise.deplacement},
+      {entreprise.delai}. {entreprise.delaiRapide}
     </p>
     <p>
       <strong>
-        Déplacement et devis gratuits, puis {offreDepannage.prix} {offreDepannage.unite}.
-        {offreDepannage.promesse}
+        {entreprise.horaires}. Déplacement et devis gratuits, puis {offreDepannage.prix}
+        {offreDepannage.unite}. {offreDepannage.promesse}
       </strong>
     </p>
   </IntroPage>
-  <Pannes />
   <Tarif />
+  <Pannes />
   <Electromenager />
   <BonsReflexes />
   <AppelFinal />

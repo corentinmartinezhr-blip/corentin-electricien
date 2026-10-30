@@ -1,21 +1,14 @@
 ---
 import Icone from '../Icone.astro';
 
-// Chaque carte renvoie vers sa page dédiée.
+// Chaque carte renvoie vers sa page dédiée. Installation mise de côté le 30/10/2026 : plus de carte.
 const services = [
   {
     icone: 'eclair',
-    titre: 'Dépannage électrique',
+    titre: 'Dépannage électrique d’urgence',
     texte:
-      "Plus de courant, un disjoncteur qui saute, une prise ou une lumière qui ne marche plus : je trouve d'où vient la panne et je la répare.",
+      "Plus de courant, un disjoncteur qui saute, une prise ou une lumière qui ne marche plus : j'arrive vite, je trouve d'où vient la panne et je la répare.",
     lien: { url: '/depannage-electrique-avignon/', texte: 'Dépannage et tarifs' },
-  },
-  {
-    icone: 'outils',
-    titre: 'Petits travaux et tableau',
-    texte:
-      "J'ajoute ou je change vos prises et vos interrupteurs, j'installe vos lampes et je m'occupe de votre tableau électrique.",
-    lien: { url: '/installation-electrique-avignon/', texte: 'Réalisations et tarifs' },
   },
   {
     icone: 'electromenager',
@@ -74,7 +67,7 @@ const services = [
 
   @media (min-width: 48rem) {
     .services {
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 1.5rem;
     }
   }

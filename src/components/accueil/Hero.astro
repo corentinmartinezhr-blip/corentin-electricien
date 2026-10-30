@@ -6,11 +6,11 @@ import { entreprise } from '../../data/entreprise';
 <section class="hero" aria-labelledby="hero-titre">
   <div class="conteneur hero__grille">
     <div>
-      <span class="surtitre">Artisan électricien à {entreprise.ville}</span>
+      <span class="surtitre">Électricien d'urgence à {entreprise.ville}</span>
       <h1 id="hero-titre">Un problème électrique&nbsp;? Je suis là pour vous aider.</h1>
       <p class="hero__accroche">
-        Plus de courant, une prise à ajouter, un appareil qui ne marche plus : je viens chez vous, à
-        {entreprise.ville} et dans les communes voisines. Je trouve le problème et je le répare.
+        Plus de courant, un disjoncteur qui saute, un appareil qui ne marche plus ? J'arrive
+        {entreprise.deplacement}, {entreprise.delai}. {entreprise.horaires}.
       </p>
       <div class="hero__actions">
         <BoutonContact action="appel" variante="principal" class="action--appel" />

@@ -7,7 +7,10 @@ import NumeroCopiable from './NumeroCopiable.astro';
 <section class="fond-olive appel-final" id="contact" aria-labelledby="appel-final-titre">
   <div class="conteneur">
     <h2 id="appel-final-titre">Un problème électrique&nbsp;?</h2>
-    <p>Appelez-moi, écrivez-moi sur WhatsApp ou passez par le <a href="/contact/">formulaire</a>, pour un dépannage comme pour un devis gratuit.</p>
+    <p>
+      Appelez-moi, écrivez-moi sur WhatsApp ou passez par le <a href="/contact/">formulaire</a>. Je réponds
+      {entreprise.horaires}.
+    </p>
     <p class="appel-final__numero"><NumeroCopiable /></p>
     <div class="appel-final__actions">
       <BoutonContact action="appel" variante="principal" />

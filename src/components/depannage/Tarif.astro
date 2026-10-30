@@ -1,12 +1,12 @@
 ---
-// Tarif du dépannage (offre de lancement) : 65 € de l'heure, déplacement et devis gratuits, et les
+// Tarif du dépannage (offre de lancement) : 65 € TTC de l'heure, déplacement et devis gratuits, et les
 // mentions obligatoires (arrêté du 24 janvier 2017 : taux horaire, déplacement, décompte du temps).
-// Données : src/data/tarifs.ts.
+// L'exemple est mis en avant sous la carte : c'est lui qui rend le tarif évident. Données : src/data/tarifs.ts.
 import GrilleTarifs from '../GrilleTarifs.astro';
-import { mentionTva, offreDepannage, offreLancement } from '../../data/tarifs';
+import { offreDepannage, offreLancement } from '../../data/tarifs';
 ---
 
-<section class="section section--brume" id="tarifs" aria-labelledby="tarifs-titre">
+<section class="section" id="tarifs" aria-labelledby="tarifs-titre">
   <div class="conteneur">
     <h2 id="tarifs-titre">Tarifs</h2>
     <p class="lancement">{offreLancement}</p>
@@ -18,12 +18,13 @@ import { mentionTva, offreDepannage, offreLancement } from '../../data/tarifs';
           {[...offreDepannage.inclus, offreDepannage.promesse].map((point) => <li>{point}</li>)}
         </ul>
       </div>
-      <GrilleTarifs titre="Selon le moment" lignes={offreDepannage.horaires} />
+      <GrilleTarifs titre="Selon le moment (TTC)" lignes={offreDepannage.horaires} />
     </div>
-    <ul class="mentions" role="list">
-      <li>{offreDepannage.exemple}</li>
-      <li>{mentionTva}</li>
-    </ul>
+    <div class="fond-olive exemple">
+      <p class="exemple__titre">Exemple</p>
+      <p class="exemple__situation">{offreDepannage.exemple.situation}</p>
+      <p class="exemple__prix">= {offreDepannage.exemple.prix}</p>
+    </div>
   </div>
 </section>
 
@@ -32,7 +33,7 @@ import { mentionTva, offreDepannage, offreLancement } from '../../data/tarifs';
     display: grid;
     align-items: start;
     gap: 1rem;
-    margin-block: 1.5rem;
+    margin-block: 1.5rem 1rem;
   }
 
   .offre {
@@ -67,22 +68,46 @@ import { mentionTva, offreDepannage, offreLancement } from '../../data/tarifs';
     font-weight: 700;
   }
 
-  .mentions {
-    max-width: 44rem;
-    margin: 0;
-    padding-left: 1.2rem;
-    color: var(--gris-pierre);
-    font-size: 0.9375rem;
+  /* Exemple chiffré : bandeau olive, le prix en jaune (le jaune est permis sur fond foncé). */
+  .exemple {
+    padding: 1.5rem;
+    border-radius: var(--rayon);
   }
 
-  .mentions li + li {
+  .exemple p {
+    margin: 0;
+  }
+
+  .exemple__titre {
+    color: var(--jaune-soleil);
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .exemple .exemple__situation {
     margin-top: 0.35rem;
+    font-size: 1.125rem;
+  }
+
+  .exemple .exemple__prix {
+    margin-top: 0.25rem;
+    color: var(--jaune-soleil);
+    font-family: var(--font-titre);
+    font-size: clamp(1.5rem, 4.5vw, 2.25rem);
+    font-weight: 600;
+    line-height: 1.2;
   }
 
   @media (min-width: 48rem) {
     .tarif {
       grid-template-columns: 1.2fr 1fr;
       gap: 1.5rem;
+    }
+
+    .exemple {
+      padding: 1.75rem 2rem;
     }
   }
 </style>

@@ -4,7 +4,7 @@
 // Données : src/data/tarifs.ts.
 import GrilleTarifs from '../GrilleTarifs.astro';
 import Icone from '../Icone.astro';
-import { decompteTemps, interventionsInstallation, mentionTva, offreLancement, tauxInstallation } from '../../data/tarifs';
+import { decompteTemps, interventionsInstallation, offreLancement, tauxInstallation } from '../../data/tarifs';
 ---
 
 <section class="section section--brume" id="tarifs" aria-labelledby="tarifs-titre">
@@ -35,7 +35,6 @@ import { decompteTemps, interventionsInstallation, mentionTva, offreLancement, t
     <div class="grilles">
       {interventionsInstallation.map(({ titre, lignes }) => <GrilleTarifs titre={titre} lignes={lignes} />)}
     </div>
-    <p class="mention">{mentionTva}</p>
   </div>
 </section>
 
@@ -70,14 +69,8 @@ import { decompteTemps, interventionsInstallation, mentionTva, offreLancement, t
     display: grid;
     align-items: start;
     gap: 1rem;
-    margin-bottom: 1rem;
   }
 
-  .mention {
-    margin: 0;
-    color: var(--gris-pierre);
-    font-size: 0.9375rem;
-  }
 
   @media (min-width: 48rem) {
     .grilles {

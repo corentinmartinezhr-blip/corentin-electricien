@@ -2,6 +2,8 @@
 // Page Installation : /installation-electrique-avignon/ (recherches visées : « installation électrique Avignon »,
 // « pose luminaire Avignon », « installation prise électrique Avignon »).
 // Ordre demandé par Corentin : tarifs avant les réalisations.
+// MISE DE CÔTÉ le 30/10/2026 (focus dépannage d'urgence) : hors menu, hors plan du site, non indexée.
+// Pour la remettre : indexable, menu (navigation.ts), plan du site, accueil et formulaire.
 // Alternance des fonds : brume, ivoire, brume (tarifs), ivoire (réalisations), puis olive.
 import Base from '../layouts/Base.astro';
 import IntroPage from '../components/IntroPage.astro';
@@ -14,6 +16,7 @@ import { entreprise } from '../data/entreprise';
 
 <Base
   title="Installation électrique à Avignon – Tarifs | Corentin Électricien"
+  indexable={false}
   description="Prises, éclairage, radiateurs, détecteurs de fumée, interphone, prise voiture électrique à Avignon. 65 € de l'heure, déplacement et devis gratuits."
 >
   <IntroPage

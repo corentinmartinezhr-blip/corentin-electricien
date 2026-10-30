@@ -1,3 +1,4 @@
+// Prix TTC (demande de Corentin, 30/10/2026 : pas de mention de TVA sur le site, franchise non confirmée).
 // Tarifs affichés : offre de lancement définie par Corentin le 30/10/2026, valable jusqu'au 31/12/2026
 // (peut être prolongée). Seule source des prix du site : la loi impose de les afficher, et ils servent
 // de plafond (une remise est possible, jamais un prix plus élevé que l'affichage).
@@ -30,12 +31,12 @@ export const decompteTemps = "1 heure minimum, puis par quart d'heure";
 // déplacement et façon de compter le temps.
 export const offreDepannage = {
   prix: euros(TAUX_HORAIRE),
-  unite: "de l'heure",
+  unite: "TTC de l'heure",
   titre: 'Main-d’œuvre, pièces en plus',
   // Engagement de Corentin (29/10/2026, gardé le 30/10/2026) : en gras en haut de page et en fin de liste.
   promesse: 'Pas de facturation si je ne trouve pas la panne.',
   inclus: [
-    'Déplacement gratuit, à Avignon et dans les communes voisines.',
+    'Déplacement gratuit à vélo électrique, à Avignon et dans les villes proches.',
     `Je compte seulement le temps de travail (recherche et réparation) : ${decompteTemps}.`,
     'Les pièces à changer sont en plus.',
     'Réparation longue : je vous donne d’abord un devis gratuit.',
@@ -43,20 +44,24 @@ export const offreDepannage = {
   horaires: [
     { prestation: 'Du lundi au samedi', detail: '7h–19h', prix: parHeure(TAUX_HORAIRE) },
     { prestation: 'Soir', detail: '19h–22h (+25 %)', prix: parHeure(TAUX_HORAIRE * 1.25) },
-    { prestation: 'Dimanche et jours fériés', detail: '+50 %', prix: parHeure(TAUX_HORAIRE * 1.5) },
+    { prestation: 'Dimanche et jours fériés', detail: '7h–22h (+50 %)', prix: parHeure(TAUX_HORAIRE * 1.5) },
   ] satisfies LigneTarif[],
-  exemple: `Exemple : une prise grillée, trouvée et réparée en 40 minutes = ${euros(TAUX_HORAIRE)} + le prix de la prise.`,
+  // Mis en avant sous la carte : c'est ce qui fait comprendre le tarif d'un coup d'œil.
+  exemple: {
+    situation: 'Une prise grillée, trouvée et réparée en 40 minutes',
+    prix: `${euros(TAUX_HORAIRE)} + le prix de la prise`,
+  },
 };
 
 // ---------- Électroménager : même règle que le dépannage ----------
 export const tarifElectromenager: LigneTarif[] = [
   { prestation: 'Déplacement et devis', prix: 'Gratuits' },
-  { prestation: 'Main-d’œuvre', detail: decompteTemps, prix: parHeure(TAUX_HORAIRE) },
+  { prestation: 'Main-d’œuvre (TTC)', detail: decompteTemps, prix: parHeure(TAUX_HORAIRE) },
   { prestation: 'Pièces à changer', prix: 'En plus' },
 ];
 
 // ---------- Installation : temps estimés (Corentin, 30/10/2026), facturés au taux horaire ----------
-export const tauxInstallation = euros(TAUX_HORAIRE);
+export const tauxInstallation = `${euros(TAUX_HORAIRE)} TTC`;
 
 export const interventionsInstallation: GroupeForfaits[] = [
   {
@@ -84,5 +89,3 @@ export const interventionsInstallation: GroupeForfaits[] = [
   },
 ];
 
-// Mentions communes.
-export const mentionTva = 'Prix nets : pas de TVA en plus (TVA non applicable, art. 293 B du CGI).';

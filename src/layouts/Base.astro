@@ -44,6 +44,12 @@ const donneesStructurees = {
   },
   image: new URL('/logo/logo-carre.svg', Astro.site).href,
   areaServed: communes.map((commune) => ({ '@type': 'City', name: commune })),
+  openingHoursSpecification: {
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+    opens: entreprise.horairesDonnees.ouverture,
+    closes: entreprise.horairesDonnees.fermeture,
+  },
 };
 ---
 

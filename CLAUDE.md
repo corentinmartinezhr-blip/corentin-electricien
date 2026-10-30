@@ -9,25 +9,33 @@ Le cadrage de référence est la note de cadrage V3 (Claude Docs : https://claud
 - Corentin n'est pas développeur : on lui parle simplement, sans jargon, et on ne lui demande jamais de taper de commande.
 - Il voit chaque modification directement sur le vrai site (pas de site de test, à sa demande) : on lui explique ce qui va changer avant d'envoyer.
 
+## Positionnement (choisi par Corentin le 30/10/2026)
+
+- **Dépannage électrique d'urgence à vélo électrique, à Avignon.** Focus du lancement : générer des appels de dépannage. Mots-clés : urgence, dépannage, Avignon.
+- Horaires : 7 jours sur 7, de 7h à 22h (22h peut-être revu). Délai : « en moins de 24 h, le plus souvent le jour même » ; « Si je suis libre, j'arrive en moins d'une heure ». Jamais de délai plus court promis sans condition.
+- Vélo électrique : une valeur de Corentin (le tout électrique). Rester factuel (pas de bouchons, pas de problème pour se garer, pas de voiture) : jamais « zéro émission » ni « écologique » (allégations environnementales encadrées).
+- Données dans `src/data/entreprise.ts` (`horaires`, `delai`, `delaiRapide`, `deplacement`) ; horaires aussi dans les données structurées.
+
 ## Architecture du site (V1)
 
-- 4 pages : Accueil, Dépannage, Installation, Contact, plus les pages légales (mentions légales, confidentialité).
+- Pages visibles : Accueil, Dépannage, Contact, plus les pages légales (mentions légales, confidentialité). **Installation mise de côté le 30/10/2026** : la page reste en ligne pour Corentin, mais hors menu, hors accueil, hors formulaire, hors plan du site et non indexée (pour la remettre : voir le commentaire en tête de `installation-electrique-avignon.astro`).
 - Faites : Accueil (`/`), Dépannage (`/depannage-electrique-avignon/`), Installation (`/installation-electrique-avignon/`), Contact (`/contact/`, + `merci/` et `erreur/` non indexées), Confidentialité (`/confidentialite/`). À faire : Mentions légales (attend le SIRET).
 - Menu (en-tête et pied de page) : `src/data/navigation.ts`. Composants partagés : `IntroPage`, `GrilleTarifs`, `Deroule`, `AppelFinal`, `BoutonContact`, `NumeroCopiable`.
 - Électroménager : pas de réfrigérateur ni de climatisation (circuit de froid = attestation fluides frigorigènes).
 - Véhicule électrique : uniquement « prise renforcée jusqu'à 3,7 kW » (pas de qualification IRVE). Ne jamais proposer de « borne de recharge » ni de puissance supérieure tant que Corentin n'est pas qualifié IRVE.
 - Pas de page Tarifs : les prix sont affichés sur Dépannage et Installation.
-- Accueil : hero avec la photo de Corentin, 3 services (dépannage électrique ; petits travaux et tableau ; électroménager), présentation, garanties, FAQ, appel final.
+- Accueil : hero avec la photo de Corentin, 2 services (dépannage électrique d'urgence ; électroménager), présentation (dont le vélo électrique), garanties, zone, FAQ, appel final.
+- Page Dépannage, dans cet ordre (demande de Corentin) : haut de page (urgence, délai, vélo, horaires), tarifs avec l'exemple chiffré en bandeau olive juste dessous, pannes, électroménager, bons réflexes.
 - Électroménager : une section de la page Dépannage en V1, pas une page.
 - Les « bons réflexes » sont sur la page Dépannage.
 
 ## Tarifs (seule source : `src/data/tarifs.ts`)
 
 - **Offre de lancement (définie par Corentin le 30/10/2026, jusqu'au 31/12/2026, peut être prolongée)** : une seule règle pour tout. Déplacement gratuit partout dans la zone (le supplément de 30 € pour les autres communes est supprimé) et devis gratuit. Main-d'œuvre 65 €/h, 1 heure minimum puis par quart d'heure, pièces ou matériel en plus. Pastille « Offre de lancement jusqu'au 31 décembre 2026 » au-dessus des tarifs. À revoir avant le 31/12/2026.
-- **Dépannage** : le temps de recherche de la panne est facturé (c'est du travail), mais promesse gardée : « Pas de facturation si je ne trouve pas la panne. » (en gras en haut de page et en fin de carte). Soir 19h–22h +25 % (81,25 €/h), dimanche et fériés +50 % (97,50 €/h). Affichage obligatoire (arrêté du 24/01/2017) : taux horaire, déplacement, décompte du temps. Exemple affiché : prise réparée en 40 min = 65 € + la prise.
+- **Dépannage** : le temps de recherche de la panne est facturé (c'est du travail), mais promesse gardée : « Pas de facturation si je ne trouve pas la panne. » (en gras en haut de page et en fin de carte). Soir 19h–22h +25 % (81,25 €/h), dimanche et fériés 7h–22h +50 % (97,50 €/h). Affichage obligatoire (arrêté du 24/01/2017) : taux horaire, déplacement, décompte du temps. Exemple affiché : prise réparée en 40 min = 65 € + la prise.
 - **Électroménager** : même règle que le dépannage.
 - **Installation** : pas de prix par prestation (jugé peu clair par Corentin) : la liste des interventions avec un temps estimé. Petits travaux « 1 heure ou moins » (prise, interrupteur, RJ45/TV, lampe, lumière extérieure, radiateur, thermostat, détecteur de fumée) ; gros travaux avec une fourchette de temps et « sur devis » (prise sans fil existant, interphone, ligne dédiée, prise voiture électrique ≤ 3,7 kW, tableau). Pas de VMC pour l'instant.
-- Prix nets, « TVA non applicable, art. 293 B du CGI » (franchise de TVA, à confirmer avec le SIRET).
+- Prix affichés TTC (« 65 € TTC de l'heure »). Pas de mention de TVA sur le site (demande de Corentin, 30/10/2026 : la franchise de TVA n'est pas sûre). Si la franchise est confirmée, la mention « TVA non applicable, art. 293 B du CGI » ira sur les factures.
 - Les prix affichés sont un plafond : remise possible, jamais au-dessus.
 
 ## Ton (règle n° 1 de toute la communication, définie par Corentin le 30/10/2026)
@@ -48,7 +56,7 @@ Le cadrage de référence est la note de cadrage V3 (Claude Docs : https://claud
 ## Contact
 
 - Téléphone et WhatsApp : 06 83 78 69 11 (même numéro). Coordonnées et communes dans `src/data/entreprise.ts`, seule source à utiliser.
-- Zone : les 18 communes de la zone principale sont validées (29/10/2026). Formulation prudente sur les frais de déplacement.
+- Zone recentrée le 30/10/2026 : Avignon, Le Pontet, Villeneuve-lès-Avignon, Les Angles. Déplacement gratuit dans ces quatre villes.
 - Présentation (faits fournis par Corentin) : 31 ans, réactif, communication et transparence, croit en l'artisanat et au fait main. Rien d'autre sans validation.
 - Corentin parle aussi anglais (29/10/2026) : mention sous les boutons de « Me joindre directement » (page Contact) et `knowsLanguage` dans les données structurées.
 - Le bouton « Demander un devis gratuit » mène à `/contact/`.
