@@ -28,14 +28,15 @@ const FORMATS_PHOTO = [
     'image/heif' => 'heif',
 ];
 
-function rediriger(string $page): void
+// never : la fonction ne rend jamais la main (exit), le code qui suit un refus ne s'exécute pas.
+function rediriger(string $page): never
 {
     header('Location: ' . $page, true, 303);
     exit;
 }
 
 /** Renvoie vers la page d'erreur, sur l'explication du champ en cause (ancre lue en CSS, sans JavaScript). */
-function refuser(string $motif): void
+function refuser(string $motif): never
 {
     rediriger(PAGE_ERREUR . '#' . $motif);
 }

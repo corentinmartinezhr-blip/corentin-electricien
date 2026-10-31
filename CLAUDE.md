@@ -14,7 +14,7 @@ Le cadrage de référence est la note de cadrage V3 (Claude Docs : https://claud
 - **Dépannage électrique d'urgence à vélo électrique, à Avignon.** Focus du lancement : générer des appels de dépannage. Mots-clés : urgence, dépannage, Avignon.
 - Horaires : 7 jours sur 7, de 7h à 22h (22h peut-être revu). Délai : « en moins de 24 h, le plus souvent le jour même » ; « Si je suis libre, j'arrive en moins d'une heure ». Jamais de délai plus court promis sans condition.
 - Vélo électrique : une valeur de Corentin (le tout électrique). Rester factuel (pas de bouchons, pas de problème pour se garer, pas de voiture) : jamais « zéro émission » ni « écologique » (allégations environnementales encadrées).
-- Données dans `src/data/entreprise.ts` (`horaires`, `delai`, `delaiRapide`, `deplacement`) ; horaires aussi dans les données structurées.
+- Données dans `src/data/entreprise.ts` (`horaires`, `horairesCourts` pour les descriptions Google, `horairesDonnees`, `delai`, `delaiRapide`, `deplacement`) ; horaires aussi dans les données structurées. Si 22h change : aussi les tranches soir/dimanche de `tarifs.ts` et la FAQ urgence (« Le soir (19h–22h) »).
 
 ## Architecture du site (V1)
 
@@ -78,7 +78,7 @@ Le cadrage de référence est la note de cadrage V3 (Claude Docs : https://claud
 - Chiffres alignés forcés (`font-variant-numeric: lining-nums` sur `body`) : Playfair Display dessine par défaut des chiffres de style ancien.
 - Polices : Playfair Display (titres, remplace Fraunces le 30/10/2026 : Fraunces jugée trop inhabituelle par Corentin) et Manrope (texte), via `@fontsource-variable`, servies depuis o2switch.
 - Le jaune n'est jamais utilisé pour du texte sur fond clair, et jamais de texte blanc sur jaune. Pour du texte « jaune » sur fond clair, utiliser l'ocre.
-- Logos dans `public/logo/` : `logo-horizontal.svg` (fond transparent, pour fond clair), `logo-horizontal-fond-olive.svg`, `logo-carre.svg` (aussi favicon).
+- Logos dans `public/logo/` : `logo-horizontal.svg` (fond transparent, pour fond clair), `logo-horizontal-fond-olive.svg`, `logo-carre.svg` (aussi favicon). Icônes tirées du logo carré : `public/favicon.svg`, `public/favicon.ico` (16/32/48 px) et `public/apple-touch-icon.png` (180 px, iPhone).
 - Pas de Google Fonts chargées depuis Google (RGPD) : polices auto-hébergées uniquement.
 
 ## Photos
@@ -117,7 +117,7 @@ Relire chaque modification avec un œil critique avant de l'envoyer, et amélior
 - **JavaScript :** aucun par défaut. Exceptions : `MesureAudience.astro` (Matomo) ; `src/scripts/contact.ts` (copie du numéro ; sur ordinateur, les liens `tel:` copient le numéro au lieu de ne rien faire) et `src/scripts/formulaire.ts` (champ téléphone : chiffres uniquement, demande de Corentin ; chargé seulement sur la page Contact). Pas de bibliothèque ni de dépendance sans raison forte.
 - **Nommage :** en français, explicite (`telephoneLien`, `garanties`), commentaires courts qui disent le pourquoi.
 - **Performance :** images via `astro:assets` avec `widths`/`sizes` ; CSS intégré dans la page ; polices latines préchargées ; viser LCP ≤ 2,5 s, CLS ≤ 0,1.
-- **SEO :** un seul `<h1>` par page ; title ≤ ~60 caractères et description ≤ ~155 ; URL lisibles (`/depannage-electrique-avignon/`) ; canonical, sitemap et données structurées `Electrician` gérés par `Base.astro`, `sitemap.xml.ts`, `robots.txt.ts`. Les nouvelles pages entrent seules dans le sitemap.
+- **SEO :** un seul `<h1>` par page ; title ≤ ~60 caractères et description ≤ ~155 ; URL lisibles (`/depannage-electrique-avignon/`) ; canonical (pages indexables seulement), sitemap et données structurées gérés par `Base.astro`, `sitemap.xml.ts`, `robots.txt.ts`. Données structurées : `Electrician` avec un `@id` fixe sur toutes les pages, `WebSite` (nom du site) sur l'accueil, fil d'Ariane `BreadcrumbList` dans `IntroPage`. Les nouvelles pages entrent seules dans le sitemap. Titres et descriptions : prix, téléphone et horaires tirés des données (jamais écrits en dur).
 - **Accessibilité :** contrastes WCAG AA, focus visible, `aria-labelledby` sur chaque section, `role="list"` sur les listes sans puces.
 - **Vérification :** après chaque envoi, contrôler que le build GitHub passe, puis regarder la page en ligne (mobile et ordinateur) après le passage du cron.
 - **Limite connue :** pas de `package-lock.json` (l'espace de travail de Claude ne peut pas installer les paquets). Les versions suivent les plages de `package.json`.

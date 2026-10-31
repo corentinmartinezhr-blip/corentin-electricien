@@ -33,12 +33,16 @@ const imagePartage = { url: new URL('/partage.jpg', Astro.site).href, largeur: 1
 
 // Données structurées : uniquement des informations exactes et publiques.
 // Le SIRET sera ajouté quand il existera ; le lien de la fiche Google (sameAs) dès qu'elle est validée.
-const donneesStructurees = {
-  '@context': 'https://schema.org',
+// @id : un identifiant fixe, pour que Google relie toutes les pages à la même entreprise.
+const idEntreprise = new URL('/#entreprise', Astro.site).href;
+const fiche = {
   '@type': 'Electrician',
+  '@id': idEntreprise,
   name: entreprise.nom,
+  description: `Dépannage électrique d'urgence à ${entreprise.ville}, ${entreprise.deplacement}, ${entreprise.horaires}.`,
   url: Astro.site?.href,
   telephone: entreprise.telephoneInternational,
+  email: entreprise.email,
   knowsLanguage: entreprise.langues,
   address: {
     '@type': 'PostalAddress',
@@ -58,6 +62,12 @@ const donneesStructurees = {
     closes: entreprise.horairesDonnees.fermeture,
   },
 };
+// Sur l'accueil seulement : le nom du site, que Google peut afficher à la place de l'adresse dans ses résultats.
+const site = { '@type': 'WebSite', name: entreprise.nom, url: Astro.site?.href, publisher: { '@id': idEntreprise } };
+const donneesStructurees = {
+  '@context': 'https://schema.org',
+  '@graph': Astro.url.pathname === '/' ? [fiche, site] : [fiche],
+};
 ---
 
 <!doctype html>
@@ -67,7 +77,8 @@ const donneesStructurees = {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={urlCanonique} />
+    <!-- Pas d'adresse de référence sur une page non indexée (404, merci, erreur) : ce serait un signal contradictoire. -->
+    {indexable && <link rel="canonical" href={urlCanonique} />}
     {(!estProduction || !indexable) && <meta name="robots" content="noindex, nofollow" />}
 
     <meta property="og:type" content="website" />
@@ -84,8 +95,11 @@ const donneesStructurees = {
 
     <link rel="preload" href={policeTitres} as="font" type="font/woff2" crossorigin />
     <link rel="preload" href={policeTexte} as="font" type="font/woff2" crossorigin />
+    <!-- Icônes : .ico pour les anciens navigateurs et les robots, SVG pour les navigateurs récents, PNG pour l'iPhone.
+         Les trois sont tirées de public/logo/logo-carre.svg. -->
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="sitemap" href="/sitemap.xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="theme-color" content="#FAF7F0" /><!-- = --ivoire (une balise meta ne lit pas le CSS) -->
     <meta name="format-detection" content="telephone=no" />
 

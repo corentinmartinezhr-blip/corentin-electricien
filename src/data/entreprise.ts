@@ -22,7 +22,9 @@ export const entreprise = {
   // Langues parlées par Corentin (29/10/2026), au format des données structurées.
   langues: ['fr', 'en'],
   // Dépannage d'urgence (positionnement du 30/10/2026) : horaires, délai et déplacement à vélo électrique.
+  // Si les horaires changent : modifier aussi les tranches de prix (soir, dimanche) dans tarifs.ts.
   horaires: '7 jours sur 7, de 7h à 22h',
+  horairesCourts: '7j/7 de 7h à 22h', // descriptions pour Google (texte court)
   horairesDonnees: { ouverture: '07:00', fermeture: '22:00' }, // tous les jours (données structurées)
   delai: 'en moins de 24 h, le plus souvent le jour même',
   delaiRapide: "Si je suis libre, j'arrive en moins d'une heure.",

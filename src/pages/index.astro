@@ -9,11 +9,12 @@ import Garanties from '../components/accueil/Garanties.astro';
 import Zone from '../components/accueil/Zone.astro';
 import Faq from '../components/accueil/Faq.astro';
 import AppelFinal from '../components/AppelFinal.astro';
+import { entreprise } from '../data/entreprise';
 ---
 
 <Base
   title="Électricien d'urgence à Avignon | Corentin Électricien"
-  description="Dépannage électrique en urgence à Avignon, Le Pontet, Villeneuve-lès-Avignon et Les Angles : 7j/7 de 7h à 22h, à vélo électrique. Appel ou WhatsApp."
+  description={`Dépannage électrique en urgence à Avignon, Le Pontet, Villeneuve-lès-Avignon et Les Angles : ${entreprise.horairesCourts}, ${entreprise.deplacement}. Appel ou WhatsApp.`}
 >
   <Hero />
   <Services />

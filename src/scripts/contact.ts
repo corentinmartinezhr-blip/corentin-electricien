@@ -1,4 +1,5 @@
-// Seul JavaScript du site : copie du numéro de téléphone.
+// Copie du numéro de téléphone, chargée sur toutes les pages (autres scripts : formulaire.ts sur la page
+// Contact, et la mesure d'audience Matomo).
 //  - Numéro écrit en clair (bouton .numero-copiable) : un clic le copie, sur tous les appareils.
 //  - Boutons « Appeler » (liens tel:) : sur téléphone, ils ouvrent l'application d'appel (comportement
 //    normal du navigateur) ; sur ordinateur, un lien tel: ne fait rien, donc on copie le numéro à la place.

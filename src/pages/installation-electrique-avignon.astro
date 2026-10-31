@@ -14,11 +14,12 @@ import Tarifs from '../components/installation/Tarifs.astro';
 import FaqInstallation from '../components/installation/FaqInstallation.astro';
 import AppelFinal from '../components/AppelFinal.astro';
 import { entreprise } from '../data/entreprise';
+import { tauxInstallation } from '../data/tarifs';
 ---
 
 <Base
   title="Installation électrique à Avignon : prix | Corentin"
-  description="Prises, éclairage, radiateurs, détecteurs de fumée, interphone, prise voiture électrique à Avignon. 65 € TTC de l'heure, déplacement et devis gratuits."
+  description={`Prises, éclairage, radiateurs, détecteurs de fumée, interphone, prise voiture électrique à Avignon. ${tauxInstallation} de l'heure, déplacement et devis gratuits.`}
 >
   <IntroPage
     surtitre="Installation électrique"

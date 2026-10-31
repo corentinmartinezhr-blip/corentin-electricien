@@ -16,7 +16,19 @@ interface Props {
 }
 
 const { surtitre, titre, image, alt = '' } = Astro.props;
+
+// Le même fil d'Ariane, lisible par Google (il peut l'afficher sous le titre dans ses résultats).
+const filAriane = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Accueil', item: new URL('/', Astro.site).href },
+    { '@type': 'ListItem', position: 2, name: surtitre },
+  ],
+};
 ---
+
+<script type="application/ld+json" set:html={JSON.stringify(filAriane)} />
 
 <section class="intro-page" aria-labelledby="intro-titre">
   <div class:list={['conteneur', { 'intro-page__grille': image }]}>

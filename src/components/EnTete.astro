@@ -29,6 +29,7 @@ const cheminActuel = Astro.url.pathname;
       class="bouton bouton--principal en-tete__appel"
       href={entreprise.telephoneLien}
       data-numero={entreprise.telephoneAffiche}
+      aria-label={`Appeler le ${entreprise.telephoneAffiche}`}
     >
       <Icone nom="telephone" taille={18} />
       {entreprise.telephoneAffiche}
