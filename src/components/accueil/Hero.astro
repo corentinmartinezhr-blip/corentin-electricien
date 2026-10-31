@@ -6,8 +6,10 @@ import { entreprise } from '../../data/entreprise';
 <section class="hero" aria-labelledby="hero-titre">
   <div class="conteneur hero__grille">
     <div>
-      <span class="surtitre">Électricien d'urgence à {entreprise.ville}</span>
-      <h1 id="hero-titre">Un problème électrique&nbsp;? Je suis là pour vous aider.</h1>
+      <!-- H1 = la recherche visée (« électricien d'urgence Avignon »), décision de Corentin du 31/10/2026. -->
+      <span class="surtitre">Dépannage électrique</span>
+      <h1 id="hero-titre">Électricien d'urgence à {entreprise.ville}</h1>
+      <p class="hero__slogan">Un problème électrique&nbsp;? Je suis là pour vous aider.</p>
       <p class="hero__accroche">
         Plus de courant, un disjoncteur qui saute, un appareil qui ne marche plus ? J'arrive
         {entreprise.deplacement}, {entreprise.delai}. {entreprise.horaires}.
@@ -45,6 +47,14 @@ import { entreprise } from '../../data/entreprise';
   h1 {
     max-width: 18ch;
     font-size: clamp(2rem, 6vw, 3.25rem);
+  }
+
+  .hero__slogan {
+    margin-bottom: 0.75rem;
+    font-family: var(--font-titre);
+    font-size: clamp(1.25rem, 3.5vw, 1.625rem);
+    font-weight: 600;
+    line-height: 1.3;
   }
 
   .hero__accroche {
