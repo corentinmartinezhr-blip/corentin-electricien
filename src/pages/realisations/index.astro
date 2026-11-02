@@ -1,0 +1,107 @@
+---
+// Catalogue des chantiers : /realisations/. Une carte par chantier, chacun avec sa page détaillée.
+// Pour ajouter un chantier : une page dans src/pages/realisations/ et une entrée dans « chantiers » ci-dessous.
+import Base from '../../layouts/Base.astro';
+import IntroPage from '../../components/IntroPage.astro';
+import AppelFinal from '../../components/AppelFinal.astro';
+import { entreprise } from '../../data/entreprise';
+import { photosCuisine } from '../../data/photos-renovation-cuisine';
+
+const couvertureCuisine = photosCuisine['terminee-21-ensemble-evier-plaque-lave-vaisselle'];
+const chantiers = [
+  {
+    url: '/realisations/renovation-cuisine/',
+    titre: 'Rénovation complète d’une cuisine',
+    resume: 'Électricité, plomberie, ouverture sur le salon, pose des meubles et faïence : le chantier étape par étape.',
+    travaux: ['Électricité', 'Plomberie', 'Pose de cuisine', 'Faïence'],
+    image: `/realisations/renovation-cuisine/${couvertureCuisine.fichier}-960.webp`,
+    alt: couvertureCuisine.alt,
+  },
+];
+---
+
+<Base
+  title={`Réalisations : chantiers en photos à ${entreprise.ville} | Corentin`}
+  description={`Mes chantiers d'électricien à ${entreprise.ville}, racontés étape par étape et en photos : ce que j'ai fait, comment et pourquoi.`}
+>
+  <IntroPage surtitre="Réalisations" titre="Mes réalisations">
+    <p>Des chantiers en photos, étape par étape : ce que j'ai fait, comment, et pourquoi.</p>
+  </IntroPage>
+
+  <section class="section" aria-labelledby="chantiers-titre">
+    <div class="conteneur">
+      <h2 id="chantiers-titre">Les chantiers</h2>
+      <ul class="liste-nue chantiers" role="list">
+        {
+          chantiers.map((chantier) => (
+            <li class="carte chantier">
+              <img src={chantier.image} alt={chantier.alt} width="960" height="540" loading="lazy" decoding="async" />
+              <div class="chantier__texte">
+                <h3>
+                  <a href={chantier.url}>{chantier.titre}</a>
+                </h3>
+                <p>{chantier.resume}</p>
+                <ul class="liste-nue etiquettes" role="list">
+                  {chantier.travaux.map((travail) => <li>{travail}</li>)}
+                </ul>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <AppelFinal titre={'Un projet ?'} devis>
+    <p>Appelez-moi, écrivez-moi sur WhatsApp ou demandez un devis gratuit. Je réponds {entreprise.horaires}.</p>
+  </AppelFinal>
+</Base>
+
+<style>
+  .chantiers {
+    display: grid;
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  /* Toute la carte est cliquable (le lien du titre s'étend sur la carte). */
+  .chantier {
+    position: relative;
+    overflow: hidden;
+    padding: 0;
+  }
+
+  .chantier img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+  }
+
+  .chantier__texte {
+    padding: 1.5rem;
+  }
+
+  .chantier h3 a {
+    text-decoration: none;
+  }
+
+  .chantier h3 a::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+  }
+
+  .chantier h3 a:hover {
+    text-decoration: underline;
+  }
+
+  .chantier p {
+    margin-bottom: 1rem;
+  }
+
+  @media (min-width: 48rem) {
+    .chantiers {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

@@ -1,0 +1,22 @@
+name: Aperçu (temporaire, ne publie rien)
+# Construit le site sur une branche de travail et garde le résultat pour vérification. À supprimer avant fusion.
+on:
+  push:
+    branches-ignore: [main, production]
+jobs:
+  construire:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+      - run: npm install --no-audit --no-fund
+      - run: npm run build
+        env:
+          PUBLIC_SITE_ENV: preparation
+      - uses: actions/upload-artifact@v4
+        with:
+          name: site
+          path: dist
+          retention-days: 3

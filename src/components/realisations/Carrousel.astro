@@ -1,0 +1,108 @@
+---
+// Carrousel de photos sans JavaScript : une rangée qui défile au doigt (téléphone), au pavé tactile,
+// avec la barre de défilement ou les flèches du clavier (ordinateur). Chaque photo s'arrête bien en place.
+// Toutes les photos ont la même hauteur ; leur largeur suit leur format (paysage ou portrait).
+// Deux tailles par photo : 960 px (téléphones) et 1920 px (grands écrans), choisies par le navigateur.
+interface Photo {
+  fichier: string;
+  largeur: number;
+  hauteur: number;
+  alt: string;
+}
+
+interface Props {
+  photos: readonly Photo[];
+  /** Nom du carrousel lu par les lecteurs d'écran, ex. « Photos de la dépose ». */
+  nom: string;
+}
+
+const { photos, nom } = Astro.props;
+const dossier = '/realisations/renovation-cuisine';
+// Hauteur affichée (px) : 288 sur téléphone, 448 sur ordinateur (voir le CSS). Sert à choisir la bonne taille d'image.
+const tailles = (photo: Photo) => {
+  const format = photo.largeur / photo.hauteur;
+  return `(min-width: 48rem) ${Math.ceil(448 * format)}px, ${Math.ceil(288 * format)}px`;
+};
+---
+
+<p class="carrousel__aide" aria-hidden="true">Faites glisser pour voir les {photos.length} photos →</p>
+<div class="carrousel" tabindex="0" role="region" aria-label={nom}>
+  <ul class="liste-nue carrousel__rangee" role="list">
+    {
+      photos.map((photo) => (
+        <li>
+          <figure>
+            <img
+              src={`${dossier}/${photo.fichier}-960.webp`}
+              srcset={`${dossier}/${photo.fichier}-960.webp 960w, ${dossier}/${photo.fichier}.webp 1920w`}
+              sizes={tailles(photo)}
+              alt={photo.alt}
+              width={photo.largeur}
+              height={photo.hauteur}
+              loading="lazy"
+              decoding="async"
+            />
+            <figcaption aria-hidden="true">{photo.alt}</figcaption>
+          </figure>
+        </li>
+      ))
+    }
+  </ul>
+</div>
+
+<style>
+  .carrousel__aide {
+    margin: 1.5rem 0 0.75rem;
+    color: var(--gris-pierre);
+    font-size: 0.875rem;
+    font-weight: 700;
+  }
+
+  .carrousel {
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scrollbar-color: var(--vert-olive) transparent;
+    padding-bottom: 0.75rem;
+  }
+
+  .carrousel__rangee {
+    display: flex;
+    gap: 1rem;
+    width: max-content;
+  }
+
+  li {
+    scroll-snap-align: start;
+  }
+
+  figure {
+    margin: 0;
+  }
+
+  img {
+    width: auto;
+    max-width: calc(100vw - 3rem);
+    height: 18rem;
+    object-fit: cover;
+    border-radius: var(--rayon);
+  }
+
+  figcaption {
+    max-width: 18rem;
+    margin-top: 0.5rem;
+    color: var(--gris-pierre);
+    font-size: 0.875rem;
+    line-height: 1.4;
+  }
+
+  @media (min-width: 48rem) {
+    img {
+      height: 28rem;
+    }
+
+    figcaption {
+      max-width: 24rem;
+    }
+  }
+</style>

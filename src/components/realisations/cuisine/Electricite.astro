@@ -1,0 +1,54 @@
+---
+// Étape « électricité » de la rénovation de cuisine : le cœur du chantier, mis en avant (demande de Corentin).
+// Règles vérifiées le 02/11/2026 (Legrand, EDF) : four, plaque, lave-vaisselle et congélateur sur une ligne chacun ;
+// au moins 4 prises au-dessus du plan de travail (cuisine > 4 m²) ; 6 prises maximum par ligne de prises de cuisine
+// (2,5 mm², 20 A). Le réfrigérateur n'est PAS obligatoire sur une ligne à lui : c'est un choix de Corentin.
+// Ne pas écrire « la cuisine consomme le plus » (faux : c'est le chauffage) ni « tout est conforme ».
+import Etape from '../Etape.astro';
+import Carrousel from '../Carrousel.astro';
+import { photosCuisine as p } from '../../../data/photos-renovation-cuisine';
+---
+
+<Etape id="electricite" surtitre="Étape 3" titre="L'électricité, le cœur du chantier" brume>
+  <p>
+    Dans une maison, la cuisine est la pièce qui demande le plus de lignes électriques. Une norme française, la
+    NF&nbsp;C&nbsp;15-100, fixe les règles pour que l'installation soit sûre. Par exemple, le four, la plaque de
+    cuisson, le lave-vaisselle et le congélateur doivent avoir chacun leur propre ligne : un câble et un disjoncteur
+    rien que pour eux. Cela évite qu'un câble chauffe parce qu'il alimente trop d'appareils à la fois.
+  </p>
+  <h3>Ce que j'ai installé</h3>
+  <ul>
+    <li>Une ligne pour le four, une pour la plaque de cuisson, une pour le lave-vaisselle et une pour le congélateur.</li>
+    <li>
+      Une ligne aussi pour le réfrigérateur. La norme ne l'oblige pas, mais comme ça, il ne s'arrête pas si une
+      prise du plan de travail fait sauter son disjoncteur.
+    </li>
+    <li>
+      8 prises au-dessus des plans de travail, réparties sur 2 lignes de 4. La norme demande au moins 4 prises
+      au-dessus du plan de travail, et pas plus de 6 prises par ligne.
+    </li>
+    <li>
+      Pour ces prises, des câbles de 2,5&nbsp;mm² protégés par des disjoncteurs de 20&nbsp;ampères : la taille de
+      câble prévue par la norme.
+    </li>
+    <li>Le tableau électrique refait. La hotte, elle, garde sa ligne, qui existait déjà.</li>
+  </ul>
+  <h3>Des prises bien placées</h3>
+  <p>
+    Au-dessus des plans de travail, les prises sont encastrées : elles sont dans le mur, bien à plat. Pour les
+    appareils, les prises sont posées sur le mur, mais cachées derrière les meubles. Quand c'était possible, j'ai
+    passé les câbles derrière la plaque de plâtre : moins de murs à ouvrir, donc un chantier plus rapide.
+  </p>
+  <p>J'ai commencé à passer les gaines dès juillet, en même temps que l'ouverture des arches.</p>
+  <Carrousel
+    slot="photos"
+    nom="Photos des travaux d'électricité"
+    photos={[
+      p['electricite-00a-passage-gaines-point-lumineux-plafond'],
+      p['electricite-00b-gaines-et-prise-emplacement-colonne'],
+      p['electricite-01-nouvelles-boites-encastrement'],
+      p['electricite-02-boites-posees-hotte-deposee'],
+      p['electricite-03-attentes-apres-peinture'],
+    ]}
+  />
+</Etape>

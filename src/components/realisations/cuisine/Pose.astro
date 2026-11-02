@@ -1,0 +1,62 @@
+---
+// Étape « pose de la cuisine » : meubles IKEA Voxtorp effet chêne, plan de travail en bois huilé (Castorama),
+// plomberie. Le retour honnête sur les portes sans poignée est voulu par Corentin : on le garde.
+import Etape from '../Etape.astro';
+import Carrousel from '../Carrousel.astro';
+import { photosCuisine as p } from '../../../data/photos-renovation-cuisine';
+---
+
+<Etape id="pose" surtitre="Étape 4" titre="La pose de la cuisine">
+  <p>
+    Les meubles viennent de chez IKEA, modèle Voxtorp effet chêne. La pose suit le guide d'IKEA : d'abord les rails
+    fixés au mur, puis les caissons (les meubles sans leurs portes), bien mis à niveau.
+  </p>
+  <Carrousel
+    nom="Photos de la pose des rails et des meubles"
+    photos={[
+      p['installation-01-pose-rail-meubles-bas'],
+      p['installation-04-rails-mur-evier'],
+      p['installation-05-montage-colonne'],
+      p['installation-09-caissons-et-four-encastre'],
+      p['installation-14-caissons-hauts-autour-hotte'],
+      p['installation-16-caissons-angle-mise-a-niveau'],
+    ]}
+  />
+  <h3>Des portes sans poignée</h3>
+  <p>
+    J'ai choisi des portes sans poignée : on les ouvre en glissant les doigts dans le bord. On attrape plus
+    facilement une grande surface qu'une petite poignée, et le rendu est plus lisse. Mon ancien métier de designer
+    produit m'a appris à penser à ça : rendre le geste simple et montrer clairement où agir.
+  </p>
+  <p>
+    Pour être honnête : à l'usage, le gras se dépose sur les portes et, comme ce n'est pas du vrai bois, elles
+    brillent un peu. Il faut les nettoyer chaque semaine. Si c'était à refaire, je prendrais de grandes poignées.
+  </p>
+  <h3>Des tiroirs en bas, des portes en haut</h3>
+  <p>
+    Tous les meubles bas ont des tiroirs : on voit tout d'un coup d'œil, rien ne se perd au fond. Les meubles hauts,
+    moins profonds, ont des portes classiques.
+  </p>
+  <h3>Un plan de travail en bois</h3>
+  <p>
+    Le plan de travail ne vient pas d'IKEA : c'est du bois déjà huilé, acheté chez Castorama. Le bois doit être
+    huilé régulièrement, surtout la première année, pour bien se protéger.
+  </p>
+  <h3>La plomberie</h3>
+  <p>
+    J'ai gardé les anciennes arrivées d'eau et l'évacuation, et ajouté des raccords pour brancher l'évier et les
+    appareils avec des tuyaux souples (des flexibles).
+  </p>
+  <Carrousel
+    slot="photos"
+    nom="Photos de la pose des façades et des appareils"
+    photos={[
+      p['installation-18-pose-facades-tiroirs'],
+      p['installation-21-facades-tiroirs-mur-evier'],
+      p['installation-23-refrigerateur-integre-colonne'],
+      p['installation-24-facades-hautes-mur-four'],
+      p['installation-27-colonne-habillee-micro-ondes'],
+      p['installation-30-colonne-vue-sejour'],
+    ]}
+  />
+</Etape>

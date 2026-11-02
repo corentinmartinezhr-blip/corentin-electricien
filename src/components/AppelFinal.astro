@@ -1,21 +1,32 @@
 ---
 // Bloc de contact en bas des pages (sauf Contact).
+// Titre et texte modifiables (ex. page d'un chantier) ; « devis » ajoute le bouton « Demander un devis gratuit ».
 import BoutonContact from './BoutonContact.astro';
 import NumeroCopiable from './NumeroCopiable.astro';
 import { entreprise } from '../data/entreprise';
+
+interface Props {
+  titre?: string;
+  devis?: boolean;
+}
+
+const { titre = 'Un problème électrique ?', devis = false } = Astro.props;
 ---
 
 <section class="fond-olive appel-final" id="contact" aria-labelledby="appel-final-titre">
   <div class="conteneur">
-    <h2 id="appel-final-titre">Un problème électrique&nbsp;?</h2>
-    <p>
-      Appelez-moi, écrivez-moi sur WhatsApp ou passez par le <a href="/contact/">formulaire</a>. Je réponds
-      {entreprise.horaires}.
-    </p>
+    <h2 id="appel-final-titre">{titre}</h2>
+    <slot>
+      <p>
+        Appelez-moi, écrivez-moi sur WhatsApp ou passez par le <a href="/contact/">formulaire</a>. Je réponds
+        {entreprise.horaires}.
+      </p>
+    </slot>
     <p class="appel-final__numero"><NumeroCopiable /></p>
     <div class="appel-final__actions">
       <BoutonContact action="appel" variante="principal" />
       <BoutonContact action="whatsapp" libelle="Écrire sur WhatsApp" />
+      {devis && <BoutonContact action="devis" />}
     </div>
   </div>
 </section>
@@ -26,13 +37,14 @@ import { entreprise } from '../data/entreprise';
     text-align: center;
   }
 
-  p {
+  .appel-final :global(p) {
     max-width: 34rem;
     margin-inline: auto;
     opacity: 0.9;
   }
 
-  .appel-final__numero {
+  /* Sélecteur doublé : doit l'emporter sur la règle des paragraphes ci-dessus (texte du slot compris). */
+  .appel-final .appel-final__numero {
     margin-block: 0.5rem 1.75rem;
     opacity: 1;
   }
