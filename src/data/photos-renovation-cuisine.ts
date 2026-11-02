@@ -157,11 +157,11 @@ export const photosCuisine = {
     "hauteur": 1920,
     "alt": "Bandeau LED allumé sous les meubles hauts"
   },
-  "faience-01-calepinage-tracage": {
-    "fichier": "renovation-cuisine-faience-01-calepinage-tracage",
+  "faience-01-mur-griffe-avant-collage": {
+    "fichier": "renovation-cuisine-faience-01-mur-griffe-avant-collage",
     "largeur": 1920,
     "hauteur": 1440,
-    "alt": "Traçage du motif sur le mur avant de poser la faïence"
+    "alt": "Mur griffé avant la pose de la faïence, pour que la colle accroche mieux"
   },
   "faience-02-mur-four-faience-posee": {
     "fichier": "renovation-cuisine-faience-02-mur-four-faience-posee",
