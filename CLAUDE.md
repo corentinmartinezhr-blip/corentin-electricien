@@ -84,6 +84,7 @@ Le cadrage de référence est la note de cadrage V3 (Claude Docs : https://claud
 
 ## Photos
 
+- **Formats (règle de Corentin, 02/11/2026) : toute image est en WebP ; les logos et les icônes sont en SVG.** Si Corentin fournit une image dans un autre format (JPG, PNG…), le lui signaler et la convertir en WebP ; si une icône n'est pas en SVG, le lui signaler et la refaire en SVG. Icônes : SVG inline dans `Icone.astro`. Seules exceptions, imposées par les outils qui les lisent (à garder) : `public/partage.jpg` (aperçu des liens partagés : WhatsApp, SMS et certaines messageries ne lisent pas le WebP), `public/apple-touch-icon.png` (l'iPhone exige du PNG) et `public/favicon.ico` (anciens navigateurs ; `favicon.svg` sert aux autres).
 - Réalisations : `src/assets/realisations/` ; portrait du hero : `public/portrait/corentin.webp` (WebP final de Corentin, avec son logo, servi tel quel).
 - Page Installation : tarifs avant les réalisations (demande de Corentin).
 - Photos de réalisations : WebP fournis et déjà compressés par Corentin, dans `public/realisations/`, servis tels quels (balise `<img>`, pas de recompression : demande de Corentin, la recompression d'Astro était visible). Autres images (tableau) : `astro:assets`.
@@ -127,4 +128,4 @@ Relire chaque modification avec un œil critique avant de l'envoyer, et amélior
 
 - Élément du hero : animation ? (à préciser avec Corentin)
 - Photos pour le dépannage et l'électroménager : à fournir.
-- `tableau-electrique.png` : avant/après ou deux vues ?
+- `tableau-electrique.webp` : avant/après ou deux vues ?
