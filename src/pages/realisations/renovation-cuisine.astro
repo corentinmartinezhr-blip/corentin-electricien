@@ -1,5 +1,5 @@
 ---
-// Chantier : rénovation complète d'une cuisine (juillet à septembre 2026). Recherche visée : « rénovation cuisine Avignon ».
+// Chantier : rénovation complète d'une cuisine (pas de durée affichée : demande de Corentin, 02/11/2026). Recherche visée : « rénovation cuisine Avignon ».
 // C'est la cuisine de Corentin : on ne parle jamais d'un client, et on le dit à la fin (choix de Corentin, 02/11/2026).
 // Accent mis sur l'électricité. Règles de la norme vérifiées (sources Legrand et EDF) : pas de « tout est conforme »,
 // seulement ce qui a été fait. Ne jamais annoncer la décennale ici (pas encore signée).
@@ -26,8 +26,8 @@ const travaux = ['Plans', 'Électricité', 'Plomberie', 'Ouverture sur le salon'
     surtitre="Rénovation de cuisine"
     titre={`Rénovation complète d'une cuisine à ${entreprise.ville}`}
     parent={{ texte: 'Réalisations', url: '/realisations/' }}
-    image={`/realisations/renovation-cuisine/${p['terminee-21-ensemble-evier-plaque-lave-vaisselle'].fichier}.webp`}
-    alt={p['terminee-21-ensemble-evier-plaque-lave-vaisselle'].alt}
+    image={`/realisations/renovation-cuisine/${p['terminee-17-vue-plan-de-travail-vers-salon'].fichier}.webp`}
+    alt={p['terminee-17-vue-plan-de-travail-vers-salon'].alt}
   >
     <p>
       De l'ancienne cuisine aux derniers carreaux de faïence, j'ai tout fait : les plans, l'électricité, la
@@ -41,7 +41,6 @@ const travaux = ['Plans', 'Électricité', 'Plomberie', 'Ouverture sur le salon'
       deuxième plan de travail en L, ouvrir la cuisine sur le salon et encastrer la plupart des appareils.
     </p>
     <p>J'ai dessiné les plans avec l'outil de conception d'IKEA, avant de commander quoi que ce soit.</p>
-    <p><strong>Durée :</strong> de juillet à septembre 2026.</p>
     <ul class="liste-nue etiquettes" role="list" aria-label="Travaux réalisés">
       {travaux.map((travail) => <li>{travail}</li>)}
     </ul>
@@ -104,7 +103,7 @@ const travaux = ['Plans', 'Électricité', 'Plomberie', 'Ouverture sur le salon'
       monde, vos invités s'installent au salon et vous continuez à cuisiner sans être mis à l'écart.
     </p>
     <Fragment slot="photos">
-      <PhotoChantier photo={p['terminee-17-vue-plan-de-travail-vers-salon']} />
+      <PhotoChantier photo={p['terminee-21-ensemble-evier-plaque-lave-vaisselle']} />
       <Carrousel
         nom="Photos de la cuisine terminée"
         photos={[
