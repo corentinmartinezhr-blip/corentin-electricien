@@ -1,0 +1,158 @@
+---
+// Chantier : rénovation complète d'une cuisine (juillet à septembre 2026). Recherche visée : « rénovation cuisine Avignon ».
+// C'est la cuisine de Corentin : on ne parle jamais d'un client, et on le dit à la fin (choix de Corentin, 02/11/2026).
+// Accent mis sur l'électricité. Règles de la norme vérifiées (sources Legrand et EDF) : pas de « tout est conforme »,
+// seulement ce qui a été fait. Ne jamais annoncer la décennale ici (pas encore signée).
+// Fonds : brume (haut), puis ivoire et brume en alternance, olive pour le contact.
+import Base from '../../layouts/Base.astro';
+import IntroPage from '../../components/IntroPage.astro';
+import Etape from '../../components/realisations/Etape.astro';
+import Carrousel from '../../components/realisations/Carrousel.astro';
+import PhotoChantier from '../../components/realisations/PhotoChantier.astro';
+import Electricite from '../../components/realisations/cuisine/Electricite.astro';
+import Pose from '../../components/realisations/cuisine/Pose.astro';
+import AppelFinal from '../../components/AppelFinal.astro';
+import { entreprise } from '../../data/entreprise';
+import { photosCuisine as p } from '../../data/photos-renovation-cuisine';
+
+const travaux = ['Plans', 'Électricité', 'Plomberie', 'Ouverture sur le salon', 'Pose des meubles', 'Faïence', 'Peinture'];
+---
+
+<Base
+  title={`Rénovation de cuisine à ${entreprise.ville} : le chantier | Corentin`}
+  description="Rénovation d'une cuisine, étape par étape et en photos : électricité, plomberie, ouverture sur le salon, pose IKEA, plan de travail en bois et faïence."
+>
+  <IntroPage
+    surtitre="Rénovation de cuisine"
+    titre={`Rénovation complète d'une cuisine à ${entreprise.ville}`}
+    parent={{ texte: 'Réalisations', url: '/realisations/' }}
+    image={`/realisations/renovation-cuisine/${p['terminee-21-ensemble-evier-plaque-lave-vaisselle'].fichier}.webp`}
+    alt={p['terminee-21-ensemble-evier-plaque-lave-vaisselle'].alt}
+  >
+    <p>
+      De l'ancienne cuisine aux derniers carreaux de faïence, j'ai tout fait : les plans, l'électricité, la
+      plomberie, la pose des meubles, la faïence et la peinture. Voici le chantier, étape par étape.
+    </p>
+  </IntroPage>
+
+  <Etape id="projet" surtitre="Le projet" titre="Une cuisine plus pratique, ouverte sur le salon">
+    <p>
+      Avant, la cuisine n'avait qu'un seul plan de travail, le long d'un mur, et deux portes. Le but : ajouter un
+      deuxième plan de travail en L, ouvrir la cuisine sur le salon et encastrer la plupart des appareils.
+    </p>
+    <p>J'ai dessiné les plans avec l'outil de conception d'IKEA, avant de commander quoi que ce soit.</p>
+    <p><strong>Durée :</strong> de juillet à septembre 2026.</p>
+    <ul class="liste-nue etiquettes" role="list" aria-label="Travaux réalisés">
+      {travaux.map((travail) => <li>{travail}</li>)}
+    </ul>
+    <PhotoChantier slot="photos" photo={p['avant-01-ancienne-cuisine']} legende="Avant : un seul plan de travail, le long d'un mur." />
+  </Etape>
+
+  <Etape id="ouverture" surtitre="Étape 1" titre="Ouvrir la cuisine sur le salon" brume>
+    <p>
+      J'ai cassé la cloison côté salon pour créer deux arches : la lumière traverse et la cuisine profite de la pièce
+      à vivre. L'autre porte, je l'ai refermée avec des blocs de béton cellulaire, puis recouverte de plaque de
+      plâtre. La place gagnée a permis d'installer le plan de travail en L.
+    </p>
+    <PhotoChantier slot="photos" photo={p['avant-02-reprise-arche-sejour']} />
+  </Etape>
+
+  <Etape id="depose" surtitre="Étape 2" titre="Enlever l'ancienne cuisine">
+    <p>
+      Crédence, évier, four, plaque de cuisson, plan de travail, puis les meubles : tout part. À la fin, le mur est
+      nu et on voit les anciens tuyaux et les câbles.
+    </p>
+    <Carrousel
+      slot="photos"
+      nom="Photos de la dépose de l'ancienne cuisine"
+      photos={[
+        p['depose-01-credence-et-evier-retires'],
+        p['depose-02-four-retire'],
+        p['depose-03-plaque-de-cuisson-retiree'],
+        p['depose-04-plan-de-travail-et-caissons-retires'],
+        p['depose-05-mur-mis-a-nu-reseaux-apparents'],
+      ]}
+    />
+  </Etape>
+
+  <Electricite />
+  <Pose />
+
+  <Etape id="faience" surtitre="Étape 5" titre="La faïence" brume>
+    <p>
+      Au-dessus des plans de travail, j'ai posé des petits carreaux beiges (de chez Castorama) en diagonale. Avant
+      de coller, je trace le motif sur le mur : c'est le calepinage. Il permet de bien centrer les carreaux et
+      d'éviter les petits morceaux mal coupés sur les bords.
+    </p>
+    <Carrousel
+      slot="photos"
+      nom="Photos de la pose de la faïence"
+      photos={[
+        p['faience-01-calepinage-tracage'],
+        p['faience-02-mur-four-faience-posee'],
+        p['faience-04-pose-en-diagonale-detail'],
+        p['faience-06-decoupe-carreaux-angle'],
+        p['faience-07-encollage-angle'],
+        p['faience-09-cote-evier-termine'],
+      ]}
+    />
+  </Etape>
+
+  <Etape id="resultat" surtitre="Le résultat" titre="On cuisine face au salon">
+    <p>
+      Le plan de travail en L change tout : on coupe et on prépare en regardant vers le salon. Si vous recevez du
+      monde, vos invités s'installent au salon et vous continuez à cuisiner sans être mis à l'écart.
+    </p>
+    <Fragment slot="photos">
+      <PhotoChantier photo={p['terminee-17-vue-plan-de-travail-vers-salon']} />
+      <Carrousel
+        nom="Photos de la cuisine terminée"
+        photos={[
+          p['terminee-22-colonne-et-mur-four'],
+          p['terminee-11-deux-arches-vue-salon'],
+          p['terminee-12-arche-ouverture-cuisine'],
+          p['terminee-14-retour-en-l-plan-de-travail'],
+          p['terminee-18-robinet-et-evier-detail'],
+          p['terminee-23-meubles-hauts-ouverts-rangement'],
+        ]}
+      />
+    </Fragment>
+  </Etape>
+
+  <Etape id="lumiere" surtitre="Zoom sur l'électricité" titre="La lumière et les prises" brume>
+    <p>
+      Au plafond, un ventilateur avec une lumière intégrée (on l'appelle un brasseur d'air) éclaire toute la pièce et
+      rafraîchit l'été. Sous les meubles hauts, deux bandeaux LED éclairent chacun un plan de travail. À l'entrée de
+      la cuisine, un double interrupteur allume le ventilateur d'un côté, les LED de l'autre.
+    </p>
+    <Carrousel
+      slot="photos"
+      nom="Photos de l'éclairage et des prises"
+      photos={[
+        p['installation-31-eclairage-led-sous-meubles'],
+        p['terminee-05-credence-prises-eclairage-led'],
+        p['terminee-06-prises-credence'],
+        p['terminee-07-detail-prise-double'],
+        p['terminee-09-brasseur-air-lumiere-allumee'],
+        p['terminee-08-brasseur-air-plafonnier'],
+        p['terminee-10-double-interrupteur-et-telecommande'],
+      ]}
+    />
+  </Etape>
+
+  <Etape id="au-fait" surtitre="Et au fait…" titre="Cette cuisine, je la connais bien">
+    <p>
+      C'est la mienne. Je l'ai refaite de A à Z et je m'en sers tous les jours : je sais ce qui marche, et ce que
+      je changerais. Il me reste d'ailleurs quelques finitions, comme le sol. J'ai pris beaucoup de plaisir sur ce
+      chantier.
+    </p>
+    <PhotoChantier slot="photos" photo={p['conclusion-corentin-au-miroir']} legende="C'est moi, chez moi." />
+  </Etape>
+
+  <AppelFinal titre={'Un projet pour votre cuisine\u00a0?'} devis>
+    <p>
+      Ajouter des prises, créer une ligne pour un four ou une plaque de cuisson, refaire l'électricité de votre
+      cuisine : parlons-en. Le devis est gratuit.
+    </p>
+  </AppelFinal>
+</Base>

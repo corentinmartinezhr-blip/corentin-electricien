@@ -1,0 +1,49 @@
+---
+// Une photo seule, en grand, avec sa légende. Les photos en hauteur sont limitées pour ne pas remplir tout l'écran.
+// Deux tailles : 960 px (téléphones) et 1920 px (grands écrans).
+interface Props {
+  photo: { fichier: string; largeur: number; hauteur: number; alt: string };
+  /** Légende visible ; par défaut, le texte de remplacement de la photo. */
+  legende?: string;
+}
+
+const { photo, legende = photo.alt } = Astro.props;
+const dossier = '/realisations/renovation-cuisine';
+const enHauteur = photo.hauteur > photo.largeur;
+---
+
+<figure class:list={['photo-chantier', { 'photo-chantier--hauteur': enHauteur }]}>
+  <img
+    src={`${dossier}/${photo.fichier}-960.webp`}
+    srcset={`${dossier}/${photo.fichier}-960.webp 960w, ${dossier}/${photo.fichier}.webp 1920w`}
+    sizes={enHauteur ? '(min-width: 48rem) 22rem, 90vw' : '(min-width: 72rem) 46rem, 90vw'}
+    alt={photo.alt}
+    width={photo.largeur}
+    height={photo.hauteur}
+    loading="lazy"
+    decoding="async"
+  />
+  <figcaption>{legende}</figcaption>
+</figure>
+
+<style>
+  .photo-chantier {
+    max-width: 46rem;
+    margin: 2rem 0 0;
+  }
+
+  .photo-chantier--hauteur {
+    max-width: 22rem;
+  }
+
+  img {
+    width: 100%;
+    border-radius: var(--rayon);
+  }
+
+  figcaption {
+    margin-top: 0.5rem;
+    color: var(--gris-pierre);
+    font-size: 0.9375rem;
+  }
+</style>

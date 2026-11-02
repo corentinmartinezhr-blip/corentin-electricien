@@ -1,0 +1,40 @@
+---
+// Une étape d'un chantier : surtitre, titre, texte (slot par défaut) puis photos (slot « photos »).
+// Le fond alterne ivoire / brume d'une étape à l'autre (prop « brume »).
+interface Props {
+  id: string;
+  surtitre: string;
+  titre: string;
+  brume?: boolean;
+}
+
+const { id, surtitre, titre, brume = false } = Astro.props;
+---
+
+<section class:list={['section', { 'section--brume': brume }]} aria-labelledby={`${id}-titre`}>
+  <div class="conteneur">
+    <span class="surtitre">{surtitre}</span>
+    <h2 id={`${id}-titre`}>{titre}</h2>
+    <div class="etape__texte"><slot /></div>
+    <slot name="photos" />
+  </div>
+</section>
+
+<style>
+  /* Largeur de lecture pour le texte seulement : un carrousel placé entre deux paragraphes garde toute la largeur. */
+  .etape__texte :global(:is(p, h3, ul:not(.liste-nue))) {
+    max-width: 44rem;
+  }
+
+  .etape__texte :global(h3) {
+    margin-top: 2rem;
+  }
+
+  .etape__texte :global(ul:not(.liste-nue)) {
+    padding-left: 1.25rem;
+  }
+
+  .etape__texte :global(ul:not(.liste-nue) li + li) {
+    margin-top: 0.5rem;
+  }
+</style>
