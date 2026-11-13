@@ -11,6 +11,8 @@ export const entreprise = {
   siren: '894 455 559',
   siret: '894 455 559 00035',
   ville: 'Avignon',
+  // Lien de partage de la fiche Google (fourni par Corentin le 13/11/2026) : relie le site à la fiche aux yeux de Google.
+  ficheGoogle: 'https://share.google/yJXrbOiprBtoroMDe',
   telephoneAffiche: '06 83 78 69 11',
   telephoneInternational: '+33683786911',
   telephoneLien: 'tel:+33683786911',
