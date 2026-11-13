@@ -1,0 +1,29 @@
+name: Aperçu (temporaire, ne publie rien)
+# Construit le site sur une branche de travail et range le résultat dans la branche « apercu »
+# (le serveur ne lit que « production »). À supprimer avant fusion dans main.
+on:
+  push:
+    branches-ignore: [main, production, apercu]
+permissions:
+  contents: write
+jobs:
+  construire:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+      - run: npm install --no-audit --no-fund
+      - run: npm run build
+        env:
+          PUBLIC_SITE_ENV: preparation
+      - env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          cd dist
+          git init -q -b apercu
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A && git commit -q -m "Aperçu ${GITHUB_SHA::7}"
+          git push -q --force "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" apercu
