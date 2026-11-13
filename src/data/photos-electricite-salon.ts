@@ -3,6 +3,12 @@
 export const dossierSalon = '/realisations/electricite-salon';
 
 export const photosSalon = {
+  "couverture-avant-apres": {
+    "fichier": "renovation-maison-salon-couverture-avant-apres",
+    "largeur": 1920,
+    "hauteur": 1080,
+    "alt": "Avant et après : la saignée rebouchée au plâtre sur le pilier, puis le mur terminé avec son interrupteur près de la porte du couloir"
+  },
   "lumiere-01-avant-saignee-et-gaines-au-plafond": {
     "fichier": "renovation-maison-salon-lumiere-01-avant-saignee-et-gaines-au-plafond",
     "largeur": 1920,
