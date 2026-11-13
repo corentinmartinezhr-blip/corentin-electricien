@@ -20,11 +20,11 @@ const couverture = p['prise-04-apres-vue-d-ensemble'];
 
 <Base
   title={`Électricité encastrée dans un salon à ${entreprise.ville} | Corentin`}
-  description="Deux points d'interrupteurs en va-et-vient et un nouveau circuit de prises, encastrés dans les murs d'un salon : saignées, gaines, plâtre et finitions, en photos."
+  description={`À ${entreprise.ville}, deux points d'interrupteurs en va-et-vient et un nouveau circuit de prises encastrés dans un salon : saignées, gaines, plâtre, en photos.`}
 >
   <IntroPage
     surtitre="Électricité d'un salon"
-    titre="Électricité encastrée dans un salon : interrupteurs et prises"
+    titre={`Électricité encastrée dans un salon à ${entreprise.ville} : interrupteurs et prises`}
     parent={{ texte: 'Réalisations', url: '/realisations/' }}
     image={{ dossier, ...couverture }}
     alt={couverture.alt}

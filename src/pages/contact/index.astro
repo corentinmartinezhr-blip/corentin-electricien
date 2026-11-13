@@ -12,7 +12,7 @@ import { entreprise } from '../../data/entreprise';
   title="Contact – Électricien d'urgence à Avignon | Corentin"
   description={`Contactez Corentin, électricien d'urgence à Avignon : téléphone ou WhatsApp au ${entreprise.telephoneAffiche}, ${entreprise.horairesCourts}, ou formulaire avec photos.`}
 >
-  <IntroPage surtitre="Contact" titre="Une panne ? Parlons-en">
+  <IntroPage surtitre="Contact" titre={`Une panne à ${entreprise.ville} ? Parlons-en`}>
     <p>
       Appelez-moi, écrivez-moi sur WhatsApp ou remplissez le formulaire : je vous réponds moi-même,
       {entreprise.horaires}. Le déplacement et le devis sont gratuits.
