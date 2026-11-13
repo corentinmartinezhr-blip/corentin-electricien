@@ -4,6 +4,22 @@
   Les styles propres à une section vivent dans le composant de cette section.
 */
 
+/* Polices de repli, affichées une fraction de seconde avant l'arrivée des vraies polices. Elles sont agrandies
+   pour occuper la même largeur (rapports mesurés : Manrope/Arial, Playfair Display 600/Times gras) : le texte ne
+   change pas de ligne quand la vraie police arrive, donc la page ne bouge pas. */
+@font-face {
+  font-family: 'Repli Texte';
+  src: local('Arial'), local('Liberation Sans');
+  size-adjust: 102.8%;
+}
+
+@font-face {
+  font-family: 'Repli Titres';
+  src: local('Times New Roman Bold'), local('TimesNewRomanPS-BoldMT'), local('Liberation Serif Bold');
+  font-weight: 600;
+  size-adjust: 106.4%;
+}
+
 :root {
   /* Couleurs de la palette */
   --jaune-soleil: #F5C02E; /* éclair, boutons « Appeler ». Jamais en texte sur fond clair. */
@@ -21,8 +37,8 @@
   --bordure-champ: #857F73; /* contour des champs de formulaire : contraste ≥ 3:1 (WCAG AA) */
 
   /* Typographie (polices auto-hébergées via @fontsource, voir Base.astro) */
-  --font-titre: 'Playfair Display Variable', Georgia, 'Times New Roman', serif;
-  --font-texte: 'Manrope Variable', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-titre: 'Playfair Display Variable', 'Repli Titres', Georgia, 'Times New Roman', serif;
+  --font-texte: 'Manrope Variable', 'Repli Texte', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
 
   /* Mise en page */
   --largeur-max: 72rem;

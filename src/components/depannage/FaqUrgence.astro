@@ -1,5 +1,5 @@
 ---
-// FAQ « urgence » de la page Dépannage : une question par recherche fréquente (prix, délai, horaires,
+// FAQ « urgence » de la page Dépannage : une question par recherche fréquente (prix, délai, horaires, 24h/24,
 // symptômes, villes). Voir le benchmark « mots-clés » dans les documents du projet (30/10/2026).
 // Conseils de sécurité volontairement prudents : jamais démonter le tableau ni toucher un fil.
 // Prix, horaires, délai et villes viennent des données du site : ils suivent tout changement.
@@ -21,6 +21,10 @@ const questions = [
   {
     question: 'Intervenez-vous le soir, le dimanche et les jours fériés ?',
     reponse: `Oui, ${entreprise.horaires}. Le soir (19h–22h), je compte ${tauxHoraires.soir} TTC de l'heure ; le dimanche et les jours fériés, ${tauxHoraires.dimancheFeries}.`,
+  },
+  {
+    question: 'Faites-vous du dépannage en électricité 24h/24 ?',
+    reponse: `Non, pas la nuit. Je fais du dépannage en électricité ${entreprise.horaires}. La nuit, s'il y a de la fumée, des étincelles ou une odeur de brûlé, éloignez-vous et appelez les pompiers (18) ou le 112. Sinon, écrivez-moi sur WhatsApp : je vous réponds dès le matin.`,
   },
   {
     question: "Je n'ai plus de courant chez moi : que faire ?",

@@ -19,13 +19,13 @@ const couverture = p['01-machine-ouverte-par-le-dessus'];
 
 <Base
   title={`Dépannage lave-linge Miele à ${entreprise.ville} : la panne | Corentin`}
-  description="Un lave-linge Miele qui vidangeait sans arrêt, réparé sans changer de pièce : le diagnostic étape par étape, jusqu'à la corrosion sur la carte électronique."
+  description="Un lave-linge Miele qui vidangeait sans arrêt, réparé sans changer de pièce : le diagnostic étape par étape, jusqu'à la corrosion sur la carte."
 >
   <IntroPage
     surtitre="Dépannage lave-linge"
     titre="Dépannage d'un lave-linge Miele qui vidangeait sans arrêt"
     parent={{ texte: 'Réalisations', url: '/realisations/' }}
-    image={`${dossier}/${couverture.fichier}.webp`}
+    image={{ dossier, ...couverture }}
     alt={couverture.alt}
   >
     <p>

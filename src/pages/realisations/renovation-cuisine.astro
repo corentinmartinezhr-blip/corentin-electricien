@@ -26,7 +26,7 @@ const travaux = ['Plans', 'Électricité', 'Plomberie', 'Ouverture sur le salon'
     surtitre="Rénovation de cuisine"
     titre={`Rénovation complète d'une cuisine à ${entreprise.ville}`}
     parent={{ texte: 'Réalisations', url: '/realisations/' }}
-    image={`/realisations/renovation-cuisine/${p['terminee-17-vue-plan-de-travail-vers-salon'].fichier}.webp`}
+    image={{ dossier: '/realisations/renovation-cuisine', ...p['terminee-17-vue-plan-de-travail-vers-salon'] }}
     alt={p['terminee-17-vue-plan-de-travail-vers-salon'].alt}
   >
     <p>

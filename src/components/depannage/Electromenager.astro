@@ -20,12 +20,21 @@ const appareils = ['Lave-linge', 'Lave-vaisselle', 'Sèche-linge', 'Four', 'Plaq
       <ul class="liste-nue etiquettes" role="list">
         {appareils.map((appareil) => <li>{appareil}</li>)}
       </ul>
+      <!-- Lien vers un vrai dépannage raconté en photos : utile au lecteur, et Google trouve la page plus facilement. -->
+      <p class="exemple-chantier">
+        Un exemple en photos :
+        <a href="/realisations/depannage-lave-linge-miele/">le dépannage d'un lave-linge Miele, étape par étape</a>.
+      </p>
     </div>
     <GrilleTarifs titre="Même tarif que le dépannage" lignes={tarifElectromenager} />
   </div>
 </section>
 
 <style>
+  .exemple-chantier {
+    margin: 1.25rem 0 0;
+  }
+
   .electromenager {
     display: grid;
     align-items: center;
