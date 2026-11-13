@@ -77,9 +77,7 @@ const tailles = (photo: Photo) => {
     scroll-snap-align: start;
   }
 
-  /* La légende prend la largeur de la photo : espacement régulier entre les photos. */
   figure {
-    width: min-content;
     margin: 0;
   }
 
@@ -91,7 +89,10 @@ const tailles = (photo: Photo) => {
     border-radius: var(--rayon);
   }
 
+  /* La légende ne dépasse jamais la largeur de sa photo (width 0 + min-width 100 %) : espacement régulier. */
   figcaption {
+    width: 0;
+    min-width: 100%;
     margin-top: 0.5rem;
     color: var(--gris-pierre);
     font-size: 0.875rem;
