@@ -6,8 +6,10 @@ import Base from '../../layouts/Base.astro';
 import AppelFinal from '../../components/AppelFinal.astro';
 import { entreprise } from '../../data/entreprise';
 import { photosCuisine } from '../../data/photos-renovation-cuisine';
+import { dossierLaveLinge, photosLaveLinge } from '../../data/photos-depannage-lave-linge';
 
 const couvertureCuisine = photosCuisine['terminee-17-vue-plan-de-travail-vers-salon'];
+const couvertureLaveLinge = photosLaveLinge['01-machine-ouverte-par-le-dessus'];
 const chantiers = [
   {
     url: '/realisations/renovation-cuisine/',
@@ -19,6 +21,17 @@ const chantiers = [
     // Version 960 px : mêmes proportions que l'originale.
     largeur: 960,
     hauteur: Math.round((960 * couvertureCuisine.hauteur) / couvertureCuisine.largeur),
+  },
+  {
+    url: '/realisations/depannage-lave-linge-miele/',
+    titre: 'Dépannage d’un lave-linge Miele',
+    resume: 'Une pompe qui vidangeait sans arrêt : le diagnostic pas à pas, jusqu’à la corrosion sur la carte. Aucune pièce changée.',
+    travaux: ['Dépannage', 'Électroménager', 'Diagnostic'],
+    image: `${dossierLaveLinge}/${couvertureLaveLinge.fichier}-960.webp`,
+    alt: couvertureLaveLinge.alt,
+    // Version 960 px : le plus grand côté fait 960 px.
+    largeur: Math.round((960 * couvertureLaveLinge.largeur) / couvertureLaveLinge.hauteur),
+    hauteur: 960,
   },
 ];
 ---

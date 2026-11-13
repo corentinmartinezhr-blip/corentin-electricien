@@ -14,10 +14,11 @@ interface Props {
   photos: readonly Photo[];
   /** Nom du carrousel lu par les lecteurs d'écran, ex. « Photos de la dépose ». */
   nom: string;
+  /** Dossier des photos dans public/ (un par chantier). */
+  dossier?: string;
 }
 
-const { photos, nom } = Astro.props;
-const dossier = '/realisations/renovation-cuisine';
+const { photos, nom, dossier = '/realisations/renovation-cuisine' } = Astro.props;
 // Hauteur affichée (px) : 288 sur téléphone, 448 sur ordinateur (voir le CSS). Sert à choisir la bonne taille d'image.
 const tailles = (photo: Photo) => {
   const format = photo.largeur / photo.hauteur;

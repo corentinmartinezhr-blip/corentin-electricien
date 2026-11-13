@@ -22,7 +22,7 @@ const { id, surtitre, titre, brume = false } = Astro.props;
 
 <style>
   /* Largeur de lecture pour le texte seulement : un carrousel placé entre deux paragraphes garde toute la largeur. */
-  .etape__texte :global(:is(p, h3, ul:not(.liste-nue))) {
+  .etape__texte :global(:is(p, h3, ul:not(.liste-nue), ol)) {
     max-width: 44rem;
   }
 
@@ -30,11 +30,11 @@ const { id, surtitre, titre, brume = false } = Astro.props;
     margin-top: 2rem;
   }
 
-  .etape__texte :global(ul:not(.liste-nue)) {
+  .etape__texte :global(:is(ul:not(.liste-nue), ol)) {
     padding-left: 1.25rem;
   }
 
-  .etape__texte :global(ul:not(.liste-nue) li + li) {
+  .etape__texte :global(:is(ul:not(.liste-nue), ol) > li + li) {
     margin-top: 0.5rem;
   }
 </style>

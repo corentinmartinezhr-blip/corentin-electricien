@@ -5,10 +5,11 @@ interface Props {
   photo: { fichier: string; largeur: number; hauteur: number; alt: string };
   /** Légende visible ; par défaut, le texte de remplacement de la photo. */
   legende?: string;
+  /** Dossier des photos dans public/ (un par chantier). */
+  dossier?: string;
 }
 
-const { photo, legende = photo.alt } = Astro.props;
-const dossier = '/realisations/renovation-cuisine';
+const { photo, legende = photo.alt, dossier = '/realisations/renovation-cuisine' } = Astro.props;
 const enHauteur = photo.hauteur > photo.largeur;
 ---
 

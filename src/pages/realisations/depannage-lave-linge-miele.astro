@@ -1,0 +1,146 @@
+---
+// Chantier : dépannage du lave-linge Miele W542 de Corentin (novembre 2026). Recherche visée : « dépannage lave-linge Avignon ».
+// C'est sa machine : dit dès le chapeau. Réparation = diagnostic + nettoyage de la carte, aucune pièce changée.
+// Ne jamais écrire « je répare les cartes électroniques » (hors des compétences revendiquées par Corentin).
+// Corrosion = cause « la plus probable » (pas une certitude). Prix de la carte confirmés par Corentin (13/11/2026).
+// Photo du résultat (machine qui se remplit) à ajouter quand Corentin la fournit.
+import Base from '../../layouts/Base.astro';
+import IntroPage from '../../components/IntroPage.astro';
+import Etape from '../../components/realisations/Etape.astro';
+import Carrousel from '../../components/realisations/Carrousel.astro';
+import PhotoChantier from '../../components/realisations/PhotoChantier.astro';
+import Diagnostic from '../../components/realisations/lave-linge/Diagnostic.astro';
+import AppelFinal from '../../components/AppelFinal.astro';
+import { entreprise } from '../../data/entreprise';
+import { dossierLaveLinge as dossier, photosLaveLinge as p } from '../../data/photos-depannage-lave-linge';
+
+const couverture = p['01-machine-ouverte-par-le-dessus'];
+---
+
+<Base
+  title={`Dépannage lave-linge Miele à ${entreprise.ville} : la panne | Corentin`}
+  description="Un lave-linge Miele qui vidangeait sans arrêt, réparé sans changer de pièce : le diagnostic étape par étape, jusqu'à la corrosion sur la carte électronique."
+>
+  <IntroPage
+    surtitre="Dépannage lave-linge"
+    titre="Dépannage d'un lave-linge Miele qui vidangeait sans arrêt"
+    parent={{ texte: 'Réalisations', url: '/realisations/' }}
+    image={`${dossier}/${couverture.fichier}.webp`}
+    alt={couverture.alt}
+  >
+    <p>
+      Mon lave-linge Miele de 2005 vidangeait en permanence. Plutôt que de changer des pièces au hasard, j'ai cherché
+      la vraie cause, une vérification après l'autre. Le coupable : de la corrosion sur la carte électronique.
+    </p>
+  </IntroPage>
+
+  <Etape id="panne" surtitre="La panne" titre="Une pompe qui ne s'arrête plus">
+    <p>
+      Dès que je branchais la machine, la pompe de vidange (celle qui évacue l'eau) se mettait à tourner et ne
+      s'arrêtait plus. Impossible de lancer un programme : au bout d'un moment, le voyant « Vidange » clignotait en
+      rouge.
+    </p>
+    <p>
+      Deux indices dans l'histoire de la machine : le tambour bougeait trop depuis un moment, et j'étais passé à la
+      lessive en poudre, sans doute un peu trop dosée. Peu après, un sifflement aigu est apparu par moments, du côté
+      de l'électronique.
+    </p>
+  </Etape>
+
+  <Etape id="methode" surtitre="Étape 1" titre="Première étape : diagnostiquer la panne" brume>
+    <p>
+      Avant de toucher à quoi que ce soit, je diagnostique la panne. Une pompe qui tourne sans arrêt peut venir de cinq
+      endroits : la pompe, ses fils, la sécurité anti-fuite, la mesure du niveau d'eau, ou la carte électronique (le
+      « cerveau » de la machine). Je vérifie chaque piste, de la plus simple à la plus compliquée.
+    </p>
+    <p>
+      Une idée m'a guidé tout du long : une pompe ne décide rien. Si elle tourne, c'est que la carte lui envoie du
+      courant. La vraie question n'était donc pas « la pompe est-elle cassée ? », mais « pourquoi la carte
+      demande-t-elle de vider l'eau ? ».
+    </p>
+    <p>
+      Mes outils : un multimètre (l'appareil qui mesure l'électricité), les schémas électriques Miele, rangés dans la
+      machine, et la notice.
+    </p>
+    <PhotoChantier slot="photos" photo={p['03-schema-electrique-miele']} dossier={dossier} />
+  </Etape>
+
+  <Diagnostic />
+
+  <Etape id="decouverte" surtitre="La découverte" titre="De la corrosion sur la carte">
+    <p>En sortant la carte, la corrosion se voyait à l'œil nu :</p>
+    <ul>
+      <li>une ligne brun-rouge le long du bord, là où la carte glisse dans son support ;</li>
+      <li>une tache ronde, la trace d'une goutte séchée ;</li>
+      <li>des dépôts entre certaines pistes (les fines lignes de cuivre qui relient les composants).</li>
+    </ul>
+    <p>
+      Ces pistes mènent au capteur de niveau d'eau. Ce capteur envoie un signal très faible : un tout petit passage de
+      courant à travers l'humidité et la corrosion suffit à fausser la mesure. D'où vient l'humidité ? Le bac à
+      lessive est juste sous la carte : la poudre humide et la vapeur remontent facilement.
+    </p>
+    <Carrousel
+      slot="photos"
+      nom="Photos de la corrosion, avant et après nettoyage"
+      dossier={dossier}
+      photos={[
+        p['08-corrosion-le-long-du-bord-avant-nettoyage'],
+        p['09-tache-de-corrosion-avant-nettoyage'],
+        p['10-tache-de-corrosion-apres-nettoyage'],
+      ]}
+    />
+  </Etape>
+
+  <Etape id="reparation" surtitre="Étape 3" titre="La réparation" brume>
+    <ol>
+      <li>
+        <strong>Nettoyage</strong> des zones corrodées à l'alcool isopropylique et à la brosse à dents, puis essuyage
+        avec un chiffon microfibre. Sécher ne suffit pas : la corrosion attire l'humidité, il faut l'enlever.
+      </li>
+      <li>
+        <strong>Contrôle au multimètre :</strong> aucune piste n'était coupée. J'ai aussi vérifié le capteur de
+        pression, mon principal suspect : je n'y ai trouvé aucun défaut.
+      </li>
+      <li><strong>Séchage</strong> de la carte vers 45 °C, sur le plateau chauffant de mon imprimante 3D.</li>
+      <li>
+        <strong>Remise en route :</strong> la pompe reste arrêtée à l'allumage, et la machine lance de nouveau ses
+        programmes.
+      </li>
+    </ol>
+    <PhotoChantier slot="photos" photo={p['12-sechage-de-la-carte-sur-plateau-chauffant']} dossier={dossier} />
+  </Etape>
+
+  <Etape id="resultat" surtitre="Le résultat" titre="Aucune pièce changée">
+    <p>
+      La machine fonctionne à nouveau, sans aucune pièce changée. Coût : un flacon d'alcool isopropylique. Une carte
+      neuve coûte environ 340 €, une carte d'occasion autour de 100 €. En vérifiant chaque piste, j'ai aussi évité de
+      changer pour rien la pompe, le flotteur ou le tuyau.
+    </p>
+    <p>
+      C'est le nettoyage qui a fait repartir la machine : la corrosion est donc la cause la plus probable. Il me reste
+      à tout remonter et à changer les amortisseurs.
+    </p>
+    <h3>Pour que ça ne recommence pas</h3>
+    <ul>
+      <li>
+        <strong>Mettre moins de lessive en poudre</strong>, ou passer à la lessive liquide : trop de poudre fait
+        mousser et laisse des dépôts qui gardent l'humidité.
+      </li>
+      <li>
+        <strong>Protéger la carte</strong> avec un vernis spécial (vernis de tropicalisation) sur le bord et autour du
+        capteur.
+      </li>
+      <li>
+        <strong>Changer les amortisseurs</strong> : un tambour qui bouge trop use la machine et secoue l'électronique.
+      </li>
+    </ul>
+  </Etape>
+
+  <AppelFinal titre={'Votre lave-linge fait des siennes ?'}>
+    <p>
+      Une panne qui semble demander une pièce chère cache parfois une cause simple. Je cherche d'abord, et je ne
+      change une pièce que si c'est nécessaire. Voir
+      <a href="/depannage-electrique-avignon/#electromenager">le dépannage d'électroménager et mes tarifs</a>.
+    </p>
+  </AppelFinal>
+</Base>

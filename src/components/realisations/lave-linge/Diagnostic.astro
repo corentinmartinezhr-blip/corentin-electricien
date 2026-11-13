@@ -1,0 +1,102 @@
+---
+// Étape « diagnostic » du dépannage du lave-linge Miele : 5 vérifications en mots simples,
+// puis les mesures détaillées dans un bloc repliable (<details>, sans JavaScript) pour les curieux.
+// Faits tirés du résumé de Corentin (13/11/2026) : ne rien ajouter sans validation.
+import Etape from '../Etape.astro';
+import Carrousel from '../Carrousel.astro';
+import { dossierLaveLinge, photosLaveLinge as p } from '../../../data/photos-depannage-lave-linge';
+---
+
+<Etape id="diagnostic" surtitre="Étape 2" titre="Le diagnostic en 5 vérifications" brume>
+  <p>Toutes les vérifications se font machine débranchée.</p>
+  <ol class="verifications">
+    <li>
+      <strong>La sécurité anti-fuite.</strong> Un flotteur au fond de la machine lance la vidange s'il y a de l'eau
+      dans le bac. Le bac était sec et le flotteur fonctionnait. → Ce n'est pas lui.
+    </li>
+    <li>
+      <strong>Le tuyau du capteur de pression.</strong> Ce petit tuyau permet à la carte de savoir combien d'eau il
+      y a dans la cuve. Je l'ai débranché : la pompe tournait toujours. → Ce n'est pas le tuyau. Il était pourtant
+      couvert de dépôts de lessive : un indice pour la suite.
+    </li>
+    <li>
+      <strong>La pompe et ses fils.</strong> Pompe débranchée de la carte, elle s'arrête : c'est bien la carte qui
+      l'alimente. Mesurée, la pompe est en bon état. → Ce n'est pas la pompe.
+    </li>
+    <li>
+      <strong>La vidange.</strong> J'ai versé quelques litres d'eau dans le tambour : ils sont ressortis vite par le
+      tuyau. → Rien n'est bouché.
+    </li>
+    <li>
+      <strong>La notice.</strong> Le voyant « Vidange » seul veut dire : « il reste de l'eau après la vidange ». Or
+      la cuve était vide.
+    </li>
+  </ol>
+  <p>
+    Conclusion : la carte croyait la cuve pleine alors qu'elle était vide. Pour en être sûr, j'ai lancé un programme
+    sans la pompe : la machine refusait de prendre l'eau. Une machine qui voit sa cuve vide se remplit tout de suite.
+    Le problème venait donc de la mesure du niveau d'eau, sur la carte. Pendant longtemps, j'ai cru que c'était le
+    capteur de pression qui était en panne.
+  </p>
+  <p>
+    Dernier indice : quelques minutes de sèche-cheveux sur la carte calmaient la panne… puis elle revenait. Ça
+    sentait l'humidité. J'ai donc regardé la carte de très près.
+  </p>
+  <details class="carte curieux">
+    <summary>Pour les curieux : les mesures</summary>
+    <ul>
+      <li>Flotteur : 0,06 Ω au repos, circuit ouvert une fois soulevé. Flotteur ponté, la pompe tourne toujours.</li>
+      <li>Pompe : bobinage à 146 Ω, une valeur normale.</li>
+      <li>Porte ouverte, la pompe s'arrête : le neutre passe par le verrou de porte, comme sur le schéma.</li>
+      <li>
+        Triac (le composant qui commande la pompe) : aucun court-circuit à l'ohmmètre. Test partiel : un triac peut
+        ne fuir que sous 230 V.
+      </li>
+      <li>Capteur de niveau : aucune réaction à une légère aspiration dans son embout. Soudures à environ 0,5 Ω.</li>
+      <li>Après nettoyage : chaque piste à 0,1 Ω, aucune fuite entre pistes voisines.</li>
+    </ul>
+  </details>
+  <Carrousel
+    slot="photos"
+    nom="Photos du diagnostic"
+    dossier={dossierLaveLinge}
+    photos={[
+      p['02-vue-du-dessus-cuve-et-boitier-electronique'],
+      p['04-faisceau-electrique-et-tuyau'],
+      p['05-carte-electronique-cote-composants'],
+      p['06-carte-electronique-cote-composants-vue-2'],
+      p['07-carte-cote-soudures-vue-ensemble'],
+    ]}
+  />
+</Etape>
+
+<style>
+  .verifications {
+    max-width: 44rem;
+    padding-left: 1.25rem;
+  }
+
+  .verifications li + li {
+    margin-top: 0.75rem;
+  }
+
+  .curieux {
+    max-width: 44rem;
+    margin-top: 1.5rem;
+  }
+
+  summary {
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .curieux ul {
+    margin: 1rem 0 0;
+    padding-left: 1.25rem;
+    color: var(--gris-pierre);
+  }
+
+  .curieux li + li {
+    margin-top: 0.5rem;
+  }
+</style>
