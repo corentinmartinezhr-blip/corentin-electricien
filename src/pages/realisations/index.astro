@@ -7,9 +7,11 @@ import AppelFinal from '../../components/AppelFinal.astro';
 import { entreprise } from '../../data/entreprise';
 import { photosCuisine } from '../../data/photos-renovation-cuisine';
 import { dossierLaveLinge, photosLaveLinge } from '../../data/photos-depannage-lave-linge';
+import { dossierSalon, photosSalon } from '../../data/photos-electricite-salon';
 
 const couvertureCuisine = photosCuisine['terminee-17-vue-plan-de-travail-vers-salon'];
 const couvertureLaveLinge = photosLaveLinge['01-machine-ouverte-par-le-dessus'];
+const couvertureSalon = photosSalon['prise-04-apres-vue-d-ensemble'];
 const chantiers = [
   {
     url: '/realisations/renovation-cuisine/',
@@ -31,6 +33,17 @@ const chantiers = [
     alt: couvertureLaveLinge.alt,
     // Version 960 px : le plus grand côté fait 960 px.
     largeur: Math.round((960 * couvertureLaveLinge.largeur) / couvertureLaveLinge.hauteur),
+    hauteur: 960,
+  },
+  {
+    url: '/realisations/electricite-salon/',
+    titre: 'Électricité encastrée dans un salon',
+    resume: 'Deux points d’interrupteurs en va-et-vient et un nouveau circuit de prises, passés dans le mur : avant, plâtre, après.',
+    travaux: ['Électricité', 'Interrupteurs', 'Prises'],
+    image: `${dossierSalon}/${couvertureSalon.fichier}-960.webp`,
+    alt: couvertureSalon.alt,
+    // Version 960 px : le plus grand côté fait 960 px.
+    largeur: Math.round((960 * couvertureSalon.largeur) / couvertureSalon.hauteur),
     hauteur: 960,
   },
 ];

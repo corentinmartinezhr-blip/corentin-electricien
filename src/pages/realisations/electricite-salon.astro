@@ -1,0 +1,117 @@
+---
+// Chantier : électricité encastrée dans un salon (deux points d'interrupteurs en va-et-vient + un circuit de prises).
+// Page courte (demande de Corentin, 13/11/2026). On parle d'« un salon » : ni « chez moi », ni client.
+// Faits validés par Corentin : entrée (près de l'arche) = va-et-vient du plafonnier central ; près du couloir =
+// double interrupteur, un va-et-vient pour ce plafonnier et un autre pour un deuxième luminaire ; télécommande =
+// brasseur d'air. Circuit de prises : 5 prises encastrées (3 + 2), 8 prises en tout sur le circuit.
+// Section des câbles et calibre du disjoncteur non fournis : ne rien écrire à ce sujet.
+// Gaine : remplaçabilité des conducteurs (NF C 15-100, vérifié 13/11/2026) ; « règle du tiers » donnée comme règle
+// courante, pas comme article de la norme (aucune source ne cite l'article).
+import Base from '../../layouts/Base.astro';
+import IntroPage from '../../components/IntroPage.astro';
+import Etape from '../../components/realisations/Etape.astro';
+import Carrousel from '../../components/realisations/Carrousel.astro';
+import AppelFinal from '../../components/AppelFinal.astro';
+import { entreprise } from '../../data/entreprise';
+import { dossierSalon as dossier, photosSalon as p } from '../../data/photos-electricite-salon';
+
+const couverture = p['prise-04-apres-vue-d-ensemble'];
+---
+
+<Base
+  title={`Électricité encastrée dans un salon à ${entreprise.ville} | Corentin`}
+  description="Deux points d'interrupteurs en va-et-vient et un nouveau circuit de prises, encastrés dans les murs d'un salon : saignées, gaines, plâtre et finitions, en photos."
+>
+  <IntroPage
+    surtitre="Électricité d'un salon"
+    titre="Électricité encastrée dans un salon : interrupteurs et prises"
+    parent={{ texte: 'Réalisations', url: '/realisations/' }}
+    image={{ dossier, ...couverture }}
+    alt={couverture.alt}
+  >
+    <p>
+      De nouveaux interrupteurs et un nouveau circuit de prises, tout passé dans le mur : rien ne dépasse, ni fil, ni
+      baguette.
+    </p>
+  </IntroPage>
+
+  <Etape id="principe" surtitre="La méthode" titre="Comment on encastre">
+    <p>
+      Pour cacher un câble, je creuse d'abord une saignée : une rainure dans le mur. J'y pose une gaine (un tuyau souple),
+      puis je rebouche au plâtre. Une fois le mur repeint, on ne voit plus que l'interrupteur ou la prise.
+    </p>
+    <h3>Pourquoi une gaine, toujours</h3>
+    <p>
+      La norme électrique française, la NF&nbsp;C&nbsp;15-100, demande qu'on puisse remplacer un fil abîmé. Un fil noyé
+      dans le plâtre, on ne peut plus le changer sans casser le mur. Dans une gaine, on le retire et on en passe un neuf.
+      C'est pour ça qu'un câble noir classique (comme le 3G&nbsp;2,5, qui contient 3 fils), même avec son enveloppe, ne
+      s'encastre jamais directement : il passe dans une gaine.
+    </p>
+    <p>
+      Il ne faut pas non plus la bourrer. On ne la remplit pas à plus d'un tiers environ (la règle du tiers), pour que
+      les fils puissent glisser.
+    </p>
+    <p>
+      Deux façons de faire : la gaine préfilée, vendue avec les fils déjà dedans, ou la gaine vide dans laquelle on tire
+      les fils soi-même. Dans les deux cas, de simples fils suffisent : la gaine les protège déjà.
+    </p>
+  </Etape>
+
+  <Etape id="interrupteurs" surtitre="Chantier 1" titre="Allumer depuis deux endroits" brume>
+    <p>
+      Un va-et-vient permet d'allumer et d'éteindre la même lumière depuis deux endroits. Le plafonnier central, un
+      ventilateur de plafond avec lumière (on l'appelle un brasseur d'air), s'allume ainsi à l'entrée comme près du
+      couloir. Sa télécommande, rangée au mur, règle le ventilateur.
+    </p>
+    <h3>À l'entrée, près de l'arche</h3>
+    <p>Un interrupteur en va-et-vient pour le plafonnier central.</p>
+    <Carrousel
+      nom="Photos de l'interrupteur près de l'arche : avant, plâtre, après"
+      dossier={dossier}
+      photos={[
+        p['interrupteur-01-avant-gaine-dans-la-saignee'],
+        p['interrupteur-02-platre-saignee-rebouchee'],
+        p['interrupteur-03-apres-interrupteur-pres-de-l-arche'],
+      ]}
+    />
+    <h3>Près de la porte du couloir</h3>
+    <p>
+      Un double interrupteur : un va-et-vient pour le plafonnier central, et un autre va-et-vient pour un deuxième
+      luminaire.
+    </p>
+    <Carrousel
+      slot="photos"
+      nom="Photos de l'interrupteur près du couloir : avant, plâtre, après"
+      dossier={dossier}
+      photos={[
+        p['lumiere-01-avant-saignee-et-gaines-au-plafond'],
+        p['lumiere-02-platre-saignee-rebouchee'],
+        p['lumiere-03-apres-interrupteur-et-telecommande'],
+      ]}
+    />
+  </Etape>
+
+  <Etape id="prises" surtitre="Chantier 2" titre="Un nouveau circuit de prises">
+    <p>
+      5 prises encastrées : 3 côte à côte au ras de la plinthe, et 2 de l'autre côté de la pièce. Avec celles qui
+      existaient déjà, ce circuit alimente 8 prises en tout.
+    </p>
+    <Carrousel
+      slot="photos"
+      nom="Photos du circuit de prises : plâtre, après, gros plan"
+      dossier={dossier}
+      photos={[
+        p['prise-02-platre-saignee-rebouchee'],
+        p['prise-04-apres-vue-d-ensemble'],
+        p['prise-03-apres-prise-triple-encastree'],
+      ]}
+    />
+  </Etape>
+
+  <AppelFinal titre={'Des prises ou des interrupteurs en plus ?'} devis>
+    <p>
+      Je les encastre dans le mur, pour un rendu propre. Le devis est gratuit. Voir
+      <a href="/installation-electrique-avignon/">mes travaux d'installation et leurs temps estimés</a>.
+    </p>
+  </AppelFinal>
+</Base>
