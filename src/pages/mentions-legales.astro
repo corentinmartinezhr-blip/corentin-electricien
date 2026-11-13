@@ -1,10 +1,10 @@
 ---
 // Mentions légales (LCEN art. 6 ; Code de la consommation pour le médiateur). Données : src/data/entreprise.ts.
-// SIREN et médiateur s'affichent seuls dès qu'ils sont renseignés dans entreprise.ts.
+// Le médiateur s'affiche seul dès qu'il est renseigné dans entreprise.ts.
 import Base from '../layouts/Base.astro';
 import { entreprise, hebergeur, mediateur } from '../data/entreprise';
 
-const miseAJour = '30 octobre 2026';
+const miseAJour = '13 novembre 2026';
 ---
 
 <Base
@@ -24,7 +24,8 @@ const miseAJour = '30 octobre 2026';
         {entreprise.adresse.rue}, {entreprise.adresse.codePostal} {entreprise.adresse.ville}.<br />
         Téléphone&nbsp;: {entreprise.telephoneAffiche}. E-mail&nbsp;:
         <a href={`mailto:${entreprise.email}`}>{entreprise.email}</a>.<br />
-        {entreprise.siren ? `SIREN : ${entreprise.siren}.` : 'Immatriculation en cours.'}
+        Immatriculé au Répertoire national des entreprises (RNE). SIREN&nbsp;: {entreprise.siren}. SIRET&nbsp;:
+        {entreprise.siret}.
       </p>
       <p>Directeur de la publication&nbsp;: {entreprise.responsable}.</p>
 

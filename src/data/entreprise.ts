@@ -7,7 +7,9 @@ export const entreprise = {
   responsable: 'Corentin Martinez',
   statut: 'entrepreneur individuel (EI)',
   activite: 'Électricien : dépannage électrique et réparation d’électroménager',
-  siren: '', // À RENSEIGNER dès réception (immatriculation en cours) : il s'affichera seul dans les mentions légales.
+  // Immatriculation au Répertoire national des entreprises (RNE) le 05/11/2026, transmise par Corentin le 11/11/2026.
+  siren: '894 455 559',
+  siret: '894 455 559 00035',
   ville: 'Avignon',
   telephoneAffiche: '06 83 78 69 11',
   telephoneInternational: '+33683786911',

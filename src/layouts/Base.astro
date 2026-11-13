@@ -32,13 +32,15 @@ const urlCanonique = new URL(Astro.url.pathname, Astro.site).href;
 const imagePartage = { url: new URL('/partage.jpg', Astro.site).href, largeur: 1086, hauteur: 570 };
 
 // Données structurées : uniquement des informations exactes et publiques.
-// Le SIRET sera ajouté quand il existera ; le lien de la fiche Google (sameAs) dès qu'elle est validée.
+// Le lien de la fiche Google (sameAs) sera ajouté dès qu'elle est validée.
 // @id : un identifiant fixe, pour que Google relie toutes les pages à la même entreprise.
 const idEntreprise = new URL('/#entreprise', Astro.site).href;
 const fiche = {
   '@type': 'Electrician',
   '@id': idEntreprise,
   name: entreprise.nom,
+  legalName: `${entreprise.responsable} EI`,
+  identifier: { '@type': 'PropertyValue', propertyID: 'SIRET', value: entreprise.siret.replaceAll(' ', '') },
   description: `Dépannage électrique d'urgence à ${entreprise.ville}, ${entreprise.deplacement}, ${entreprise.horaires}.`,
   url: Astro.site?.href,
   telephone: entreprise.telephoneInternational,
