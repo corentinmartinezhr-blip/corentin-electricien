@@ -1,7 +1,7 @@
 ---
 import Icone from '../Icone.astro';
 
-// Chaque carte renvoie vers sa page dédiée. Installation mise de côté le 30/10/2026 : plus de carte.
+// Chaque carte renvoie vers sa page dédiée. Installation et Réalisations ajoutées le 14/11/2026 (demande de Corentin).
 const services = [
   {
     icone: 'eclair',
@@ -15,6 +15,18 @@ const services = [
     titre: 'Électroménager',
     texte: 'Votre lave-linge, votre four ou votre lave-vaisselle ne marche plus ? Je trouve ce qui ne va pas et je le répare.',
     lien: { url: '/depannage-electrique-avignon/#electromenager', texte: 'Électroménager et tarif' },
+  },
+  {
+    icone: 'prise',
+    titre: 'Installation électrique',
+    texte: 'Une prise à ajouter, une lampe à poser, un radiateur ou un tableau électrique à changer : je fais vos travaux avec soin.',
+    lien: { url: '/installation-electrique-avignon/', texte: 'Installation et tarifs' },
+  },
+  {
+    icone: 'outils',
+    titre: 'Mes réalisations en photos',
+    texte: 'Un tableau électrique remplacé, un lave-linge réparé, une cuisine refaite : mes chantiers racontés étape par étape.',
+    lien: { url: '/realisations/', texte: 'Voir mes réalisations' },
   },
 ] as const;
 ---
