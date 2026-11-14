@@ -1,0 +1,91 @@
+---
+// Chantier : remplacement d'un tableau électrique secondaire (étage d'une vieille maison) à Villeneuve-lès-Avignon.
+// Recherche visée : « remplacement tableau électrique » + ville (document « mots-clés »). Ville du chantier dans le H1.
+// Chantier chez un client (demande de Corentin, 14/11/2026). Ne pas parler du câble retiré (demande de Corentin).
+// Faits validés : pas de terre avant (prises 2 broches), terre ajoutée sur tous les circuits, prises Legrand avec terre,
+// tous les disjoncteurs changés (20 A / 2,5 mm² prises, 16 A / 1,5 mm² éclairage), différentiels 30 mA type A,
+// câble de 10 mm² depuis le tableau principal (section calculée), réserve laissée, ligne prévue pour une climatisation,
+// caches imprimés en 3D pour les peignes en attente, disjoncteurs fournis par le client.
+// Réserve : la norme demande au moins 20 % (Legrand) ; on n'écrit pas « 30 % de la norme ». Calibre VMC non confirmé :
+// pas de chiffre. La 3e rangée est vide : ne pas écrire « tableau conforme ».
+import Base from '../../layouts/Base.astro';
+import IntroPage from '../../components/IntroPage.astro';
+import Etape from '../../components/realisations/Etape.astro';
+import Carrousel from '../../components/realisations/Carrousel.astro';
+import PhotoChantier from '../../components/realisations/PhotoChantier.astro';
+import AppelFinal from '../../components/AppelFinal.astro';
+import { dossierTableau as dossier, photosTableau as p } from '../../data/photos-remplacement-tableau';
+
+const ville = 'Villeneuve-lès-Avignon';
+const couverture = p['03-apres-ferme-deux-vues'];
+---
+
+<Base
+  title={`Remplacement tableau électrique ${ville}`}
+  description={`À ${ville}, remplacement d'un tableau électrique : terre ajoutée sur tous les circuits, différentiels 30 mA, câble de 10 mm². En photos.`}
+>
+  <IntroPage
+    surtitre="Tableau électrique"
+    titre={`Remplacement d'un tableau électrique à ${ville}`}
+    parent={{ texte: 'Réalisations', url: '/realisations/' }}
+    image={{ dossier, ...couverture }}
+    alt={couverture.alt}
+  >
+    <p>
+      Une vieille maison sans prise de terre. J'ai remplacé le tableau électrique de l'étage, ajouté la terre sur tous
+      les circuits et posé des protections différentielles. Résultat : un tableau plus sûr, et prêt pour la suite.
+    </p>
+  </IntroPage>
+
+  <Etape id="avant" surtitre="Avant" titre="Un danger qu'on ne voit pas">
+    <p>
+      Chez ce client, les prises n'avaient que 2 trous : il n'y avait pas de terre. La terre, c'est un fil qui envoie le
+      courant dans le sol quand un appareil a un défaut. Sans elle, ce courant peut passer par la personne qui touche
+      l'appareil.
+    </p>
+    <Carrousel
+      slot="photos"
+      nom="Photos du tableau avant les travaux"
+      dossier={dossier}
+      photos={[p['01-avant-ancien-coffret'], p['02-avant-ouvert-cablage']]}
+    />
+  </Etape>
+
+  <Etape id="travaux" surtitre="Les travaux" titre="Ce que j'ai fait" brume>
+    <ul>
+      <li>
+        Un câble de 10 mm² tiré depuis le tableau principal, avec la section choisie par le calcul. Il a aussi permis de
+        refaire le raccordement à la terre.
+      </li>
+      <li>La terre ajoutée sur tous les circuits, et les prises à 2 trous remplacées par des prises Legrand avec terre.</li>
+      <li>
+        Tous les disjoncteurs changés, comme le prévoit la norme NF&nbsp;C&nbsp;15-100 : fils de 2,5&nbsp;mm² protégés
+        en 20&nbsp;A pour les prises, fils de 1,5&nbsp;mm² protégés en 16&nbsp;A pour l'éclairage, et un petit calibre
+        adapté pour la VMC.
+      </li>
+      <li>
+        Des interrupteurs différentiels 30&nbsp;mA de type&nbsp;A : ils coupent le courant dès qu'ils détectent une fuite,
+        avant qu'elle devienne dangereuse. Le type&nbsp;A réagit aussi aux fuites des appareils électroniques, comme les
+        plaques de cuisson ou les lave-linge.
+      </li>
+      <li>Une rangée presque entièrement réservée à la cuisine, l'autre pour le reste de l'étage.</li>
+    </ul>
+    <p>Le client avait acheté lui-même les disjoncteurs et les différentiels.</p>
+  </Etape>
+
+  <Etape id="suite" surtitre="Le résultat" titre="Un tableau prêt pour la suite">
+    <p>
+      J'ai laissé des emplacements libres, plus que les 20&nbsp;% demandés par la norme. Une ligne est déjà prévue pour
+      une future climatisation. Pour protéger les peignes laissés en attente (les barrettes qui relient les disjoncteurs
+      entre eux), j'ai dessiné des caches sur mesure et je les ai imprimés en 3D.
+    </p>
+    <PhotoChantier slot="photos" photo={p['04-apres-ouvert-cables-ranges']} dossier={dossier} />
+  </Etape>
+
+  <AppelFinal titre={'Un vieux tableau ou des prises sans terre ?'} devis>
+    <p>
+      Je vérifie votre installation et je vous dis ce qu'il faut changer. Le devis est gratuit. Voir
+      <a href="/installation-electrique-avignon/">mes travaux d'installation et leurs temps estimés</a>.
+    </p>
+  </AppelFinal>
+</Base>

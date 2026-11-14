@@ -8,10 +8,12 @@ import { entreprise } from '../../data/entreprise';
 import { photosCuisine } from '../../data/photos-renovation-cuisine';
 import { dossierLaveLinge, photosLaveLinge } from '../../data/photos-depannage-lave-linge';
 import { dossierSalon, photosSalon } from '../../data/photos-electricite-salon';
+import { dossierTableau, photosTableau } from '../../data/photos-remplacement-tableau';
 
 const couvertureCuisine = photosCuisine['terminee-17-vue-plan-de-travail-vers-salon'];
 const couvertureLaveLinge = photosLaveLinge['01-machine-ouverte-par-le-dessus'];
 const couvertureSalon = photosSalon['couverture-avant-apres'];
+const couvertureTableau = photosTableau['03-apres-ferme-deux-vues'];
 const chantiers = [
   {
     url: '/realisations/renovation-cuisine/',
@@ -45,6 +47,17 @@ const chantiers = [
     // Version 960 px (photo en largeur) : mêmes proportions que l'originale.
     largeur: 960,
     hauteur: Math.round((960 * couvertureSalon.hauteur) / couvertureSalon.largeur),
+  },
+  {
+    url: '/realisations/remplacement-tableau-electrique/',
+    titre: 'Remplacement d’un tableau électrique',
+    resume: 'À Villeneuve-lès-Avignon, une maison sans terre : nouveau tableau, terre sur tous les circuits et différentiels 30 mA.',
+    travaux: ['Tableau électrique', 'Mise à la terre', 'Sécurité'],
+    image: `${dossierTableau}/${couvertureTableau.fichier}-960.webp`,
+    alt: couvertureTableau.alt,
+    // Version 960 px (photo en largeur) : mêmes proportions que l'originale.
+    largeur: 960,
+    hauteur: Math.round((960 * couvertureTableau.hauteur) / couvertureTableau.largeur),
   },
 ];
 ---
