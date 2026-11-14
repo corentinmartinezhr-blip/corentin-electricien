@@ -1,0 +1,97 @@
+---
+// Cartes de chantiers : photo, titre, résumé et étiquettes, chacune menant à la page du chantier.
+// Utilisées par le catalogue (/realisations/) et par la page Installation : le texte complet d'un chantier
+// n'existe que sur sa page (pas de contenu en double pour Google), les cartes y mènent par un lien.
+import type { chantiers as listeChantiers } from '../../data/chantiers';
+
+interface Props {
+  chantiers: typeof listeChantiers;
+  /** Niveau du titre de chaque carte : h2 sur le catalogue, h3 dans une section qui a déjà son h2. */
+  niveau?: 'h2' | 'h3';
+  /** Photos chargées en priorité (catalogue : elles sont en haut de page). Ailleurs : chargées à l'approche. */
+  prioritaires?: boolean;
+}
+
+const { chantiers, niveau: Titre = 'h2', prioritaires = false } = Astro.props;
+---
+
+<ul class="liste-nue chantiers" role="list">
+  {
+    chantiers.map((chantier) => (
+      <li class="carte chantier">
+        <img
+          src={chantier.image}
+          alt={chantier.alt}
+          width={chantier.largeur}
+          height={chantier.hauteur}
+          fetchpriority={prioritaires ? 'high' : undefined}
+          loading={prioritaires ? undefined : 'lazy'}
+          decoding="async"
+        />
+        <div class="chantier__texte">
+          <Titre class="chantier__titre">
+            <a href={chantier.url}>{chantier.titre}</a>
+          </Titre>
+          <p>{chantier.resume}</p>
+          <ul class="liste-nue etiquettes" role="list">
+            {chantier.travaux.map((travail) => <li>{travail}</li>)}
+          </ul>
+        </div>
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .chantiers {
+    display: grid;
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  /* Toute la carte est cliquable (le lien du titre s'étend sur la carte). */
+  .chantier {
+    position: relative;
+    overflow: hidden;
+    padding: 0;
+  }
+
+  .chantier img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+  }
+
+  .chantier__texte {
+    padding: 1.5rem;
+  }
+
+  /* :global : le titre est une balise choisie à la volée (h2 ou h3). */
+  .chantier__texte :global(.chantier__titre) {
+    font-size: 1.25rem;
+  }
+
+  .chantier__texte :global(.chantier__titre a) {
+    text-decoration: none;
+  }
+
+  .chantier__texte :global(.chantier__titre a::after) {
+    content: '';
+    position: absolute;
+    inset: 0;
+  }
+
+  .chantier__texte :global(.chantier__titre a:hover) {
+    text-decoration: underline;
+  }
+
+  .chantier p {
+    margin-bottom: 1rem;
+  }
+
+  @media (min-width: 48rem) {
+    .chantiers {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

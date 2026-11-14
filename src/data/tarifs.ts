@@ -76,7 +76,8 @@ export const interventionsInstallation: GroupeForfaits[] = [
       { prestation: 'Lumière extérieure ou détecteur de présence', detail: 'Là où un fil électrique arrive déjà', prix: 'Environ 1 h' },
       { prestation: 'Remplacer un radiateur ou un sèche-serviettes', prix: 'Environ 1 h' },
       { prestation: 'Thermostat ou programmateur de radiateur', prix: 'Moins d’1 h' },
-      { prestation: 'Détecteur de fumée', prix: 'Moins d’1 h' },
+      { prestation: 'Détecteur de fumée', prix: 'Moins d’1 h' },
+      { prestation: 'Entretien d’une VMC', prix: 'Environ 1 h' },
     ],
   },
   {
@@ -86,7 +87,8 @@ export const interventionsInstallation: GroupeForfaits[] = [
       { prestation: 'Interphone ou visiophone', prix: '2 à 4 h' },
       { prestation: 'Ligne dédiée (plaque, four, lave-linge…)', detail: 'Un nouveau câble depuis le tableau', prix: '4 à 8 h' },
       { prestation: 'Prise renforcée pour voiture électrique', detail: 'Jusqu’à 3,7 kW', prix: '4 à 8 h' },
-      { prestation: 'Remplacement du tableau électrique', prix: '1 à 2 jours' },
+      { prestation: 'Pose d’une VMC', detail: 'Salle de bain, WC, cuisine', prix: 'Sur devis' },
+      { prestation: 'Remplacement du tableau électrique', prix: '1 à 2 jours' },
     ],
   },
 ];

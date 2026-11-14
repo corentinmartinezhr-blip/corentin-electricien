@@ -1,86 +1,27 @@
 ---
-// Photos de chantiers de Corentin (sans élément permettant d'identifier l'adresse d'un client).
-// WebP déjà compressés par Corentin (public/realisations/) : servis tels quels, sans recompression.
-import { entreprise } from '../../data/entreprise';
+// Chantiers d'installation, tirés de la rubrique Réalisations (src/data/chantiers.ts) : des cartes qui mènent
+// à la page de chaque chantier. Remplace la galerie de photos du 29/10/2026 (demande de Corentin, 14/11/2026).
+// Le récit d'un chantier n'est écrit que sur sa page : pas de texte en double, et des liens utiles à Google.
+import CartesChantiers from '../realisations/CartesChantiers.astro';
+import { chantiers } from '../../data/chantiers';
 
-const photos = [
-  { fichier: 'prises-plan-travail', legende: 'Prises sur le plan de travail d’une cuisine' },
-  { fichier: 'prise-cuisine-double', legende: 'Double prise dans le mur de la cuisine' },
-  { fichier: 'prise-salon-triple', legende: 'Triple prise dans un salon' },
-  { fichier: 'interrupteur-telecommande', legende: 'Interrupteur double et télécommande murale' },
-  { fichier: 'brasseur-air-allume', legende: 'Ventilateur de plafond avec éclairage' },
-  { fichier: 'brasseur-air', legende: 'Ventilateur de plafond' },
-];
+const chantiersInstallation = chantiers.filter((chantier) => chantier.installation);
 ---
 
 <section class="section" aria-labelledby="realisations-titre">
   <div class="conteneur">
     <span class="surtitre">Réalisations</span>
     <h2 id="realisations-titre">Quelques chantiers récents</h2>
-    <ul class="liste-nue galerie" role="list">
-      {
-        photos.map(({ fichier, legende }) => (
-          <li>
-            <figure>
-              <img
-                src={`/realisations/${fichier}.webp`}
-                alt={`${legende} : travail de Corentin, électricien à ${entreprise.ville}`}
-                width="1920"
-                height="1080"
-                loading="lazy"
-                decoding="async"
-              />
-              <figcaption>{legende}</figcaption>
-            </figure>
-          </li>
-        ))
-      }
-    </ul>
-    <p class="lien-chantier">
-      <a href="/realisations/renovation-cuisine/">Voir la rénovation complète d’une cuisine, étape par étape</a>
+    <CartesChantiers chantiers={chantiersInstallation} niveau="h3" />
+    <p class="lien-chantiers">
+      <a href="/realisations/">Voir toutes mes réalisations</a>
     </p>
   </div>
 </section>
 
 <style>
-  .galerie {
-    display: grid;
-    gap: 1rem;
-    margin-top: 2rem;
-  }
-
-  figure {
-    margin: 0;
-  }
-
-  img {
-    width: 100%;
-    aspect-ratio: 4 / 3;
-    object-fit: cover;
-    border-radius: var(--rayon);
-  }
-
-  figcaption {
-    margin-top: 0.5rem;
-    color: var(--gris-pierre);
-    font-size: 0.9375rem;
-  }
-
-  .lien-chantier {
+  .lien-chantiers {
     margin: 2rem 0 0;
     font-weight: 700;
-  }
-
-  @media (min-width: 40rem) {
-    .galerie {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-
-  @media (min-width: 64rem) {
-    .galerie {
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-    }
   }
 </style>

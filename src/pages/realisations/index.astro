@@ -1,65 +1,12 @@
 ---
 // Catalogue des chantiers : /realisations/. Une carte par chantier, chacun avec sa page détaillée.
-// Pour ajouter un chantier : une page dans src/pages/realisations/ et une entrée dans « chantiers » ci-dessous.
+// Pour ajouter un chantier : une page dans src/pages/realisations/ et une entrée dans src/data/chantiers.ts.
 // Pas de haut de page avec photo (demande de Corentin, 02/11/2026) : le titre, puis directement les chantiers.
 import Base from '../../layouts/Base.astro';
 import AppelFinal from '../../components/AppelFinal.astro';
 import { entreprise } from '../../data/entreprise';
-import { photosCuisine } from '../../data/photos-renovation-cuisine';
-import { dossierLaveLinge, photosLaveLinge } from '../../data/photos-depannage-lave-linge';
-import { dossierSalon, photosSalon } from '../../data/photos-electricite-salon';
-import { dossierTableau, photosTableau } from '../../data/photos-remplacement-tableau';
-
-const couvertureCuisine = photosCuisine['terminee-17-vue-plan-de-travail-vers-salon'];
-const couvertureLaveLinge = photosLaveLinge['01-machine-ouverte-par-le-dessus'];
-const couvertureSalon = photosSalon['couverture-avant-apres'];
-const couvertureTableau = photosTableau['04-apres-ouvert-cables-ranges'];
-const chantiers = [
-  {
-    url: '/realisations/renovation-cuisine/',
-    titre: 'Rénovation complète d’une cuisine',
-    resume: 'Électricité, plomberie, ouverture sur le salon, pose des meubles et faïence : le chantier étape par étape.',
-    travaux: ['Électricité', 'Plomberie', 'Pose de cuisine', 'Faïence'],
-    image: `/realisations/renovation-cuisine/${couvertureCuisine.fichier}-960.webp`,
-    alt: couvertureCuisine.alt,
-    // Version 960 px : mêmes proportions que l'originale.
-    largeur: 960,
-    hauteur: Math.round((960 * couvertureCuisine.hauteur) / couvertureCuisine.largeur),
-  },
-  {
-    url: '/realisations/depannage-lave-linge-miele/',
-    titre: 'Dépannage d’un lave-linge Miele',
-    resume: 'Une pompe qui vidangeait sans arrêt : le diagnostic pas à pas, jusqu’à la corrosion sur la carte. Aucune pièce changée.',
-    travaux: ['Dépannage', 'Électroménager', 'Diagnostic'],
-    image: `${dossierLaveLinge}/${couvertureLaveLinge.fichier}-960.webp`,
-    alt: couvertureLaveLinge.alt,
-    // Version 960 px : le plus grand côté fait 960 px.
-    largeur: Math.round((960 * couvertureLaveLinge.largeur) / couvertureLaveLinge.hauteur),
-    hauteur: 960,
-  },
-  {
-    url: '/realisations/electricite-salon/',
-    titre: 'Électricité encastrée dans un salon',
-    resume: 'Deux points d’interrupteurs en va-et-vient et un nouveau circuit de prises, passés dans le mur : avant, plâtre, après.',
-    travaux: ['Électricité', 'Interrupteurs', 'Prises'],
-    image: `${dossierSalon}/${couvertureSalon.fichier}-960.webp`,
-    alt: couvertureSalon.alt,
-    // Version 960 px (photo en largeur) : mêmes proportions que l'originale.
-    largeur: 960,
-    hauteur: Math.round((960 * couvertureSalon.hauteur) / couvertureSalon.largeur),
-  },
-  {
-    url: '/realisations/remplacement-tableau-electrique/',
-    titre: 'Remplacement d’un tableau électrique',
-    resume: 'À Villeneuve-lès-Avignon, une maison sans terre : nouveau tableau, terre sur tous les circuits et différentiels 30 mA.',
-    travaux: ['Tableau électrique', 'Mise à la terre', 'Sécurité'],
-    image: `${dossierTableau}/${couvertureTableau.fichier}-960.webp`,
-    alt: couvertureTableau.alt,
-    // Version 960 px (photo en hauteur) : le plus grand côté fait 960 px.
-    largeur: Math.round((960 * couvertureTableau.largeur) / couvertureTableau.hauteur),
-    hauteur: 960,
-  },
-];
+import CartesChantiers from '../../components/realisations/CartesChantiers.astro';
+import { chantiers } from '../../data/chantiers';
 ---
 
 <Base
@@ -69,31 +16,7 @@ const chantiers = [
   <section class="section" aria-labelledby="chantiers-titre">
     <div class="conteneur">
       <h1 id="chantiers-titre">Mes réalisations d'électricien à {entreprise.ville}</h1>
-      <ul class="liste-nue chantiers" role="list">
-        {
-          chantiers.map((chantier) => (
-            <li class="carte chantier">
-              <img
-                src={chantier.image}
-                alt={chantier.alt}
-                width={chantier.largeur}
-                height={chantier.hauteur}
-                fetchpriority="high"
-                decoding="async"
-              />
-              <div class="chantier__texte">
-                <h2>
-                  <a href={chantier.url}>{chantier.titre}</a>
-                </h2>
-                <p>{chantier.resume}</p>
-                <ul class="liste-nue etiquettes" role="list">
-                  {chantier.travaux.map((travail) => <li>{travail}</li>)}
-                </ul>
-              </div>
-            </li>
-          ))
-        }
-      </ul>
+      <CartesChantiers chantiers={chantiers} prioritaires />
     </div>
   </section>
 
@@ -105,56 +28,5 @@ const chantiers = [
 <style>
   h1 {
     font-size: clamp(2rem, 5.5vw, 3rem);
-  }
-
-  .chantier h2 {
-    font-size: 1.25rem;
-  }
-
-  .chantiers {
-    display: grid;
-    gap: 1.5rem;
-    margin-top: 2rem;
-  }
-
-  /* Toute la carte est cliquable (le lien du titre s'étend sur la carte). */
-  .chantier {
-    position: relative;
-    overflow: hidden;
-    padding: 0;
-  }
-
-  .chantier img {
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    object-fit: cover;
-  }
-
-  .chantier__texte {
-    padding: 1.5rem;
-  }
-
-  .chantier h2 a {
-    text-decoration: none;
-  }
-
-  .chantier h2 a::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-  }
-
-  .chantier h2 a:hover {
-    text-decoration: underline;
-  }
-
-  .chantier p {
-    margin-bottom: 1rem;
-  }
-
-  @media (min-width: 48rem) {
-    .chantiers {
-      grid-template-columns: repeat(2, 1fr);
-    }
   }
 </style>
