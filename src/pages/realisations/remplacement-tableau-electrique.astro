@@ -12,7 +12,6 @@ import Base from '../../layouts/Base.astro';
 import IntroPage from '../../components/IntroPage.astro';
 import Etape from '../../components/realisations/Etape.astro';
 import Carrousel from '../../components/realisations/Carrousel.astro';
-import PhotoChantier from '../../components/realisations/PhotoChantier.astro';
 import AppelFinal from '../../components/AppelFinal.astro';
 import { dossierTableau as dossier, photosTableau as p } from '../../data/photos-remplacement-tableau';
 
@@ -79,7 +78,12 @@ const couverture = p['04-apres-ouvert-cables-ranges'];
       une future climatisation. Pour protéger les peignes laissés en attente (les barrettes qui relient les disjoncteurs
       entre eux), j'ai dessiné des caches sur mesure et je les ai imprimés en 3D.
     </p>
-    <PhotoChantier slot="photos" photo={p['03-apres-ferme-deux-vues']} dossier={dossier} />
+    <Carrousel
+      slot="photos"
+      nom="Photos du nouveau tableau, ouvert et fermé"
+      dossier={dossier}
+      photos={[p['04-apres-ouvert-cables-ranges'], p['03-apres-ferme-deux-vues']]}
+    />
   </Etape>
 
   <AppelFinal titre={'Un vieux tableau ou des prises sans terre ?'} devis>
