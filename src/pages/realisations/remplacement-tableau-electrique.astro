@@ -17,7 +17,7 @@ import AppelFinal from '../../components/AppelFinal.astro';
 import { dossierTableau as dossier, photosTableau as p } from '../../data/photos-remplacement-tableau';
 
 const ville = 'Villeneuve-lès-Avignon';
-const couverture = p['03-apres-ferme-deux-vues'];
+const couverture = p['04-apres-ouvert-cables-ranges'];
 ---
 
 <Base
@@ -79,7 +79,7 @@ const couverture = p['03-apres-ferme-deux-vues'];
       une future climatisation. Pour protéger les peignes laissés en attente (les barrettes qui relient les disjoncteurs
       entre eux), j'ai dessiné des caches sur mesure et je les ai imprimés en 3D.
     </p>
-    <PhotoChantier slot="photos" photo={p['04-apres-ouvert-cables-ranges']} dossier={dossier} />
+    <PhotoChantier slot="photos" photo={p['03-apres-ferme-deux-vues']} dossier={dossier} />
   </Etape>
 
   <AppelFinal titre={'Un vieux tableau ou des prises sans terre ?'} devis>
