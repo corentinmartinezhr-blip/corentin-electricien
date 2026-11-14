@@ -7,6 +7,7 @@ Le cadrage de référence est la note de cadrage V3 (Claude Docs : https://claud
 
 - Site vitrine de Corentin, artisan électricien indépendant à Avignon. Tout le site est en français.
 - Corentin n'est pas développeur : on lui parle simplement, sans jargon, et on ne lui demande jamais de taper de commande.
+- Quand on lui donne son SIREN ou son SIRET dans la conversation : toujours sans espaces (89445555900035), prêt à copier-coller (demande de Corentin, 14/11/2026 : les espaces font échouer les formulaires).
 - Il voit chaque modification directement sur le vrai site (pas de site de test, à sa demande) : on lui explique ce qui va changer avant d'envoyer.
 
 ## Positionnement (choisi par Corentin le 30/10/2026)
