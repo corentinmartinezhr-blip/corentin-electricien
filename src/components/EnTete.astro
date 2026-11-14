@@ -1,10 +1,12 @@
 ---
 // En-tête : logo à gauche ; à droite, le menu puis le bouton d'appel.
+// Sur téléphone, le menu se déplie avec un bouton (depuis le 14/11/2026 : 4 pages ne tiennent plus sur une ligne).
 import Icone from './Icone.astro';
 import { entreprise } from '../data/entreprise';
 import { menu } from '../data/navigation';
 
 const cheminActuel = Astro.url.pathname;
+const liens = menu.map((lien) => ({ ...lien, actuel: cheminActuel.startsWith(lien.url) ? ('page' as const) : undefined }));
 ---
 
 <header class="en-tete">
@@ -12,17 +14,12 @@ const cheminActuel = Astro.url.pathname;
     <a class="en-tete__logo" href="/">
       <img src="/logo/logo-horizontal.svg" alt={`${entreprise.nom}, retour à l'accueil`} width="1188" height="500" />
     </a>
+    <!-- Ordinateur : le menu en ligne. -->
     <nav class="en-tete__nav" aria-label="Menu principal">
       <ul class="liste-nue en-tete__menu" role="list">
-        {
-          menu.map(({ url, texte }) => (
-            <li>
-              <a href={url} aria-current={cheminActuel.startsWith(url) ? 'page' : undefined}>
-                {texte}
-              </a>
-            </li>
-          ))
-        }
+        {liens.map(({ url, texte, actuel }) => (
+          <li><a href={url} aria-current={actuel}>{texte}</a></li>
+        ))}
       </ul>
     </nav>
     <a
@@ -34,38 +31,46 @@ const cheminActuel = Astro.url.pathname;
       <Icone nom="telephone" taille={18} />
       {entreprise.telephoneAffiche}
     </a>
+    <!-- Téléphone : quatre pages ne tiennent pas sur une ligne, le menu se déplie (balise <details>, sans JavaScript). -->
+    <details class="en-tete__repli">
+      <summary aria-label="Menu">
+        <span class="repli__ouvrir"><Icone nom="menu" taille={24} /></span>
+        <span class="repli__fermer"><Icone nom="fermer" taille={24} /></span>
+      </summary>
+      <nav aria-label="Menu principal">
+        <ul class="liste-nue" role="list">
+          <li><a href="/" aria-current={cheminActuel === '/' ? 'page' : undefined}>Accueil</a></li>
+          {liens.map(({ url, texte, actuel }) => (
+            <li><a href={url} aria-current={actuel}>{texte}</a></li>
+          ))}
+        </ul>
+      </nav>
+    </details>
   </div>
 </header>
 
 <style>
   .en-tete {
+    position: relative; /* repère du menu déplié sur téléphone */
     border-bottom: 1px solid var(--bordure);
     background: var(--ivoire);
   }
 
-  /* Mobile : logo et bouton d'appel sur la 1re ligne, menu sur la 2e. */
+  /* Téléphone : logo, bouton d'appel et bouton du menu sur une ligne. */
   .en-tete__grille {
     display: grid;
-    grid-template-areas:
-      'logo appel'
-      'nav nav';
-    grid-template-columns: 1fr auto;
+    grid-template-columns: 1fr auto auto;
     align-items: center;
-    column-gap: 1rem;
+    column-gap: 0.75rem;
     padding-block: 0.75rem;
   }
 
-  .en-tete__logo {
-    grid-area: logo;
-  }
-
   .en-tete__logo img {
-    width: clamp(7rem, 30vw, 11.5rem);
+    width: clamp(6rem, 28vw, 11.5rem);
   }
 
   .en-tete__nav {
-    grid-area: nav;
-    margin-top: 0.5rem;
+    display: none;
   }
 
   .en-tete__menu {
@@ -81,7 +86,7 @@ const cheminActuel = Astro.url.pathname;
   }
 
   .en-tete__menu a:hover,
-  .en-tete__menu a[aria-current='page'] {
+  .en-tete a[aria-current='page'] {
     text-decoration: underline;
     text-decoration-color: var(--jaune-soleil);
     text-decoration-thickness: 3px;
@@ -91,32 +96,82 @@ const cheminActuel = Astro.url.pathname;
   /* Le numéro est écrit sur le bouton : on peut le lire ou le recopier, et le clic garde son effet
      (appel sur téléphone, copie sur ordinateur). */
   .en-tete__appel {
-    grid-area: appel;
     min-height: 2.75rem;
     padding: 0.55rem 0.9rem;
     font-size: 0.875rem;
     white-space: nowrap;
   }
 
-  /* Très petits écrans : l'icône s'efface pour que le numéro tienne à côté du logo. */
+  /* Bouton du menu : un carré de 44 px, facile à toucher. */
+  .en-tete__repli summary {
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border: 2px solid var(--vert-olive);
+    border-radius: var(--rayon);
+    list-style: none;
+    cursor: pointer;
+  }
+
+  .en-tete__repli summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .en-tete__repli summary span {
+    display: grid;
+  }
+
+  .en-tete__repli:not([open]) .repli__fermer,
+  .en-tete__repli[open] .repli__ouvrir {
+    display: none;
+  }
+
+  /* Menu déplié : sous l'en-tête, sur toute la largeur, par-dessus la page. */
+  .en-tete__repli nav {
+    position: absolute;
+    z-index: 10;
+    top: 100%;
+    right: 0;
+    left: 0;
+    border-bottom: 1px solid var(--bordure);
+    background: var(--ivoire);
+    box-shadow: 0 0.75rem 1.5rem -1rem var(--vert-olive);
+  }
+
+  .en-tete__repli li + li {
+    border-top: 1px solid var(--bordure);
+  }
+
+  .en-tete__repli nav a {
+    display: block;
+    padding: 0.9rem var(--gouttiere, 1rem);
+    font-size: 1.125rem;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  /* Très petits écrans : l'icône du téléphone s'efface pour que le numéro tienne. */
   @media (max-width: 22rem) {
     .en-tete__appel :global(svg) {
       display: none;
     }
   }
 
-  /* Ordinateur : tout sur une ligne, menu juste à gauche du bouton. */
+  /* Ordinateur : menu en ligne juste à gauche du bouton d'appel, pas de menu à déplier. */
   @media (min-width: 48rem) {
     .en-tete__grille {
-      grid-template-areas: 'logo nav appel';
-      grid-template-columns: 1fr auto auto;
       column-gap: 1.75rem;
       min-height: 4.5rem;
       padding-block: 0;
     }
 
     .en-tete__nav {
-      margin-top: 0;
+      display: block;
+    }
+
+    .en-tete__repli {
+      display: none;
     }
 
     .en-tete__appel {
