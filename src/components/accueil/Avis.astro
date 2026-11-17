@@ -1,0 +1,111 @@
+---
+// Avis Google sur l'accueil : les 3 avis 5 étoiles les plus récents (données : src/data/avis.ts).
+// La sélection est dite en clair sous les avis, avec la note moyenne et un lien vers tous les avis :
+// obligatoire (Code de la consommation), et c'est plus honnête. Rien ne s'affiche tant qu'il n'y a aucun avis.
+// Pas de données structurées « avis » : Google ne montre pas d'étoiles pour les avis affichés par l'entreprise elle-même.
+import { avisAffiches, bilan } from '../../data/avis';
+import { entreprise } from '../../data/entreprise';
+
+const dateLisible = (date: string) =>
+  new Date(`${date}T12:00:00`).toLocaleDateString('fr-FR', { month: 'long', year: 'numeric' });
+const noteLisible = bilan.note.toLocaleString('fr-FR', { maximumFractionDigits: 1 });
+---
+
+{
+  avisAffiches.length > 0 && (
+    <section class="section" aria-labelledby="avis-titre">
+      <div class="conteneur">
+        <span class="surtitre">Avis Google</span>
+        <h2 id="avis-titre">Ce que disent mes clients</h2>
+        <ul class="liste-nue avis" role="list">
+          {avisAffiches.map((un) => (
+            <li class="carte un-avis">
+              <figure>
+                <p class="etoiles" role="img" aria-label={`${un.note} étoiles sur 5`}>
+                  {'★'.repeat(un.note)}
+                </p>
+                <blockquote>
+                  <p>{un.texte}</p>
+                </blockquote>
+                <figcaption>
+                  <strong>{un.auteur}</strong>, <time datetime={un.date}>{dateLisible(un.date)}</time>
+                </figcaption>
+              </figure>
+            </li>
+          ))}
+        </ul>
+        <p class="avis__bilan">
+          Note de {noteLisible}/5 sur {bilan.nombre} avis Google. Ici, mes avis 5 étoiles les plus récents, recopiés
+          sans retouche. <a href={entreprise.ficheGoogle} rel="noopener">Voir tous mes avis sur Google</a>
+        </p>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  /* Trois cartes côte à côte sur ordinateur ; centrées s'il y en a moins de trois. */
+  .avis {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .un-avis {
+    flex: 1 1 18rem;
+    max-width: 24rem;
+    border-top: 4px solid var(--jaune-soleil);
+  }
+
+  figure {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    margin: 0;
+  }
+
+  .etoiles {
+    margin: 0 0 0.75rem;
+    color: var(--ocre);
+    font-size: 1.25rem;
+    letter-spacing: 0.15em;
+  }
+
+  blockquote {
+    margin: 0 0 1rem;
+  }
+
+  blockquote p {
+    margin: 0;
+  }
+
+  figcaption {
+    margin-top: auto;
+    color: var(--gris-pierre);
+    font-size: 0.9375rem;
+  }
+
+  figcaption strong {
+    color: var(--vert-olive);
+  }
+
+  .avis__bilan {
+    max-width: 44rem;
+    margin: 1.75rem auto 0;
+    color: var(--gris-pierre);
+    font-size: 0.9375rem;
+    text-align: center;
+  }
+
+  .avis__bilan a {
+    font-weight: 700;
+  }
+
+  @media (min-width: 48rem) {
+    .avis {
+      gap: 1.5rem;
+    }
+  }
+</style>
