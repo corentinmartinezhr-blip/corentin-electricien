@@ -16,9 +16,17 @@ export interface Avis {
 }
 
 // Note moyenne et nombre total d'avis affichés sur la fiche Google (à recopier à chaque ajout).
-export const bilan = { note: 5, nombre: 0 };
+export const bilan = { note: 5, nombre: 1 };
 
-export const avis: Avis[] = [];
+export const avis: Avis[] = [
+  {
+    auteur: 'Moara T.',
+    date: '2026-11-17',
+    note: 5,
+    texte:
+      "Il y a eu une prise qui a commencé à fumer dans la cuisine et une amie m’a recommandé Corentin, qui est venu en urgence chez moi à Villeneuve-lès-Avignon. Il a été rapide et professionnel et m’a expliqué la situation de manière très claire avant de résoudre le problème. Je le recommande moi aussi comme électricien il est fiable et a un bon contact humain.",
+  },
+];
 
 /** Les 3 avis 5 étoiles les plus récents : ceux montrés sur l'accueil. */
 export const avisAffiches = avis
