@@ -11,14 +11,21 @@ export interface Avis {
   date: string;
   /** Nombre d'étoiles (1 à 5). */
   note: number;
-  /** Texte exact de l'avis, sans retouche. */
+  /** Texte exact de l'avis, sans retouche. Paragraphes séparés par une ligne vide (\n\n), retour à la ligne : \n. */
   texte: string;
 }
 
 // Note moyenne et nombre total d'avis affichés sur la fiche Google (à recopier à chaque ajout).
-export const bilan = { note: 5, nombre: 1 };
+export const bilan = { note: 5, nombre: 2 };
 
 export const avis: Avis[] = [
+  {
+    auteur: 'Rudy S.',
+    date: '2026-11-17',
+    note: 5,
+    texte:
+      "Je recommande vivement Corentin. Appelé puis rencontré a la maison en une journée. Un devis détaillé est envoyé le lendemain pour un rendez-vous fixé dans la semaine.\n\nCet électricien est intervenu à la maison pour installer 5 ventilateurs de plafond. Le travail a été propre, efficace et professionnel. Il a pris le temps de bien nous expliquer toutes les étapes.\n\nBref un artisan pro et sérieux que je n'hésiterais pas à recontacter pour mes futurs travaux !\nEncore merci Corentin :)",
+  },
   {
     auteur: 'Moara T.',
     date: '2026-11-17',
