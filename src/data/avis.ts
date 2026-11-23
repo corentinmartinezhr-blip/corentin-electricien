@@ -11,6 +11,8 @@ export interface Avis {
   date: string;
   /** Nombre d'étoiles (1 à 5). */
   note: number;
+  /** false : avis gardé ici mais pas montré sur l'accueil (choix de Corentin). */
+  affiche?: boolean;
   /** Texte exact de l'avis, sans retouche. Paragraphes séparés par une ligne vide (\n\n), retour à la ligne : \n. */
   texte: string;
 }
@@ -30,6 +32,7 @@ export const avis: Avis[] = [
     auteur: 'Singe L.',
     date: '2026-11-20',
     note: 5,
+    affiche: false, // Corentin préfère montrer l'avis de Moara (23/11/2026)
     texte:
       "J'ai fait appel à Corentin pour des problèmes de branchement et de fonctionnement d'appareils professionnels demandant des compétences que je n'ai pas et il a été très efficace, il m'a tout expliqué et m'a même donné des conseils.\nÀ la fois sympathique et compétent je le recommande chaudement !",
   },
@@ -49,8 +52,8 @@ export const avis: Avis[] = [
   },
 ];
 
-/** Les 3 avis 5 étoiles les plus récents : ceux montrés sur l'accueil. */
+/** Les 3 avis montrés sur l'accueil : 5 étoiles, choisis par Corentin, du plus récent au plus ancien. */
 export const avisAffiches = avis
-  .filter((un) => un.note === 5)
+  .filter((un) => un.note === 5 && un.affiche !== false)
   .sort((a, b) => b.date.localeCompare(a.date))
   .slice(0, 3);
