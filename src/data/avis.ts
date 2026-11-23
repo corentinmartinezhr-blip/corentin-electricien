@@ -16,9 +16,23 @@ export interface Avis {
 }
 
 // Note moyenne et nombre total d'avis affichés sur la fiche Google (à recopier à chaque ajout).
-export const bilan = { note: 5, nombre: 2 };
+export const bilan = { note: 5, nombre: 4 };
 
 export const avis: Avis[] = [
+  {
+    auteur: 'Elsa B.',
+    date: '2026-11-23',
+    note: 5,
+    texte:
+      "Corentin est très réactif et sérieux, il a été transparent tout au long de l'intervention. Merci encore Corentin !",
+  },
+  {
+    auteur: 'Singe L.',
+    date: '2026-11-20',
+    note: 5,
+    texte:
+      "J'ai fait appel à Corentin pour des problèmes de branchement et de fonctionnement d'appareils professionnels demandant des compétences que je n'ai pas et il a été très efficace, il m'a tout expliqué et m'a même donné des conseils.\nÀ la fois sympathique et compétent je le recommande chaudement !",
+  },
   {
     auteur: 'Rudy S.',
     date: '2026-11-17',
