@@ -52,7 +52,7 @@ Le cadrage de référence est la note de cadrage V3 (Claude Docs : https://claud
 
 - Ne jamais écrire « réparateur agréé ».
 - Ne jamais écrire « certifié » sauf pour une vraie certification nommée. L'habilitation électrique n'est pas une certification : on affiche les niveaux exacts (BR, B2V…).
-- Ne jamais annoncer la décennale ou la RC Pro avant leur signature. L'électroménager peut être mis en avant (validé par Corentin le 29/10/2026).
+- Décennale et RC Pro signées le 26/11/2026 (ERGO) : elles couvrent l'électricité seulement. L'électroménager peut être mis en avant (validé par Corentin le 29/10/2026).
 - Pas d'avis clients inventés, pas de chiffres inventés.
 
 ## Contact
@@ -63,7 +63,7 @@ Le cadrage de référence est la note de cadrage V3 (Claude Docs : https://claud
 - Corentin parle aussi anglais (29/10/2026) : mention sous les boutons de « Me joindre directement » (page Contact) et `knowsLanguage` dans les données structurées.
 - Le bouton « Demander un devis gratuit » mène à `/contact/`.
 - Boutons « Appeler » = lien `tel:` : sur téléphone (appareil déclaré mobile ou pointeur tactile principal), ouvre l'application d'appel ; sur ordinateur, copie le numéro et affiche « Numéro copié ». Exigence de Corentin : ne jamais copier sur un téléphone. Numéro écrit en clair dans un texte (pied de page, FAQ, appel final) = composant `NumeroCopiable` : un clic copie le numéro et affiche « Numéro copié » (demande de Corentin).
-- Garanties (après « Qui suis-je ») : CAP Électricien mention très bien (Académie de Paris, 2025) et habilitations basse tension BR, BC, B2V, B2V Essai, BE Essai, confirmés le 29/10/2026. La H0 n'est pas affichée (choix de Corentin). La 3e carte « Décennale et RC Pro » n'apparaît que si `assurancesSignees: true` dans `src/data/entreprise.ts` : à passer seulement après signature (prévue début novembre 2026).
+- Garanties (après « Qui suis-je ») : CAP Électricien mention très bien (Académie de Paris, 2025) et habilitations basse tension BR, BC, B2V, B2V Essai, BE Essai, confirmés le 29/10/2026. La H0 n'est pas affichée (choix de Corentin). 3e carte « Garantie décennale et RC Pro » affichée depuis le 26/11/2026 (`assurancesSignees: true`) : contrat ERGO Bâtisseurs n° SV75020721/14569 via le courtier Assuromieux, signé le 26/11/2026, effet au 10/11/2026, activité assurée : électricité (télécom et alarmes compris) uniquement. Ne jamais présenter plomberie, faïence ou pose de cuisine comme des services assurés.
 - SIREN/SIRET en cours (demande déposée à l'INPI, Kbis attendu début novembre 2026). **Lancement officiel décidé par Corentin le 30/10/2026** : site ouvert à Google (`PUBLIC_SITE_ENV: production`) sans attendre le SIREN ni la décennale. Ajouter le SIREN dans `entreprise.ts` dès réception.
 - Sur mobile : WhatsApp en premier. Sur ordinateur : formulaire en premier.
 - On change l'ordre, on ne cache jamais rien : le formulaire reste accessible sur mobile.

@@ -41,10 +41,10 @@ export const garanties = {
   diplome: 'CAP Électricien, mention très bien',
   diplomeDetail: 'Académie de Paris, 2025',
   habilitations: 'BR, BC, B2V, B2V Essai et BE Essai',
-  // Décennale et RC Pro : pas encore signées (prévu début novembre 2026).
-  // Passer à true UNIQUEMENT après signature : la 3e carte apparaîtra.
-  assurancesSignees: false,
-  assureur: '', // facultatif, à renseigner à la signature
+  // Décennale et RC Pro : contrat ERGO Bâtisseurs n° SV75020721/14569 (courtier Assuromieux), signé le 26/11/2026,
+  // effet au 10/11/2026. Activité assurée : électricité uniquement (pas plomberie, faïence, pose de cuisine).
+  assurancesSignees: true,
+  assureur: 'ERGO',
 };
 
 // Zone recentrée le 30/10/2026 (dépannage d'urgence à vélo électrique) : Avignon et les villes proches.

@@ -26,7 +26,10 @@ import { garanties } from '../../data/entreprise';
         garanties.assurancesSignees && (
           <li class="carte garantie">
             <h3>Garantie décennale et RC Pro</h3>
-            <p>{garanties.assureur ? `Assuré auprès de ${garanties.assureur}.` : 'Vos travaux sont assurés.'}</p>
+            <p>
+              Mes travaux d'électricité sont assurés chez {garanties.assureur}.<br />
+              <small>Garantie décennale et responsabilité civile professionnelle.</small>
+            </p>
           </li>
         )
       }
