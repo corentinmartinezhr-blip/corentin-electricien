@@ -13,7 +13,16 @@ import FaqUrgence from '../components/depannage/FaqUrgence.astro';
 import AppelFinal from '../components/AppelFinal.astro';
 import { entreprise } from '../data/entreprise';
 import { offreDepannage } from '../data/tarifs';
-import photoTableau from '../assets/realisations/tableau-electrique.webp';
+
+// Photo du haut (27/11/2026, fournie par Corentin) : lui et son vélo électrique au sommet du rocher des Doms.
+// WebP de Corentin servi tel quel (1700 × 956) + version 960 px pour les téléphones.
+// L'ancienne photo du tableau (src/assets/realisations/tableau-electrique.webp) est gardée, plus affichée.
+const photoVelo = {
+  dossier: '/photos',
+  fichier: 'corentin-velo-electrique-rocher-des-doms-avignon',
+  largeur: 1700,
+  hauteur: 956,
+};
 ---
 
 <Base
@@ -23,8 +32,8 @@ import photoTableau from '../assets/realisations/tableau-electrique.webp';
   <IntroPage
     surtitre="Dépannage électrique d'urgence"
     titre={`Dépannage électrique en urgence à ${entreprise.ville}`}
-    image={photoTableau}
-    alt={`Tableau électrique remis en état par Corentin, électricien à ${entreprise.ville}`}
+    image={photoVelo}
+    alt={`Corentin, électricien d'urgence à ${entreprise.ville}, debout à côté de son vélo électrique chargé de sacoches, au sommet du rocher des Doms, au-dessus du Rhône`}
   >
     <p>
       Plus de courant, un disjoncteur qui saute, une prise qui ne marche plus ? J'arrive {entreprise.deplacement},
