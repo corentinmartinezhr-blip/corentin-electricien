@@ -15,8 +15,10 @@ export const chantiers = [
     url: '/realisations/renovation-cuisine/',
     installation: true,
     titre: 'Rénovation complète d’une cuisine',
-    resume: 'Électricité, plomberie, ouverture sur le salon, pose des meubles et faïence : le chantier étape par étape.',
-    travaux: ['Électricité', 'Plomberie', 'Pose de cuisine', 'Faïence'],
+    // Étiquettes et résumé centrés sur l'électricité (demande de Corentin, 28/11/2026) : plomberie, faïence et pose
+    // de cuisine ne sont pas couvertes par sa décennale, elles ne doivent pas ressembler à des services proposés.
+    resume: 'Ma propre cuisine, refaite de A à Z : prises, bandeaux LED sous les meubles et ventilateur de plafond. Le chantier étape par étape.',
+    travaux: ['Prises', 'Éclairage LED', 'Ventilateur de plafond', 'Interrupteurs'],
     image: `/realisations/renovation-cuisine/${couvertureCuisine.fichier}-960.webp`,
     alt: couvertureCuisine.alt,
     // Version 960 px : mêmes proportions que l'originale.
@@ -40,7 +42,7 @@ export const chantiers = [
     installation: true,
     titre: 'Électricité encastrée dans un salon',
     resume: 'Deux points d’interrupteurs en va-et-vient et un nouveau circuit de prises, passés dans le mur : avant, plâtre, après.',
-    travaux: ['Électricité', 'Interrupteurs', 'Prises'],
+    travaux: ['Va-et-vient', 'Interrupteurs', 'Prises encastrées'],
     image: `${dossierSalon}/${couvertureSalon.fichier}-960.webp`,
     alt: couvertureSalon.alt,
     // Version 960 px (photo en largeur) : mêmes proportions que l'originale.
