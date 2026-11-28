@@ -67,6 +67,7 @@ export const avis: Avis[] = [
     auteur: 'Moara T.',
     date: '2026-11-17',
     note: 5,
+    depannage: true, // prise qui fumait, venu en urgence : aussi sur la page Dépannage (demande de Corentin, 28/11/2026)
     texte:
       "Il y a eu une prise qui a commencé à fumer dans la cuisine et une amie m’a recommandé Corentin, qui est venu en urgence chez moi à Villeneuve-lès-Avignon. Il a été rapide et professionnel et m’a expliqué la situation de manière très claire avant de résoudre le problème. Je le recommande moi aussi comme électricien il est fiable et a un bon contact humain.",
   },
