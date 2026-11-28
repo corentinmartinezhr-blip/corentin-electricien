@@ -3,6 +3,8 @@
 // « électricien urgence Avignon », « recherche de panne électrique Avignon »).
 // Positionnement du 30/10/2026 : dépannage d'urgence, 7j/7 de 7h à 22h, moins de 24 h, à vélo électrique.
 // Ordre voulu par Corentin : haut de page, tarifs, pannes, électroménager, bons réflexes, puis la FAQ urgence.
+// 28/11/2026 (demande de Corentin) : avis laissés après un dépannage et zone d'intervention (intra-muros) ajoutés
+// après les pannes. Fonds alternés : ivoire (tarifs), brume (pannes), ivoire (avis), brume (zone), ivoire, brume, ivoire.
 import Base from '../layouts/Base.astro';
 import IntroPage from '../components/IntroPage.astro';
 import Pannes from '../components/depannage/Pannes.astro';
@@ -10,7 +12,10 @@ import Tarif from '../components/depannage/Tarif.astro';
 import Electromenager from '../components/depannage/Electromenager.astro';
 import BonsReflexes from '../components/depannage/BonsReflexes.astro';
 import FaqUrgence from '../components/depannage/FaqUrgence.astro';
+import Zone from '../components/depannage/Zone.astro';
+import Avis from '../components/Avis.astro';
 import AppelFinal from '../components/AppelFinal.astro';
+import { avisDepannage } from '../data/avis';
 import { entreprise } from '../data/entreprise';
 import { offreDepannage } from '../data/tarifs';
 
@@ -37,7 +42,7 @@ const photoVelo = {
   >
     <p>
       Plus de courant, un disjoncteur qui saute, une prise qui ne marche plus ? J'arrive {entreprise.deplacement},
-      {entreprise.delai}. {entreprise.delaiRapide}
+      même dans {entreprise.ville} intra-muros, {entreprise.delai}. {entreprise.delaiRapide}
     </p>
     <p>
       <strong>
@@ -48,6 +53,12 @@ const photoVelo = {
   </IntroPage>
   <Tarif />
   <Pannes />
+  <Avis
+    liste={avisDepannage}
+    titre="Ils m'ont appelé pour un dépannage"
+    selection="Ici, des avis laissés après un dépannage, recopiés sans retouche."
+  />
+  <Zone />
   <Electromenager />
   <BonsReflexes />
   <FaqUrgence />

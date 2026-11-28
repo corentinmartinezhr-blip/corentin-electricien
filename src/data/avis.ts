@@ -13,14 +13,34 @@ export interface Avis {
   note: number;
   /** false : avis gardé ici mais pas montré sur l'accueil (choix de Corentin). */
   affiche?: boolean;
+  /** true : avis laissé après un dépannage, montré sur la page Dépannage (choix de Corentin). */
+  depannage?: boolean;
   /** Texte exact de l'avis, sans retouche. Paragraphes séparés par une ligne vide (\n\n), retour à la ligne : \n. */
   texte: string;
 }
 
 // Note moyenne et nombre total d'avis affichés sur la fiche Google (à recopier à chaque ajout).
-export const bilan = { note: 5, nombre: 4 };
+export const bilan = { note: 5, nombre: 6 };
 
 export const avis: Avis[] = [
+  // Dates déduites de « il y a 3 jours » et « il y a 4 jours » sur les captures du 28/11/2026 (seul le mois s'affiche).
+  {
+    auteur: 'Agathe A.',
+    date: '2026-11-25',
+    note: 5,
+    affiche: false, // l'accueil garde les 3 avis choisis par Corentin
+    depannage: true,
+    texte:
+      "Merci à Corentin d'être intervenu rapidement chez moi : mes disjoncteurs sautaient sans arrêt, il a trouvé l'origine de la panne et tout est rentré dans l'ordre. Travail propre, explications claires. Je recommande !",
+  },
+  {
+    auteur: 'Maxime S.',
+    date: '2026-11-24',
+    note: 5,
+    affiche: false, // l'accueil garde les 3 avis choisis par Corentin
+    depannage: true,
+    texte: 'Intervention plus que rapide !\nDétection de panne d’un chauffe eau et réparation dans l’heure, merci beaucoup !!',
+  },
   {
     auteur: 'Elsa B.',
     date: '2026-11-23',
@@ -57,3 +77,8 @@ export const avisAffiches = avis
   .filter((un) => un.note === 5 && un.affiche !== false)
   .sort((a, b) => b.date.localeCompare(a.date))
   .slice(0, 3);
+
+/** Les avis laissés après un dépannage, montrés sur la page Dépannage, du plus récent au plus ancien. */
+export const avisDepannage = avis
+  .filter((un) => un.depannage)
+  .sort((a, b) => b.date.localeCompare(a.date));

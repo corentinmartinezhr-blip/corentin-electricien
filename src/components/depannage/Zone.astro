@@ -1,0 +1,35 @@
+---
+// Zone d'intervention de la page Dépannage. « Intra-muros » ajouté à la demande de Corentin (28/11/2026) :
+// beaucoup d'habitants du centre savent que des artisans évitent d'y venir ; à vélo, Corentin y va sans souci.
+// Lien vers le chantier de Villeneuve : une vraie intervention de l'autre côté du Rhône (preuve + lien interne).
+import { communes, entreprise } from '../../data/entreprise';
+---
+
+<section class="section section--brume" aria-labelledby="zone-depannage-titre">
+  <div class="conteneur">
+    <span class="surtitre">Zone d'intervention</span>
+    <h2 id="zone-depannage-titre">Je viens aussi dans {entreprise.ville} intra-muros</h2>
+    <p class="intro">
+      Je me déplace gratuitement dans ces quatre villes. À {entreprise.ville}, je viens aussi dans le centre, à
+      l'intérieur des remparts : {entreprise.deplacement}, je passe dans les petites rues et je n'ai pas de camionnette
+      à garer.
+    </p>
+    <ul class="liste-nue etiquettes communes" role="list">
+      {communes.map((commune) => <li>{commune}</li>)}
+    </ul>
+    <p class="exemple-chantier">
+      Un exemple de l'autre côté du Rhône :
+      <a href="/realisations/remplacement-tableau-electrique/">un tableau électrique remplacé à Villeneuve-lès-Avignon</a>.
+    </p>
+  </div>
+</section>
+
+<style>
+  .communes {
+    margin-top: 1.5rem;
+  }
+
+  .exemple-chantier {
+    margin: 1.5rem 0 0;
+  }
+</style>
