@@ -14,8 +14,9 @@ Ce qui est gardé, prêt à resservir :
 - `src/data/tarifs.ts` : `tarifElectromenager`.
 - `src/components/Icone.astro` : l'icône `electromenager`.
 - `src/de-cote/realisations/depannage-lave-linge-miele.astro` : la page du lave-linge Miele (hors de `src/pages/`, donc plus
-  construite : l'adresse `/realisations/depannage-lave-linge-miele/` répond « page introuvable »). Ses photos restent dans
-  `public/realisations/depannage-lave-linge-miele/`, ses données dans `src/data/photos-depannage-lave-linge.ts`, son
+  construite : l'adresse `/realisations/depannage-lave-linge-miele/` répond « page introuvable »). Ses photos sont rangées dans
+  `src/de-cote/photos/depannage-lave-linge-miele/` (hors de `public/`, donc plus servies : sinon le serveur affichait
+  la liste des fichiers du dossier à cette adresse), ses données dans `src/data/photos-depannage-lave-linge.ts`, son
   diagnostic dans `src/components/realisations/lave-linge/Diagnostic.astro`.
 
 Pour tout remettre :
@@ -26,4 +27,5 @@ Pour tout remettre :
    la question « Réparez-vous l'électroménager ? » dans `accueil/Faq.astro`.
 3. Formulaire : « Électroménager » dans `typesDemande` (`Formulaire.astro`) ET dans `TYPES_DEMANDE` (`envoyer.php`).
 4. `entreprise.ts` : `activite` (mentions légales).
-5. Lave-linge : remettre le fichier dans `src/pages/realisations/` et sa carte dans `src/data/chantiers.ts`.
+5. Lave-linge : remettre la page dans `src/pages/realisations/`, ses photos dans `public/realisations/depannage-lave-linge-miele/`
+   et sa carte dans `src/data/chantiers.ts`.
