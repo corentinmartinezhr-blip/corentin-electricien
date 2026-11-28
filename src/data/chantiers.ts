@@ -1,15 +1,14 @@
 // Liste des chantiers de la rubrique Réalisations : une entrée par page de src/pages/realisations/.
 // Seule source des cartes (catalogue /realisations/ et page Installation).
 import { photosCuisine } from './photos-renovation-cuisine';
-import { dossierLaveLinge, photosLaveLinge } from './photos-depannage-lave-linge';
 import { dossierSalon, photosSalon } from './photos-electricite-salon';
 import { dossierTableau, photosTableau } from './photos-remplacement-tableau';
 
 const couvertureCuisine = photosCuisine['terminee-17-vue-plan-de-travail-vers-salon'];
-const couvertureLaveLinge = photosLaveLinge['01-machine-ouverte-par-le-dessus'];
 const couvertureSalon = photosSalon['couverture-avant-apres'];
 const couvertureTableau = photosTableau['04-apres-ouvert-cables-ranges'];
 // « installation » = chantier montré aussi sur la page Installation (cartes, sans recopier le texte du chantier).
+// Lave-linge Miele mis de côté le 28/11/2026 (électroménager retiré du site) : voir docs/de-cote.md.
 export const chantiers = [
   {
     url: '/realisations/renovation-cuisine/',
@@ -24,18 +23,6 @@ export const chantiers = [
     // Version 960 px : mêmes proportions que l'originale.
     largeur: 960,
     hauteur: Math.round((960 * couvertureCuisine.hauteur) / couvertureCuisine.largeur),
-  },
-  {
-    url: '/realisations/depannage-lave-linge-miele/',
-    installation: false,
-    titre: 'Dépannage d’un lave-linge Miele',
-    resume: 'Une pompe qui vidangeait sans arrêt : le diagnostic pas à pas, jusqu’à la corrosion sur la carte. Aucune pièce changée.',
-    travaux: ['Dépannage', 'Électroménager', 'Diagnostic'],
-    image: `${dossierLaveLinge}/${couvertureLaveLinge.fichier}-960.webp`,
-    alt: couvertureLaveLinge.alt,
-    // Version 960 px : le plus grand côté fait 960 px.
-    largeur: Math.round((960 * couvertureLaveLinge.largeur) / couvertureLaveLinge.hauteur),
-    hauteur: 960,
   },
   {
     url: '/realisations/electricite-salon/',

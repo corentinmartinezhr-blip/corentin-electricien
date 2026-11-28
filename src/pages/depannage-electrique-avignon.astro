@@ -2,14 +2,15 @@
 // Page Dépannage : /depannage-electrique-avignon/ (recherches visées : « dépannage électrique urgence Avignon »,
 // « électricien urgence Avignon », « recherche de panne électrique Avignon »).
 // Positionnement du 30/10/2026 : dépannage d'urgence, 7j/7 de 7h à 22h, moins de 24 h, à vélo électrique.
-// Ordre voulu par Corentin : haut de page, tarifs, pannes, électroménager, bons réflexes, puis la FAQ urgence.
+// Ordre voulu par Corentin : haut de page, tarifs, pannes, bons réflexes, puis la FAQ urgence.
+// Section électroménager mise de côté le 28/11/2026 (focus sur le dépannage d'urgence) : voir docs/de-cote.md.
 // 28/11/2026 (demande de Corentin) : avis laissés après un dépannage et zone d'intervention (intra-muros) ajoutés
-// après les pannes. Fonds alternés : ivoire (tarifs), brume (pannes), ivoire (avis), brume (zone), ivoire, brume, ivoire.
+// après les pannes. Fonds alternés : ivoire (tarifs), brume (pannes), ivoire (avis), brume (zone), ivoire (réflexes),
+// brume (FAQ), puis olive.
 import Base from '../layouts/Base.astro';
 import IntroPage from '../components/IntroPage.astro';
 import Pannes from '../components/depannage/Pannes.astro';
 import Tarif from '../components/depannage/Tarif.astro';
-import Electromenager from '../components/depannage/Electromenager.astro';
 import BonsReflexes from '../components/depannage/BonsReflexes.astro';
 import FaqUrgence from '../components/depannage/FaqUrgence.astro';
 import Zone from '../components/depannage/Zone.astro';
@@ -59,7 +60,6 @@ const photoVelo = {
     selection="Ici, des avis laissés après un dépannage, recopiés sans retouche."
   />
   <Zone />
-  <Electromenager />
   <BonsReflexes />
   <FaqUrgence />
   <AppelFinal />

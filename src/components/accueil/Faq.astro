@@ -4,13 +4,8 @@
 import ListeQuestions from '../ListeQuestions.astro';
 import NumeroCopiable from '../NumeroCopiable.astro';
 
-const questions = [
-  {
-    question: "Réparez-vous l'électroménager ?",
-    reponse:
-      "Oui : lave-linge, lave-vaisselle, sèche-linge, four, plaque de cuisson. Je trouve la panne et je répare. Dites-moi quel appareil et ce qui ne va pas, par téléphone ou sur WhatsApp.",
-  },
-];
+// Question « Réparez-vous l'électroménager ? » mise de côté le 28/11/2026 (voir docs/de-cote.md).
+const questions: { question: string; reponse: string }[] = [];
 ---
 
 <section class="section section--brume" aria-labelledby="faq-titre">

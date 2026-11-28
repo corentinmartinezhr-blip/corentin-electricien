@@ -6,7 +6,7 @@ export const entreprise = {
   // Identité légale (mentions légales, confidentialité). Fournie par Corentin le 30/10/2026.
   responsable: 'Corentin Martinez',
   statut: 'entrepreneur individuel (EI)',
-  activite: 'Électricien : dépannage électrique et réparation d’électroménager',
+  activite: 'Électricien : dépannage électrique et installation électrique', // électroménager mis de côté le 28/11/2026
   // Immatriculation au Répertoire national des entreprises (RNE) le 05/11/2026, transmise par Corentin le 11/11/2026.
   siren: '894 455 559',
   siret: '894 455 559 00035',

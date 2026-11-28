@@ -55,7 +55,7 @@ export const offreDepannage = {
   },
 };
 
-// ---------- Électroménager : même règle que le dépannage ----------
+// ---------- Électroménager : même règle que le dépannage (MIS DE CÔTÉ le 28/11/2026, plus affiché) ----------
 export const tarifElectromenager: LigneTarif[] = [
   { prestation: 'Déplacement et devis', prix: 'Gratuits' },
   { prestation: 'Main-d’œuvre (TTC)', detail: decompteTemps, prix: parHeure(TAUX_HORAIRE) },

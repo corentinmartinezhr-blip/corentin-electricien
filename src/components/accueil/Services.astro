@@ -2,6 +2,7 @@
 import Icone from '../Icone.astro';
 
 // Chaque carte renvoie vers sa page dédiée. Installation et Réalisations ajoutées le 14/11/2026 (demande de Corentin).
+// Électroménager mis de côté le 28/11/2026 (focus sur le dépannage d'urgence) : voir docs/de-cote.md.
 const services = [
   {
     icone: 'eclair',
@@ -9,12 +10,6 @@ const services = [
     texte:
       "Plus de courant, un disjoncteur qui saute, une prise ou une lumière qui ne marche plus : j'arrive vite, je trouve d'où vient la panne et je la répare.",
     lien: { url: '/depannage-electrique-avignon/', texte: 'Dépannage et tarifs' },
-  },
-  {
-    icone: 'electromenager',
-    titre: 'Électroménager',
-    texte: 'Votre lave-linge, votre four ou votre lave-vaisselle ne marche plus ? Je trouve ce qui ne va pas et je le répare.',
-    lien: { url: '/depannage-electrique-avignon/#electromenager', texte: 'Électroménager et tarif' },
   },
   {
     icone: 'prise',
@@ -25,7 +20,7 @@ const services = [
   {
     icone: 'outils',
     titre: 'Mes réalisations en photos',
-    texte: 'Un tableau électrique remplacé, un lave-linge réparé, une cuisine refaite : mes chantiers racontés étape par étape.',
+    texte: 'Un tableau électrique remplacé, des prises et des interrupteurs encastrés, une cuisine refaite : mes chantiers racontés étape par étape.',
     lien: { url: '/realisations/', texte: 'Voir mes réalisations' },
   },
 ] as const;
@@ -77,10 +72,25 @@ const services = [
     text-underline-offset: 4px;
   }
 
+  /* Trois cartes : deux par ligne sur tablette (la dernière prend toute la largeur), trois sur ordinateur. */
   @media (min-width: 48rem) {
     .services {
       grid-template-columns: repeat(2, 1fr);
       gap: 1.5rem;
+    }
+
+    .service:last-child:nth-child(odd) {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .services {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .service:last-child:nth-child(odd) {
+      grid-column: auto;
     }
   }
 </style>
